@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import xboxReducer from '../xbox_dashboard/xboxSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    xbox_dashboard: xboxReducer,
   },
 });

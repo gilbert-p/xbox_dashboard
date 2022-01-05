@@ -3,8 +3,18 @@
 }
 
 .App-logo {
+    width: 40vmin;
   height: 40vmin;
   pointer-events: none;
+  border: 20px solid white;
+}
+
+.first-border {
+    border-color: green;
+}
+
+.some-border {
+    border-color: purple;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -36,4 +46,11 @@
   100% {
     transform: translateY(0px);
   }
+}
+
+.loader-container {
+    position: absolute;
+    width: 10vw;
+    height: 10vh;
+    background-color: red;
 }
