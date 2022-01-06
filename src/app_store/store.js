@@ -3,6 +3,6 @@ import xboxReducer from '../xbox_dashboard/xboxSlice';
 
 export const store = configureStore({
   reducer: {
-    xbox_dashboard: xboxReducer,
+    dashboard: xboxReducer,
   },
 });
