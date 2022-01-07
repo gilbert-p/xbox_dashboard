@@ -27,7 +27,6 @@ const Xbox = () => {
                     <div className={styles.contentContainer}>
                         <div className={styles.leftContent}>
                             <div className={styles.profileContainer}>
-                                <div className={styles.highlight}></div>
                                 <p>Sign In</p>
                                 <div className={styles.profileImgContainer}>
                                     <div className={styles.profileIcon}></div>
@@ -38,14 +37,17 @@ const Xbox = () => {
                             </div>
                             <div className={styles.selectItemListContainer}>
                                 <div className={styles.innerListContainer}>
-                                    <div><p>Join Xbox LIVE</p></div>
-                                    <div><p>Recover Gamertag from Xbox LIVE</p></div>
+                                    <div className={styles.listItem}><span className={`${styles.listIcon} ${styles.joinXBL_icon}`}></span><p>Join Xbox LIVE</p></div>
+                                    <div className={styles.listItem_2}><span className={`${styles.listIcon} ${styles.person_icon}`}></span><p>Recover Gamertag from Xbox LIVE</p></div>
                                 </div>
                             </div>
-                            <div className={styles.xboxliveAnimation}></div>
+                            <div className={styles.xboxliveAnimationContainer}>
+                                <div className={styles.circleAnimation}></div>
+                                <div className={styles.logoContainer}></div>
+                            </div>
                         </div>
                         <div className={styles.rightContent}>
-                            <div className={styles.xboxliveLogo}>asdf</div>
+                            <div className={styles.xboxliveLogo}></div>
                             <div className={styles.descriptionContainer}>
                                 <div className={styles.descriptionTitle}>Xbox LIVE</div>
                                 <div className={styles.descriptionContent}>
@@ -54,7 +56,13 @@ const Xbox = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.bottomContent}></div>
+                    </div>
+                    <div className={styles.systemTrayContainer}>
+                        <div className={styles.trayEllipse}></div>
+                        <div className={styles.trayRect}></div>
+                        <div className={styles.trayTriangleButton}></div>
+                        <div className={styles.trayRectButton}></div>
+                        <p>Open Tray</p>
                     </div>
                     <div className={styles.controllerButtons}></div>
                 </section>

@@ -5,8 +5,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    width: 85vw;
-    height: 85vh;
+    width: 76vw;
+    height: 80vh;
     /* background-color: red; */
 }
 
@@ -50,7 +50,7 @@
 /* Games Section */
 .gamesContainer {
     position: relative;
-    width: calc(100% - 350px);
+    width: calc(100% - 450px);
     height: 100%;
     background: url('../assets/images/xbox_live_background.webp');
     margin: 0 auto;
@@ -62,9 +62,9 @@
     position: absolute;
     width: 100%;
     height: 75%;
-    top: 50%;
+    top: 51%;
     transform: translateY(-50%);
-    background: radial-gradient(#ffffff00, #ffffff80);
+    background: radial-gradient(#ffffff00, #ffffff5d);
 }
 
 .topBorder {
@@ -83,27 +83,27 @@
 
 .contentContainer {
     position: relative;
-    left: 50%;
+    left: 52%;
     transform: translateX(-50%);
     display: grid;
-    height: calc(100% - 200px);
-    margin: 70px 20px 0 20px;
+    height: 100%;
+    max-height: 475px;
+    width: 102%;
+    margin: 80px 20px 0 20px;
     grid-template-columns: 45% 45%;
-    grid-template-rows: minmax(250px, auto);
     column-gap: 20px;
     grid-template-areas: 
     "left-content right-content"
     "left-content right-content"
-    "left-content ."
-    "bottom-content bottom-content";
+    "left-content .";
 }
 
 .leftContent {
     grid-area: left-content;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: repeat(auto-fit, minmax(175px, 175px));
-    row-gap: 10px;
+    grid-template-rows: repeat(auto-fill, minmax(125px, 150px));
+    row-gap: 20px;
     /* background-color: slateblue; */
     text-align: left;
 }
@@ -120,7 +120,7 @@
     /* background-color: orange; */
     border-radius: 15px;
     text-align: left;
-    font-size: 2rem;
+    font-size: 1.5rem;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 -1px 4px 0px black;
@@ -130,7 +130,7 @@
     grid-area: profile-name;
     position: relative;
     width: inherit;
-    height: 50px;
+    height: 35px;
     left: 10px;
     font-weight: 500;
     z-index: 2;
@@ -175,15 +175,13 @@
     padding-top: 30px;
 }
 
-.highlight {
+/* .highlight {
     position: absolute;
-    /* position: relative; */
     width: 590px;
-    /* min-width: 400px; */
     max-width: 616px;
     height: 175px;
     background: radial-gradient(#ffffff9f, #ffffff04);
-}
+} */
 
 
 .selectItemListContainer {
@@ -193,33 +191,125 @@
 
 .innerListContainer {
     position: relative;
+    display: flex;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* background-color: blue; */
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .innerListContainer > div {
+    display: flex;
     width: 100%;
     height: 50%;
     /* background-color: chocolate; */
 }
 
+.listItem:after {
+    content: "";
+    position: absolute;
+    width: 97%;
+    height: 2px;
+    top: -9px;
+    left: 0;
+    background-color: rgba(9, 9, 9, 0.295);
+    border-radius: 5px;
+}
+
+.listItem:before {
+    content: "";
+    position: absolute;
+    width: 97%;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    background-color: rgba(9, 9, 9, 0.295);
+    border-radius: 5px;
+}
+
+.listItem_2:after {
+    content: "";
+    position: absolute;
+    width: 97%;
+    height: 2px;
+    top: 105%;
+    left: 0;
+    background-color: rgba(9, 9, 9, 0.295);
+    border-radius: 5px;
+}
+
+/* .listItem:before {
+    content: "";
+    position: absolute;
+    width: 97%;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    background-color: rgba(9, 9, 9, 0.295);
+    border-radius: 5px;
+} */
+
+
+
+.innerListContainer > div:nth-child(1) {
+    margin-bottom: 10px;
+}
+
 .innerListContainer > div > p {
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    display: inline-block;
+    padding-left: 15px;
+    /* background-color: lavender; */
+    /* top: 50%;
+    transform: translateY(-50%); */
+}
+
+.innerListContainer > div:nth-child(1) > p {
+    padding-top: 20px;
 }
 
 
-.xboxliveAnimation {
+
+.listIcon {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 100%;
+}
+
+.joinXBL_icon {
+    background: url('../assets/icons/join_xboxlive.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.person_icon {
+    background: url('../assets/icons/person_icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+
+.xboxliveAnimationContainer {
     width: 100%;
     height: 100%;
-    background: url("../assets/images/xbox_live_background.png");
-    background-repeat: no-repeat;
+    background-color: #4f4e50;
+    border-radius: 15px;
+    box-shadow: inset 0 0 6px 0px black;
+
+}
+
+.xboxliveAnimationContainer > .logoContainer {
+    position: relative;
+    width: calc(30%);
+    height: 100%;
+    left: 45%;
+    top: 20%;
+    background-image: url('../assets/images/Xbox Live Logo_vector.png');
     background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .rightContent {
@@ -233,7 +323,13 @@
 
 
 .xboxliveLogo {
+    position: relative;
     /* background-color: aquamarine; */
+    background-image: url('../assets/images/Xbox\ Live\ Logo_vector.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 30px;
 
 }
 
@@ -256,9 +352,68 @@
 
 .bottomContent {
     grid-area: bottom-content;
+    height: 100px;
     background-color: darkgreen;
 }
 
 
 
 
+/*System Tray*/
+
+.systemTrayContainer {
+    position: relative;
+    width: calc(100% - 65px);
+    height: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.systemTrayContainer > p {
+    /* left: 30px; */
+    position: absolute;
+    top: 50%;
+    left: 85px;
+    transform: translateY(-60%);
+    font-size: 1.4rem;
+}
+
+.trayEllipse {
+    width: 70px;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 7px 0 black;
+}
+
+.trayRect {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    border-radius: 20px;
+    box-shadow: inset 0 0 4px 0 black;
+}
+
+.trayTriangleButton {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 50%;
+    left: 30px;
+    transform: translateY(-50%);
+    border-top: 10px solid transparent;
+    border-right: 10px solid rgba(0, 0, 0, 0.466);
+    border-bottom: 10px solid transparent;
+}
+
+.trayRectButton {
+    position: absolute;
+    width: 4px;
+    height: 19px;
+    top: 50%;
+    left: 43px;
+    transform: translateY(-50%);
+    box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.466);
+}
