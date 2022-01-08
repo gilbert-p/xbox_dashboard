@@ -1,27 +1,55 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './Dashboard.module.css';
+import marketplaceStyles from './Marketplace.module.css';
 import ringAnim from './ringAnimation.module.css';
-import { navigateTo, selectCurrentContext } from './xboxSlice';
+import { navigateTo, 
+         selectCurrentContext, 
+         selectContextIndex,
+         selectXboxPos,
+         selectGamesPos,
+         selectMediaPos,
+         selectSystemPos } from './xboxSlice';
 
 const Xbox = () => {
 
     const dispatch = useDispatch();
-    const [current_context, setCurrentContext] = useState("games");
+    const [current_context, setCurrentContext] = useState("xboxlive");
     const current_dashboard_context = useSelector(selectCurrentContext);
+    const current_context_index = useSelector(selectContextIndex);
+    const xbox_blade_position = useSelector(selectXboxPos);
+    const games_position = useSelector(selectGamesPos);
+    const media_position = useSelector(selectMediaPos);
+    const system_pos = useSelector(selectSystemPos);
+
+    const formattedContext = (context) => {
+        switch(context){
+            case "marketplace":
+                return "Marketplace";
+            case "xboxlive":
+                return "Xbox LIVE";
+            case "games":
+                return "Games";
+            case "media":
+                return "Media";
+            case "system":
+                return "System";
+            default: return "marketplace";
+        }
+    }
 
     return (
         <div>
             <h2>{current_dashboard_context}</h2>
             <div className={styles.mainContainer}>
-                <div className={styles.bladeContainer}>
-                    <div className={styles.blade} onClick={()=> dispatch(navigateTo("marketplace"))}><p>marketplace</p></div>
-                    <div className={styles.blade} onClick={()=> dispatch(navigateTo("xbox_live"))}><p>xbox live</p></div>
-                    <div className={styles.blade} onClick={()=> dispatch(navigateTo("games"))}><p>games</p></div>
-                    <div className={styles.blade} onClick={()=> dispatch(navigateTo("media"))}><p>media</p></div>
-                    <div className={styles.blade} onClick={()=> dispatch(navigateTo("system"))}><p>system</p></div>
+                <div className={styles.bladeContainer} style={{"transform": `translateX(-${current_context_index * 35 + 135}px)`}}>
+                    <div id={styles["marketplaceBlade"]} className={`${styles.blade} ${""}`}   style={{"--index": 0}} onClick={()=> dispatch(navigateTo("marketplace"))}><p>marketplace</p></div>
+                    <div id={styles["xboxliveBlade"]}    className={`${styles.blade}`}   style={{"--index": 1, "transform": `${xbox_blade_position === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("xboxlive"))}><p>xbox live</p></div>
+                    <div id={styles["gamesBlade"]}       className={`${styles.blade}`}   style={{"--index": 2, "transform": `${games_position === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("games"))}><p>games</p></div>
+                    <div id={styles["mediaBlade"]}       className={`${styles.blade}`}   style={{"--index": 3, "transform": `${media_position === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("media"))}><p>media</p></div>
+                    <div id={styles["systemBlade"]}      className={`${styles.blade}`}   style={{"--index": 4, "transform": `${system_pos === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("system"))}><p>system</p></div>
                 </div>
-                <h2 className={styles.sectionHeading}>Xbox LIVE</h2>
+                <h2 className={styles.sectionHeading}>{formattedContext(current_dashboard_context)}</h2>
                 <section className={styles.gamesContainer}>
 
                     {/* These elements are consistent across all contexts */}
@@ -40,7 +68,7 @@ const Xbox = () => {
                     {/* These elements are consistent across all contexts */}
 
 
-                    <div className={styles.contentContainer}>
+                    <div id={styles["xboxlive"]} className={`${""} ${current_dashboard_context !== "xboxlive" ? styles.makeTransparent : ""}`}>
                         <div className={styles.leftContent}>
                             <div className={styles.profileContainer}>
                                 <p>Epoxi117</p>
@@ -121,13 +149,40 @@ const Xbox = () => {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.systemTrayContainer}>
-                        <div className={styles.trayEllipse}></div>
-                        <div className={styles.trayRect}></div>
-                        <div className={styles.trayTriangleButton}></div>
-                        <div className={styles.trayRectButton}></div>
-                        <p>Open Tray</p>
+
+                    <div id={marketplaceStyles["marketplace"]} className={`${''} ${current_dashboard_context !== "marketplace" ? styles.makeTransparent : ""}`}>
+                        <div className={marketplaceStyles.leftContent}>
+                            <div className={marketplaceStyles.selectOption}>
+                                <p>Games</p>
+                            </div>
+                            <div className={marketplaceStyles.selectOption}>
+                                <p>Media and Entertainment</p>
+                            </div>
+                            <div className={marketplaceStyles.selectOption}>
+                                <p>Game Demos</p>
+                            </div>
+                            <div className={marketplaceStyles.selectOption}>
+                                <p>Game Videos</p>
+                            </div>
+                            <div className={marketplaceStyles.selectOption}>
+                                <p>Themes and Gamer Pictures</p>
+                            </div>
+                            <div className={marketplaceStyles.selectOption}>
+                                <p>Featured Downloads</p>
+                            </div>
+                        </div>
+                        <div className={styles.rightContent}>
+                            <div className={styles.xboxliveLogo}></div>
+                            <div className={styles.descriptionContainer}>
+                                <div className={styles.descriptionTitle}>Xbox LIVE</div>
+                                <div className={styles.descriptionContent}>
+                                    Games. Tournaments. Entertainment. 
+                                    All the rewards. Endless possibilities. What are you waiting for?
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div className={styles.controllerButtons}></div>
                 </section>
                 

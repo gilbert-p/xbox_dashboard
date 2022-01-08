@@ -5,6 +5,9 @@
 
 :root {
   --blade-size: 30px;
+  --container-width: 54vw;
+  --container-height: 80vh;
+  --transition_value: calc(var(--container-width) - 24.5%);
 }
 
 * {
