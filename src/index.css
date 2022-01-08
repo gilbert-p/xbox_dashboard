@@ -1,9 +1,15 @@
+@font-face {
+  font-family: 'x360';
+  src: url('./assets/fonts/x360.ttf');
+}
+
 :root {
   --blade-size: 30px;
 }
 
 * {
   box-sizing: border-box;
+  font-family: "x360";
 }
 
 h1,h2,h3,h4,p {

@@ -10,6 +10,10 @@
     /* background-color: red; */
 }
 
+.makeTransparent {
+    visibility: hidden;
+}
+
 
 /*Blade Styling */
 .bladeContainer {
@@ -40,10 +44,73 @@
     margin-left: 5px;
 }
 
+.topBorder {
+    position: absolute;
+    width: 101%;
+    height: 90px;
+    left: 50%;
+    box-shadow: inset 0 -1px 7px 0px black;
+    border-radius: 0px 0px 40px 40px;
+    transform: translateX(-50%);
+}
+
+.bottomBorder {
+    position: absolute;
+    width: 101%;
+    height: 90px;
+    top: 89%;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: inset 0 -1px 7px 0px black;
+    border-radius: 40px 40px 0px 0px;
+}
 
 
+.buttonContainer {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 90px;
+    top: 89%;
+    padding: 0 35px;
+}
 
+.buttons {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    height: 100%;
+    margin-top: 5px;
+}
 
+.buttonStyle {
+    width: 100%;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#yButton {
+    background-image: url('../assets/images/y_button.png');
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+#xButton {
+    background-image: url('../assets/images/x_button.png');
+}
+
+#bButton {
+    background-image: url('../assets/images/b_button.png');
+    margin-bottom: 5px;
+    margin-left: -20px;
+}
+
+#aButton {
+    background-image: url('../assets/images/a_button.png');
+}
 
 
 
@@ -52,10 +119,11 @@
     position: relative;
     width: calc(100% - 450px);
     height: 100%;
-    background: url('../assets/images/xbox_live_background.webp');
+    background: linear-gradient(89.59deg, #F59542 0.88%, #F9B43F 50.8%, #F59542 99.29%);
     margin: 0 auto;
     /* text-align: left; */
     overflow: hidden;
+    
 }
 
 .whiteRadial {
@@ -67,18 +135,13 @@
     background: radial-gradient(#ffffff00, #ffffff5d);
 }
 
-.topBorder {
-    position: absolute;
-    width: 100%;
-    height: 100px;
-    box-shadow: inset 0 -1px 7px 0px black;
-    border-radius: 0px 0px 40px 40px;
-}
-
 .sectionHeading {
-    position: relative;
-    text-align: left;
-    margin-left: 20px;
+    position: absolute;
+    left: 17.5%;
+    top: 55px;
+    z-index: 10;
+    color: white;
+    font-weight: 500;
 }
 
 .contentContainer {
@@ -89,7 +152,7 @@
     height: 100%;
     max-height: 475px;
     width: 102%;
-    margin: 80px 20px 0 20px;
+    margin: 100px 20px 0 20px;
     grid-template-columns: 45% 45%;
     column-gap: 20px;
     grid-template-areas: 
@@ -111,7 +174,7 @@
 .profileContainer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: 35px 1fr;
     grid-template-areas: 
     "profile-name profile-name profile-name profile-name"
     "profile-img profile-desc profile-desc profile-desc";
@@ -165,23 +228,68 @@
     background-repeat: no-repeat;
 }
 
+
 .profileDescription {
     grid-area: profile-desc;
     z-index: 2;
-    /* background-color: lightseagreen; */
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 30px 30px 30px;
+    grid-template-areas:
+    "rep-title . rep-stars rep-stars"
+    "gamerscore-title gamerscore-title . gamerscore-value"
+    "zone-title . . zone-status";
+    row-gap: 4px;
+    margin-right: 15px;
+    margin-top: 10px;
+    /* height: 90%; */
 }
 
-.profileDescription > p {
-    padding-top: 30px;
+.repTitle {
+    grid-area: rep-title;
+    /* background-color: lightgrey; */
 }
 
-/* .highlight {
-    position: absolute;
-    width: 590px;
-    max-width: 616px;
-    height: 175px;
-    background: radial-gradient(#ffffff9f, #ffffff04);
-} */
+.reputationStars {
+    grid-area: rep-stars;
+    /* background-color: darkgray; */
+    display: flex;
+
+}
+
+.gamerscoreTitle {
+    grid-area: gamerscore-title;
+    /* background-color: lightsteelblue; */
+}
+
+.gamerscoreValue {
+    grid-area: gamerscore-value;
+    /* background-color: darkkhaki; */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.zoneTitle {
+    grid-area: zone-title;
+    /* background-color: lightyellow; */
+}
+
+.zoneStatus {
+    grid-area: zone-status;
+    /* background-color: darkturquoise; */
+    text-align: right;
+    margin-right: 10px;
+}
+
+.starIcon {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/icons/reputation_star_icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 
 
 .selectItemListContainer {
@@ -291,18 +399,25 @@
     background-position: 50% 50%;
 }
 
-
 .xboxliveAnimationContainer {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: #4f4e50;
     border-radius: 15px;
     box-shadow: inset 0 0 6px 0px black;
+    overflow: hidden;
+}
 
+
+.circleAnimation {
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .xboxliveAnimationContainer > .logoContainer {
-    position: relative;
+    position: absolute;
     width: calc(30%);
     height: 100%;
     left: 45%;
@@ -330,7 +445,19 @@
     background-repeat: no-repeat;
     background-position: center;
     margin: 30px;
+}
 
+.xboxliveLogo:after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 3px;
+    left: 50%;
+    top: 115%;
+    transform: translateX(-50%);
+    border-radius: 100%;
+    background: radial-gradient(#050505bd, #0000006e);
+    opacity: 0.6;
 }
 
 .descriptionContainer {
@@ -367,6 +494,7 @@
     height: 70px;
     left: 50%;
     transform: translateX(-50%);
+    margin-top: 15px;
 }
 
 .systemTrayContainer > p {

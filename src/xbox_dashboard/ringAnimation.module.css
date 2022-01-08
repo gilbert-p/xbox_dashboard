@@ -1,0 +1,36 @@
+.ring {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 1%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: rgb(2, 162, 2);
+    animation: grow 5s ease-in infinite calc((var(--i, 0) * 0.6s));
+  }
+  
+  .ringInner {
+    position: relative;
+    width: 92%;
+    height: 92%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: #4f4e50;
+  }
+  
+  
+  @keyframes grow {
+    70% {
+      width: 170px;
+      height: 170px;
+    }
+    100% {
+      width: 220px;
+      height: 220px;
+      opacity: 0;
+    }
+  }
+  
