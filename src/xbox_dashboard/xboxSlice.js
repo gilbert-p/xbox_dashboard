@@ -8,6 +8,7 @@ let initialState = {
     games_pos: "right",
     media_pos: "right",
     system_pos: "right",
+    disc_tray: false,
 }
 
 export const xboxSlice = createSlice({
@@ -23,6 +24,9 @@ export const xboxSlice = createSlice({
             state.games_pos = "right";
             state.media_pos = "right";
             state.system_pos = "right";
+
+            state.disc_tray = false;
+
           break;
           case "xboxlive":
             state.context_index = 1;
@@ -30,6 +34,8 @@ export const xboxSlice = createSlice({
             state.games_pos = "right";
             state.media_pos = "right";
             state.system_pos = "right";
+
+            state.disc_tray = true;
           break;
           case "games":
             state.context_index = 2;
@@ -37,6 +43,8 @@ export const xboxSlice = createSlice({
             state.games_pos = "left";
             state.media_pos = "right";
             state.system_pos = "right";
+
+            state.disc_tray = true;
           break;
           case "media":
             state.context_index = 3;
@@ -44,6 +52,8 @@ export const xboxSlice = createSlice({
             state.games_pos = "left";
             state.media_pos = "left";
             state.system_pos = "right";
+
+            state.disc_tray = true;
           break;
           case "system":
             state.context_index = 4;
@@ -51,6 +61,8 @@ export const xboxSlice = createSlice({
             state.games_pos = "left";
             state.media_pos = "left";
             state.system_pos = "left";
+
+            state.disc_tray = false;
           break;
           default:
             state.context_index = 0;
@@ -67,5 +79,6 @@ export const selectXboxPos = (state) => state.dashboard.xbox_pos;
 export const selectGamesPos = (state) => state.dashboard.games_pos;
 export const selectMediaPos = (state) => state.dashboard.media_pos;
 export const selectSystemPos = (state) => state.dashboard.system_pos;
+export const isTrayDisplayed = (state) => state.dashboard.disc_tray;
 
 export default xboxSlice.reducer;

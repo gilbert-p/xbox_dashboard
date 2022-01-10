@@ -8,6 +8,8 @@
     transform: translate(-50%,-50%);
     width: var(--container-width);
     height: var(--container-height);
+    max-height: 750px;
+    min-height: 750px;
     /* background-color: red; */
 }
 
@@ -22,7 +24,7 @@
     /* background-color: lightskyblue; */
     z-index: 10;
     /* transform: translateX(var(--shiftIndex, 0) * var(--blade-size, 0)); */
-    transition: transform 0.8s;
+    transition: transform 0.8s ease-out;
 }
 
 .blade {
@@ -148,6 +150,7 @@
     display: grid;
     height: 100%;
     max-height: 475px;
+    min-height: 400px;
     width: 102%;
     margin: 100px 20px 0 20px;
     grid-template-columns: 45% 45%;
@@ -160,9 +163,9 @@
 }
 
 .makeTransparent {
-    position: absolute !important;
-    opacity: 0;
-    transition: opacity 0.4s ease-out;
+    /* position: absolute !important; */
+    display: none !important;
+    transition: display 0.4s ease-out;
 }
 
 .leftContent {

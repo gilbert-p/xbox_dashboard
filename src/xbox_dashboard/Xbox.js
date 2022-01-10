@@ -9,7 +9,8 @@ import { navigateTo,
          selectXboxPos,
          selectGamesPos,
          selectMediaPos,
-         selectSystemPos } from './xboxSlice';
+         selectSystemPos,
+         isTrayDisplayed } from './xboxSlice';
 
 const Xbox = () => {
 
@@ -21,6 +22,7 @@ const Xbox = () => {
     const games_position = useSelector(selectGamesPos);
     const media_position = useSelector(selectMediaPos);
     const system_pos = useSelector(selectSystemPos);
+    const display_tray = useSelector(isTrayDisplayed);
 
     const formattedContext = (context) => {
         switch(context){
@@ -171,18 +173,24 @@ const Xbox = () => {
                                 <p>Featured Downloads</p>
                             </div>
                         </div>
-                        <div className={styles.rightContent}>
-                            <div className={styles.xboxliveLogo}></div>
-                            <div className={styles.descriptionContainer}>
-                                <div className={styles.descriptionTitle}>Xbox LIVE</div>
-                                <div className={styles.descriptionContent}>
-                                    Games. Tournaments. Entertainment. 
-                                    All the rewards. Endless possibilities. What are you waiting for?
+                        <div className={marketplaceStyles.rightContent}>
+                            <div className={marketplaceStyles.imageHeaderContainer}></div>
+                            <div className={marketplaceStyles.selectItemListContainer}>
+                                <div className={marketplaceStyles.innerListContainer}>
+                                    <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.card_icon}`}></span><p>Redeem Code</p></div>
+                                    <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.download_icon}`}></span><p>Active Downloads</p></div>
+                                    <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.crown_icon}`}></span><p>Account Management</p></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
+                    <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ""}`}>
+                        <div className={styles.trayEllipse}></div>
+                        <div className={styles.trayRect}></div>
+                        <div className={styles.trayTriangleButton}></div>
+                        <div className={styles.trayRectButton}></div>
+                        <p>Open Tray</p>
+                    </div>
                     <div className={styles.controllerButtons}></div>
                 </section>
                 
