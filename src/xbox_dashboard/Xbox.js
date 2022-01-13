@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { gsap } from 'gsap';
 import styles from './Dashboard.module.css';
 import marketplaceStyles from './Marketplace.module.css';
 import ringAnim from './ringAnimation.module.css';
@@ -10,12 +11,21 @@ import { navigateTo,
          selectGamesPos,
          selectMediaPos,
          selectSystemPos,
-         isTrayDisplayed } from './xboxSlice';
+         isTrayDisplayed,
+         selectBladeSize,
+         selectBladeContainerWidth,
+         updateBladeContainerWidth } from './xboxSlice';
+import { current } from '@reduxjs/toolkit';
 
 const Xbox = () => {
 
     const dispatch = useDispatch();
-    const [current_context, setCurrentContext] = useState("xboxlive");
+    const [current_context, setCurrentContext] = useState("marketplace");
+    const [blade_container_width, setBladeContainerWidth] = useState(0);
+    const [xbox_blade_reversed, setXboxBladeReversed] = useState(false);
+    const [games_blade_reversed, setGamesBladeReversed] = useState(false);
+    const [media_blade_reversed, setMediaBladeReversed] = useState(false);
+    const [system_blade_reversed, setSystemBladeReversed] = useState(false);
     const current_dashboard_context = useSelector(selectCurrentContext);
     const current_context_index = useSelector(selectContextIndex);
     const xbox_blade_position = useSelector(selectXboxPos);
@@ -23,6 +33,12 @@ const Xbox = () => {
     const media_position = useSelector(selectMediaPos);
     const system_pos = useSelector(selectSystemPos);
     const display_tray = useSelector(isTrayDisplayed);
+    const blade_size = useSelector(selectBladeSize);
+    const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
+
+    const transition_duration = 1.2;
+
+
 
     const formattedContext = (context) => {
         switch(context){
@@ -40,16 +56,134 @@ const Xbox = () => {
         }
     }
 
+    const xboxBladeContainerRef = useRef(null);
+    const xboxliveRef = useRef(null);
+    const marketplaceRef = useRef(null);
+    const gamesRef = useRef(null);
+    const mediaRef = useRef(null);
+    const systemRef = useRef(null);
+    const queryRef = useRef(null);
+
+    const gsapQuery = gsap.utils.selector(xboxBladeContainerRef);
+    
+    const bladeContainerTransition = useRef(null);
+    const xboxBladeTransition = useRef();
+    const gamesBladeTransition = useRef();
+    const mediaBladeTransition = useRef();
+    const systemBladeTransition = useRef();
+
+
+    // xboxBladeTransition.to(xboxliveRef.current, {id:"xboxBlade", x: `${xbox_blade_container_width - blade_size}`, duration: transition_duration});
+    // gamesBladeTransition.to(gamesRef.current, {x: `${xbox_blade_container_width - blade_size}`, duration: transition_duration});
+    // mediaBladeTransition.to(mediaRef.current, {x: `${xbox_blade_container_width - blade_size}`, duration: transition_duration});
+    // systemBladeTransition.to(systemRef.current, {x: `${xbox_blade_container_width - blade_size}`, duration: transition_duration});
+
+
+
+
+    useEffect(()=>{
+        bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-${blade_size}`});
+        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {x: `${xbox_blade_container_width}`});
+        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {x: `${xbox_blade_container_width}`}, 0);
+        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {x: `${xbox_blade_container_width}`}, 0);
+        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {x: `${xbox_blade_container_width}`}, 0);
+        // .to(xboxliveRef.current, {x: `${xbox_blade_container_width}`}, 0)
+        // .to(gamesRef.current, {x: `${xbox_blade_container_width}`}, 0)
+        // .to(mediaRef.current, {x: `${xbox_blade_container_width}`}, 0)
+        // .to(systemRef.current, {x: `${xbox_blade_container_width}`}, 0);
+    }, [xbox_blade_container_width]);
+
+
+    useEffect(()=> {
+
+
+        const moveBladeContainer = () => {
+
+            
+
+            // switch(current_context_index) {
+            //     case 0:
+            //     break;
+            //     case 1:
+            //     break;
+            //     case 2:
+            //     break;
+            //     case 3:
+            //     break;
+            //     case 4:
+            //     break;
+            //     case 5:
+            //     break;
+            //     default:
+            //     break;
+            // }
+        }
+
+        const moveBlade = () => {
+    
+            switch(current_context_index) {
+                case 0:
+                    xboxBladeTransition.current.play();
+                    gamesBladeTransition.current.play();
+                    mediaBladeTransition.current.play();
+                    systemBladeTransition.current.play();
+                break;
+                case 1:
+                    xboxBladeTransition.current.reverse();
+                    gamesBladeTransition.current.play();
+                    mediaBladeTransition.current.play();
+                    systemBladeTransition.current.play();
+
+                break;
+                case 2:
+                    xboxBladeTransition.current.reverse();
+                    gamesBladeTransition.current.reverse();
+                    mediaBladeTransition.current.play();
+                    systemBladeTransition.current.play();
+                break;
+                case 3:
+                    xboxBladeTransition.current.reverse();
+                    gamesBladeTransition.current.reverse();
+                    mediaBladeTransition.current.reverse();
+                    systemBladeTransition.current.play();
+
+                break;
+                case 4:
+                    xboxBladeTransition.current.reverse();
+                    gamesBladeTransition.current.reverse();
+                    mediaBladeTransition.current.reverse();
+                    systemBladeTransition.current.reverse();
+                    // systemBladeTransition.to(mediaRef.current, {left: `0`, duration: transition_duration, ease: "power2.out"});
+                break;
+                
+                default:
+                break;
+            }
+        };
+
+        const updateContainerWidth = () => {
+            xboxBladeContainerRef && dispatch(updateBladeContainerWidth(xboxBladeContainerRef.current.offsetWidth));
+         }
+
+         //TODO: Optimize using debounce.
+         window.addEventListener('resize', updateContainerWidth);
+
+        moveBlade();
+        updateContainerWidth();
+        moveBladeContainer();
+    }, [current_context, current_context_index, xbox_blade_reversed, bladeContainerTransition, xbox_blade_position]);
+
     return (
         <div>
             <h2>{current_dashboard_context}</h2>
+            <h2>{xbox_blade_container_width}</h2>
             <div className={styles.mainContainer}>
-                <div className={styles.bladeContainer} style={{"transform": `translateX(-${current_context_index * 35 + 135}px)`}}>
-                    <div id={styles["marketplaceBlade"]} className={`${styles.blade} ${""}`}   style={{"--index": 0}} onClick={()=> dispatch(navigateTo("marketplace"))}><p>marketplace</p></div>
-                    <div id={styles["xboxliveBlade"]}    className={`${styles.blade}`}   style={{"--index": 1, "transform": `${xbox_blade_position === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("xboxlive"))}><p>xbox live</p></div>
-                    <div id={styles["gamesBlade"]}       className={`${styles.blade}`}   style={{"--index": 2, "transform": `${games_position === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("games"))}><p>games</p></div>
-                    <div id={styles["mediaBlade"]}       className={`${styles.blade}`}   style={{"--index": 3, "transform": `${media_position === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("media"))}><p>media</p></div>
-                    <div id={styles["systemBlade"]}      className={`${styles.blade}`}   style={{"--index": 4, "transform": `${system_pos === "right" ? "translateX(var(--container-width))": ""}`}} onClick={()=> dispatch(navigateTo("system"))}><p>system</p></div>
+                <div className={styles.bladeContainer} ref={xboxBladeContainerRef}>
+                    <div id={styles["marketplaceBlade"]} className={`${styles.blade} `}  style={{"--index": 0}} ref={marketplaceRef} onClick={()=> {dispatch(navigateTo("marketplace")); setXboxBladeReversed(false)}}><p>marketplace</p></div>
+                    <div id={styles["xboxliveBlade"]}    className={`${styles.blade}`}   style={{"--index": 1}} ref={xboxliveRef}    onClick={()=> {dispatch(navigateTo("xboxlive")); setXboxBladeReversed(!xbox_blade_reversed)}}><p>xbox live</p></div>
+                    <div id={styles["gamesBlade"]}       className={`${styles.blade}`}   style={{"--index": 2}} ref={gamesRef}       onClick={()=> dispatch(navigateTo("games"))}><p>games</p></div>
+                    <div id={styles["mediaBlade"]}       className={`${styles.blade}`}   style={{"--index": 3}} ref={mediaRef}       onClick={()=> dispatch(navigateTo("media"))}><p>media</p></div>
+                    <div id={styles["systemBlade"]}      className={`${styles.blade}`}   style={{"--index": 4}} ref={systemRef}      onClick={()=> dispatch(navigateTo("system"))}><p>system</p></div>
                 </div>
                 <h2 className={styles.sectionHeading}>{formattedContext(current_dashboard_context)}</h2>
                 <section className={styles.gamesContainer}>

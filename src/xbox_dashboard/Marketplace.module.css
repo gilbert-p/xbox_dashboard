@@ -109,7 +109,9 @@
     border-radius: var(--border_radius);
     box-shadow: inset 0 0 6px 0 black;
     background-image: url('../assets/images/marketplace_arcade.png');
-    background-size: contain;
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .selectItemListContainer {
