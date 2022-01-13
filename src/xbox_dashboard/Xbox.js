@@ -165,121 +165,122 @@ const Xbox = () => {
                     </div>
                     {/* These elements are consistent across all contexts */}
 
-
-                    <div id={styles["xboxlive"]} className={`${""} ${current_dashboard_context !== "xboxlive" ? styles.makeTransparent : ""}`}>
-                        <div className={styles.leftContent}>
-                            <div className={styles.profileContainer}>
-                                <p>Epoxi117</p>
-                                <div className={styles.profileImgContainer}>
-                                    <div className={styles.profileIcon}></div>
-                                </div>
-                                <div className={styles.profileDescription}>
-                                    <p className={styles.repTitle}>Rep</p>
-                                    <div className={styles.reputationStars}>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
+                    <div className={styles.outerContextContainer}>
+                        <div id={styles["xboxlive"]} className={`${""} ${current_context_index !== 1 ? styles.makeTransparent : ""}`}>
+                            <div className={styles.leftContent}>
+                                <div className={styles.profileContainer}>
+                                    <p>Epoxi117</p>
+                                    <div className={styles.profileImgContainer}>
+                                        <div className={styles.profileIcon}></div>
                                     </div>
-                                    <p className={styles.gamerscoreTitle}>Gamerscore</p>
-                                    <p className={styles.gamerscoreValue}>21117</p>
-                                    <p className={styles.zoneTitle}>Zone</p>
-                                    <div className={styles.zoneStatus}>Pro</div>
-                                </div>
-                            </div>
-                            <div className={styles.selectItemListContainer}>
-                                <div className={styles.innerListContainer}>
-                                    <div className={styles.listItem}><span className={`${styles.listIcon} ${styles.joinXBL_icon}`}></span><p>Join Xbox LIVE</p></div>
-                                    <div className={styles.listItem_2}><span className={`${styles.listIcon} ${styles.person_icon}`}></span><p>Recover Gamertag from Xbox LIVE</p></div>
-                                </div>
-                            </div>
-                            <div className={styles.xboxliveAnimationContainer}>
-                                <div className={styles.circleAnimation}>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 0}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 1}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 2}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 3}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 4}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 5}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 6}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 7}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 8}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 9}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 10}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 11}}>
-                                        <div className={ringAnim.ringInner}></div>
+                                    <div className={styles.profileDescription}>
+                                        <p className={styles.repTitle}>Rep</p>
+                                        <div className={styles.reputationStars}>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                        </div>
+                                        <p className={styles.gamerscoreTitle}>Gamerscore</p>
+                                        <p className={styles.gamerscoreValue}>21117</p>
+                                        <p className={styles.zoneTitle}>Zone</p>
+                                        <div className={styles.zoneStatus}>Pro</div>
                                     </div>
                                 </div>
-                                <div className={styles.logoContainer}></div>
-                            </div>
-                        </div>
-                        <div className={styles.rightContent}>
-                            <div className={styles.xboxliveLogo}></div>
-                            <div className={styles.descriptionContainer}>
-                                <div className={styles.descriptionTitle}>Xbox LIVE</div>
-                                <div className={styles.descriptionContent}>
-                                    Games. Tournaments. Entertainment. 
-                                    All the rewards. Endless possibilities. What are you waiting for?
+                                <div className={styles.selectItemListContainer}>
+                                    <div className={styles.innerListContainer}>
+                                        <div className={styles.listItem}><span className={`${styles.listIcon} ${styles.joinXBL_icon}`}></span><p>Join Xbox LIVE</p></div>
+                                        <div className={styles.listItem_2}><span className={`${styles.listIcon} ${styles.person_icon}`}></span><p>Recover Gamertag from Xbox LIVE</p></div>
+                                    </div>
+                                </div>
+                                <div className={styles.xboxliveAnimationContainer}>
+                                    <div className={styles.circleAnimation}>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 0}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 1}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 2}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 3}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 4}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 5}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 6}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 7}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 8}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 9}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 10}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                        <div className={`${ringAnim.ring}`} style={{"--i": 11}}>
+                                            <div className={ringAnim.ringInner}></div>
+                                        </div>
+                                    </div>
+                                    <div className={styles.logoContainer}></div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div id={marketplaceStyles["marketplace"]} className={`${''} ${current_dashboard_context !== "marketplace" ? styles.makeTransparent : ""}`}>
-                        <div className={marketplaceStyles.leftContent}>
-                            <div className={marketplaceStyles.selectOption}>
-                                <p>Games</p>
-                            </div>
-                            <div className={marketplaceStyles.selectOption}>
-                                <p>Media and Entertainment</p>
-                            </div>
-                            <div className={marketplaceStyles.selectOption}>
-                                <p>Game Demos</p>
-                            </div>
-                            <div className={marketplaceStyles.selectOption}>
-                                <p>Game Videos</p>
-                            </div>
-                            <div className={marketplaceStyles.selectOption}>
-                                <p>Themes and Gamer Pictures</p>
-                            </div>
-                            <div className={marketplaceStyles.selectOption}>
-                                <p>Featured Downloads</p>
-                            </div>
-                        </div>
-                        <div className={marketplaceStyles.rightContent}>
-                            <div className={marketplaceStyles.imageHeaderContainer}></div>
-                            <div className={marketplaceStyles.selectItemListContainer}>
-                                <div className={marketplaceStyles.innerListContainer}>
-                                    <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.card_icon}`}></span><p>Redeem Code</p></div>
-                                    <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.download_icon}`}></span><p>Active Downloads</p></div>
-                                    <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.crown_icon}`}></span><p>Account Management</p></div>
+                            <div className={styles.rightContent}>
+                                <div className={styles.xboxliveLogo}></div>
+                                <div className={styles.descriptionContainer}>
+                                    <div className={styles.descriptionTitle}>Xbox LIVE</div>
+                                    <div className={styles.descriptionContent}>
+                                        Games. Tournaments. Entertainment. 
+                                        All the rewards. Endless possibilities. What are you waiting for?
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className={styles.outerContextContainer}>
+                        <div id={marketplaceStyles["marketplace"]} className={`${''} ${current_dashboard_context !== "marketplace" ? styles.makeTransparent : ""}`}>
+                            <div className={marketplaceStyles.leftContent}>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Games</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Media and Entertainment</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Game Demos</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Game Videos</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Themes and Gamer Pictures</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Featured Downloads</p>
+                                </div>
+                            </div>
+                            <div className={marketplaceStyles.rightContent}>
+                                <div className={marketplaceStyles.imageHeaderContainer}></div>
+                                <div className={marketplaceStyles.selectItemListContainer}>
+                                    <div className={marketplaceStyles.innerListContainer}>
+                                        <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.card_icon}`}></span><p>Redeem Code</p></div>
+                                        <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.download_icon}`}></span><p>Active Downloads</p></div>
+                                        <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.crown_icon}`}></span><p>Account Management</p></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ""}`}>
                         <div className={styles.trayEllipse}></div>
                         <div className={styles.trayRect}></div>
@@ -287,6 +288,8 @@ const Xbox = () => {
                         <div className={styles.trayRectButton}></div>
                         <p>Open Tray</p>
                     </div>
+                    </div>
+
                     <div className={styles.controllerButtons}></div>
                 </section>
                 

@@ -1,7 +1,7 @@
 #marketplace {
-    position: relative;
-    left: 52%;
-    transform: translateX(-50%);
+    position: static;
+    /* left: 52%;
+    transform: translateX(-50%); */
     display: grid;
     height: var(--container-height);
     max-height: 475px;

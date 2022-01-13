@@ -145,14 +145,19 @@
     font-weight: 500;
 }
 
+.outerContextContainer {
+    position: absolute;
+    width: 100%;
+}
+
 #xboxlive {
-    position: relative;
-    left: 52%;
-    transform: translateX(-50%);
+    position: static;
+    /* left: 52%; */
+    /* transform: translateX(-50%); */
     display: grid;
     height: 100%;
     max-height: 475px;
-    min-height: 400px;
+    min-height: 475px;
     width: 102%;
     margin: 100px 20px 0 20px;
     grid-template-columns: 45% 45%;
@@ -166,8 +171,8 @@
 
 .makeTransparent {
     /* position: absolute !important; */
-    display: none !important;
-    transition: display 0.4s ease-out;
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
 }
 
 .leftContent {
