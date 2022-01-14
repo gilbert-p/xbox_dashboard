@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { gsap } from 'gsap';
 import styles from './Dashboard.module.css';
 import marketplaceStyles from './Marketplace.module.css';
+import gamesStyles from './Games.module.css';
 import ringAnim from './ringAnimation.module.css';
 import { navigateTo, 
          selectCurrentContext, 
@@ -58,30 +59,41 @@ const Xbox = () => {
     const gamesRef = useRef(null);
     const mediaRef = useRef(null);
     const systemRef = useRef(null);
+
+    const xboxBackgroundRef = useRef(null);
+    const marketplaceBackgroundRef = useRef(null);
     
     //GSAP instance Refs
     const bladeContainerTransition = useRef(null);
-    const xboxBladeTransition = useRef();
-    const gamesBladeTransition = useRef();
-    const mediaBladeTransition = useRef();
-    const systemBladeTransition = useRef();
+    const xboxBladeTransition = useRef(null);
+    const gamesBladeTransition = useRef(null);
+    const mediaBladeTransition = useRef(null);
+    const systemBladeTransition = useRef(null);
+    const xboxBackgroundTransition = useRef(null);
+    const marketplaceBackgroundTransition = useRef(null);
+
+
 
     //Runs before browser paint in order to set a new GSAP instance for animating each unique transition.
     useLayoutEffect(()=> {
         bladeContainerTransition.current = {};
         bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current,
             {x: `-${current_context_index * (blade_size) + 30}`})
-    },[current_context_index])
+    },[current_context_index]);
 
 
     //Runs on first render to initialize the blades 
     useEffect(()=>{
         bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-${blade_size}`});
-        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {x: `${xbox_blade_container_width}`});
-        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {x: `${xbox_blade_container_width}`}, 0);
-        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {x: `${xbox_blade_container_width}`}, 0);
-        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {x: `${xbox_blade_container_width}`}, 0);
+        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {x: `${xbox_blade_container_width +5}`});
+        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {x: `${xbox_blade_container_width +5}`}, 0);
+        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {x: `${xbox_blade_container_width +5}`}, 0);
+        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {x: `${xbox_blade_container_width +5}`}, 0);
     }, [xbox_blade_container_width]);
+
+    useEffect(()=> {
+        xboxBackgroundTransition.current = gsap.timeline().to(xboxBackgroundRef.current, {x: `${xbox_blade_container_width}`});
+    }, [xboxBackgroundRef.current])
 
 
     useEffect(()=> {
@@ -92,12 +104,16 @@ const Xbox = () => {
                     gamesBladeTransition.current.play();
                     mediaBladeTransition.current.play();
                     systemBladeTransition.current.play();
+
+                    xboxBackgroundTransition.current.play();
                 break;
                 case 1:
                     xboxBladeTransition.current.reverse();
                     gamesBladeTransition.current.play();
                     mediaBladeTransition.current.play();
                     systemBladeTransition.current.play();
+
+                    xboxBackgroundTransition.current.reverse();
 
                 break;
                 case 2:
@@ -149,10 +165,12 @@ const Xbox = () => {
                 </div>
                 <h2 className={styles.sectionHeading}>{formattedContext(current_dashboard_context)}</h2>
                 <section className={styles.gamesContainer}>
-
+                    <div className={styles.xboxliveBackground} ref={xboxBackgroundRef}></div>
+                    <div className={styles.marketplaceBackground} ref={marketplaceBackgroundRef}></div>
                     {/* These elements are consistent across all contexts */}
                     <div className={styles.topBorder}></div>
                     <div className={styles.bottomBorder}></div>
+                    <div className={styles.lightOverlay}></div>
                     <div className={styles.buttonContainer}>
                         <div className={`${styles.buttons}`}>
                             <div id={styles["yButton"]} className={styles.buttonStyle}></div>
@@ -246,7 +264,15 @@ const Xbox = () => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                        <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ""}`}>
+                                <div className={styles.trayEllipse}></div>
+                                <div className={styles.trayRect}></div>
+                                <div className={styles.trayTriangleButton}></div>
+                                <div className={styles.trayRectButton}></div>
+                                <p>Open Tray</p>
+                            </div>
                     </div>
                     <div className={styles.outerContextContainer}>
                         <div id={marketplaceStyles["marketplace"]} className={`${''} ${current_dashboard_context !== "marketplace" ? styles.makeTransparent : ""}`}>
@@ -281,13 +307,99 @@ const Xbox = () => {
                                 </div>
                             </div>
                         </div>
-                    <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ""}`}>
-                        <div className={styles.trayEllipse}></div>
-                        <div className={styles.trayRect}></div>
-                        <div className={styles.trayTriangleButton}></div>
-                        <div className={styles.trayRectButton}></div>
-                        <p>Open Tray</p>
+
                     </div>
+                    <div className={styles.outerContextContainer}>
+                    <div id={gamesStyles["games"]} className={`${""} ${current_context_index !== 2 ? styles.makeTransparent : ""}`}>
+                        <div className={styles.leftContent}>
+                            <div className={styles.profileContainer}>
+                                <p>Epoxi117</p>
+                                <div className={styles.profileImgContainer}>
+                                    <div className={styles.profileIcon}></div>
+                                </div>
+                                <div className={styles.profileDescription}>
+                                    <p className={styles.repTitle}>Rep</p>
+                                    <div className={styles.reputationStars}>
+                                        <div className={styles.starIcon}></div>
+                                        <div className={styles.starIcon}></div>
+                                        <div className={styles.starIcon}></div>
+                                        <div className={styles.starIcon}></div>
+                                        <div className={styles.starIcon}></div>
+                                    </div>
+                                    <p className={styles.gamerscoreTitle}>Gamerscore</p>
+                                    <p className={styles.gamerscoreValue}>21117</p>
+                                    <p className={styles.zoneTitle}>Zone</p>
+                                    <div className={styles.zoneStatus}>Pro</div>
+                                </div>
+                            </div>
+                            <div className={gamesStyles.selectItemListContainer}>
+                                <div className={gamesStyles.innerListContainer}>
+                                    <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.joystick_icon}`}></span><p>Games Library</p></div>
+                                    <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.trophy_icon}`}></span><p>Achievements</p></div>
+                                    <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Played Games</p></div>
+                                </div>
+                            </div>
+                            <div className={gamesStyles.xboxliveAnimationContainer}>
+                                <div className={styles.circleAnimation}>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 0}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 1}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 2}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 3}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 4}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 5}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 6}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 7}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 8}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 9}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 10}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                    <div className={`${ringAnim.ring}`} style={{"--i": 11}}>
+                                        <div className={ringAnim.ringInner}></div>
+                                    </div>
+                                </div>
+                                <div className={styles.logoContainer}></div>
+                            </div>
+                        </div>
+                        <div className={styles.rightContent}>
+                            <div className={gamesStyles.xbox360Logo}></div>
+                            <div className={styles.descriptionContainer}>
+                                <div className={styles.descriptionTitle}>Xbox LIVE</div>
+                                <div className={styles.descriptionContent}>
+                                    Games. Tournaments. Entertainment. 
+                                    All the rewards. Endless possibilities. What are you waiting for?
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+                        <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ""}`}>
+                                <div className={styles.trayEllipse}></div>
+                                <div className={styles.trayRect}></div>
+                                <div className={styles.trayTriangleButton}></div>
+                                <div className={styles.trayRectButton}></div>
+                                <p>Open Tray</p>
+                            </div>
                     </div>
 
                     <div className={styles.controllerButtons}></div>

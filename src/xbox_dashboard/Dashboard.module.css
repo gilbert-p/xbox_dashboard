@@ -56,23 +56,32 @@
 
 .topBorder {
     position: absolute;
-    width: 101%;
+    width: 103%;
     height: 90px;
     left: 50%;
     box-shadow: inset 0 -1px 7px 0px black;
-    border-radius: 0px 0px 40px 40px;
+    border-radius: 0px 0px 70px 70px;
     transform: translateX(-50%);
 }
 
 .bottomBorder {
     position: absolute;
-    width: 101%;
+    width: 103%;
     height: 90px;
     top: 89%;
     left: 50%;
     transform: translateX(-50%);
     box-shadow: inset 0 -1px 7px 0px black;
-    border-radius: 40px 40px 0px 0px;
+    border-radius: 70px 70px 0px 0px;
+}
+
+.lightOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(0, 0, 0, 0) 60%, rgba(255, 255, 255, 0.315) 85%);
+    z-index: 10;
+    opacity: 0.4;
 }
 
 
@@ -129,11 +138,25 @@
     position: relative;
     width: calc(100%);
     height: 100%;
-    background: linear-gradient(89.59deg, #F59542 0.88%, #F9B43F 50.8%, #F59542 99.29%);
+    /* background: linear-gradient(89.59deg, #F59542 0.88%, #F9B43F 50.8%, #F59542 99.29%); */
     margin: 0 auto;
     /* text-align: left; */
     overflow: hidden;
-    
+}
+
+.marketplaceBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(89.59deg, #F47B1E 0.88%, #FFA743 50.8%, #F47B1E 99.29%);
+    z-index: -1;
+}
+
+.xboxliveBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(89.59deg, #D78034 0.88%, #FDBA4C 48.47%, #D78034 99.29%);
 }
 
 .sectionHeading {
@@ -360,18 +383,6 @@
     background-color: rgba(9, 9, 9, 0.295);
     border-radius: 5px;
 }
-
-/* .listItem:before {
-    content: "";
-    position: absolute;
-    width: 97%;
-    height: 2px;
-    top: 50%;
-    left: 0;
-    background-color: rgba(9, 9, 9, 0.295);
-    border-radius: 5px;
-} */
-
 
 
 .innerListContainer > div:nth-child(1) {

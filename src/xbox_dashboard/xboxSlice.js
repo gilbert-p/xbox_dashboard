@@ -9,7 +9,7 @@ let initialState = {
     media_reversed: true,
     system_reversed: true,
     disc_tray: false,
-    blade_size: 30,
+    blade_size: 35,
     blade_container_width: 0,
 }
 
