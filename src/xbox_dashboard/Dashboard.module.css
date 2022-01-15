@@ -149,7 +149,7 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(89.59deg, #F47B1E 0.88%, #FFA743 50.8%, #F47B1E 99.29%);
-    z-index: -1;
+    z-index: -10;
 }
 
 .xboxliveBackground {
@@ -157,6 +157,31 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(89.59deg, #D78034 0.88%, #FDBA4C 48.47%, #D78034 99.29%);
+    z-index: -9;
+}
+
+.gamesBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(89.59deg, #43903D 0.88%, #69CF38 50.8%, #43903D 99.29%);
+    z-index: -8;
+}
+
+.mediaBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(89.59deg, #4582B9 0.88%, #449AED 50.8%, #4582B9 99.29%);
+    z-index: -7;
+}
+
+.systemBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(89.59deg, #8660BB 0.88%, #AE87FF 50.8%, #8660BB 99.29%);
+    z-index: -6;
 }
 
 .sectionHeading {
@@ -189,13 +214,13 @@
     "left-content right-content"
     "left-content right-content"
     "left-content .";
-    transition: opacity 0.4s ease-in;
+    transition: opacity 0.6s ease-in;
 }
 
 .makeTransparent {
     /* position: absolute !important; */
     opacity: 0;
-    transition: opacity 0.4s ease-in;
+    transition: opacity 0.6s ease-in;
 }
 
 .leftContent {

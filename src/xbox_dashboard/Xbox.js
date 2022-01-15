@@ -16,7 +16,6 @@ import { navigateTo,
          selectBladeSize,
          selectBladeContainerWidth,
          updateBladeContainerWidth } from './xboxSlice';
-import { current } from '@reduxjs/toolkit';
 
 const Xbox = () => {
 
@@ -32,6 +31,11 @@ const Xbox = () => {
     const display_tray = useSelector(isTrayDisplayed);
     const blade_size = useSelector(selectBladeSize);
     const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
+
+    const background_transition_duration = 0.9;
+    const background_transition_delay = 0;
+    const blade_transition_duration = 0.9;
+    const blade_transition_delay = 0;
 
 
 
@@ -62,6 +66,9 @@ const Xbox = () => {
 
     const xboxBackgroundRef = useRef(null);
     const marketplaceBackgroundRef = useRef(null);
+    const gamesBackgroundRef = useRef(null);
+    const mediaBackgroundRef = useRef(null);
+    const systemBackgroundRef = useRef(null);
     
     //GSAP instance Refs
     const bladeContainerTransition = useRef(null);
@@ -70,7 +77,9 @@ const Xbox = () => {
     const mediaBladeTransition = useRef(null);
     const systemBladeTransition = useRef(null);
     const xboxBackgroundTransition = useRef(null);
-    const marketplaceBackgroundTransition = useRef(null);
+    const gamesBackgroundTransition = useRef(null);
+    const mediaBackgroundTransition = useRef(null);
+    const systemBackgroundTransition = useRef(null);
 
 
 
@@ -78,21 +87,26 @@ const Xbox = () => {
     useLayoutEffect(()=> {
         bladeContainerTransition.current = {};
         bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current,
-            {x: `-${current_context_index * (blade_size) + 30}`})
+            {left: `-${current_context_index * (blade_size) + 30}`, duration: 0.3})
     },[current_context_index]);
 
 
     //Runs on first render to initialize the blades 
     useEffect(()=>{
-        bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-${blade_size}`});
-        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {x: `${xbox_blade_container_width +5}`});
-        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {x: `${xbox_blade_container_width +5}`}, 0);
-        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {x: `${xbox_blade_container_width +5}`}, 0);
-        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {x: `${xbox_blade_container_width +5}`}, 0);
+        bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {left: `-${blade_size}`, duration: blade_transition_duration, delay: blade_transition_delay});
+        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
     }, [xbox_blade_container_width]);
 
+    //Runs on first render to initialize background slides
     useEffect(()=> {
-        xboxBackgroundTransition.current = gsap.timeline().to(xboxBackgroundRef.current, {x: `${xbox_blade_container_width}`});
+        xboxBackgroundTransition.current = gsap.timeline().to(xboxBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        gamesBackgroundTransition.current = gsap.timeline().to(gamesBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        mediaBackgroundTransition.current = gsap.timeline().to(mediaBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        systemBackgroundTransition.current = gsap.timeline().to(systemBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        
     }, [xboxBackgroundRef.current])
 
 
@@ -106,34 +120,55 @@ const Xbox = () => {
                     systemBladeTransition.current.play();
 
                     xboxBackgroundTransition.current.play();
+                    gamesBackgroundTransition.current.play();
+                    mediaBackgroundTransition.current.play();
+                    systemBackgroundTransition.current.play();
                 break;
                 case 1:
-                    xboxBladeTransition.current.reverse();
+                    xboxBladeTransition.current.reverse().delay(blade_transition_delay);
                     gamesBladeTransition.current.play();
                     mediaBladeTransition.current.play();
                     systemBladeTransition.current.play();
 
-                    xboxBackgroundTransition.current.reverse();
+                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    mediaBackgroundTransition.current.play();
+                    gamesBackgroundTransition.current.play();
+                    systemBackgroundTransition.current.play();
 
                 break;
                 case 2:
-                    xboxBladeTransition.current.reverse();
-                    gamesBladeTransition.current.reverse();
+                    xboxBladeTransition.current.reverse().delay(blade_transition_delay);
+                    gamesBladeTransition.current.reverse().delay(blade_transition_delay);
                     mediaBladeTransition.current.play();
                     systemBladeTransition.current.play();
+
+                    gamesBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    mediaBackgroundTransition.current.play();
+                    systemBackgroundTransition.current.play();
                 break;
                 case 3:
-                    xboxBladeTransition.current.reverse();
-                    gamesBladeTransition.current.reverse();
-                    mediaBladeTransition.current.reverse();
+                    xboxBladeTransition.current.reverse().delay(blade_transition_delay);
+                    gamesBladeTransition.current.reverse().delay(blade_transition_delay);
+                    mediaBladeTransition.current.reverse().delay(blade_transition_delay);
                     systemBladeTransition.current.play();
+
+                    mediaBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    gamesBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    systemBackgroundTransition.current.play();
 
                 break;
                 case 4:
-                    xboxBladeTransition.current.reverse();
-                    gamesBladeTransition.current.reverse();
-                    mediaBladeTransition.current.reverse();
-                    systemBladeTransition.current.reverse();
+                    xboxBladeTransition.current.reverse().delay(blade_transition_delay);
+                    gamesBladeTransition.current.reverse().delay(blade_transition_delay);
+                    mediaBladeTransition.current.reverse().delay(blade_transition_delay);
+                    systemBladeTransition.current.reverse().delay(blade_transition_delay);
+
+                    systemBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    gamesBackgroundTransition.current.reverse().delay(background_transition_delay);
+                    mediaBackgroundTransition.current.reverse().delay(background_transition_delay);
                 break;
                 default:
                 break;
@@ -167,6 +202,9 @@ const Xbox = () => {
                 <section className={styles.gamesContainer}>
                     <div className={styles.xboxliveBackground} ref={xboxBackgroundRef}></div>
                     <div className={styles.marketplaceBackground} ref={marketplaceBackgroundRef}></div>
+                    <div className={styles.gamesBackground} ref={gamesBackgroundRef}></div>
+                    <div className={styles.mediaBackground} ref={mediaBackgroundRef}></div>
+                    <div className={styles.systemBackground} ref={systemBackgroundRef}></div>
                     {/* These elements are consistent across all contexts */}
                     <div className={styles.topBorder}></div>
                     <div className={styles.bottomBorder}></div>
