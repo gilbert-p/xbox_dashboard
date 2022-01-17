@@ -4,6 +4,8 @@ import { gsap } from 'gsap';
 import styles from './Dashboard.module.css';
 import marketplaceStyles from './Marketplace.module.css';
 import gamesStyles from './Games.module.css';
+import mediaStyles from './Media.module.css';
+import systemStyles from './System.module.css';
 import ringAnim from './ringAnimation.module.css';
 import { navigateTo, 
          selectCurrentContext, 
@@ -17,11 +19,14 @@ import { navigateTo,
          selectBladeContainerWidth,
          updateBladeContainerWidth } from './xboxSlice';
 
+import { navigateSystemMenu, selectSystemMainMenuIndex } from './systemSlice';
+
 const Xbox = () => {
 
     const dispatch = useDispatch();
-    const [current_context, setCurrentContext] = useState("marketplace");
-    const [xbox_blade_reversed, setXboxBladeReversed] = useState(false);
+    
+    
+    //Dashboard state variables
     const current_dashboard_context = useSelector(selectCurrentContext);
     const current_context_index = useSelector(selectContextIndex);
     const xbox_blade_position = useSelector(selectXboxPos);
@@ -31,6 +36,10 @@ const Xbox = () => {
     const display_tray = useSelector(isTrayDisplayed);
     const blade_size = useSelector(selectBladeSize);
     const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
+
+    //System state variables
+    const systemMenuIndex = useSelector(selectSystemMainMenuIndex);
+    
 
     const background_transition_duration = 0.9;
     const background_transition_delay = 0;
@@ -81,7 +90,7 @@ const Xbox = () => {
     const mediaBackgroundTransition = useRef(null);
     const systemBackgroundTransition = useRef(null);
 
-
+    
 
     //Runs before browser paint in order to set a new GSAP instance for animating each unique transition.
     useLayoutEffect(()=> {
@@ -184,7 +193,7 @@ const Xbox = () => {
 
         moveBlade();
         updateContainerWidth();
-    }, [current_context, current_context_index, xbox_blade_reversed, bladeContainerTransition, xbox_blade_position]);
+    }, [current_context_index, bladeContainerTransition, xbox_blade_position]);
 
     return (
         <div>
@@ -209,6 +218,13 @@ const Xbox = () => {
                     <div className={styles.topBorder}></div>
                     <div className={styles.bottomBorder}></div>
                     <div className={styles.lightOverlay}></div>
+                    <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ''}`}>
+                                <div className={styles.trayEllipse}></div>
+                                <div className={styles.trayRect}></div>
+                                <div className={styles.trayTriangleButton}></div>
+                                <div className={styles.trayRectButton}></div>
+                                <p>Open Tray</p>
+                    </div>
                     <div className={styles.buttonContainer}>
                         <div className={`${styles.buttons}`}>
                             <div id={styles["yButton"]} className={styles.buttonStyle}></div>
@@ -222,7 +238,7 @@ const Xbox = () => {
                     {/* These elements are consistent across all contexts */}
 
                     <div className={styles.outerContextContainer}>
-                        <div id={styles["xboxlive"]} className={`${""} ${current_context_index !== 1 ? styles.makeTransparent : ""}`}>
+                        <div id={styles["xboxlive"]} className={`${current_context_index !== 1 ? styles.makeTransparent : ""}`}>
                             <div className={styles.leftContent}>
                                 <div className={styles.profileContainer}>
                                     <p>Epoxi117</p>
@@ -304,13 +320,13 @@ const Xbox = () => {
                             </div>
 
                         </div>
-                        <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ""}`}>
+                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 1 ? styles.makeTransparent : ''}`}>
                                 <div className={styles.trayEllipse}></div>
                                 <div className={styles.trayRect}></div>
                                 <div className={styles.trayTriangleButton}></div>
                                 <div className={styles.trayRectButton}></div>
                                 <p>Open Tray</p>
-                            </div>
+                        </div> */}
                     </div>
                     <div className={styles.outerContextContainer}>
                         <div id={marketplaceStyles["marketplace"]} className={`${''} ${current_dashboard_context !== "marketplace" ? styles.makeTransparent : ""}`}>
@@ -348,99 +364,257 @@ const Xbox = () => {
 
                     </div>
                     <div className={styles.outerContextContainer}>
-                    <div id={gamesStyles["games"]} className={`${""} ${current_context_index !== 2 ? styles.makeTransparent : ""}`}>
-                        <div className={styles.leftContent}>
-                            <div className={styles.profileContainer}>
-                                <p>Epoxi117</p>
-                                <div className={styles.profileImgContainer}>
-                                    <div className={styles.profileIcon}></div>
-                                </div>
-                                <div className={styles.profileDescription}>
-                                    <p className={styles.repTitle}>Rep</p>
-                                    <div className={styles.reputationStars}>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
-                                        <div className={styles.starIcon}></div>
+                        <div id={gamesStyles["games"]} className={`${current_context_index !== 2 ? styles.makeTransparent : ""}`}>
+                            <div className={styles.leftContent}>
+                                <div className={styles.profileContainer}>
+                                    <p>Epoxi117</p>
+                                    <div className={styles.profileImgContainer}>
+                                        <div className={styles.profileIcon}></div>
                                     </div>
-                                    <p className={styles.gamerscoreTitle}>Gamerscore</p>
-                                    <p className={styles.gamerscoreValue}>21117</p>
-                                    <p className={styles.zoneTitle}>Zone</p>
-                                    <div className={styles.zoneStatus}>Pro</div>
-                                </div>
-                            </div>
-                            <div className={gamesStyles.selectItemListContainer}>
-                                <div className={gamesStyles.innerListContainer}>
-                                    <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.joystick_icon}`}></span><p>Games Library</p></div>
-                                    <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.trophy_icon}`}></span><p>Achievements</p></div>
-                                    <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Played Games</p></div>
-                                </div>
-                            </div>
-                            <div className={gamesStyles.xboxliveAnimationContainer}>
-                                <div className={styles.circleAnimation}>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 0}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 1}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 2}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 3}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 4}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 5}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 6}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 7}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 8}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 9}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 10}}>
-                                        <div className={ringAnim.ringInner}></div>
-                                    </div>
-                                    <div className={`${ringAnim.ring}`} style={{"--i": 11}}>
-                                        <div className={ringAnim.ringInner}></div>
+                                    <div className={styles.profileDescription}>
+                                        <p className={styles.repTitle}>Rep</p>
+                                        <div className={styles.reputationStars}>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                        </div>
+                                        <p className={styles.gamerscoreTitle}>Gamerscore</p>
+                                        <p className={styles.gamerscoreValue}>21117</p>
+                                        <p className={styles.zoneTitle}>Zone</p>
+                                        <div className={styles.zoneStatus}>Pro</div>
                                     </div>
                                 </div>
-                                <div className={styles.logoContainer}></div>
-                            </div>
-                        </div>
-                        <div className={styles.rightContent}>
-                            <div className={gamesStyles.xbox360Logo}></div>
-                            <div className={styles.descriptionContainer}>
-                                <div className={styles.descriptionTitle}>Xbox LIVE</div>
-                                <div className={styles.descriptionContent}>
-                                    Games. Tournaments. Entertainment. 
-                                    All the rewards. Endless possibilities. What are you waiting for?
+                                <div className={gamesStyles.selectItemListContainer}>
+                                    <div className={gamesStyles.innerListContainer}>
+                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.joystick_icon}`}></span><p>Games Library</p></div>
+                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.trophy_icon}`}></span><p>Achievements</p></div>
+                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Played Games</p></div>
+                                    </div>
+                                </div>
+                                <div className={gamesStyles.xboxliveAnimationContainer}>
+                                    <div className={styles.logoContainer}></div>
                                 </div>
                             </div>
-                        </div>
+                            <div className={styles.rightContent}>
+                                <div className={gamesStyles.xbox360Logo}></div>
+                                <div className={styles.descriptionContainer}>
+                                    <div className={styles.descriptionTitle}>Xbox LIVE</div>
+                                    <div className={styles.descriptionContent}>
+                                        Games. Tournaments. Entertainment. 
+                                        All the rewards. Endless possibilities. What are you waiting for?
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
-                        <div className={`${styles.systemTrayContainer} ${!display_tray ? styles.makeTransparent : ""}`}>
+                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 2 ? styles.makeTransparent : ''}`}>
                                 <div className={styles.trayEllipse}></div>
                                 <div className={styles.trayRect}></div>
                                 <div className={styles.trayTriangleButton}></div>
                                 <div className={styles.trayRectButton}></div>
                                 <p>Open Tray</p>
-                            </div>
+                        </div> */}
                     </div>
 
-                    <div className={styles.controllerButtons}></div>
+                    <div className={styles.outerContextContainer}>
+                        <div id={gamesStyles["media"]} className={`${current_context_index !== 3 ? styles.makeTransparent : ""}`}>
+                            <div className={styles.leftContent}>
+                                <div className={styles.profileContainer}>
+                                    <p>Epoxi117</p>
+                                    <div className={styles.profileImgContainer}>
+                                        <div className={styles.profileIcon}></div>
+                                    </div>
+                                    <div className={styles.profileDescription}>
+                                        <p className={styles.repTitle}>Rep</p>
+                                        <div className={styles.reputationStars}>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                            <div className={styles.starIcon}></div>
+                                        </div>
+                                        <p className={styles.gamerscoreTitle}>Gamerscore</p>
+                                        <p className={styles.gamerscoreValue}>21117</p>
+                                        <p className={styles.zoneTitle}>Zone</p>
+                                        <div className={styles.zoneStatus}>Pro</div>
+                                    </div>
+                                </div>
+                                <div className={gamesStyles.selectItemListContainer}>
+                                    <div className={gamesStyles.innerListContainer}>
+                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.joystick_icon}`}></span><p>Music</p></div>
+                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.trophy_icon}`}></span><p>Pictures</p></div>
+                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Videos</p></div>
+                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Media Center</p></div>
+                                    </div>
+                                </div>
+                                <div className={gamesStyles.xboxliveAnimationContainer}>
+                                    <div className={styles.logoContainer}></div>
+                                </div>
+                            </div>
+                            <div className={styles.rightContent}>
+                                <div className={gamesStyles.xbox360Logo}></div>
+                                <div className={styles.descriptionContainer}>
+                                    <div className={styles.descriptionTitle}>Xbox LIVE</div>
+                                    <div className={styles.descriptionContent}>
+                                        Games. Tournaments. Entertainment. 
+                                        All the rewards. Endless possibilities. What are you waiting for?
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 3 ? styles.makeTransparent : ''}`}>
+                                <div className={styles.trayEllipse}></div>
+                                <div className={styles.trayRect}></div>
+                                <div className={styles.trayTriangleButton}></div>
+                                <div className={styles.trayRectButton}></div>
+                                <p>Open Tray</p>
+                        </div> */}
+                    </div>
+
+                    <div className={styles.outerContextContainer}>
+                        <div id={systemStyles["system"]} className={`${current_context_index !== 4 ? styles.makeTransparent : ""}`}>
+
+                            <div className={systemStyles.leftContent}>
+                                <div className={systemStyles.selectItemListContainer}>
+                                    <div className={systemStyles.boxInsetHighlightContainer}>
+                                        <div className={systemStyles.boxInsetHighlightMaskTop}>
+                                            <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 0 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 1 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 2 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 3 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 4 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 5 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 6 ? styles.makeTransparent : ""}`}></div>
+                                        </div>
+                                        <div className={systemStyles.boxInsetHighlightMaskBottom}>
+                                            <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 0 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 1 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 2 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 3 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 4 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 5 ? styles.makeTransparent : ""}`}></div>
+                                            <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 6 ? styles.makeTransparent : ""}`}></div>
+                                        </div>
+                                    </div>
+                                    <div className={systemStyles.innerListContainer} >
+                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(0));}}>
+                                            <span className={`${systemStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                                            <p>
+                                                <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 0 ? styles.makeTransparent : ""}`}></span>
+                                                Console Settings
+                                            </p>
+                                        </div>
+                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(1));}}>
+                                            <span className={`${systemStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                            <p>
+                                                <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 1 ? styles.makeTransparent : ""}`}></span>
+                                                Family Settings
+                                            </p>
+                                        </div>
+                                        <div className={systemStyles.listItem} onClick={()=>dispatch(navigateSystemMenu(2))}>
+                                            <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 2 ? styles.makeTransparent : ""}`}></span>
+                                                Memory
+                                            </p>
+                                        </div>
+                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(3));}}>
+                                            <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 3 ? styles.makeTransparent : ""}`}></span>
+                                                Network Settings
+                                            </p>
+                                        </div>
+                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(4));}}>
+                                            <span className={`${systemStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                            <p>
+                                                <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 4 ? styles.makeTransparent : ""}`}></span>
+                                                Computers
+                                            </p>
+                                        </div>
+                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(5));}}>
+                                            <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 5 ? styles.makeTransparent : ""}`}></span>
+                                                Xbox Live Vision
+                                            </p>
+                                        </div>
+                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(6));}}>
+                                            <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 6 ? styles.makeTransparent : ""}`}></span>
+                                                Initial Setup
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={systemStyles.rightContent}>
+                                <div className={systemStyles.containerHalf}>
+                                <div id="console-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 0 ? styles.makeTransparent : ""}`}>
+                                    <div className={systemStyles.descTitle}>
+                                        Edit your Xbox 360 system settings, including:
+                                    </div>
+                                    <div className={systemStyles.descContent}>
+                                        <ul>
+                                            <li>Display</li>
+                                            <li>Audio</li>
+                                            <li>Language</li>
+                                            <li>Remote Control</li>
+                                            <li>and more</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div id="family-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 1 ? styles.makeTransparent : ""}`}>
+                                    <div className={systemStyles.descContent}>
+                                        <p>Protect younger family members by customizing content, communications, and online
+                                            interactions. Adjust settings on the console or at the individual profile level.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div id="memory-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 2 ? styles.makeTransparent : ""}`}>
+                                    <div className={systemStyles.descContent}>
+                                        <p>Move or delete saved games, profiles, and other items on Xbox 360 storage devices.</p>
+                                    </div>
+                                </div>
+                                <div id="network-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 3 ? styles.makeTransparent : ""}`}>
+                                    <div className={systemStyles.descContent}>
+                                        <p>Connect your console to your home network or Xbox Live. Set up wireless network connections and test network settings.</p>
+                                    </div>
+                                </div>
+                                <div id="computers" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 4 ? styles.makeTransparent : ""}`}>
+                                    <div className={systemStyles.descContent}>
+                                        <p>Manage your connections to Windows XP or Media Center PC.</p>
+                                    </div>
+                                </div>
+                                <div id="xboxlive-vision" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 5 ? styles.makeTransparent : ""}`}>
+                                    <div className={systemStyles.descContent}>
+                                        <p>Change the settings for your Xbox Live Vision camera.</p>
+                                    </div>
+                                </div>
+                                <div id="initial-setup" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 6 ? styles.makeTransparent : ""}`}>
+                                    <div className={systemStyles.descContent}>
+                                        <p>Run the system setup that you saw the first time you started the console.</p>
+                                    </div>
+                                </div>
+                                </div>
+
+                                
+                            </div>
+
+                        </div>
+                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 3 ? styles.makeTransparent : ''}`}>
+                                <div className={styles.trayEllipse}></div>
+                                <div className={styles.trayRect}></div>
+                                <div className={styles.trayTriangleButton}></div>
+                                <div className={styles.trayRectButton}></div>
+                                <p>Open Tray</p>
+                        </div> */}
+                    </div>
+
                 </section>
                 
             </div>

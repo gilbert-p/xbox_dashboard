@@ -9,6 +9,7 @@
   --container-height: 80vh;
   --transition_value: calc(var(--container-width) - 24.5%);
   --border_radius: 10px;
+  --transition_duration: 0.6s;
 }
 
 * {

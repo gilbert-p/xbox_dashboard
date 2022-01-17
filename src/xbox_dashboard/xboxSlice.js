@@ -18,7 +18,9 @@ export const xboxSlice = createSlice({
     initialState,
     reducers: {
       navigateTo: (state, action) => {
+        
         state.current_context = action.payload;
+
         switch(action.payload){
           case "marketplace":
             state.context_index = 0;
