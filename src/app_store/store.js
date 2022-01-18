@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import xboxReducer from '../xbox_dashboard/xboxSlice';
-import systemReducer from '../xbox_dashboard/systemSlice';
+import menuReducer from '../xbox_dashboard/menuSlice';
 
 
 export const store = configureStore({
   reducer: {
     dashboard: xboxReducer,
-    system: systemReducer
+    menu: menuReducer
   },
 });

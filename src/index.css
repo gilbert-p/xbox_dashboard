@@ -1,21 +1,35 @@
 @font-face {
-  font-family: 'x360';
-  src: url('./assets/fonts/x360.ttf');
+  font-family: Convection;
+  src: url('./assets/fonts/Conv.ttf');
+}
+
+@font-face {
+  font-family: Convection;
+  src: url('./assets/fonts/Convmd.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Convection;
+  src: url('./assets/fonts/Convb.ttf');
+  font-weight: bold;
 }
 
 :root {
-  --blade-size: 30px;
+  --blade-size: 85px;
   --container-width: 54vw;
   --container-height: 80vh;
   --transition_value: calc(var(--container-width) - 24.5%);
   --border_radius: 10px;
   --transition_duration: 0.6s;
+  --z-depth:0;
 }
 
 * {
   box-sizing: border-box;
-  font-family: "x360";
+  font-family: Convection;
 }
+
 
 h1,h2,h3,h4,p {
   margin: 0;

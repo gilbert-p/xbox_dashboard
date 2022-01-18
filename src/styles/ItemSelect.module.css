@@ -1,31 +1,3 @@
-#systemContextContainer {
-    z-index: var(--z-depth);
-}
-
-#system {
-    position: static;
-    display: grid;
-    height: 100%;
-    max-height: 475px;
-    min-height: 475px;
-    width: 102%;
-    margin: 100px 20px 0 20px;
-    grid-template-columns: 45% 45%;
-    grid-template-rows: 100%;
-    column-gap: 20px;
-    grid-template-areas: 
-    "list-items item-desc";
-    transition: opacity 0.4s ease-in;
-}
-
-.leftContent {
-    grid-area: list-items;
-}
-
-.rightContent {
-    grid-area: item-desc;
-    padding-left: 20px;
-}
 .containerReset {
     position: relative;
     width: 100%;
@@ -55,9 +27,6 @@
     /* background-color: chocolate; */
 }
 
-.listItem:first-child {
-
-}
 
 .listItem:hover{
     cursor: pointer;
@@ -115,35 +84,6 @@
     margin-top: 10px;
 }
 
-.itemSelectDescription {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    height: 100%;
-    text-align: left;
-    transition: opacity var(--transition_duration);
-}
-
-.descTitle {
-    font-size: 1.5rem;
-    line-height: 1.4;
-}
-
-.descContent > p {
-    font-size: 1.3rem;
-    margin-top: 5px;
-}
-
-.descContent > ul {
-    padding-left: 20px;
-}
-
-.descContent > ul > li {
-    font-size: 1.2rem;
-    list-style: disc;
-    margin-bottom: 5px;
-}
 
 .listItemHighlight {
     position: absolute;
@@ -189,12 +129,13 @@
     height: 102%;
     width: 100%;
     left: -20px;
-    top: calc(-100% + 15px);
+    top: calc(-100% + 10px);
     border-radius: 0 0 15px 0;
     border-top: 1px solid black;
     border-right: 1px solid black;
     box-shadow: inset -1px 2px 10px 0px rgba(0, 0, 0, 0.623);
     transition: opacity var(--transition_duration);
+    /* background-color: red; */
 }
 
 .boxInsetHighlightBottom {
@@ -208,6 +149,7 @@
     border-right: 1px solid black;
     box-shadow: inset -1px 2px 10px 0px rgba(0, 0, 0, 0.623);
     transition: opacity var(--transition_duration);
+    /* background-color: red; */
 }
 
 /* Bottom Highlights */
@@ -242,26 +184,98 @@
 
 /* Top Highlights */
 
+.boxInsetHighlightTop:nth-child(1) {
+    top: calc(-100%);
+}
+
 .boxInsetHighlightTop:nth-child(2) {
-    top: calc(-100% + 65px);
+    top: calc(-100% + 50px);
 }
 
 .boxInsetHighlightTop:nth-child(3) {
-    top: calc(-100% + 115px);
+    top: calc(-100% + 100px);
 }
 
 .boxInsetHighlightTop:nth-child(4) {
-    top: calc(-100% + 165px);
+    top: calc(-100% + 150px);
 }
 
 .boxInsetHighlightTop:nth-child(5) {
-    top: calc(-100% + 215px);
+    top: calc(-100% + 200px);
 }
 
 .boxInsetHighlightTop:nth-child(6) {
-    top: calc(-100% + 265px);
+    top: calc(-100% + 250px);
 }
 
 .boxInsetHighlightTop:nth-child(7) {
-    top: calc(-100% + 315px);
+    top: calc(-100% + 300px);
+}
+
+
+
+#marketplaceSection > .boxInsetHighlightContainer {
+    top: 55px;
+}
+
+#marketplaceSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
+    top: -50px;
+}
+
+#marketplaceSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
+    height: 108px;
+}
+
+
+
+
+#xboxliveSection > .boxInsetHighlightContainer {
+    top: 55px;
+}
+
+#xboxliveSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
+    top: -50px;
+}
+
+#xboxliveSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
+    height: 108px;
+}
+
+
+
+
+#gamesSelection >.innerListContainer {
+    top: 0;
+    min-height: 250px;
+}
+
+#gamesSelection > .boxInsetHighlightContainer {
+    top: 55px;
+}
+
+#gamesSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
+    top: -50px;
+}
+
+#gamesSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
+    height: 250px;
+}
+
+
+
+
+#mediaSelection >.innerListContainer {
+    top: 0;
+}
+
+#mediaSelection > .boxInsetHighlightContainer {
+    top: 55px;
+}
+
+#mediaSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
+    top: -50px;
+}
+
+#mediaSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
+    height: 250px;
 }

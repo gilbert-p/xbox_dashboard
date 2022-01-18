@@ -25,15 +25,18 @@
     /* transform: translateX(var(--shiftIndex, 0) * var(--blade-size, 0)); */
     transition: transform 0.8s ease-out;
     pointer-events: none;
+    /* margin-left: -20px; */
 }
 
 .blade {
     position: relative;
     width: var(--blade-size);
     height: 100%;
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
+    /* border: 1px solid black; */
     transition: transform 0.6s ease-in;
     pointer-events: initial;
+    overflow: hidden;
 }
 
 .blade:hover {
@@ -41,8 +44,24 @@
 }
 
 
-.blade:not(:first-of-type){
-    left: calc(var(--container-width) - var(--blade_size));
+.blade:nth-child(2){
+    /* left: calc(var(--container-width) - var(--blade_size)); */
+    transform: translateX(-38px);
+}
+
+.blade:nth-child(3){
+    /* left: calc(var(--container-width) - var(--blade_size)); */
+    transform: translateX(-76px);
+}
+
+.blade:nth-child(4){
+    /* left: calc(var(--container-width) - var(--blade_size)); */
+    transform: translateX(-114px);
+}
+
+.blade:nth-child(5){
+    /* left: calc(var(--container-width) - var(--blade_size)); */
+    transform: translateX(-152px);
 }
 
 
@@ -228,14 +247,17 @@
     /* position: absolute !important; */
     opacity: 0;
     transition: opacity 0.6s ease-in;
+    pointer-events: none;
+}
+
+.instantTransparent {
+    visibility: hidden;
 }
 
 .leftContent {
     grid-area: left-content;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: repeat(auto-fill, minmax(125px, 150px));
-    row-gap: 20px;
+    display: flex;
+    flex-direction: column;
     /* background-color: slateblue; */
     text-align: left;
 }
@@ -249,6 +271,7 @@
     "profile-img profile-desc profile-desc profile-desc";
     width: 100%;
     height: 100%;
+    max-height: 150px;
     /* background-color: orange; */
     border-radius: 15px;
     text-align: left;
@@ -460,6 +483,7 @@
     position: relative;
     width: 100%;
     height: 100%;
+    max-height: 120px;
     background-color: #4f4e50;
     border-radius: 15px;
     box-shadow: inset 0 0 6px 0px black;

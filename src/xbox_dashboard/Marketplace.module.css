@@ -1,3 +1,7 @@
+#marketplaceContextContainer {
+    z-index: var(--z-depth);
+}
+
 #marketplace {
     position: static;
     /* left: 52%;

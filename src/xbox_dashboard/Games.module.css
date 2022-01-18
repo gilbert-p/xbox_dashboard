@@ -1,3 +1,7 @@
+#gamesContextContainer {
+    z-index: var(--z-depth);
+}
+
 #games {
     position: static;
     display: grid;
@@ -9,26 +13,7 @@
     grid-template-columns: 45% 45%;
     column-gap: 20px;
     grid-template-areas: 
-    "left-content right-content"
-    "left-content right-content"
-    "left-content .";
-    transition: opacity 0.4s ease-in;
-}
-
-#media {
-    position: static;
-    display: grid;
-    height: 100%;
-    max-height: 475px;
-    min-height: 475px;
-    width: 102%;
-    margin: 100px 20px 0 20px;
-    grid-template-columns: 45% 45%;
-    column-gap: 20px;
-    grid-template-areas: 
-    "left-content right-content"
-    "left-content right-content"
-    "left-content .";
+    "left-content right-content";
     transition: opacity 0.4s ease-in;
 }
 

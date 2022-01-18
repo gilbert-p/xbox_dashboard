@@ -3,9 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { gsap } from 'gsap';
 import styles from './Dashboard.module.css';
 import marketplaceStyles from './Marketplace.module.css';
+import xboxliveStyles from '../styles/Xboxlive.module.css';
 import gamesStyles from './Games.module.css';
 import mediaStyles from './Media.module.css';
 import systemStyles from './System.module.css';
+import itemSelectStyles from '../styles/ItemSelect.module.css';
+import bladeStyles from '../styles/BladeStyling.module.css';
 import ringAnim from './ringAnimation.module.css';
 import { navigateTo, 
          selectCurrentContext, 
@@ -19,7 +22,18 @@ import { navigateTo,
          selectBladeContainerWidth,
          updateBladeContainerWidth } from './xboxSlice';
 
-import { navigateSystemMenu, selectSystemMainMenuIndex } from './systemSlice';
+import { updateSelectionHighlight,
+         selectHighlightState,
+         navigateSystemMenu,
+         selectSystemMainMenuIndex,
+         navigateMediaMenu,
+         selectMediaMenuIndex,
+         navigateGamesMenu,
+         selectGamesMenuIndex,
+         navigateXboxliveMenu,
+         selectXboxliveMenuIndex,
+         navigateMarketplaceMenu,
+         selectMarketplaceMenuIndex} from './menuSlice';
 
 const Xbox = () => {
 
@@ -37,8 +51,13 @@ const Xbox = () => {
     const blade_size = useSelector(selectBladeSize);
     const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
 
-    //System state variables
+    //Menu state variables
+    const isHighlightActive = useSelector(selectHighlightState);
     const systemMenuIndex = useSelector(selectSystemMainMenuIndex);
+    const mediaMenuIndex = useSelector(selectMediaMenuIndex);
+    const gamesMenuIndex = useSelector(selectGamesMenuIndex)
+    const xboxliveMenuIndex = useSelector(selectXboxliveMenuIndex);
+    const marketplaceMenuIndex = useSelector(selectMarketplaceMenuIndex);
     
 
     const background_transition_duration = 0.9;
@@ -48,22 +67,6 @@ const Xbox = () => {
 
 
 
-
-    const formattedContext = (context) => {
-        switch(context){
-            case "marketplace":
-                return "Marketplace";
-            case "xboxlive":
-                return "Xbox LIVE";
-            case "games":
-                return "Games";
-            case "media":
-                return "Media";
-            case "system":
-                return "System";
-            default: return "marketplace";
-        }
-    }
 
     //Refs for animating elements
     const xboxBladeContainerRef = useRef(null);
@@ -96,17 +99,23 @@ const Xbox = () => {
     useLayoutEffect(()=> {
         bladeContainerTransition.current = {};
         bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current,
-            {left: `-${current_context_index * (blade_size) + 30}`, duration: 0.3})
+            {left: `-${current_context_index * (blade_size) + 60}`, duration: 0.3})
     },[current_context_index]);
 
 
     //Runs on first render to initialize the blades 
     useEffect(()=>{
-        bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {left: `-${blade_size}`, duration: blade_transition_duration, delay: blade_transition_delay});
-        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        // bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {left: `-${blade_size}`, duration: blade_transition_duration, delay: blade_transition_delay});
+        // xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        // gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        // mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},xbox_blade_container_width;
+        // systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width +5}`, duration: blade_transition_duration, delay: blade_transition_delay},);xbox_blade_container_width
+
+        bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {left: `${-60}`, duration: blade_transition_duration, delay: blade_transition_delay});
+        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
     }, [xbox_blade_container_width]);
 
     //Runs on first render to initialize background slides
@@ -116,7 +125,7 @@ const Xbox = () => {
         mediaBackgroundTransition.current = gsap.timeline().to(mediaBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
         systemBackgroundTransition.current = gsap.timeline().to(systemBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
         
-    }, [xboxBackgroundRef.current])
+    }, [xboxBackgroundRef.current]);
 
 
     useEffect(()=> {
@@ -184,16 +193,38 @@ const Xbox = () => {
             }
         };
 
+
+
+        moveBlade();
+
+    }, [current_context_index, bladeContainerTransition,]);
+
+    useEffect(()=> {
+                 //TODO: Optimize using debounce.
         const updateContainerWidth = () => {
             xboxBladeContainerRef && dispatch(updateBladeContainerWidth(xboxBladeContainerRef.current.offsetWidth));
          }
 
-         //TODO: Optimize using debounce.
          window.addEventListener('resize', updateContainerWidth);
 
-        moveBlade();
-        updateContainerWidth();
-    }, [current_context_index, bladeContainerTransition, xbox_blade_position]);
+         updateContainerWidth();
+    }, [xboxBladeContainerRef.current]);
+
+    const formattedContext = (context) => {
+        switch(context){
+            case "marketplace":
+                return "Marketplace";
+            case "xboxlive":
+                return "Xbox LIVE";
+            case "games":
+                return "Games";
+            case "media":
+                return "Media";
+            case "system":
+                return "System";
+            default: return "marketplace";
+        }
+    };
 
     return (
         <div>
@@ -201,19 +232,78 @@ const Xbox = () => {
             <h2>{xbox_blade_container_width}</h2>
             <div className={styles.mainContainer}>
                 <div className={styles.bladeContainer} ref={xboxBladeContainerRef}>
-                    <div id={styles["marketplaceBlade"]} className={`${styles.blade} `}  style={{"--index": 0}} ref={marketplaceRef} onClick={()=> {dispatch(navigateTo("marketplace"));}}><p>marketplace</p></div>
-                    <div id={styles["xboxliveBlade"]}    className={`${styles.blade}`}   style={{"--index": 1}} ref={xboxliveRef}    onClick={()=> {dispatch(navigateTo("xboxlive"));}}><p>xbox live</p></div>
-                    <div id={styles["gamesBlade"]}       className={`${styles.blade}`}   style={{"--index": 2}} ref={gamesRef}       onClick={()=> dispatch(navigateTo("games"))}><p>games</p></div>
-                    <div id={styles["mediaBlade"]}       className={`${styles.blade}`}   style={{"--index": 3}} ref={mediaRef}       onClick={()=> dispatch(navigateTo("media"))}><p>media</p></div>
-                    <div id={styles["systemBlade"]}      className={`${styles.blade}`}   style={{"--index": 4}} ref={systemRef}      onClick={()=> dispatch(navigateTo("system"))}><p>system</p></div>
+                    <div id={styles["marketplaceBlade"]} className={`${styles.blade} `}  style={{"--index": 0}} ref={marketplaceRef} onClick={()=> {dispatch(navigateTo("marketplace"));}}>
+                        <div className={bladeStyles.svgBladeContainer}>
+                            <svg className={bladeStyles.bladeBase}  width="88" height="993" viewBox="0 0 88 993" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.0336 222.503L60.5333 1.5L0.5 0.00341797C74.0065 273.739 68.3105 684.35 1 992.003H53.5C53.5 992.003 84.534 776.003 86.534 717.503C87.1341 699.951 88.6623 688.054 82.034 671.503L64.0338 626.003C60.2944 617.171 58.5914 611.735 58.5339 598.503C60.4846 460.501 60.831 383.249 49.0338 247.503C48.3828 237.938 55.2883 237.044 60.5333 237.003H71.0334C81.5173 236.752 88.4083 233.666 87.0336 222.503Z" fill="#EAEAEA"/>
+                            </svg>
+
+                            <svg id={bladeStyles["marketplaceJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 58 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M39.0337 221.503L12.7121 0.5H19C76.1661 293.177 67.1347 701.06 13 991H1.53418C-0.850259 992.669 35.2546 775.899 38.5342 716.503C39.5024 698.967 40.6624 687.053 34.0342 670.503L16.0342 625.003C12.2947 616.17 10.5917 610.734 10.5342 597.503C12.4849 459.501 12.8312 382.249 1.03405 246.503C0.382984 236.938 7.28865 236.044 12.5336 236.003H23.0337C33.5177 235.752 40.4085 232.666 39.0337 221.503Z"/>
+                            </svg>
+
+                        </div>
+                    </div>
+                    <div id={styles["xboxliveBlade"]}    className={`${styles.blade}`}   style={{"--index": 1}} ref={xboxliveRef}    onClick={()=> {dispatch(navigateTo("xboxlive"));}}>
+                        <div className={bladeStyles.svgBladeContainer}>
+                            <svg className={bladeStyles.bladeBase}  width="88" height="993" viewBox="0 0 88 993" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.0336 222.503L60.5333 1.5L0.5 0.00341797C74.0065 273.739 68.3105 684.35 1 992.003H53.5C53.5 992.003 84.534 776.003 86.534 717.503C87.1341 699.951 88.6623 688.054 82.034 671.503L64.0338 626.003C60.2944 617.171 58.5914 611.735 58.5339 598.503C60.4846 460.501 60.831 383.249 49.0338 247.503C48.3828 237.938 55.2883 237.044 60.5333 237.003H71.0334C81.5173 236.752 88.4083 233.666 87.0336 222.503Z" fill="#EAEAEA"/>
+                            </svg>
+
+                            <svg id={bladeStyles["xboxliveJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 58 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M39.0337 221.503L12.7121 0.5H19C76.1661 293.177 67.1347 701.06 13 991H1.53418C-0.850259 992.669 35.2546 775.899 38.5342 716.503C39.5024 698.967 40.6624 687.053 34.0342 670.503L16.0342 625.003C12.2947 616.17 10.5917 610.734 10.5342 597.503C12.4849 459.501 12.8312 382.249 1.03405 246.503C0.382984 236.938 7.28865 236.044 12.5336 236.003H23.0337C33.5177 235.752 40.4085 232.666 39.0337 221.503Z"/>
+                            </svg>
+
+                        </div>
+                    </div>
+                    <div id={styles["gamesBlade"]}       className={`${styles.blade}`}   style={{"--index": 2}} ref={gamesRef}       onClick={()=> dispatch(navigateTo("games"))}>
+                    <div className={bladeStyles.svgBladeContainer}>
+                            <svg className={bladeStyles.bladeBase}  width="88" height="993" viewBox="0 0 88 993" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.0336 222.503L60.5333 1.5L0.5 0.00341797C74.0065 273.739 68.3105 684.35 1 992.003H53.5C53.5 992.003 84.534 776.003 86.534 717.503C87.1341 699.951 88.6623 688.054 82.034 671.503L64.0338 626.003C60.2944 617.171 58.5914 611.735 58.5339 598.503C60.4846 460.501 60.831 383.249 49.0338 247.503C48.3828 237.938 55.2883 237.044 60.5333 237.003H71.0334C81.5173 236.752 88.4083 233.666 87.0336 222.503Z" fill="#EAEAEA"/>
+                            </svg>
+
+                            <svg id={bladeStyles["gamesJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 58 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M39.0337 221.503L12.7121 0.5H19C76.1661 293.177 67.1347 701.06 13 991H1.53418C-0.850259 992.669 35.2546 775.899 38.5342 716.503C39.5024 698.967 40.6624 687.053 34.0342 670.503L16.0342 625.003C12.2947 616.17 10.5917 610.734 10.5342 597.503C12.4849 459.501 12.8312 382.249 1.03405 246.503C0.382984 236.938 7.28865 236.044 12.5336 236.003H23.0337C33.5177 235.752 40.4085 232.666 39.0337 221.503Z"/>
+                            </svg>
+
+                        </div>
+                    </div>
+                    <div id={styles["mediaBlade"]}       className={`${styles.blade}`}   style={{"--index": 3}} ref={mediaRef}       onClick={()=> dispatch(navigateTo("media"))}>
+                    <div className={bladeStyles.svgBladeContainer}>
+                            <svg className={bladeStyles.bladeBase}  width="88" height="993" viewBox="0 0 88 993" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.0336 222.503L60.5333 1.5L0.5 0.00341797C74.0065 273.739 68.3105 684.35 1 992.003H53.5C53.5 992.003 84.534 776.003 86.534 717.503C87.1341 699.951 88.6623 688.054 82.034 671.503L64.0338 626.003C60.2944 617.171 58.5914 611.735 58.5339 598.503C60.4846 460.501 60.831 383.249 49.0338 247.503C48.3828 237.938 55.2883 237.044 60.5333 237.003H71.0334C81.5173 236.752 88.4083 233.666 87.0336 222.503Z" fill="#EAEAEA"/>
+                            </svg>
+
+                            <svg id={bladeStyles["mediaJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 58 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M39.0337 221.503L12.7121 0.5H19C76.1661 293.177 67.1347 701.06 13 991H1.53418C-0.850259 992.669 35.2546 775.899 38.5342 716.503C39.5024 698.967 40.6624 687.053 34.0342 670.503L16.0342 625.003C12.2947 616.17 10.5917 610.734 10.5342 597.503C12.4849 459.501 12.8312 382.249 1.03405 246.503C0.382984 236.938 7.28865 236.044 12.5336 236.003H23.0337C33.5177 235.752 40.4085 232.666 39.0337 221.503Z"/>
+                            </svg>
+
+                        </div>
+                    </div>
+                    <div id={styles["systemBlade"]}      className={`${styles.blade}`}   style={{"--index": 4}} ref={systemRef}      onClick={()=> dispatch(navigateTo("system"))}>
+                    <div className={bladeStyles.svgBladeContainer}>
+                            <svg className={bladeStyles.bladeBase}  width="88" height="993" viewBox="0 0 88 993" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.0336 222.503L60.5333 1.5L0.5 0.00341797C74.0065 273.739 68.3105 684.35 1 992.003H53.5C53.5 992.003 84.534 776.003 86.534 717.503C87.1341 699.951 88.6623 688.054 82.034 671.503L64.0338 626.003C60.2944 617.171 58.5914 611.735 58.5339 598.503C60.4846 460.501 60.831 383.249 49.0338 247.503C48.3828 237.938 55.2883 237.044 60.5333 237.003H71.0334C81.5173 236.752 88.4083 233.666 87.0336 222.503Z" fill="#EAEAEA"/>
+                            </svg>
+
+                            <svg  id={bladeStyles["systemJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 58 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M39.0337 221.503L12.7121 0.5H19C76.1661 293.177 67.1347 701.06 13 991H1.53418C-0.850259 992.669 35.2546 775.899 38.5342 716.503C39.5024 698.967 40.6624 687.053 34.0342 670.503L16.0342 625.003C12.2947 616.17 10.5917 610.734 10.5342 597.503C12.4849 459.501 12.8312 382.249 1.03405 246.503C0.382984 236.938 7.28865 236.044 12.5336 236.003H23.0337C33.5177 235.752 40.4085 232.666 39.0337 221.503Z"/>
+                            </svg>
+
+                        </div>
+                    </div>
                 </div>
                 <h2 className={styles.sectionHeading}>{formattedContext(current_dashboard_context)}</h2>
                 <section className={styles.gamesContainer}>
+
+                    {/* Backgrounds */}
                     <div className={styles.xboxliveBackground} ref={xboxBackgroundRef}></div>
                     <div className={styles.marketplaceBackground} ref={marketplaceBackgroundRef}></div>
                     <div className={styles.gamesBackground} ref={gamesBackgroundRef}></div>
                     <div className={styles.mediaBackground} ref={mediaBackgroundRef}></div>
                     <div className={styles.systemBackground} ref={systemBackgroundRef}></div>
+
+
                     {/* These elements are consistent across all contexts */}
                     <div className={styles.topBorder}></div>
                     <div className={styles.bottomBorder}></div>
@@ -237,7 +327,60 @@ const Xbox = () => {
                     </div>
                     {/* These elements are consistent across all contexts */}
 
-                    <div className={styles.outerContextContainer}>
+                    <div id={marketplaceStyles["marketplaceContextContainer"]} className={styles.outerContextContainer} style={{"--z-depth": `${current_context_index === 0 ? 1 : -1}`}}>
+                        <div id={marketplaceStyles["marketplace"]} className={`${''} ${current_dashboard_context !== "marketplace" ? styles.makeTransparent : ""}`}>
+                            <div className={marketplaceStyles.leftContent}>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Games</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Media and Entertainment</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Game Demos</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Game Videos</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Themes and Gamer Pictures</p>
+                                </div>
+                                <div className={marketplaceStyles.selectOption}>
+                                    <p>Featured Downloads</p>
+                                </div>
+                            </div>
+                            <div className={marketplaceStyles.rightContent}>
+                                <div className={marketplaceStyles.imageHeaderContainer}></div>
+                                <div id={itemSelectStyles["marketplaceSection"]} className={itemSelectStyles.selectItemListContainer}>
+                                    <div className={itemSelectStyles.innerListContainer} >
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 0 ? styles.makeTransparent : ""}`}></span>
+                                                Redeem Code
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 1 ? styles.makeTransparent : ""}`}></span>
+                                                Active Downloads
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 2 ? styles.makeTransparent : ""}`}></span>
+                                                Account Management
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id={xboxliveStyles["xboxliveContextContainer"]} className={styles.outerContextContainer} style={{"--z-depth": `${current_context_index === 1 ? 1 : -1}`}}>
                         <div id={styles["xboxlive"]} className={`${current_context_index !== 1 ? styles.makeTransparent : ""}`}>
                             <div className={styles.leftContent}>
                                 <div className={styles.profileContainer}>
@@ -260,10 +403,41 @@ const Xbox = () => {
                                         <div className={styles.zoneStatus}>Pro</div>
                                     </div>
                                 </div>
-                                <div className={styles.selectItemListContainer}>
-                                    <div className={styles.innerListContainer}>
-                                        <div className={styles.listItem}><span className={`${styles.listIcon} ${styles.joinXBL_icon}`}></span><p>Join Xbox LIVE</p></div>
-                                        <div className={styles.listItem_2}><span className={`${styles.listIcon} ${styles.person_icon}`}></span><p>Recover Gamertag from Xbox LIVE</p></div>
+                                <div id={itemSelectStyles["xboxliveSection"]} className={itemSelectStyles.selectItemListContainer}>
+                                    <div className={itemSelectStyles.boxInsetHighlightContainer}>
+                                        <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && xboxliveMenuIndex !== 0 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && xboxliveMenuIndex !== 1 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && xboxliveMenuIndex !== 2 ? styles.instantTransparent : ""}`}></div>
+                                        </div>
+                                        <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && xboxliveMenuIndex !== 0 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && xboxliveMenuIndex !== 1 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && xboxliveMenuIndex !== 2 ? styles.instantTransparent : ""}`}></div>
+                                        </div>
+                                    </div>
+                                    <div className={itemSelectStyles.innerListContainer} >
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 0 ? styles.makeTransparent : ""}`}></span>
+                                                Messages
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 1 ? styles.makeTransparent : ""}`}></span>
+                                                Friends
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 2 ? styles.makeTransparent : ""}`}></span>
+                                                Chat
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className={styles.xboxliveAnimationContainer}>
@@ -313,57 +487,15 @@ const Xbox = () => {
                                 <div className={styles.descriptionContainer}>
                                     <div className={styles.descriptionTitle}>Xbox LIVE</div>
                                     <div className={styles.descriptionContent}>
-                                        Games. Tournaments. Entertainment. 
-                                        All the rewards. Endless possibilities. What are you waiting for?
+                                        <p>                                        Games. Tournaments. Entertainment. 
+                                        All the rewards. Endless possibilities. What are you waiting for?</p>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 1 ? styles.makeTransparent : ''}`}>
-                                <div className={styles.trayEllipse}></div>
-                                <div className={styles.trayRect}></div>
-                                <div className={styles.trayTriangleButton}></div>
-                                <div className={styles.trayRectButton}></div>
-                                <p>Open Tray</p>
-                        </div> */}
                     </div>
-                    <div className={styles.outerContextContainer}>
-                        <div id={marketplaceStyles["marketplace"]} className={`${''} ${current_dashboard_context !== "marketplace" ? styles.makeTransparent : ""}`}>
-                            <div className={marketplaceStyles.leftContent}>
-                                <div className={marketplaceStyles.selectOption}>
-                                    <p>Games</p>
-                                </div>
-                                <div className={marketplaceStyles.selectOption}>
-                                    <p>Media and Entertainment</p>
-                                </div>
-                                <div className={marketplaceStyles.selectOption}>
-                                    <p>Game Demos</p>
-                                </div>
-                                <div className={marketplaceStyles.selectOption}>
-                                    <p>Game Videos</p>
-                                </div>
-                                <div className={marketplaceStyles.selectOption}>
-                                    <p>Themes and Gamer Pictures</p>
-                                </div>
-                                <div className={marketplaceStyles.selectOption}>
-                                    <p>Featured Downloads</p>
-                                </div>
-                            </div>
-                            <div className={marketplaceStyles.rightContent}>
-                                <div className={marketplaceStyles.imageHeaderContainer}></div>
-                                <div className={marketplaceStyles.selectItemListContainer}>
-                                    <div className={marketplaceStyles.innerListContainer}>
-                                        <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.card_icon}`}></span><p>Redeem Code</p></div>
-                                        <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.download_icon}`}></span><p>Active Downloads</p></div>
-                                        <div className={marketplaceStyles.listItem}><span className={`${marketplaceStyles.listIcon} ${marketplaceStyles.crown_icon}`}></span><p>Account Management</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className={styles.outerContextContainer}>
+                    <div id={gamesStyles["gamesContextContainer"]} className={styles.outerContextContainer} style={{"--z-depth": `${current_context_index === 2 ? 1 : -1}`}}>
                         <div id={gamesStyles["games"]} className={`${current_context_index !== 2 ? styles.makeTransparent : ""}`}>
                             <div className={styles.leftContent}>
                                 <div className={styles.profileContainer}>
@@ -386,15 +518,42 @@ const Xbox = () => {
                                         <div className={styles.zoneStatus}>Pro</div>
                                     </div>
                                 </div>
-                                <div className={gamesStyles.selectItemListContainer}>
-                                    <div className={gamesStyles.innerListContainer}>
-                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.joystick_icon}`}></span><p>Games Library</p></div>
-                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.trophy_icon}`}></span><p>Achievements</p></div>
-                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Played Games</p></div>
+                                <div id={itemSelectStyles["gamesSelection"]} className={itemSelectStyles.selectItemListContainer}>
+                                    <div className={itemSelectStyles.boxInsetHighlightContainer}>
+                                        <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 0 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 1 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 2 ? styles.instantTransparent : ""}`}></div>
+                                        </div>
+                                        <div className={itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 0 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 1 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 2 ? styles.instantTransparent : ""}`}></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className={gamesStyles.xboxliveAnimationContainer}>
-                                    <div className={styles.logoContainer}></div>
+                                    <div className={itemSelectStyles.innerListContainer} >
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 0 ? styles.makeTransparent : ""}`}></span>
+                                                Music
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 1 ? styles.makeTransparent : ""}`}></span>
+                                                Pictures
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 2 ? styles.makeTransparent : ""}`}></span>
+                                                Videos
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className={styles.rightContent}>
@@ -409,18 +568,11 @@ const Xbox = () => {
                             </div>
 
                         </div>
-                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 2 ? styles.makeTransparent : ''}`}>
-                                <div className={styles.trayEllipse}></div>
-                                <div className={styles.trayRect}></div>
-                                <div className={styles.trayTriangleButton}></div>
-                                <div className={styles.trayRectButton}></div>
-                                <p>Open Tray</p>
-                        </div> */}
                     </div>
 
-                    <div className={styles.outerContextContainer}>
-                        <div id={gamesStyles["media"]} className={`${current_context_index !== 3 ? styles.makeTransparent : ""}`}>
-                            <div className={styles.leftContent}>
+                    <div id={mediaStyles["mediaContextContainer"]} className={styles.outerContextContainer} style={{"--z-depth": `${current_context_index === 3 ? 1 : -1}`}}>
+                        <div id={mediaStyles["media"]} className={`${current_context_index !== 3 ? styles.makeTransparent : ""}`}>
+                            <div className={mediaStyles.leftContent}>
                                 <div className={styles.profileContainer}>
                                     <p>Epoxi117</p>
                                     <div className={styles.profileImgContainer}>
@@ -441,17 +593,64 @@ const Xbox = () => {
                                         <div className={styles.zoneStatus}>Pro</div>
                                     </div>
                                 </div>
-                                <div className={gamesStyles.selectItemListContainer}>
-                                    <div className={gamesStyles.innerListContainer}>
-                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.joystick_icon}`}></span><p>Music</p></div>
-                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.trophy_icon}`}></span><p>Pictures</p></div>
-                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Videos</p></div>
-                                        <div className={gamesStyles.listItem}><span className={`${gamesStyles.listIcon} ${gamesStyles.controller_icon}`}></span><p>Media Center</p></div>
+                                <div id={itemSelectStyles["mediaSelection"]} className={itemSelectStyles.selectItemListContainer}>
+                                    <div className={itemSelectStyles.boxInsetHighlightContainer}>
+                                        <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 0 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 1 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 2 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 3 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 4 ? styles.instantTransparent : ""}`}></div>
+                                        </div>
+                                        <div className={itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 0 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 1 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 2 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 3 ? styles.instantTransparent : ""}`}></div>
+                                            <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 4 ? styles.instantTransparent : ""}`}></div>
+                                        </div>
+                                    </div>
+                                    <div className={itemSelectStyles.innerListContainer} >
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMediaMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 0 ? styles.makeTransparent : ""}`}></span>
+                                                Music
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMediaMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 1 ? styles.makeTransparent : ""}`}></span>
+                                                Pictures
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMediaMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 2 ? styles.makeTransparent : ""}`}></span>
+                                                Videos
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMediaMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 3 ? styles.makeTransparent : ""}`}></span>
+                                                Video Store
+                                            </p>
+                                        </div>
+                                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMediaMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                            <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                            <p>
+                                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 4 ? styles.makeTransparent : ""}`}></span>
+                                                Media Center
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className={gamesStyles.xboxliveAnimationContainer}>
+                                {/* <div className={gamesStyles.xboxliveAnimationContainer}>
                                     <div className={styles.logoContainer}></div>
-                                </div>
+                                </div> */}
                             </div>
                             <div className={styles.rightContent}>
                                 <div className={gamesStyles.xbox360Logo}></div>
@@ -465,16 +664,9 @@ const Xbox = () => {
                             </div>
 
                         </div>
-                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 3 ? styles.makeTransparent : ''}`}>
-                                <div className={styles.trayEllipse}></div>
-                                <div className={styles.trayRect}></div>
-                                <div className={styles.trayTriangleButton}></div>
-                                <div className={styles.trayRectButton}></div>
-                                <p>Open Tray</p>
-                        </div> */}
                     </div>
 
-                    <div className={styles.outerContextContainer}>
+                    <div id={mediaStyles["systemContextContainer"]} className={styles.outerContextContainer} style={{"--z-depth": `${current_context_index === 4 ? 1 : -1}`}} >
                         <div id={systemStyles["system"]} className={`${current_context_index !== 4 ? styles.makeTransparent : ""}`}>
 
                             <div className={systemStyles.leftContent}>
@@ -500,49 +692,49 @@ const Xbox = () => {
                                         </div>
                                     </div>
                                     <div className={systemStyles.innerListContainer} >
-                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(0));}}>
+                                        <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                             <span className={`${systemStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
                                             <p>
                                                 <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 0 ? styles.makeTransparent : ""}`}></span>
                                                 Console Settings
                                             </p>
                                         </div>
-                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(1));}}>
+                                        <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                             <span className={`${systemStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
                                             <p>
                                                 <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 1 ? styles.makeTransparent : ""}`}></span>
                                                 Family Settings
                                             </p>
                                         </div>
-                                        <div className={systemStyles.listItem} onClick={()=>dispatch(navigateSystemMenu(2))}>
+                                        <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                             <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                             <p>
                                                 <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 2 ? styles.makeTransparent : ""}`}></span>
                                                 Memory
                                             </p>
                                         </div>
-                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(3));}}>
+                                        <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                             <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                             <p>
                                                 <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 3 ? styles.makeTransparent : ""}`}></span>
                                                 Network Settings
                                             </p>
                                         </div>
-                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(4));}}>
+                                        <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                             <span className={`${systemStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
                                             <p>
                                                 <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 4 ? styles.makeTransparent : ""}`}></span>
                                                 Computers
                                             </p>
                                         </div>
-                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(5));}}>
+                                        <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(5));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                             <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                             <p>
                                                 <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 5 ? styles.makeTransparent : ""}`}></span>
                                                 Xbox Live Vision
                                             </p>
                                         </div>
-                                        <div className={systemStyles.listItem} onClick={()=>{dispatch(navigateSystemMenu(6));}}>
+                                        <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(6));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                             <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                             <p>
                                                 <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 6 ? styles.makeTransparent : ""}`}></span>
@@ -553,66 +745,59 @@ const Xbox = () => {
                                 </div>
                             </div>
                             <div className={systemStyles.rightContent}>
-                                <div className={systemStyles.containerHalf}>
-                                <div id="console-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 0 ? styles.makeTransparent : ""}`}>
-                                    <div className={systemStyles.descTitle}>
-                                        Edit your Xbox 360 system settings, including:
+                                <div className={systemStyles.containerReset}>
+                                    <div id="console-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 0 ? styles.makeTransparent : ""}`}>
+                                        <div className={systemStyles.descTitle}>
+                                            Edit your Xbox 360 system settings, including:
+                                        </div>
+                                        <div className={systemStyles.descContent}>
+                                            <ul>
+                                                <li>Display</li>
+                                                <li>Audio</li>
+                                                <li>Language</li>
+                                                <li>Remote Control</li>
+                                                <li>and more</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div className={systemStyles.descContent}>
-                                        <ul>
-                                            <li>Display</li>
-                                            <li>Audio</li>
-                                            <li>Language</li>
-                                            <li>Remote Control</li>
-                                            <li>and more</li>
-                                        </ul>
+                                    <div id="family-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 1 ? styles.makeTransparent : ""}`}>
+                                        <div className={systemStyles.descContent}>
+                                            <p>Protect younger family members by customizing content, communications, and online
+                                                interactions. Adjust settings on the console or at the individual profile level.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="family-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 1 ? styles.makeTransparent : ""}`}>
-                                    <div className={systemStyles.descContent}>
-                                        <p>Protect younger family members by customizing content, communications, and online
-                                            interactions. Adjust settings on the console or at the individual profile level.
-                                        </p>
+                                    <div id="memory-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 2 ? styles.makeTransparent : ""}`}>
+                                        <div className={systemStyles.descContent}>
+                                            <p>Move or delete saved games, profiles, and other items on Xbox 360 storage devices.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="memory-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 2 ? styles.makeTransparent : ""}`}>
-                                    <div className={systemStyles.descContent}>
-                                        <p>Move or delete saved games, profiles, and other items on Xbox 360 storage devices.</p>
+                                    <div id="network-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 3 ? styles.makeTransparent : ""}`}>
+                                        <div className={systemStyles.descContent}>
+                                            <p>Connect your console to your home network or Xbox Live. Set up wireless network connections and test network settings.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="network-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 3 ? styles.makeTransparent : ""}`}>
-                                    <div className={systemStyles.descContent}>
-                                        <p>Connect your console to your home network or Xbox Live. Set up wireless network connections and test network settings.</p>
+                                    <div id="computers" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 4 ? styles.makeTransparent : ""}`}>
+                                        <div className={systemStyles.descContent}>
+                                            <p>Manage your connections to Windows XP or Media Center PC.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="computers" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 4 ? styles.makeTransparent : ""}`}>
-                                    <div className={systemStyles.descContent}>
-                                        <p>Manage your connections to Windows XP or Media Center PC.</p>
+                                    <div id="xboxlive-vision" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 5 ? styles.makeTransparent : ""}`}>
+                                        <div className={systemStyles.descContent}>
+                                            <p>Change the settings for your Xbox Live Vision camera.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="xboxlive-vision" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 5 ? styles.makeTransparent : ""}`}>
-                                    <div className={systemStyles.descContent}>
-                                        <p>Change the settings for your Xbox Live Vision camera.</p>
+                                    <div id="initial-setup" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 6 ? styles.makeTransparent : ""}`}>
+                                        <div className={systemStyles.descContent}>
+                                            <p>Run the system setup that you saw the first time you started the console.</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div id="initial-setup" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 6 ? styles.makeTransparent : ""}`}>
-                                    <div className={systemStyles.descContent}>
-                                        <p>Run the system setup that you saw the first time you started the console.</p>
-                                    </div>
-                                </div>
                                 </div>
 
                                 
                             </div>
 
                         </div>
-                        {/* <div className={`${styles.systemTrayContainer} ${current_context_index !== 3 ? styles.makeTransparent : ''}`}>
-                                <div className={styles.trayEllipse}></div>
-                                <div className={styles.trayRect}></div>
-                                <div className={styles.trayTriangleButton}></div>
-                                <div className={styles.trayRectButton}></div>
-                                <p>Open Tray</p>
-                        </div> */}
                     </div>
 
                 </section>

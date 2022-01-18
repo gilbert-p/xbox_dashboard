@@ -1,0 +1,42 @@
+.bladeBase {
+    position: absolute;
+    z-index: -1;
+    width: 88PX;
+    height: 993px;
+    left: -25px;
+    top: -95px;
+    /* width="65" height="751" */
+}
+
+.bladeJewel {
+    position: absolute;
+    width: 58px;
+    height: 993px;
+    left: 22px;
+    top: -95px;
+    /* transform: translateX(22px); */
+}
+
+.svgBladeContainer {
+    transform: scale(0.9);
+}
+
+#marketplaceJewel {
+    fill: #FA9433;
+}
+
+#xboxliveJewel {
+    fill: #F0A744;
+}
+
+#gamesJewel {
+    fill: #55AE3A;
+}
+
+#mediaJewel {
+    fill: #4490D7;
+}
+
+#systemJewel {
+    fill: #9D76E2;
+}
