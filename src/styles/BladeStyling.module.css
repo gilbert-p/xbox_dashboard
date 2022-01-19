@@ -1,8 +1,8 @@
 .bladeBase {
     position: absolute;
     z-index: -1;
-    width: 88PX;
-    height: 993px;
+    width: 87px;
+    height: 992px;
     left: -25px;
     top: -95px;
     /* width="65" height="751" */
@@ -10,9 +10,9 @@
 
 .bladeJewel {
     position: absolute;
-    width: 58px;
-    height: 993px;
-    left: 22px;
+    width: 66px;
+    height: 992px;
+    left: 15px;
     top: -95px;
     /* transform: translateX(22px); */
 }
@@ -21,22 +21,28 @@
     transform: scale(0.9);
 }
 
+#marketplace_svg_container {
+    transform: scale(0.80) translateY(40px);
+}
+
 #marketplaceJewel {
-    fill: #FA9433;
+    /* fill: url("#paint0_radial_203_178"); */
+    fill: url("#paint0_radial_213_161");
+    
 }
 
 #xboxliveJewel {
-    fill: #F0A744;
+    fill: url("#paint0_radial_211_77");
 }
 
 #gamesJewel {
-    fill: #55AE3A;
+    fill: url("#paint0_radial_211_29");
 }
 
 #mediaJewel {
-    fill: #4490D7;
+    fill: url("#paint0_radial_211_45");
 }
 
 #systemJewel {
-    fill: #9D76E2;
+    fill: url("#paint0_radial_211_61");
 }
