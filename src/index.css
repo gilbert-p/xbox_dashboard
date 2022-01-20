@@ -16,7 +16,7 @@
 }
 
 :root {
-  --blade-size: 85px;
+  --blade-size: 90px;
   --container-width: 54vw;
   --container-height: 80vh;
   --transition_value: calc(var(--container-width) - 24.5%);

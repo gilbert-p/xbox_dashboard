@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { transitionBlade } from '../api_features/bladeTransition';
+
 
 let initialState = {
     current_context: "marketplace",
@@ -11,7 +13,17 @@ let initialState = {
     disc_tray: false,
     blade_size: 60,
     blade_container_width: 0,
+    is_transitioning: false,
 }
+
+export const bladeTransitionAsync = createAsyncThunk(
+  '../api_features/transitionBlade',
+  async () => {
+    const response = await transitionBlade();
+    // The value we return becomes the `fulfilled` action payload
+    return response;
+  }
+);
 
 export const xboxSlice = createSlice({
     name: 'dashboard',
@@ -76,6 +88,15 @@ export const xboxSlice = createSlice({
         state.blade_container_width = action.payload;
       },
     },
+    extraReducers: (builder) => {
+      builder
+      .addCase(bladeTransitionAsync.pending, (state) => {
+        state.is_transitioning = true;
+      })
+      .addCase(bladeTransitionAsync.fulfilled, (state) => {
+        state.is_transitioning = false;
+      });
+    }
 });
 
 export const { navigateTo, updateBladeContainerWidth } = xboxSlice.actions;

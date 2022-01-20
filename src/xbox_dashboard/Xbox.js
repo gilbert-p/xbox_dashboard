@@ -20,7 +20,8 @@ import { navigateTo,
          isTrayDisplayed,
          selectBladeSize,
          selectBladeContainerWidth,
-         updateBladeContainerWidth } from './xboxSlice';
+         updateBladeContainerWidth,
+         bladeTransitionAsync } from './xboxSlice';
 
 import { updateSelectionHighlight,
          selectHighlightState,
@@ -226,33 +227,34 @@ const Xbox = () => {
             <h2>{xbox_blade_container_width}</h2>
             <div className={styles.mainContainer}>
                 <div className={styles.bladeContainer} ref={xboxBladeContainerRef}>
-                    <div id={styles["marketplaceBlade"]} className={`${styles.blade} `}  style={{"--index": 0}} ref={marketplaceRef} onClick={()=> {dispatch(navigateTo("marketplace"));}}>
-                        <div id={bladeStyles["marketplace_svg_container"]} className={bladeStyles.svgBladeContainer}>
-                            {/* <svg className={bladeStyles.bladeBase}  width="88" height="993" viewBox="0 0 88 993" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M87.0336 222.503L60.5333 1.5L0.5 0.00341797C74.0065 273.739 68.3105 684.35 1 992.003H53.5C53.5 992.003 84.534 776.003 86.534 717.503C87.1341 699.951 88.6623 688.054 82.034 671.503L64.0338 626.003C60.2944 617.171 58.5914 611.735 58.5339 598.503C60.4846 460.501 60.831 383.249 49.0338 247.503C48.3828 237.938 55.2883 237.044 60.5333 237.003H71.0334C81.5173 236.752 88.4083 233.666 87.0336 222.503Z" fill="#EAEAEA"/>
-                            </svg>
-
-                            <svg id={bladeStyles["marketplaceJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 58 992" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M39.0337 221.503L12.7121 0.5H19C76.1661 293.177 67.1347 701.06 13 991H1.53418C-0.850259 992.669 35.2546 775.899 38.5342 716.503C39.5024 698.967 40.6624 687.053 34.0342 670.503L16.0342 625.003C12.2947 616.17 10.5917 610.734 10.5342 597.503C12.4849 459.501 12.8312 382.249 1.03405 246.503C0.382984 236.938 7.28865 236.044 12.5336 236.003H23.0337C33.5177 235.752 40.4085 232.666 39.0337 221.503Z"/>
-                            </svg> */}
-
+                    <div id={styles["marketplaceBlade"]} className={`${styles.blade} `}  style={{"--index": 0}} ref={marketplaceRef} onClick={()=> {dispatch(bladeTransitionAsync());dispatch(navigateTo("marketplace"));}}>
+                        <div className={`${bladeStyles.bladeShrink}`}>
                             <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M86.5336 222.5C74.7057 133.92 62.5691 86.3731 45 0H0C73.5065 273.735 67.8105 684.347 0.5 992H46.5C46.5 992 84.034 776 86.034 717.5C86.6341 699.947 88.1623 688.05 81.534 671.5L63.5338 626C59.7944 617.167 58.0914 611.731 58.0339 598.5C59.9846 460.497 60.331 383.246 48.5338 247.5C47.8828 237.935 54.7883 237.041 60.0333 237H70.5334C81.0173 236.749 87.9083 233.663 86.5336 222.5Z" fill="#EAEAEA"/>
+                            <path d="M87.5336 223.5C74.4543 125.593 44.4364 1.78581 42.5 1H1C74.5065 274.735 68.8105 685.347 1.5 993H47.5C47.5 993 85.034 777 87.034 718.5C87.6341 700.947 89.1623 689.05 82.534 672.5L64.5338 627C60.7944 618.167 59.0914 612.731 59.0339 599.5C60.9846 461.497 61.331 384.246 49.5338 248.5C48.8828 238.935 55.7883 238.041 61.0333 238H71.5334C82.0173 237.749 88.9083 234.663 87.5336 223.5Z" />
+                                <defs>
+                                    <radialGradient id="paint0_radial_216_168" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1802 580.5) rotate(91.4838) scale(2490.84 1932.87)">
+                                    <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                    <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                    <stop offset="1" stop-color="#8B8B8B"/>
+                                    </radialGradient>
+                                </defs>
                             </svg>
 
-                            <svg id={bladeStyles["marketplaceJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 66 993" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M45.5337 222.5C30.3573 132.45 20.4962 83.7244 0.5 0H13C80.509 224.669 82.6299 653.597 18.5 991.997H5.5C3.11556 993.666 41.7546 776.895 45.0342 717.5C46.0024 699.964 47.1624 688.05 40.5342 671.5L22.5342 626C18.7947 617.167 17.0917 611.731 17.0342 598.5C18.9849 460.497 19.3312 383.246 7.53405 247.5C6.88298 237.934 13.7887 237.041 19.0336 237H29.5337C40.0177 236.749 46.9085 233.662 45.5337 222.5Z" fill=""/>
+                            <svg id={``} className={`${bladeStyles.bladeJewel} ${current_context_index !== 0  ? bladeStyles.inactiveBladeFill : bladeStyles.activeMarketplaceJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M46.5337 223.5C31.3573 133.45 21.4962 84.7244 1.5 1H11C85.6261 216.115 86.3422 646.731 16.5 992.997H6.5C4.11556 994.666 42.7546 777.895 46.0342 718.5C47.0024 700.964 48.1624 689.05 41.5342 672.5L23.5342 627C19.7947 618.167 18.0917 612.731 18.0342 599.5C19.9849 461.497 20.3312 384.246 8.53405 248.5C7.88298 238.934 14.7887 238.041 20.0336 238H30.5337C41.0177 237.749 47.9085 234.662 46.5337 223.5Z" stroke="black" stroke-opacity="0.5"/>
                                 <defs>
                                     {/* Active gradient */}
-                                    {/* <radialGradient id="paint0_radial_203_178" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(81 -0.000110592) rotate(99.3311) scale(1005.3 262.926)">
-                                        <stop offset="0.174693" stopColor="#BF582D"/>
-                                        <stop offset="0.359221" stopColor="#FF9B3F"/>
-                                        <stop offset="0.694086" stopColor="#BF582D"/>
-                                    </radialGradient> */}
+                                    <radialGradient id="paint0_radial_217_185" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(93.0164) scale(4133.23 1726.2)">
+                                        <stop offset="0.968864" stop-color="#B35F2D"/>
+                                        <stop offset="0.968964" stop-color="#BE6B32"/>
+                                        <stop offset="0.982838" stop-color="#FF9D42"/>
+                                        <stop offset="1" stop-color="#CB8536"/>
+                                    </radialGradient>
 
                                     {/* Inactive gradient */}
-                                    <radialGradient id="paint0_radial_213_161" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1526.5 496) rotate(90) scale(3790 1598.11)">
-                                        <stop offset="0.963542" stop-color="#D3D3D3"/>
+                                    <radialGradient id="paint0_radial_216_167" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(92.9619) scale(4170.57 1758.58)">
+                                        <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                        <stop offset="0.96875" stop-color="#D3D3D3"/>
                                         <stop offset="1" stop-color="#848484"/>
                                     </radialGradient>
                                 </defs>
@@ -260,104 +262,259 @@ const Xbox = () => {
 
 
                         </div>
-                    </div>
+                    </div>        
                     <div id={styles["xboxliveBlade"]}    className={`${styles.blade}`}   style={{"--index": 1}} ref={xboxliveRef}    onClick={()=> {dispatch(navigateTo("xboxlive"));}}>
-                        <div className={bladeStyles.svgBladeContainer}>
-                            <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M86.5336 222.5C74.7057 133.92 62.5691 86.3731 45 0H0C73.5065 273.735 67.8105 684.347 0.5 992H46.5C46.5 992 84.034 776 86.034 717.5C86.6341 699.947 88.1623 688.05 81.534 671.5L63.5338 626C59.7944 617.167 58.0914 611.731 58.0339 598.5C59.9846 460.497 60.331 383.246 48.5338 247.5C47.8828 237.935 54.7883 237.041 60.0333 237H70.5334C81.0173 236.749 87.9083 233.663 86.5336 222.5Z" fill="#EAEAEA"/>
-                            </svg>
+                        {/* Left Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${!xbox_blade_position ? styles.makeTransparent : ""}`}>
+                                <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.5336 223.5C74.4543 125.593 44.4364 1.78581 42.5 1H1C74.5065 274.735 68.8105 685.347 1.5 993H47.5C47.5 993 85.034 777 87.034 718.5C87.6341 700.947 89.1623 689.05 82.534 672.5L64.5338 627C60.7944 618.167 59.0914 612.731 59.0339 599.5C60.9846 461.497 61.331 384.246 49.5338 248.5C48.8828 238.935 55.7883 238.041 61.0333 238H71.5334C82.0173 237.749 88.9083 234.663 87.5336 223.5Z" />
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_168" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1802 580.5) rotate(91.4838) scale(2490.84 1932.87)">
+                                        <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                        <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                        <stop offset="1" stop-color="#8B8B8B"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
 
-                            <svg id={bladeStyles["xboxliveJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 66 993" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M45.5337 222.5C30.3573 132.45 20.4962 83.7244 0.5 0H13C80.509 224.669 82.6299 653.597 18.5 991.997H5.5C3.11556 993.666 41.7546 776.895 45.0342 717.5C46.0024 699.964 47.1624 688.05 40.5342 671.5L22.5342 626C18.7947 617.167 17.0917 611.731 17.0342 598.5C18.9849 460.497 19.3312 383.246 7.53405 247.5C6.88298 237.934 13.7887 237.041 19.0336 237H29.5337C40.0177 236.749 46.9085 233.662 45.5337 222.5Z"/>
-                                <defs>
-                                <radialGradient id="paint0_radial_211_77" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(81.1558 -0.000110592) rotate(99.3311) scale(1005.3 262.926)">
-                                    <stop offset="0.174693" stop-color="#C38A36"/>
-                                    <stop offset="0.359221" stop-color="#E9BC4C"/>
-                                    <stop offset="0.694086" stop-color="#C38A36"/>
-                                </radialGradient>
+                                <svg id={``} className={`${bladeStyles.bladeJewel} ${current_context_index !== 1  ? bladeStyles.inactiveBladeFill : bladeStyles.activeXboxliveJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M46.5337 223.5C31.3573 133.45 21.4962 84.7244 1.5 1H11C85.6261 216.115 86.3422 646.731 16.5 992.997H6.5C4.11556 994.666 42.7546 777.895 46.0342 718.5C47.0024 700.964 48.1624 689.05 41.5342 672.5L23.5342 627C19.7947 618.167 18.0917 612.731 18.0342 599.5C19.9849 461.497 20.3312 384.246 8.53405 248.5C7.88298 238.934 14.7887 238.041 20.0336 238H30.5337C41.0177 237.749 47.9085 234.662 46.5337 223.5Z" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        {/* Active gradient */}
+                                        <radialGradient id="paint0_radial_217_189" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(93.0164) scale(4133.23 1726.2)">
+                                            <stop offset="0.901042" stop-color="#DB9C43"/>
+                                            <stop offset="0.968864" stop-color="#C79042"/>
+                                            <stop offset="0.968964" stop-color="#BE6B32"/>
+                                            <stop offset="0.982838" stop-color="#FDC04F"/>
+                                            <stop offset="1" stop-color="#EAA162"/>
+                                        </radialGradient>
 
-                                {/* Inactive gradient */}
-                                <radialGradient id="paint0_radial_213_161" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1526.5 496) rotate(90) scale(3790 1598.11)">
-                                    <stop offset="0.963542" stop-color="#D3D3D3"/>
-                                    <stop offset="1" stop-color="#848484"/>
-                                </radialGradient>
-                                </defs>
-                            </svg>
+                                        {/* Inactive gradient */}
+                                        <radialGradient id="paint0_radial_216_167" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(92.9619) scale(4170.57 1758.58)">
+                                            <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                            <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                            <stop offset="1" stop-color="#848484"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+                        </div>
+                        
+                        {/* Right Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${xbox_blade_position ? styles.makeTransparent : ""}`}>
+                                <svg className={bladeStyles.bladeBaseRight} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.41757 223.5C14.4969 125.593 44.5148 1.78581 46.4512 1H87.9512C14.4446 274.735 20.1407 685.347 87.4512 993H41.4512C41.4512 993 3.91713 777 1.91713 718.5C1.31705 700.947 -0.211121 689.05 6.41713 672.5L24.4173 627C28.1568 618.167 29.8597 612.731 29.9173 599.5C27.9665 461.497 27.6202 384.246 39.4173 248.5C40.0684 238.935 33.1628 238.041 27.9179 238H17.4178C6.93388 237.749 0.0428619 234.663 1.41757 223.5Z" fill="url(#paint0_radial_216_179)" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_179" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1890.95 580.5) rotate(88.5162) scale(2490.84 1932.87)">
+                                        <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                        <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                        <stop offset="1" stop-color="#8B8B8B"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+
+                                <svg id={``} className={`${bladeStyles.bladeJewelRight} ${current_context_index !== 1  ? bladeStyles.inactiveBladeFill : bladeStyles.activeXboxliveJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.4174 223.5C37.5938 133.45 47.4549 84.7244 67.4512 1H57.9512C-16.6749 216.115 -17.391 646.731 52.4512 992.997H62.4512C64.8356 994.666 26.1966 777.895 22.917 718.5C21.9487 700.964 20.7887 689.05 27.417 672.5L45.417 627C49.1565 618.167 50.8595 612.731 50.917 599.5C48.9662 461.497 48.62 384.246 60.4171 248.5C61.0682 238.934 54.1625 238.041 48.9175 238H38.4174C27.9335 237.749 21.0427 234.662 22.4174 223.5Z" fill="url(#paint0_radial_216_177)" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_177" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1747.45 947.5) rotate(87.0381) scale(4170.57 1758.58)">
+                                        <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                        <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                        <stop offset="1" stop-color="#848484"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+
 
                         </div>
+
+                        <div className={bladeStyles.transitionBlade}></div>
                     </div>
                     <div id={styles["gamesBlade"]}       className={`${styles.blade}`}   style={{"--index": 2}} ref={gamesRef}       onClick={()=> dispatch(navigateTo("games"))}>
-                    <div className={bladeStyles.svgBladeContainer}>
-                            <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M86.5336 222.5C74.7057 133.92 62.5691 86.3731 45 0H0C73.5065 273.735 67.8105 684.347 0.5 992H46.5C46.5 992 84.034 776 86.034 717.5C86.6341 699.947 88.1623 688.05 81.534 671.5L63.5338 626C59.7944 617.167 58.0914 611.731 58.0339 598.5C59.9846 460.497 60.331 383.246 48.5338 247.5C47.8828 237.935 54.7883 237.041 60.0333 237H70.5334C81.0173 236.749 87.9083 233.663 86.5336 222.5Z" fill="#EAEAEA"/>
-                            </svg>
+                        {/* Left Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${!games_position ? styles.makeTransparent : ""}`}>
+                                <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.5336 223.5C74.4543 125.593 44.4364 1.78581 42.5 1H1C74.5065 274.735 68.8105 685.347 1.5 993H47.5C47.5 993 85.034 777 87.034 718.5C87.6341 700.947 89.1623 689.05 82.534 672.5L64.5338 627C60.7944 618.167 59.0914 612.731 59.0339 599.5C60.9846 461.497 61.331 384.246 49.5338 248.5C48.8828 238.935 55.7883 238.041 61.0333 238H71.5334C82.0173 237.749 88.9083 234.663 87.5336 223.5Z" />
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_168" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1802 580.5) rotate(91.4838) scale(2490.84 1932.87)">
+                                        <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                        <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                        <stop offset="1" stop-color="#8B8B8B"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
 
-                            <svg id={bladeStyles["gamesJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 66 993" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M45.5337 222.5C30.3573 132.45 20.4962 83.7244 0.5 0H13C80.509 224.669 82.6299 653.597 18.5 991.997H5.5C3.11556 993.666 41.7546 776.895 45.0342 717.5C46.0024 699.964 47.1624 688.05 40.5342 671.5L22.5342 626C18.7947 617.167 17.0917 611.731 17.0342 598.5C18.9849 460.497 19.3312 383.246 7.53405 247.5C6.88298 237.934 13.7887 237.041 19.0336 237H29.5337C40.0177 236.749 46.9085 233.662 45.5337 222.5Z"/>
-                                <defs>
-                                    <radialGradient id="paint0_radial_211_29" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(81.3116 -0.000110592) rotate(99.3311) scale(1005.3 262.926)">
-                                        <stop offset="0.174693" stop-color="#448B40"/>
-                                        <stop offset="0.359221" stop-color="#5CC548"/>
-                                        <stop offset="0.694086" stop-color="#448B40"/>
-                                    </radialGradient>
+                                <svg id={``} className={`${bladeStyles.bladeJewel} ${current_context_index !== 2  ? bladeStyles.inactiveBladeFill : bladeStyles.activeGamesJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M46.5337 223.5C31.3573 133.45 21.4962 84.7244 1.5 1H11C85.6261 216.115 86.3422 646.731 16.5 992.997H6.5C4.11556 994.666 42.7546 777.895 46.0342 718.5C47.0024 700.964 48.1624 689.05 41.5342 672.5L23.5342 627C19.7947 618.167 18.0917 612.731 18.0342 599.5C19.9849 461.497 20.3312 384.246 8.53405 248.5C7.88298 238.934 14.7887 238.041 20.0336 238H30.5337C41.0177 237.749 47.9085 234.662 46.5337 223.5Z" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        {/* Active gradient */}
+                                        <radialGradient id="paint0_radial_217_181" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(93.0164) scale(4133.23 1726.2)">
+                                            <stop offset="0.968964" stop-color="#4CA63A"/>
+                                            <stop offset="0.982838" stop-color="#68CE3C"/>
+                                            <stop offset="1" stop-color="#4D9E3C"/>
+                                        </radialGradient>
 
-                                {/* Inactive gradient */}
-                                <radialGradient id="paint0_radial_213_161" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1526.5 496) rotate(90) scale(3790 1598.11)">
-                                    <stop offset="0.963542" stop-color="#D3D3D3"/>
-                                    <stop offset="1" stop-color="#848484"/>
-                                </radialGradient>
-                                </defs>
-                            </svg>
+                                        {/* Inactive gradient */}
+                                        <radialGradient id="paint0_radial_216_167" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(92.9619) scale(4170.57 1758.58)">
+                                            <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                            <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                            <stop offset="1" stop-color="#848484"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+
+
+                        </div>
+
+                        {/* Right Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${games_position ? styles.makeTransparent : ""}`}>
+                                <svg className={bladeStyles.bladeBaseRight} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.41757 223.5C14.4969 125.593 44.5148 1.78581 46.4512 1H87.9512C14.4446 274.735 20.1407 685.347 87.4512 993H41.4512C41.4512 993 3.91713 777 1.91713 718.5C1.31705 700.947 -0.211121 689.05 6.41713 672.5L24.4173 627C28.1568 618.167 29.8597 612.731 29.9173 599.5C27.9665 461.497 27.6202 384.246 39.4173 248.5C40.0684 238.935 33.1628 238.041 27.9179 238H17.4178C6.93388 237.749 0.0428619 234.663 1.41757 223.5Z" fill="url(#paint0_radial_216_179)" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_179" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1890.95 580.5) rotate(88.5162) scale(2490.84 1932.87)">
+                                        <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                        <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                        <stop offset="1" stop-color="#8B8B8B"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+
+                                <svg id={``} className={`${bladeStyles.bladeJewelRight} ${current_context_index !== 1  ? bladeStyles.inactiveBladeFill : bladeStyles.activeXboxliveJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.4174 223.5C37.5938 133.45 47.4549 84.7244 67.4512 1H57.9512C-16.6749 216.115 -17.391 646.731 52.4512 992.997H62.4512C64.8356 994.666 26.1966 777.895 22.917 718.5C21.9487 700.964 20.7887 689.05 27.417 672.5L45.417 627C49.1565 618.167 50.8595 612.731 50.917 599.5C48.9662 461.497 48.62 384.246 60.4171 248.5C61.0682 238.934 54.1625 238.041 48.9175 238H38.4174C27.9335 237.749 21.0427 234.662 22.4174 223.5Z" fill="url(#paint0_radial_216_177)" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_177" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1747.45 947.5) rotate(87.0381) scale(4170.57 1758.58)">
+                                        <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                        <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                        <stop offset="1" stop-color="#848484"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+
 
                         </div>
                     </div>
                     <div id={styles["mediaBlade"]}       className={`${styles.blade}`}   style={{"--index": 3}} ref={mediaRef}       onClick={()=> dispatch(navigateTo("media"))}>
-                    <div className={bladeStyles.svgBladeContainer}>
-                            <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M86.5336 222.5C74.7057 133.92 62.5691 86.3731 45 0H0C73.5065 273.735 67.8105 684.347 0.5 992H46.5C46.5 992 84.034 776 86.034 717.5C86.6341 699.947 88.1623 688.05 81.534 671.5L63.5338 626C59.7944 617.167 58.0914 611.731 58.0339 598.5C59.9846 460.497 60.331 383.246 48.5338 247.5C47.8828 237.935 54.7883 237.041 60.0333 237H70.5334C81.0173 236.749 87.9083 233.663 86.5336 222.5Z" fill="#EAEAEA"/>
-                            </svg>
+                        {/* Left Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${!media_position ? styles.makeTransparent : ""}`}>
+                                <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.5336 223.5C74.4543 125.593 44.4364 1.78581 42.5 1H1C74.5065 274.735 68.8105 685.347 1.5 993H47.5C47.5 993 85.034 777 87.034 718.5C87.6341 700.947 89.1623 689.05 82.534 672.5L64.5338 627C60.7944 618.167 59.0914 612.731 59.0339 599.5C60.9846 461.497 61.331 384.246 49.5338 248.5C48.8828 238.935 55.7883 238.041 61.0333 238H71.5334C82.0173 237.749 88.9083 234.663 87.5336 223.5Z" />
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_168" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1802 580.5) rotate(91.4838) scale(2490.84 1932.87)">
+                                        <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                        <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                        <stop offset="1" stop-color="#8B8B8B"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
 
-                            <svg id={bladeStyles["mediaJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 66 993" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M45.5337 222.5C30.3573 132.45 20.4962 83.7244 0.5 0H13C80.509 224.669 82.6299 653.597 18.5 991.997H5.5C3.11556 993.666 41.7546 776.895 45.0342 717.5C46.0024 699.964 47.1624 688.05 40.5342 671.5L22.5342 626C18.7947 617.167 17.0917 611.731 17.0342 598.5C18.9849 460.497 19.3312 383.246 7.53405 247.5C6.88298 237.934 13.7887 237.041 19.0336 237H29.5337C40.0177 236.749 46.9085 233.662 45.5337 222.5Z"/>
+                                <svg id={``} className={`${bladeStyles.bladeJewel} ${current_context_index !== 3  ? bladeStyles.inactiveBladeFill : bladeStyles.activeMediaJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M46.5337 223.5C31.3573 133.45 21.4962 84.7244 1.5 1H11C85.6261 216.115 86.3422 646.731 16.5 992.997H6.5C4.11556 994.666 42.7546 777.895 46.0342 718.5C47.0024 700.964 48.1624 689.05 41.5342 672.5L23.5342 627C19.7947 618.167 18.0917 612.731 18.0342 599.5C19.9849 461.497 20.3312 384.246 8.53405 248.5C7.88298 238.934 14.7887 238.041 20.0336 238H30.5337C41.0177 237.749 47.9085 234.662 46.5337 223.5Z" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        {/* Active gradient */}
+                                        <radialGradient id="paint0_radial_217_193" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(93.0164) scale(4133.23 1726.2)">
+                                            <stop offset="0.968864" stop-color="#356DA7"/>
+                                            <stop offset="0.968964" stop-color="#3872AB"/>
+                                            <stop offset="0.982838" stop-color="#5CB2FF"/>
+                                            <stop offset="1" stop-color="#3E7FBD"/>
+                                        </radialGradient>
+
+                                        {/* Inactive gradient */}
+                                        <radialGradient id="paint0_radial_216_167" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(92.9619) scale(4170.57 1758.58)">
+                                            <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                            <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                            <stop offset="1" stop-color="#848484"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+
+
+                        </div>
+
+                        {/* Right Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${media_position ? styles.makeTransparent : ""}`}>
+                            <svg className={bladeStyles.bladeBaseRight} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.41757 223.5C14.4969 125.593 44.5148 1.78581 46.4512 1H87.9512C14.4446 274.735 20.1407 685.347 87.4512 993H41.4512C41.4512 993 3.91713 777 1.91713 718.5C1.31705 700.947 -0.211121 689.05 6.41713 672.5L24.4173 627C28.1568 618.167 29.8597 612.731 29.9173 599.5C27.9665 461.497 27.6202 384.246 39.4173 248.5C40.0684 238.935 33.1628 238.041 27.9179 238H17.4178C6.93388 237.749 0.0428619 234.663 1.41757 223.5Z" fill="url(#paint0_radial_216_179)" stroke="black" stroke-opacity="0.5"/>
                                 <defs>
-                                    <radialGradient id="paint0_radial_211_45" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(81.4673 -0.000110592) rotate(99.3311) scale(1005.3 262.926)">
-                                        <stop offset="0.174693" stop-color="#4370A3"/>
-                                        <stop offset="0.359221" stop-color="#62A8EA"/>
-                                        <stop offset="0.694086" stop-color="#4370A3"/>
+                                    <radialGradient id="paint0_radial_216_179" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1890.95 580.5) rotate(88.5162) scale(2490.84 1932.87)">
+                                    <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                    <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                    <stop offset="1" stop-color="#8B8B8B"/>
                                     </radialGradient>
-
-                                {/* Inactive gradient */}
-                                <radialGradient id="paint0_radial_213_161" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1526.5 496) rotate(90) scale(3790 1598.11)">
-                                    <stop offset="0.963542" stop-color="#D3D3D3"/>
-                                    <stop offset="1" stop-color="#848484"/>
-                                </radialGradient>
                                 </defs>
                             </svg>
+
+                            <svg id={``} className={`${bladeStyles.bladeJewelRight} ${current_context_index !== 1  ? bladeStyles.inactiveBladeFill : bladeStyles.activeXboxliveJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.4174 223.5C37.5938 133.45 47.4549 84.7244 67.4512 1H57.9512C-16.6749 216.115 -17.391 646.731 52.4512 992.997H62.4512C64.8356 994.666 26.1966 777.895 22.917 718.5C21.9487 700.964 20.7887 689.05 27.417 672.5L45.417 627C49.1565 618.167 50.8595 612.731 50.917 599.5C48.9662 461.497 48.62 384.246 60.4171 248.5C61.0682 238.934 54.1625 238.041 48.9175 238H38.4174C27.9335 237.749 21.0427 234.662 22.4174 223.5Z" fill="url(#paint0_radial_216_177)" stroke="black" stroke-opacity="0.5"/>
+                                <defs>
+                                    <radialGradient id="paint0_radial_216_177" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1747.45 947.5) rotate(87.0381) scale(4170.57 1758.58)">
+                                    <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                    <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                    <stop offset="1" stop-color="#848484"/>
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+
 
                         </div>
                     </div>
                     <div id={styles["systemBlade"]}      className={`${styles.blade}`}   style={{"--index": 4}} ref={systemRef}      onClick={()=> dispatch(navigateTo("system"))}>
-                    <div className={bladeStyles.svgBladeContainer}>
-                        <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M86.5336 222.5C74.7057 133.92 62.5691 86.3731 45 0H0C73.5065 273.735 67.8105 684.347 0.5 992H46.5C46.5 992 84.034 776 86.034 717.5C86.6341 699.947 88.1623 688.05 81.534 671.5L63.5338 626C59.7944 617.167 58.0914 611.731 58.0339 598.5C59.9846 460.497 60.331 383.246 48.5338 247.5C47.8828 237.935 54.7883 237.041 60.0333 237H70.5334C81.0173 236.749 87.9083 233.663 86.5336 222.5Z" fill="#EAEAEA"/>
-                            </svg>
+                        {/* Left Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${!system_pos ? styles.makeTransparent : ""}`}>
+                                <svg className={bladeStyles.bladeBase} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M87.5336 223.5C74.4543 125.593 44.4364 1.78581 42.5 1H1C74.5065 274.735 68.8105 685.347 1.5 993H47.5C47.5 993 85.034 777 87.034 718.5C87.6341 700.947 89.1623 689.05 82.534 672.5L64.5338 627C60.7944 618.167 59.0914 612.731 59.0339 599.5C60.9846 461.497 61.331 384.246 49.5338 248.5C48.8828 238.935 55.7883 238.041 61.0333 238H71.5334C82.0173 237.749 88.9083 234.663 87.5336 223.5Z" />
+                                    <defs>
+                                        <radialGradient id="paint0_radial_216_168" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1802 580.5) rotate(91.4838) scale(2490.84 1932.87)">
+                                        <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                        <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                        <stop offset="1" stop-color="#8B8B8B"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
 
-                            <svg id={bladeStyles["systemJewel"]} className={bladeStyles.bladeJewel} viewBox="0 0 66 993" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M45.5337 222.5C30.3573 132.45 20.4962 83.7244 0.5 0H13C80.509 224.669 82.6299 653.597 18.5 991.997H5.5C3.11556 993.666 41.7546 776.895 45.0342 717.5C46.0024 699.964 47.1624 688.05 40.5342 671.5L22.5342 626C18.7947 617.167 17.0917 611.731 17.0342 598.5C18.9849 460.497 19.3312 383.246 7.53405 247.5C6.88298 237.934 13.7887 237.041 19.0336 237H29.5337C40.0177 236.749 46.9085 233.662 45.5337 222.5Z" />
+                                <svg id={bladeStyles["marketplaceJewel"]} className={`${bladeStyles.bladeJewel} ${current_context_index !== 4  ? bladeStyles.inactiveBladeFill : bladeStyles.activeSystemJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M46.5337 223.5C31.3573 133.45 21.4962 84.7244 1.5 1H11C85.6261 216.115 86.3422 646.731 16.5 992.997H6.5C4.11556 994.666 42.7546 777.895 46.0342 718.5C47.0024 700.964 48.1624 689.05 41.5342 672.5L23.5342 627C19.7947 618.167 18.0917 612.731 18.0342 599.5C19.9849 461.497 20.3312 384.246 8.53405 248.5C7.88298 238.934 14.7887 238.041 20.0336 238H30.5337C41.0177 237.749 47.9085 234.662 46.5337 223.5Z" stroke="black" stroke-opacity="0.5"/>
+                                    <defs>
+                                        {/* Active gradient */}
+                                        <radialGradient id="paint0_radial_217_197" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(93.0164) scale(4133.23 1726.2)">
+                                            <stop offset="0.968864" stop-color="#8664B4"/>
+                                            <stop offset="0.982838" stop-color="#A983FA"/>
+                                            <stop offset="1" stop-color="#8E6FCB"/>
+                                        </radialGradient>
+
+                                        {/* Inactive gradient */}
+                                        <radialGradient id="paint0_radial_216_167" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1678.5 947.5) rotate(92.9619) scale(4170.57 1758.58)">
+                                            <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                            <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                            <stop offset="1" stop-color="#848484"/>
+                                        </radialGradient>
+                                    </defs>
+                                </svg>
+
+
+                        </div>
+
+                        {/* Right Blade */}
+                        <div className={`${bladeStyles.bladeShrink} ${system_pos ? styles.makeTransparent : ""}`}>
+                            <svg className={bladeStyles.bladeBaseRight} viewBox="0 0 87 992" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.41757 223.5C14.4969 125.593 44.5148 1.78581 46.4512 1H87.9512C14.4446 274.735 20.1407 685.347 87.4512 993H41.4512C41.4512 993 3.91713 777 1.91713 718.5C1.31705 700.947 -0.211121 689.05 6.41713 672.5L24.4173 627C28.1568 618.167 29.8597 612.731 29.9173 599.5C27.9665 461.497 27.6202 384.246 39.4173 248.5C40.0684 238.935 33.1628 238.041 27.9179 238H17.4178C6.93388 237.749 0.0428619 234.663 1.41757 223.5Z" fill="url(#paint0_radial_216_179)" stroke="black" stroke-opacity="0.5"/>
                                 <defs>
-                                    <radialGradient id="paint0_radial_211_61" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(81 -0.000110592) rotate(99.3311) scale(1005.3 262.926)">
-                                        <stop offset="0.174693" stop-color="#725E9B"/>
-                                        <stop offset="0.359221" stop-color="#A882FA"/>
-                                        <stop offset="0.694086" stop-color="#725E9B"/>
+                                    <radialGradient id="paint0_radial_216_179" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1890.95 580.5) rotate(88.5162) scale(2490.84 1932.87)">
+                                    <stop offset="0.946467" stop-color="#C1C1C1"/>
+                                    <stop offset="0.973669" stop-color="#DBDBDB"/>
+                                    <stop offset="1" stop-color="#8B8B8B"/>
                                     </radialGradient>
-
-                                {/* Inactive gradient */}
-                                <radialGradient id="paint0_radial_213_161" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(-1526.5 496) rotate(90) scale(3790 1598.11)">
-                                    <stop offset="0.963542" stop-color="#D3D3D3"/>
-                                    <stop offset="1" stop-color="#848484"/>
-                                </radialGradient>
                                 </defs>
                             </svg>
+
+                            <svg id={``} className={`${bladeStyles.bladeJewelRight} ${current_context_index !== 1  ? bladeStyles.inactiveBladeFill : bladeStyles.activeXboxliveJewelFill}`} viewBox="0 0 66 993" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22.4174 223.5C37.5938 133.45 47.4549 84.7244 67.4512 1H57.9512C-16.6749 216.115 -17.391 646.731 52.4512 992.997H62.4512C64.8356 994.666 26.1966 777.895 22.917 718.5C21.9487 700.964 20.7887 689.05 27.417 672.5L45.417 627C49.1565 618.167 50.8595 612.731 50.917 599.5C48.9662 461.497 48.62 384.246 60.4171 248.5C61.0682 238.934 54.1625 238.041 48.9175 238H38.4174C27.9335 237.749 21.0427 234.662 22.4174 223.5Z" fill="url(#paint0_radial_216_177)" stroke="black" stroke-opacity="0.5"/>
+                                <defs>
+                                    <radialGradient id="paint0_radial_216_177" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1747.45 947.5) rotate(87.0381) scale(4170.57 1758.58)">
+                                    <stop offset="0.885417" stop-color="#5B5B5B"/>
+                                    <stop offset="0.96875" stop-color="#D3D3D3"/>
+                                    <stop offset="1" stop-color="#848484"/>
+                                    </radialGradient>
+                                </defs>
+                            </svg>
+
 
                         </div>
                     </div>

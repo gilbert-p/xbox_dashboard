@@ -33,7 +33,7 @@
     width: var(--blade-size);
     height: 100%;
     /* background-color: greenyellow; */
-    /* border: 1px solid black; */
+    border: 1px solid black;
     transition: transform 0.6s ease-in;
     pointer-events: initial;
     overflow: hidden;
