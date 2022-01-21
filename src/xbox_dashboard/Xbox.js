@@ -22,7 +22,9 @@ import { navigateTo,
          selectBladeContainerWidth,
          updateBladeContainerWidth,
          bladeTransitionAsync,
-         selectTransitionState, } from './xboxSlice';
+         selectTransitionState,
+         selectTransitionDirection,
+         selectLastIndexCalled} from './xboxSlice';
 
 import { updateSelectionHighlight,
          selectHighlightState,
@@ -45,6 +47,7 @@ const Xbox = () => {
     //Dashboard state variables
     const current_dashboard_context = useSelector(selectCurrentContext);
     const current_context_index = useSelector(selectContextIndex);
+    const last_index_called = useSelector(selectLastIndexCalled);
     const xbox_blade_position = useSelector(selectXboxPos);
     const games_position = useSelector(selectGamesPos);
     const media_position = useSelector(selectMediaPos);
@@ -53,6 +56,7 @@ const Xbox = () => {
     const blade_size = useSelector(selectBladeSize);
     const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
     const transition_state = useSelector(selectTransitionState);
+    const transition_direction = useSelector(selectTransitionDirection);
 
     //Menu state variables
     const isHighlightActive = useSelector(selectHighlightState);
@@ -99,30 +103,30 @@ const Xbox = () => {
     const animationTransitionBlade = useRef(null);
 
     
-useLayoutEffect(()=>{
-
-    animationTransitionBlade.current = {};
-    // animationTransitionBlade.current = gsap.timeline().fromTo(transtionBladeRef.current, {opacity: 0}, {opacity: 1});
-                                                      
-}, [transition_state])
-
 
     //Runs before browser paint in order to set a new GSAP instance for animating each unique transition.
     useLayoutEffect(()=> {
         bladeContainerTransition.current = {};
-        bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current,
-            {left: `-${5 * (blade_size)}`, duration: 0.3});
+
+        let shift_offset = (Math.abs(current_context_index - last_index_called));
+
+        if(transition_direction === "left") {
+            bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-=${shift_offset * 40}`, duration: 0.3})
+        }
+        else {
+            bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `+=${shift_offset * 40}`, duration: 0.3});
+        }
         
     },[current_context_index]);
 
 
     //Runs on first render to initialize the blades 
     useEffect(()=>{
-        bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {left: `${-0}`, duration: blade_transition_duration, delay: blade_transition_delay});
-        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        // bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {left: `${-0}`, duration: blade_transition_duration, delay: blade_transition_delay});
+        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width - 40}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width - 40}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width - 40}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width - 40}`, duration: blade_transition_duration, delay: blade_transition_delay},);
     }, [xbox_blade_container_width]);
 
     //Runs on first render to initialize background slides

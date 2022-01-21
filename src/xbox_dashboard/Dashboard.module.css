@@ -38,17 +38,16 @@
 }
 
 .blade {
-    position: relative;
+    position: absolute;
     /* left: -90px; */
-    width: 100px;
+    width: 0px;
     /* width: var(--blade-size); */
     height: 100%;
     /* background-color: greenyellow; */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     transition: transform 0.6s ease-in;
     pointer-events: none;
-    overflow: hidden;
-    /* background-color: lavender; */
+    overflow: visible;
 }
 
 svg > path {
@@ -60,27 +59,23 @@ svg > path {
 }
 
 .blade:nth-child(1){
-    transform: translateX(252px);
+    transform: translateX(-60px);
 }
 
 .blade:nth-child(2){
-    /* left: calc(var(--container-width) - var(--blade_size)); */
-    transform: translateX(188px);
+    transform: translateX(-25px);
 }
 
 .blade:nth-child(3){
-    /* left: calc(var(--container-width) - var(--blade_size)); */
-    transform: translateX(126px);
+    transform: translateX(15px);
 }
 
 .blade:nth-child(4){
-    /* left: calc(var(--container-width) - var(--blade_size)); */
-    transform: translateX(62px);
+    transform: translateX(55px);
 }
 
 .blade:nth-child(5){
-    /* left: calc(var(--container-width) - var(--blade_size)); */
-    /* transform: translateX(-260px); */
+    transform: translateX(95px);
 }
 
 

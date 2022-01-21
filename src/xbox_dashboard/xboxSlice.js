@@ -5,11 +5,13 @@ import { transitionBlade } from '../api_features/bladeTransition';
 let initialState = {
     current_context: "marketplace",
     context_index: 0,
+    last_index_called: 0,
+    transition_direction: "right",
     market_reversed: false,
-    xbox_reversed: false,
-    games_reversed: false,
-    media_reversed: false,
-    system_reversed: false,
+    xbox_reversed: true,
+    games_reversed: true,
+    media_reversed: true,
+    system_reversed: true,
     disc_tray: false,
     blade_size: 100,
     blade_container_width: 0,
@@ -31,11 +33,19 @@ export const xboxSlice = createSlice({
     reducers: {
       navigateTo: (state, action) => {
         
+
         state.current_context = action.payload;
 
         switch(action.payload){
           case "marketplace":
+            state.last_index_called = state.context_index;
+
             state.context_index = 0;
+
+            state.last_index_called > state.context_index ?
+              state.transition_direction = "right" :
+              state.transition_direction = "left";
+
             state.xbox_reversed = false;
             state.games_reversed = false;
             state.media_reversed = false;
@@ -45,7 +55,14 @@ export const xboxSlice = createSlice({
 
           break;
           case "xboxlive":
+            state.last_index_called = state.context_index;
+
             state.context_index = 1;
+
+            state.last_index_called > state.context_index ?
+              state.transition_direction = "right" :
+              state.transition_direction = "left";
+
             state.xbox_reversed = true;
             state.games_reversed = false;
             state.media_reversed = false;
@@ -54,7 +71,14 @@ export const xboxSlice = createSlice({
             state.disc_tray = true;
           break;
           case "games":
+            state.last_index_called = state.context_index;
+
             state.context_index = 2;
+
+            state.last_index_called > state.context_index ?
+              state.transition_direction = "right" :
+              state.transition_direction = "left";
+
             state.xbox_reversed = true;
             state.games_reversed = true;
             state.media_reversed = false;
@@ -63,7 +87,14 @@ export const xboxSlice = createSlice({
             state.disc_tray = true;
           break;
           case "media":
+            state.last_index_called = state.context_index;
+
+
             state.context_index = 3;
+
+            state.last_index_called > state.context_index ?
+              state.transition_direction = "right" :
+              state.transition_direction = "left";
             state.xbox_reversed = true;
             state.games_reversed = true;
             state.media_reversed = true;
@@ -72,7 +103,14 @@ export const xboxSlice = createSlice({
             state.disc_tray = true;
           break;
           case "system":
+            state.last_index_called = state.context_index;
+
             state.context_index = 4;
+
+            state.last_index_called > state.context_index ?
+              state.transition_direction = "right" :
+              state.transition_direction = "left";
+
             state.xbox_reversed = true;
             state.games_reversed = true;
             state.media_reversed = true;
@@ -111,5 +149,7 @@ export const isTrayDisplayed = (state) => state.dashboard.disc_tray;
 export const selectBladeSize = (state) => state.dashboard.blade_size;
 export const selectBladeContainerWidth = (state) => state.dashboard.blade_container_width;
 export const selectTransitionState = (state) => state.dashboard.is_transitioning;
+export const selectTransitionDirection = (state) => state.dashboard.transition_direction;
+export const selectLastIndexCalled = (state) => state.dashboard.last_index_called;
 
 export default xboxSlice.reducer;
