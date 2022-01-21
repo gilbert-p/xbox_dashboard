@@ -1,4 +1,13 @@
+.makeTransparent {
+    /* position: absolute !important; */
+    opacity: 0;
+    transition: opacity 0.6s ease-in;
+    pointer-events: none;
+}
 
+.instantTransparent {
+    visibility: hidden !important;
+}
 
 
 .mainContainer {
@@ -30,38 +39,48 @@
 
 .blade {
     position: relative;
-    width: var(--blade-size);
+    /* left: -90px; */
+    width: 100px;
+    /* width: var(--blade-size); */
     height: 100%;
     /* background-color: greenyellow; */
     border: 1px solid black;
     transition: transform 0.6s ease-in;
-    pointer-events: initial;
+    pointer-events: none;
     overflow: hidden;
+    /* background-color: lavender; */
+}
+
+svg > path {
+    border: 1px solid black;
 }
 
 .blade:hover {
     cursor: pointer;
 }
 
+.blade:nth-child(1){
+    transform: translateX(252px);
+}
 
 .blade:nth-child(2){
     /* left: calc(var(--container-width) - var(--blade_size)); */
-    transform: translateX(-38px);
+    transform: translateX(188px);
 }
 
 .blade:nth-child(3){
     /* left: calc(var(--container-width) - var(--blade_size)); */
-    transform: translateX(-76px);
+    transform: translateX(126px);
 }
 
 .blade:nth-child(4){
     /* left: calc(var(--container-width) - var(--blade_size)); */
-    transform: translateX(-114px);
+    transform: translateX(62px);
 }
 
 .blade:nth-child(5){
     /* left: calc(var(--container-width) - var(--blade_size)); */
-    transform: translateX(-152px);
+    /* transform: translateX(-260px); */
 }
 
 
@@ -243,16 +262,7 @@
     transition: opacity 0.6s ease-in;
 }
 
-.makeTransparent {
-    /* position: absolute !important; */
-    opacity: 0;
-    transition: opacity 0.6s ease-in;
-    pointer-events: none;
-}
 
-.instantTransparent {
-    visibility: hidden;
-}
 
 .leftContent {
     grid-area: left-content;

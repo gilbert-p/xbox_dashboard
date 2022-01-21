@@ -1,3 +1,5 @@
+
+
 .bladeBase {
     position: absolute;
     z-index: -1;
@@ -9,6 +11,8 @@
     fill: url("#paint0_radial_216_168");
     stroke: black;
     stroke-opacity: 0.5;
+    pointer-events: initial;
+    /* border: 2px solid green; */
 }
 
 .bladeJewel {
@@ -17,7 +21,7 @@
     height: 992px;
     left: 30px;
     top: -95px;
-
+    pointer-events: initial;
     
 }
 
@@ -32,6 +36,7 @@
     fill: url("#paint0_radial_216_168");
     stroke: black;
     stroke-opacity: 0.5;
+    pointer-events: initial;
 }
 
 .bladeJewelRight {
@@ -40,6 +45,7 @@
     height: 992px;
     left: 5px;
     top: -95px;
+    pointer-events: initial;
 }
 
 .activeMarketplaceJewelFill {
@@ -48,6 +54,7 @@
 
 .activeXboxliveJewelFill {
     fill: url("#paint0_radial_217_189");
+    transition: fill 2s;
 }
 
 .activeGamesJewelFill {
@@ -65,6 +72,7 @@
 .inactiveBladeFill {
     /* transform: scale(0.80) translateY(40px); */
     fill: url("#paint0_radial_216_167");
+    transition: fill 2s;
 }
 
 .bladeShrink {
@@ -79,4 +87,5 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: purple;
+    opacity: 1;
 }

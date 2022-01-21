@@ -1,6 +1,8 @@
+const total_animation_duration = 900;
+
 export function transitionBlade() {
     return new Promise((resolve) =>
-      setTimeout(() => resolve(), 500)
+      setTimeout(() => resolve(), total_animation_duration)
     );
   }
   

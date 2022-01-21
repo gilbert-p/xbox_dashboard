@@ -6,12 +6,12 @@ let initialState = {
     current_context: "marketplace",
     context_index: 0,
     market_reversed: false,
-    xbox_reversed: true,
-    games_reversed: true,
-    media_reversed: true,
-    system_reversed: true,
+    xbox_reversed: false,
+    games_reversed: false,
+    media_reversed: false,
+    system_reversed: false,
     disc_tray: false,
-    blade_size: 60,
+    blade_size: 100,
     blade_container_width: 0,
     is_transitioning: false,
 }
@@ -110,5 +110,6 @@ export const selectSystemPos = (state) => state.dashboard.system_reversed;
 export const isTrayDisplayed = (state) => state.dashboard.disc_tray;
 export const selectBladeSize = (state) => state.dashboard.blade_size;
 export const selectBladeContainerWidth = (state) => state.dashboard.blade_container_width;
+export const selectTransitionState = (state) => state.dashboard.is_transitioning;
 
 export default xboxSlice.reducer;
