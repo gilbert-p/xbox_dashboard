@@ -9,9 +9,9 @@
     display: grid;
     height: var(--container-height);
     max-height: 475px;
-    width: 102%;
-    margin: 100px 20px 0 20px;
-    grid-template-columns: 45% 45%;
+    width: 100%;
+    margin: 100px 0px 0 60px;
+    grid-template-columns: minmax(420px, 500px) minmax(420px, 500px);
     column-gap: 20px;
     grid-template-areas: 
     "m_left-content m_right-content"

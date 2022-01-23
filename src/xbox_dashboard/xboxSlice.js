@@ -8,10 +8,10 @@ let initialState = {
     last_index_called: 0,
     transition_direction: "right",
     market_reversed: false,
-    xbox_reversed: true,
-    games_reversed: true,
-    media_reversed: true,
-    system_reversed: true,
+    xbox_reversed: false,
+    games_reversed: false,
+    media_reversed: false,
+    system_reversed: false,
     disc_tray: false,
     blade_size: 100,
     blade_container_width: 0,
@@ -37,7 +37,7 @@ export const xboxSlice = createSlice({
         state.current_context = action.payload;
 
         switch(action.payload){
-          case "marketplace":
+          case 0:
             state.last_index_called = state.context_index;
 
             state.context_index = 0;
@@ -54,7 +54,7 @@ export const xboxSlice = createSlice({
             state.disc_tray = false;
 
           break;
-          case "xboxlive":
+          case 1:
             state.last_index_called = state.context_index;
 
             state.context_index = 1;
@@ -70,7 +70,7 @@ export const xboxSlice = createSlice({
 
             state.disc_tray = true;
           break;
-          case "games":
+          case 2:
             state.last_index_called = state.context_index;
 
             state.context_index = 2;
@@ -86,7 +86,7 @@ export const xboxSlice = createSlice({
 
             state.disc_tray = true;
           break;
-          case "media":
+          case 3:
             state.last_index_called = state.context_index;
 
 
@@ -102,7 +102,7 @@ export const xboxSlice = createSlice({
 
             state.disc_tray = true;
           break;
-          case "system":
+          case 4:
             state.last_index_called = state.context_index;
 
             state.context_index = 4;

@@ -6,7 +6,7 @@
     width: 87px;
     height: 992px;
     left: -10px;
-    top: -95px;
+    top: -70px;
     /* width="65" height="751" */
     fill: url("#paint0_radial_216_168");
     stroke: black;
@@ -17,10 +17,10 @@
 
 .bladeJewel {
     position: absolute;
-    width: 66px;
+    width: 70px;
     height: 992px;
-    left: 30px;
-    top: -95px;
+    left: 28px;
+    top: -70px;
     pointer-events: initial;
     
 }
@@ -31,7 +31,7 @@
     width: 87px;
     height: 992px;
     left: 25px;
-    top: -95px;
+    top: -70px;
     /* width="65" height="751" */
     fill: url("#paint0_radial_216_168");
     stroke: black;
@@ -44,7 +44,7 @@
     width: 66px;
     height: 992px;
     left: 5px;
-    top: -95px;
+    top: -70px;
     pointer-events: initial;
 }
 
