@@ -117,23 +117,23 @@ svg > path {
 }
 
 .blade:nth-child(1){
-    transform: translateX(-35px);
+    transform: translateX(-45px);
 }
 
 .blade:nth-child(2){
-    transform: translateX(10px);
+    transform: translateX(30px);
 }
 
 .blade:nth-child(3){
-    transform: translateX(50px);
+    transform: translateX(80px);
 }
 
 .blade:nth-child(4){
-    transform: translateX(90px);
+    transform: translateX(130px);
 }
 
 .blade:nth-child(5){
-    transform: translateX(130px);
+    transform: translateX(180px);
 }
 
 
@@ -692,6 +692,24 @@ svg > path {
 }
 
 
+
+@media screen and (max-height: 575px) {
+    .blade:nth-child(1){
+        transform: translateX(-55px);
+    }
+    .blade:nth-child(2){
+        transform: translateX(12px);
+    }
+    .blade:nth-child(3){
+        transform: translateX(52px);
+    }
+    .blade:nth-child(4){
+        transform: translateX(92px);
+    }
+    .blade:nth-child(5){
+        transform: translateX(132px);
+    }
+}
 
 @media screen and (max-height: 900px) {
     .mainContainer {

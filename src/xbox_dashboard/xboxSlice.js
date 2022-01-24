@@ -15,6 +15,7 @@ let initialState = {
     disc_tray: false,
     blade_size: 100,
     blade_container_width: 0,
+    blade_container_height: 0,
     is_transitioning: false,
 }
 
@@ -95,6 +96,7 @@ export const xboxSlice = createSlice({
             state.last_index_called > state.context_index ?
               state.transition_direction = "right" :
               state.transition_direction = "left";
+
             state.xbox_reversed = true;
             state.games_reversed = true;
             state.media_reversed = true;
@@ -122,8 +124,9 @@ export const xboxSlice = createSlice({
             state.context_index = 0;
         }
       },
-      updateBladeContainerWidth: (state, action) => {
-        state.blade_container_width = action.payload;
+      updateBladeContainerSize: (state, action) => {
+        state.blade_container_width = action.payload.width;
+        state.blade_container_height = action.payload.height;
       },
     },
     extraReducers: (builder) => {
@@ -137,7 +140,7 @@ export const xboxSlice = createSlice({
     }
 });
 
-export const { navigateTo, updateBladeContainerWidth } = xboxSlice.actions;
+export const { navigateTo, updateBladeContainerSize } = xboxSlice.actions;
 
 export const selectCurrentContext = (state) => state.dashboard.current_context;
 export const selectContextIndex = (state) => state.dashboard.context_index;
@@ -148,6 +151,7 @@ export const selectSystemPos = (state) => state.dashboard.system_reversed;
 export const isTrayDisplayed = (state) => state.dashboard.disc_tray;
 export const selectBladeSize = (state) => state.dashboard.blade_size;
 export const selectBladeContainerWidth = (state) => state.dashboard.blade_container_width;
+export const selectBladeContainerHeight = (state) => state.dashboard.blade_container_height;
 export const selectTransitionState = (state) => state.dashboard.is_transitioning;
 export const selectTransitionDirection = (state) => state.dashboard.transition_direction;
 export const selectLastIndexCalled = (state) => state.dashboard.last_index_called;

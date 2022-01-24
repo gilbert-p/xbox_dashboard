@@ -19,7 +19,8 @@ import { navigateTo,
          selectSystemPos,
          isTrayDisplayed,
          selectBladeContainerWidth,
-         updateBladeContainerWidth,
+         selectBladeContainerHeight,
+         updateBladeContainerSize,
          bladeTransitionAsync,
          selectTransitionDirection,
          selectLastIndexCalled} from './xboxSlice';
@@ -43,7 +44,6 @@ const Xbox = () => {
     
     
     //Dashboard state variables
-    // const current_dashboard_context = useSelector(selectCurrentContext);
     const current_context_index = useSelector(selectContextIndex);
     const last_index_called = useSelector(selectLastIndexCalled);
     const xbox_blade_position = useSelector(selectXboxPos);
@@ -51,9 +51,8 @@ const Xbox = () => {
     const media_position = useSelector(selectMediaPos);
     const system_pos = useSelector(selectSystemPos);
     const display_tray = useSelector(isTrayDisplayed);
-    // const blade_size = useSelector(selectBladeSize);
     const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
-    // const transition_state = useSelector(selectTransitionState);
+    const xbox_blade_container_height = useSelector(selectBladeContainerHeight);
     const transition_direction = useSelector(selectTransitionDirection);
 
     //Menu state variables
@@ -80,13 +79,11 @@ const Xbox = () => {
     const gamesRef = useRef(null);
     const mediaRef = useRef(null);
     const systemRef = useRef(null);
-
     const xboxBackgroundRef = useRef(null);
     const marketplaceBackgroundRef = useRef(null);
     const gamesBackgroundRef = useRef(null);
     const mediaBackgroundRef = useRef(null);
     const systemBackgroundRef = useRef(null);
-    // const transtionBladeRef = useRef(null);
     
     //GSAP instance Refs
     const bladeContainerTransition = useRef(null);
@@ -98,34 +95,67 @@ const Xbox = () => {
     const gamesBackgroundTransition = useRef(null);
     const mediaBackgroundTransition = useRef(null);
     const systemBackgroundTransition = useRef(null);
-    // const animationTransitionBlade = useRef(null);
 
     
 
     //Runs before browser paint in order to set a new GSAP instance for animating each unique transition.
     useLayoutEffect(()=> {
-        bladeContainerTransition.current = {};
 
-        let shift_offset = (Math.abs(current_context_index - last_index_called));
+        const getTransitionDirection = () => {
 
-        if(transition_direction === "left") {
-            bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-=${shift_offset * 40}`, duration: 0.3})
-        }
-        else {
-            bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `+=${shift_offset * 40}`, duration: 0.3});
-        }
+            bladeContainerTransition.current = {};
+
+            let shift_offset = (Math.abs(current_context_index - last_index_called));
+
+
+            if(transition_direction === "left") {
+                if(xbox_blade_container_height <= 575) {
+                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-=${shift_offset * 20}`, duration: 0.3});
+                }
+                else {
+                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-=${shift_offset * 40}`, duration: 0.3});
+                }
+
+            }
+            else {
+                if(xbox_blade_container_height <= 575) {
+                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `+=${shift_offset * 20}`, duration: 0.3});
+                }
+                else {
+                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `+=${shift_offset * 40}`, duration: 0.3});
+                }
+            }
+
+        };
+        getTransitionDirection();
         
     },[current_context_index, last_index_called, transition_direction]);
 
 
     //Runs on first render to initialize the blades 
     useEffect(()=>{
-        // bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {left: `${-0}`, duration: blade_transition_duration, delay: blade_transition_delay});
-        xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width -60}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width - 60}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width - 60}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-        systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width - 60}`, duration: blade_transition_duration, delay: blade_transition_delay},);
-    }, [xboxBladeContainerRef,xbox_blade_container_width]);
+
+        const initializeBlades = () => {
+
+            if(xbox_blade_container_height <= 575) {
+                xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width -45}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+                gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width - 55}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+                mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width - 65}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+                systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width - 75}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+            }
+            else {
+                xboxBladeTransition.current = gsap.timeline().to(xboxliveRef.current, {left: `${xbox_blade_container_width -60}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+                gamesBladeTransition.current = gsap.timeline().to(gamesRef.current, {left: `${xbox_blade_container_width - 70}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+                mediaBladeTransition.current = gsap.timeline().to(mediaRef.current, {left: `${xbox_blade_container_width - 80}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+                systemBladeTransition.current = gsap.timeline().to(systemRef.current, {left: `${xbox_blade_container_width - 90}`, duration: blade_transition_duration, delay: blade_transition_delay},);
+            }
+            
+
+        }
+
+        initializeBlades();
+
+    }, [xbox_blade_container_width, xbox_blade_container_height]);
 
     //Runs on first render to initialize background slides
     useEffect(()=> {
@@ -218,36 +248,37 @@ const Xbox = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debounceDispatchInput = useCallback(
-        debounce((index) => {
-           dispatch(navigateTo(index));
+        debounce((fn) => {
+           dispatch(fn);
         }, 200),
         []
       );
       
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const debounceResizeListener = useCallback(
+        debounce((fn) => {
+            dispatch(fn);
+         }, 500),
+         []
+    );
 
     useEffect((e)=> {
         const navigateUsingKeys = (e) => {
             if(e !== undefined) {
                 switch(e.key) {
                     case "ArrowUp":
-                        console.log("ArrowUp");
                     break;
                     case "ArrowRight":
-                        console.log("ArrowRight");
                         if((current_context_index + 1) < 5) {
-                            // dispatch(navigateTo(current_context_index + 1));
-                            debounceDispatchInput(current_context_index + 1);
+                            debounceDispatchInput(navigateTo(current_context_index + 1));
                             
                         }
-
                     break;
                     case "ArrowDown":
-                        console.log("ArrowDown");
                     break;
                     case "ArrowLeft":
-                        console.log("ArrowLeft");
                         if((current_context_index - 1) >= 0) {
-                            debounceDispatchInput(current_context_index -1);
+                            debounceDispatchInput(navigateTo(current_context_index - 1));
                         }
                     break;
                     default:
@@ -268,20 +299,26 @@ const Xbox = () => {
     }, [current_context_index, debounceDispatchInput])
 
     useEffect(()=> {
-                 //TODO: Optimize using debounce.
-        const updateContainerWidth = () => {
-            xboxBladeContainerRef && dispatch(updateBladeContainerWidth(xboxBladeContainerRef.current.offsetWidth));
-         }
+        const updateContainerSize = () => {
+            let sizingProperties = {};
 
-         window.addEventListener('resize', updateContainerWidth);
+            if(xboxBladeContainerRef){
+                sizingProperties.width = xboxBladeContainerRef.current.offsetWidth;
+                sizingProperties.height = xboxBladeContainerRef.current.offsetHeight;
 
-         updateContainerWidth();
+                debounceResizeListener((updateBladeContainerSize(sizingProperties)));
+            }
+        }
+
+         window.addEventListener('resize', updateContainerSize);
+
+         updateContainerSize();
 
          return () => {
-             window.removeEventListener("resize", updateContainerWidth);
+             window.removeEventListener("resize", updateContainerSize);
          }
 
-    }, [dispatch]);
+    }, [debounceResizeListener]);
 
 
     return (

@@ -97,19 +97,21 @@ path {
     opacity: 1;
 }
 
-@media screen and (max-width: 1350px) {
+@media screen and (max-height: 575px) {
     .bladeBase {
-        transform: scale(0.65) translateY(-25%);
+        height: 700px;
+
     }
     .bladeJewel {
-        transform: scale(0.65) translateY(-25%);
+        height: 700px;
+
         left: 20px;
     }
     .bladeBaseRight {
-        transform: scale(0.65) translateY(-25%);
+        height: 700px;
     }
     .bladeJewelRight {
-        transform: scale(0.65) translateY(-25%);
-        left: 20px;
+        height: 700px;
+        left: 14px;
     }
 }
