@@ -690,3 +690,16 @@ svg > path {
     transform: translateY(-50%);
     box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.466);
 }
+
+
+
+@media screen and (max-height: 900px) {
+    .mainContainer {
+        height: 100vh;
+        width: 75vw;
+    }
+    .bladeContainerMask {
+        height: 100vh;
+        max-height: 100vh;
+    }
+  }

@@ -219,7 +219,7 @@ const Xbox = () => {
 
     //KeyboardEvents 
 
-    const dispatchSomething = useCallback(
+    const debounceDispatchInput = useCallback(
         debounce((index) => {
            dispatch(navigateTo(index));
         }, 200),
@@ -237,7 +237,7 @@ const Xbox = () => {
                         console.log("ArrowRight");
                         if((current_context_index + 1) < 5) {
                             // dispatch(navigateTo(current_context_index + 1));
-                            dispatchSomething(current_context_index + 1);
+                            debounceDispatchInput(current_context_index + 1);
                             
                         }
 
@@ -248,7 +248,7 @@ const Xbox = () => {
                     case "ArrowLeft":
                         console.log("ArrowLeft");
                         if((current_context_index - 1) >= 0) {
-                            dispatchSomething(current_context_index -1);
+                            debounceDispatchInput(current_context_index -1);
                         }
                     break;
                     default:
