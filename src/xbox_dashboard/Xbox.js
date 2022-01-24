@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useLayoutEffect, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import useDebounce from "../custom_hooks/useDebounce";
-import { debounce } from "lodash-es";
+import { debounce } from "lodash";
 import { gsap } from 'gsap';
 import styles from './Dashboard.module.css';
 import marketplaceStyles from './Marketplace.module.css';
