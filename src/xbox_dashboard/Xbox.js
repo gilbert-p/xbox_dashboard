@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useLayoutEffect, useMemo, useCallback } from 'react';
+import React, {useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { gsap } from 'gsap';
@@ -19,11 +19,9 @@ import { navigateTo,
          selectMediaPos,
          selectSystemPos,
          isTrayDisplayed,
-         selectBladeSize,
          selectBladeContainerWidth,
          updateBladeContainerWidth,
          bladeTransitionAsync,
-         selectTransitionState,
          selectTransitionDirection,
          selectLastIndexCalled} from './xboxSlice';
 
@@ -54,9 +52,9 @@ const Xbox = () => {
     const media_position = useSelector(selectMediaPos);
     const system_pos = useSelector(selectSystemPos);
     const display_tray = useSelector(isTrayDisplayed);
-    const blade_size = useSelector(selectBladeSize);
+    // const blade_size = useSelector(selectBladeSize);
     const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
-    const transition_state = useSelector(selectTransitionState);
+    // const transition_state = useSelector(selectTransitionState);
     const transition_direction = useSelector(selectTransitionDirection);
 
     //Menu state variables
@@ -89,7 +87,7 @@ const Xbox = () => {
     const gamesBackgroundRef = useRef(null);
     const mediaBackgroundRef = useRef(null);
     const systemBackgroundRef = useRef(null);
-    const transtionBladeRef = useRef(null);
+    // const transtionBladeRef = useRef(null);
     
     //GSAP instance Refs
     const bladeContainerTransition = useRef(null);
@@ -101,7 +99,7 @@ const Xbox = () => {
     const gamesBackgroundTransition = useRef(null);
     const mediaBackgroundTransition = useRef(null);
     const systemBackgroundTransition = useRef(null);
-    const animationTransitionBlade = useRef(null);
+    // const animationTransitionBlade = useRef(null);
 
     
 
@@ -118,7 +116,7 @@ const Xbox = () => {
             bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `+=${shift_offset * 40}`, duration: 0.3});
         }
         
-    },[current_context_index]);
+    },[current_context_index, last_index_called, transition_direction]);
 
 
     //Runs on first render to initialize the blades 
@@ -137,7 +135,7 @@ const Xbox = () => {
         mediaBackgroundTransition.current = gsap.timeline().to(mediaBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
         systemBackgroundTransition.current = gsap.timeline().to(systemBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
         
-    }, [xboxBackgroundRef.current]);
+    }, [xbox_blade_container_width]);
 
 
     useEffect(()=> {
@@ -265,7 +263,7 @@ const Xbox = () => {
         }
 
 
-    }, [current_context_index])
+    }, [current_context_index, debounceDispatchInput])
 
     useEffect(()=> {
                  //TODO: Optimize using debounce.
@@ -281,28 +279,8 @@ const Xbox = () => {
              window.removeEventListener("resize", updateContainerWidth);
          }
 
-    }, [xboxBladeContainerRef.current]);
+    }, [dispatch]);
 
-    const formattedContext = (context) => {
-        switch(context){
-            case "marketplace":
-                return "Marketplace";
-            case "xboxlive":
-                return "Xbox LIVE";
-            case "games":
-                return "Games";
-            case "media":
-                return "Media";
-            case "system":
-                return "System";
-            default: return "marketplace";
-        }
-    };
-
-    const handleKeyPress = (e) => {
-        console.log("You pressed:");
-        console.log(e.key);
-    }
 
     return (
         <div onKeyDown={(e)=>{handleKeyPress(e)}}>
@@ -606,7 +584,6 @@ const Xbox = () => {
                             </div>
                         </div>
                     </div>
-                    <h2 className={styles.sectionHeading}>{formattedContext(current_dashboard_context)}</h2>
                     <section className={styles.gamesContainer}>
 
                         {/* Backgrounds */}
