@@ -44,7 +44,7 @@ const Xbox = () => {
     
     
     //Dashboard state variables
-    const current_dashboard_context = useSelector(selectCurrentContext);
+    // const current_dashboard_context = useSelector(selectCurrentContext);
     const current_context_index = useSelector(selectContextIndex);
     const last_index_called = useSelector(selectLastIndexCalled);
     const xbox_blade_position = useSelector(selectXboxPos);
@@ -216,12 +216,15 @@ const Xbox = () => {
 
     //KeyboardEvents 
 
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debounceDispatchInput = useCallback(
         debounce((index) => {
            dispatch(navigateTo(index));
         }, 200),
         []
       );
+      
 
     useEffect((e)=> {
         const navigateUsingKeys = (e) => {
