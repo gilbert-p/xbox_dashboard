@@ -283,7 +283,7 @@ const Xbox = () => {
 
 
     return (
-        <div onKeyDown={(e)=>{handleKeyPress(e)}}>
+        <div>
             <div className={styles.bladeContainerMask}>
                 <div className={styles.topContainerBorder}></div>
                 <div className={styles.bottomContainerBorder}></div>
