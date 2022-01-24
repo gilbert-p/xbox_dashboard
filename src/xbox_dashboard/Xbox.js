@@ -12,7 +12,6 @@ import itemSelectStyles from '../styles/ItemSelect.module.css';
 import bladeStyles from '../styles/BladeStyling.module.css';
 import ringAnim from './ringAnimation.module.css';
 import { navigateTo, 
-         selectCurrentContext, 
          selectContextIndex,
          selectXboxPos,
          selectGamesPos,
