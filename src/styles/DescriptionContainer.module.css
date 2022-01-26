@@ -1,0 +1,16 @@
+.descriptionContainer {
+    /* background-color: rgb(204, 83, 220); */
+    text-align: left;
+}
+
+.descriptionTitle {
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.descriptionContent {
+    font-size: 1.6rem;
+    margin-top: 10px;
+    padding-left: 10px;
+    /* background-color: antiquewhite; */
+}

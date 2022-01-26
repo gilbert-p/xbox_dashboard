@@ -300,9 +300,17 @@
     }
 }
 
-@media screen and (max-height: 900px) {
+@media screen and (max-height: 575px) {
 
-  }
+    
+    .topBorder, .bottomBorder {
+        height: 30px;
+    }
+
+    .bottomBorder {
+        top: calc(100% - 30px);
+    }
+}
 
 
 

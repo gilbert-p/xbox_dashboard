@@ -10,8 +10,8 @@
     max-height: 475px;
     min-height: 475px;
     width: 102%;
-    margin: 100px 0px 0 60px;
-    grid-template-columns: minmax(420px, 500px) minmax(420px, 500px);
+    margin: 40px 0px 0 0px;
+    grid-template-columns: minmax(280px, 500px) minmax(280px, 500px);
     column-gap: 20px;
     grid-template-areas: 
     "left-content right-content";
@@ -30,4 +30,24 @@
     display: flex;
     flex-direction: column;
     text-align: left;
+}
+
+@media screen and (max-height: 575px) {
+
+    .mainGridContent {
+        /* margin: 20px 0 0 0; */
+        margin: 0;
+        padding-top: 40px;
+        padding-left: 30px;
+        width: 100%;
+        grid-template-columns: minmax(280px, 280px) minmax(280px, 280px);
+        column-gap: 50px;
+    }
+
+    .leftContent {
+        max-height: 420px;
+    }
+    .rightContent {
+        max-height: 420px;
+    }
 }

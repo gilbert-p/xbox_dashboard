@@ -279,3 +279,9 @@
 #mediaSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
     height: 250px;
 }
+
+@media screen and (max-height: 575px) {
+    .innerListContainer > .listItem > p {
+        font-size: 1.2rem;
+    }
+}

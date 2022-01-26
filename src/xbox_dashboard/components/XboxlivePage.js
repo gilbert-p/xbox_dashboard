@@ -10,6 +10,7 @@ import { updateSelectionHighlight,
 
 import profileCardStyles from '../../styles/ProfileCard.module.css';
 import pageGridStyles from '../../styles/PageGrid.module.css';
+import descriptionContentStyles from "../../styles/DescriptionContainer.module.css";
 import transitionStyles from '../../styles/TransitionStyles.module.css';
 import xboxliveStyles from '../../styles/Xboxlive.module.css';
 import itemSelectStyles from '../../styles/ItemSelect.module.css';
@@ -17,7 +18,7 @@ import gamesStyles from '../Games.module.css';
 import ringAnim from '../../styles/ringAnimation.module.css';
 
 
-const XboxlivePage = (props) => {
+const XboxlivePage = () => {
 
     const dispatch = useDispatch();
 
@@ -133,9 +134,9 @@ const XboxlivePage = (props) => {
             </div>
             <div className={pageGridStyles.rightContent}>
                 <div className={xboxliveStyles.xboxliveLogo}></div>
-                <div className={xboxliveStyles.descriptionContainer}>
-                    <div className={xboxliveStyles.descriptionTitle}>Xbox LIVE</div>
-                    <div className={xboxliveStyles.descriptionContent}>
+                <div className={descriptionContentStyles.descriptionContainer}>
+                    <div className={descriptionContentStyles.descriptionTitle}>Xbox LIVE</div>
+                    <div className={descriptionContentStyles.descriptionContent}>
                         <p>                                        Games. Tournaments. Entertainment. 
                         All the rewards. Endless possibilities. What are you waiting for?</p>
                     </div>

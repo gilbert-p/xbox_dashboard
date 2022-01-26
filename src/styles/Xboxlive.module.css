@@ -31,37 +31,16 @@
     background-repeat: no-repeat;
 }
 
-.xboxliveLogo {
-    position: relative;
-    /* background-color: aquamarine; */
-    background-image: url('../assets/images/Xbox\ Live\ Logo_vector.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin: 30px;
-}
-
-.xboxliveLogo:after {
-    content: "";
-    position: absolute;
-    width: 80%;
-    height: 3px;
-    left: 50%;
-    top: 115%;
-    transform: translateX(-50%);
-    border-radius: 100%;
-    background: radial-gradient(#050505bd, #0000006e);
-    opacity: 0.6;
-}
 
 .xboxliveLogo {
-    position: relative;
-    /* background-color: aquamarine; */
+    max-height: 150px;
+    height: 100%;
+    width: 100%;
     background-image: url('../assets/images/Xbox\ Live\ Logo_vector.png');
-    background-size: contain;
+    background-size: 40%;
     background-repeat: no-repeat;
-    background-position: center;
-    margin: 30px;
+    background-position: 40% 50%;
+    margin-bottom: 20px;
 }
 
 .xboxliveLogo:after {
