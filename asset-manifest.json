@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/xbox_dashboard/static/css/main.fa1759ce.css",
-    "main.js": "/xbox_dashboard/static/js/main.cd19e914.js",
+    "main.css": "/xbox_dashboard/static/css/main.4dd235c0.css",
+    "main.js": "/xbox_dashboard/static/js/main.a1f71b98.js",
     "static/media/profile_icon.jpeg": "/xbox_dashboard/static/media/profile_icon.f5698d3def6b3caba4e7.jpeg",
     "static/media/marketplace_background.png": "/xbox_dashboard/static/media/marketplace_background.078e1263276d84230b13.png",
     "static/media/marketplace_arcade.png": "/xbox_dashboard/static/media/marketplace_arcade.c58bb7c245b5d591a4f2.png",
@@ -19,11 +19,11 @@
     "static/media/media_remote.png": "/xbox_dashboard/static/media/media_remote.7cb94881e55f3916d7d4.png",
     "static/media/join_xboxlive.png": "/xbox_dashboard/static/media/join_xboxlive.4c12a139112c43f1e22f.png",
     "index.html": "/xbox_dashboard/index.html",
-    "main.fa1759ce.css.map": "/xbox_dashboard/static/css/main.fa1759ce.css.map",
-    "main.cd19e914.js.map": "/xbox_dashboard/static/js/main.cd19e914.js.map"
+    "main.4dd235c0.css.map": "/xbox_dashboard/static/css/main.4dd235c0.css.map",
+    "main.a1f71b98.js.map": "/xbox_dashboard/static/js/main.a1f71b98.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa1759ce.css",
-    "static/js/main.cd19e914.js"
+    "static/css/main.4dd235c0.css",
+    "static/js/main.a1f71b98.js"
   ]
 }
