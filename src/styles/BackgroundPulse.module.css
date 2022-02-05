@@ -1,0 +1,66 @@
+.pulseContainer {
+    /* display: inline-block; */
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    margin: 0 auto;
+    transition: display 0s;
+}
+
+.pulseRing {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) skew(6deg);
+    border: 80px solid #438fdd;
+    border-radius: 50%;
+    /*   background-color: #3991e7; */
+    filter: blur(18px);
+    transform-origin: 50% 50%;
+    animation: pulse 13s ease-in-out calc((var(--ring-index, 0) * 1.6s));
+    animation-iteration-count: infinite;
+    opacity: 0;
+}
+
+.pulseRingInner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+}
+
+@keyframes pulse {
+    0% {
+        width: 35%;
+        height: 35%;
+    }
+    70% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        width: 175%;
+        height: 150%;
+    }
+}
+
+
+#systemPulse .pulseRing {
+    border-color:#6b2edd;
+}
+
+#xboxlivePulse .pulseRing {
+    border-color:#c2843d;
+}
+
+#gamesPulse .pulseRing {
+    border-color: #438c21;
+}
+
+#mediaPulse .pulseRing {
+    border-color: #216cb3;
+}

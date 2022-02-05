@@ -1,8 +1,9 @@
 #mediaContextContainer {
     z-index: var(--z-depth);
+    height: inherit;
 }
 
-#media {
+/* #media {
     position: static;
     display: grid;
     height: 100%;
@@ -15,7 +16,7 @@
     grid-template-areas: 
     "left-content right-content";
     transition: opacity 0.4s ease-in;
-}
+} */
 
 .leftContent {
     grid-area: left-content;

@@ -1,3 +1,4 @@
+
 .containerReset {
     position: relative;
     width: 100%;
@@ -7,17 +8,58 @@
     position: relative;
     width: 100%;
     height: 100%;
+    max-height: 150px;
+    margin-top: 10px;
     /* background-color: blue; */
 }
+
+.selectItemListContainer:before {
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: 1px;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.302);
+}
+
 
 .innerListContainer {
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    height: 100%;
-    margin-top: 10px;
 }
+
+
+/* Page specific styles */
+.systemListContainer {
+    max-height: 460px;
+}
+
+
+.xboxliveListContainer {
+    max-height: 150px;
+}
+
+#marketSelectList {
+    height: 100%;
+}
+
+#marketSelectList .innerListContainer .listItem p .listItemHighlight {
+    height: 2.8em;
+    top: -0.8em;
+}
+
+#marketSelectList .innerListContainer .listItem {
+    height: 63px;
+}
+
+
+
+/* Page specific styles */
+
+
 
 .listItem {
     position: relative;
@@ -27,51 +69,35 @@
     /* background-color: chocolate; */
 }
 
+.listItemBorder {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    top: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 
 .listItem:hover{
     cursor: pointer;
 }
 
 
-.listItem:first-child:before {
-    content: "";
-    position: absolute;
-    width: inherit;
-    margin-top: 0px;
-    height: 2px;
-    background-color: rgba(9, 9, 9, 0.349);
-}
 
-.listItem:first-child:after {
-    content: "";
-    position: absolute;
-    width: inherit;
-    margin-top: 50px;
-    height: 2px;
-    background-color: rgba(9, 9, 9, 0.349)
-}
-
-.listItem:after {
-    content: "";
-    position: absolute;
-    width: inherit;
-    margin-top: 50px;
-    height: 2px;
-    background-color: rgba(9, 9, 9, 0.349)
-}
 
 .listItem > .listIcon {
-    width: 75px;
+    width: 64px;
 }
 
 
 .innerListContainer > .listItem > p {
-    position: relative;
-    display: inline-block;
+    position: absolute;
+    display: block;
     width: 100%;
-    text-align: left;
-    padding-top: 15px;
-    font-size: 1.4rem;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    font-size: var(--text-link-size);
     margin-left: 20px;
 }
 
@@ -81,37 +107,52 @@
     display: inline-block;
     /* width: 100px; */
     height: 100%;
-    margin-top: 10px;
 }
 
 
 .listItemHighlight {
     position: absolute;
-    width: 110%;
-    height: 100%;
+    width: 115%;
+    height: 2.1em;
     /* background-color: lightblue; */
-    background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.479) 5%, #a1939300 65%),
-    radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.479) 5%, #a1939300 65%);
-    top: 0px;
-    left: -100px;
+    background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.322) 5%, #a1939300 65%),
+    radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.315) 5%, #a1939300 65%);
+    top: -0.5em;
+    left: -90px;
     z-index: -1;
     transition: opacity var(--transition_duration);
 }
 
+
+
 .boxInsetHighlightContainer {
     position: absolute;
-    width: 106%;
-    height: 415px;
+    width: calc(100% + 30px);
+    height: 120px;
     top: 45px;
     left: 0px;
     pointer-events: none;
+    /* background-color: red; */
 }
+
+#mediaHighlightContainer {
+    height: 225px;
+}
+
+#systemHighlightContainer {
+    height: 325px;
+}
+
+#gamesHighlightContainer {
+    height: 225px;
+}
+
 
 .boxInsetHighlightMaskTop {
     position: absolute;
     width: 100%;
-    height: 100%;
-    top: -65px;
+    height: 105%;
+    top: -60px;
     /* background-color: red; */
     overflow: hidden;
 }
@@ -126,7 +167,7 @@
 
 .boxInsetHighlightTop {
     position: absolute;
-    height: 102%;
+    height: 100%;
     width: 100%;
     left: -20px;
     top: calc(-100% + 10px);
@@ -185,36 +226,36 @@
 /* Top Highlights */
 
 .boxInsetHighlightTop:nth-child(1) {
-    top: calc(-100%);
+    top: calc(-100% + 15px);
 }
 
 .boxInsetHighlightTop:nth-child(2) {
-    top: calc(-100% + 50px);
+    top: calc(-100% + 65px);
 }
 
 .boxInsetHighlightTop:nth-child(3) {
-    top: calc(-100% + 100px);
+    top: calc(-100% + 115px);
 }
 
 .boxInsetHighlightTop:nth-child(4) {
-    top: calc(-100% + 150px);
+    top: calc(-100% + 165px);
 }
 
 .boxInsetHighlightTop:nth-child(5) {
-    top: calc(-100% + 200px);
+    top: calc(-100% + 215px);
 }
 
 .boxInsetHighlightTop:nth-child(6) {
-    top: calc(-100% + 250px);
+    top: calc(-100% + 265px);
 }
 
 .boxInsetHighlightTop:nth-child(7) {
-    top: calc(-100% + 300px);
+    top: calc(-100% + 315px);
 }
 
 
 
-#marketplaceSection > .boxInsetHighlightContainer {
+/* #marketplaceSection > .boxInsetHighlightContainer {
     top: 55px;
 }
 
@@ -278,10 +319,14 @@
 
 #mediaSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
     height: 250px;
-}
+} */
 
 @media screen and (max-height: 575px) {
+    .innerListContainer {
+        max-height: 100px;
+    }
+
     .innerListContainer > .listItem > p {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 }

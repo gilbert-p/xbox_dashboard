@@ -4,18 +4,22 @@
 }
 
 .mainGridContent {
-    position: static;
+    position: relative;
     display: grid;
-    height: 100%;
-    max-height: 475px;
-    min-height: 475px;
-    width: 102%;
-    margin: 40px 0px 0 0px;
-    grid-template-columns: minmax(280px, 500px) minmax(280px, 500px);
+    height: auto;
+    width: 100%;
+    place-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50%));
+    /* border: 2px solid red; */
+    grid-template-columns: 345px 345px;
+    grid-template-rows: 550px;
     column-gap: 20px;
     grid-template-areas: 
     "left-content right-content";
     transition: opacity 0.4s ease-in;
+    padding: 33px 0;
 }
 
 .leftContent {
@@ -32,22 +36,31 @@
     text-align: left;
 }
 
-@media screen and (max-height: 575px) {
+#marketplaceGrid {
+    background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 3%, rgba(255, 255, 255, 0.397) 15%, rgba(255, 255, 255, 0.35) 85% , rgba(255, 255, 255, 0.35) 97%, rgba(255, 255, 255, 0) 100%);
+}
+
+#marketplaceGrid .rightContent {
+    /* justify-content: space-between; */
+}
+
+
+
+/* @media screen and (max-height: 575px) {
 
     .mainGridContent {
-        /* margin: 20px 0 0 0; */
         margin: 0;
         padding-top: 40px;
         padding-left: 30px;
         width: 100%;
         grid-template-columns: minmax(280px, 280px) minmax(280px, 280px);
-        column-gap: 50px;
+        column-gap: 20px;
     }
 
     .leftContent {
-        max-height: 420px;
+        min-height: 200px;
     }
     .rightContent {
-        max-height: 420px;
+        max-height: 200px;
     }
-}
+} */

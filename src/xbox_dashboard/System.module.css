@@ -1,8 +1,9 @@
 #systemContextContainer {
     z-index: var(--z-depth);
+    height: inherit;
 }
 
-#system {
+/* #system {
     position: static;
     display: grid;
     height: 100%;
@@ -16,7 +17,7 @@
     grid-template-areas: 
     "list-items item-desc";
     transition: opacity 0.4s ease-in;
-}
+} */
 
 .leftContent {
     grid-area: list-items;

@@ -12,9 +12,8 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-    width: calc(var(--container-width) + 120px);
+    width: calc(var(--container-width));
     height: calc(var(--container-height));
-    max-height: 780px;
     /* border: 10px solid red; */
 }
 
@@ -26,11 +25,11 @@
     height: var(--container-height);
     left: 50%;
     top: 50%;
-    max-height: 760px;
+    /* max-height: 760px; */
     transform: translate(-50%, -50%);
     /* background-color: #f1f2f6; */
     background-image: linear-gradient(0deg, #B3A89E 0%, #E5E5E5 80%);
-    overflow: hidden;
+    /* overflow: hidden; */
     /* visibility: hidden; */
 }
 
@@ -54,7 +53,16 @@
 }
 
 
-
+.curvedGlassOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("../assets/images/glass-overlay.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0;
+    pointer-events: none;
+}
 
 
 
@@ -69,34 +77,47 @@
 
 .topBorder {
     position: absolute;
-    width: 103%;
+    width: calc(100%);
     height: 90px;
-    left: 50%;
+    left: 51%;
+    transform: translateX(-50%);
     box-shadow: inset 0 -1px 7px 0px black;
     border-radius: 0px 0px 70px 70px;
-    transform: translateX(-50%);
 }
 
 .bottomBorder {
     position: absolute;
-    width: 103%;
+    width: calc(100%);
     height: 90px;
     top: 89%;
-    left: 50%;
+    left: 51%;
     transform: translateX(-50%);
     box-shadow: inset 0 -1px 7px 0px black;
     border-radius: 70px 70px 0px 0px;
 }
 
-.lightOverlay {
+.leftEdge {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(rgba(0, 0, 0, 0) 60%, rgba(255, 255, 255, 0.315) 85%);
-    z-index: 10;
-    opacity: 0.4;
-    pointer-events: none;
+    width: 100px;
+    height: 110%;
+    left: -100px;
+    transform: translate(60%, -5%);
+    background: linear-gradient(0deg, #B3A89E 0%, #E5E5E5 80%);
+    border-radius: 50%;
+    border: 8px solid rgb(99, 99, 99);
 }
+
+.rightEdge {
+    position: absolute;
+    width: 100px;
+    height: 110%;
+    left: calc(100% - 100px);
+    transform: translate(60%, -5%);
+    background: linear-gradient(0deg, #B3A89E 0%, #E5E5E5 80%);
+    border-radius: 50%;
+    border: 8px solid rgb(99, 99, 99);
+}
+
 
 
 .buttonContainer {
@@ -146,23 +167,46 @@
 }
 
 
+.backgroundsContainer {
 
-/* Games Section */
-.gamesContainer {
-    position: relative;
-    width: calc(100%);
+}
+
+.pageContentArea {
+    position: absolute;
+    width: calc(100% - 100px);
     height: 100%;
-    /* background: linear-gradient(89.59deg, #F59542 0.88%, #F9B43F 50.8%, #F59542 99.29%); */
-    margin: 0 auto;
-    /* text-align: left; */
+    /* border: 5px solid limegreen; */
+    left: 50%;
+    transform: translateX(-50%);
     overflow: hidden;
 }
+
+.staticContent {
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    /* border: 5px solid red; */
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+
+
+
+
+
+
 
 .marketplaceBackground {
     position: absolute;
     width: calc(100%);
     height: 100%;
-    background: linear-gradient(89.59deg, #F47B1E 0.88%, #FFA743 50.8%, #F47B1E 99.29%);
+    /* background: linear-gradient(89.59deg, #F47B1E 0.88%, #FFA743 50.8%, #F47B1E 99.29%); */
+    background-image: url("../assets/images/marketplace_background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 75% 50%;
     z-index: -10;
 }
 
@@ -170,32 +214,66 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(89.59deg, #D78034 0.88%, #FDBA4C 48.47%, #D78034 99.29%);
+    background: linear-gradient(231deg, #f78833, #f3ab58);
+    background-size: 400% 400%;
+    animation: xboxlive_color_scheme_gradient 10s ease infinite;
     z-index: -9;
+}
+
+@keyframes xboxlive_color_scheme_gradient {
+    0%{background-position:0% 87%}
+    50%{background-position:100% 14%}
+    100%{background-position:0% 87%}
 }
 
 .gamesBackground {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(89.59deg, #43903D 0.88%, #69CF38 50.8%, #43903D 99.29%);
+    background: linear-gradient(231deg, #69cf38, #43903d);
+    background-size: 400% 400%;
+    animation: games_color_scheme_gradient 10s ease infinite;
     z-index: -8;
 }
+
+@keyframes games_color_scheme_gradient {
+    0%{background-position:0% 87%}
+    50%{background-position:100% 14%}
+    100%{background-position:0% 87%}
+}
+
+
 
 .mediaBackground {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(89.59deg, #4582B9 0.88%, #449AED 50.8%, #4582B9 99.29%);
+    background: linear-gradient(231deg, #449aed, #297bc4);
+    background-size: 400% 400%;
+    animation: media_color_scheme_gradient 10s ease infinite;
     z-index: -7;
+}
+
+@keyframes media_color_scheme_gradient {
+    0%{background-position:0% 87%}
+    50%{background-position:100% 14%}
+    100%{background-position:0% 87%}
 }
 
 .systemBackground {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(89.59deg, #8660BB 0.88%, #AE87FF 50.8%, #8660BB 99.29%);
+    background: linear-gradient(250deg, rgb(78, 19, 187), #6228ce);
+    animation: system_color_scheme_gradient 10s ease infinite;
+    background-size: 400% 400%;
     z-index: -6;
+}
+
+@keyframes system_color_scheme_gradient {
+    0%{background-position:0% 71%}
+    50%{background-position:100% 30%}
+    100%{background-position:0% 71%}
 }
 
 .sectionHeading {
@@ -213,7 +291,7 @@
 
 .systemTrayContainer {
     position: absolute;
-    width: calc(100% - 65px);
+    width: calc(100% - 200px);
     height: 70px;
     left: 50%;
     top: 76%;
@@ -298,11 +376,7 @@
     .blade:nth-child(5){
         transform: translateX(132px);
     }
-}
 
-@media screen and (max-height: 575px) {
-
-    
     .topBorder, .bottomBorder {
         height: 30px;
     }
@@ -311,6 +385,8 @@
         top: calc(100% - 30px);
     }
 }
+
+
 
 
 

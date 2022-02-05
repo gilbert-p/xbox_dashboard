@@ -8,14 +8,18 @@ import { updateSelectionHighlight,
     navigateMarketplaceMenu,
 } from '../menuSlice';
 
+import iconLibrary from "../../styles/IconStyling.module.css";
 import pageGridStyles from '../../styles/PageGrid.module.css';
 import transitionStyles from '../../styles/TransitionStyles.module.css';
 import itemSelectStyles from '../../styles/ItemSelect.module.css';
 import marketplaceStyles from '../Marketplace.module.css';
 import gamesStyles from '../Games.module.css';
+import styles from '../Dashboard.module.css';
+
+import backgroundAnimation from "../../styles/BackgroundPulse.module.css";
 
 
-const XboxlivePage = () => {
+const MarketplacePage = (props) => {
 
     const dispatch = useDispatch();
 
@@ -25,54 +29,66 @@ const XboxlivePage = () => {
     const isHighlightActive = useSelector(selectHighlightState);
     const marketplaceMenuIndex = useSelector(selectMarketplaceMenuIndex);
 
+    const { marketplaceBackgroundRef } = props;
+
   return (
      <>
         <div id={marketplaceStyles["marketplaceContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 0 ? 1 : -1}`}}>
-            <div id={marketplaceStyles["marketplace"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 0 ? transitionStyles.makeTransparent : ""}`}>
+        <div className={styles.marketplaceBackground} ref={marketplaceBackgroundRef}></div>
+            <div id={pageGridStyles["marketplaceGrid"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 0 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
                     <div className={marketplaceStyles.selectOption}>
+                        <div className={marketplaceStyles.textHighlight}></div>
                         <p>Games</p>
                     </div>
                     <div className={marketplaceStyles.selectOption}>
+                        <div className={marketplaceStyles.textHighlight}></div>
                         <p>Media and Entertainment</p>
                     </div>
                     <div className={marketplaceStyles.selectOption}>
+                        <div className={marketplaceStyles.textHighlight}></div>
                         <p>Game Demos</p>
                     </div>
                     <div className={marketplaceStyles.selectOption}>
                         <p>Game Videos</p>
+                        <div className={marketplaceStyles.textHighlight}></div>
                     </div>
                     <div className={marketplaceStyles.selectOption}>
+                        <div className={marketplaceStyles.textHighlight}></div>
                         <p>Themes and Gamer Pictures</p>
                     </div>
                     <div className={marketplaceStyles.selectOption}>
+                        <div className={marketplaceStyles.textHighlight}></div>
                         <p>Featured Downloads</p>
                     </div>
                 </div>
                 <div className={pageGridStyles.rightContent}>
                     <div className={marketplaceStyles.imageHeaderContainer}></div>
-                    <div id={itemSelectStyles["marketplaceSection"]} className={itemSelectStyles.selectItemListContainer}>
+                    <div id={itemSelectStyles["marketSelectList"]} className={`${itemSelectStyles.selectItemListContainer}`}>
                         <div className={itemSelectStyles.innerListContainer} >
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.card_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Redeem Code
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Active Downloads
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.crown_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Account Management
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                         </div>
                     </div>
@@ -83,4 +99,4 @@ const XboxlivePage = () => {
   </>);
 };
 
-export default XboxlivePage;
+export default MarketplacePage;

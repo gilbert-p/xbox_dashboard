@@ -7,7 +7,9 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     background-color: rgb(2, 162, 2);
-    animation: grow 5s ease-in infinite calc((var(--i, 0) * 0.6s));
+    filter: blur(1px);
+
+    animation: grow 8s ease-in infinite calc((var(--i, 0) * 1s));
   }
   
   .ringInner {

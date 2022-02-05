@@ -17,12 +17,23 @@
 
 :root {
   --blade-size: 90px;
-  --container-width: 54vw;
-  --container-height: 80vh;
-  --transition_value: calc(var(--container-width) - 24.5%);
+  --container-width: 1020px;
+  --container-height: 770px;
   --border_radius: 10px;
   --transition_duration: 0.6s;
   --z-depth:0;
+
+  /* Font Sizes */
+  --text-link-size: 22px;
+  --screen-heading-size: 24px;
+  --text-body-size: 18px;
+  --meta-panel-header: 20px;
+  --legend-text-size: 16px;
+
+  --card-border-radius: 6px;
+
+  /*  Colors */
+  --dashtext-color: rgba(15, 15, 15, 0.9);
 }
 
 * {

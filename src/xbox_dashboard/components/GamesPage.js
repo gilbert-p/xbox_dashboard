@@ -15,20 +15,62 @@ import itemSelectStyles from '../../styles/ItemSelect.module.css';
 import gamesStyles from '../Games.module.css';
 import descriptionContentStyles from "../../styles/DescriptionContainer.module.css";
 
+import styles from "../Dashboard.module.css";
 
-const XboxlivePage = (props) => {
+import backgroundAnimation from "../../styles/BackgroundPulse.module.css";
+
+
+const GamesPage = (props) => {
 
     const dispatch = useDispatch();
 
-    const current_context_index = useSelector(selectContextIndex);
 
     //Menu state variables
     const isHighlightActive = useSelector(selectHighlightState);
     const gamesMenuIndex = useSelector(selectGamesMenuIndex);
 
+    const { gamesBackgroundRef, current_context_index } = props;
+    
+
   return (
      <>
         <div id={gamesStyles["gamesContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 2 ? 1 : -1}`}}>
+
+        <div className={styles.gamesBackground} ref={gamesBackgroundRef}>
+            <div id={backgroundAnimation["gamesPulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 2 ? transitionStyles.makeTransparent : ""}`}>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+            </div>
+        </div>
+
             <div id={gamesStyles["games"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 2 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
                     <div className={profileCardStyles.profileContainer}>
@@ -51,17 +93,21 @@ const XboxlivePage = (props) => {
                             <div className={profileCardStyles.zoneStatus}>Pro</div>
                         </div>
                     </div>
-                    <div id={itemSelectStyles["gamesSelection"]} className={itemSelectStyles.selectItemListContainer}>
-                        <div className={itemSelectStyles.boxInsetHighlightContainer}>
+                    <div className={itemSelectStyles.selectItemListContainer}>
+                        <div id={itemSelectStyles["gamesHighlightContainer"]} className={itemSelectStyles.boxInsetHighlightContainer}>
                             <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 0 ? transitionStyles.instantTransparent : ""}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 1 ? transitionStyles.instantTransparent : ""}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 2 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 3 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 4 ? transitionStyles.instantTransparent : ""}`}></div>
                             </div>
                             <div className={itemSelectStyles.boxInsetHighlightMaskBottom}>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 0 ? transitionStyles.instantTransparent : ""}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 1 ? transitionStyles.instantTransparent : ""}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 2 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 3 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 4 ? transitionStyles.instantTransparent : ""}`}></div>
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >
@@ -69,28 +115,49 @@ const XboxlivePage = (props) => {
                                 <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    Music
+                                    Achievements
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    Pictures
+                                    Played Games
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    Videos
+                                    Xbox Live Arcade
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
+                            </div>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                <p>
+                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    Demos
+                                </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
+                            </div>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                <p>
+                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    Trailers
+                                </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={pageGridStyles.rightContent}>
-                    <div className={gamesStyles.xbox360Logo}></div>
+                    <div className={gamesStyles.xbox360Logo}>
+                        <div className={gamesStyles.boxShadow}></div>
+                    </div>
                     <div className={descriptionContentStyles.descriptionContainer}>
                         <div className={descriptionContentStyles.descriptionTitle}>Xbox LIVE</div>
                         <div className={descriptionContentStyles.descriptionContent}>
@@ -105,4 +172,4 @@ const XboxlivePage = (props) => {
   </>);
 };
 
-export default XboxlivePage;
+export default GamesPage;

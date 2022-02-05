@@ -11,99 +11,147 @@ import pageGridStyles from '../../styles/PageGrid.module.css';
 import transitionStyles from '../../styles/TransitionStyles.module.css';
 import systemStyles from '../System.module.css';
 import gamesStyles from '../Games.module.css';
+import itemSelectStyles from '../../styles/ItemSelect.module.css';
+
+import styles from "../Dashboard.module.css";
+
+import backgroundAnimation from "../../styles/BackgroundPulse.module.css";
 
 
-const XboxlivePage = () => {
+const XboxlivePage = (props) => {
 
     const dispatch = useDispatch();
-
-    const current_context_index = useSelector(selectContextIndex);
 
     //Menu state variables
     const systemMenuIndex = useSelector(selectSystemMainMenuIndex);
 
+    const { systemBackgroundRef, current_context_index } = props;
+
   return (
      <>
         <div id={systemStyles["systemContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 4 ? 1 : -1}`}} >
-            <div id={systemStyles["system"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 4 ? transitionStyles.makeTransparent : ""}`}>
 
-                <div className={systemStyles.leftContent}>
-                    <div className={systemStyles.selectItemListContainer}>
-                        <div className={systemStyles.boxInsetHighlightContainer}>
-                            <div className={systemStyles.boxInsetHighlightMaskTop}>
-                                <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 5 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightTop} ${systemMenuIndex !== 6 ? transitionStyles.makeTransparent : ""}`}></div>
+        <div className={styles.systemBackground} ref={systemBackgroundRef}>
+            <div id={backgroundAnimation["systemPulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 4 ? transitionStyles.makeTransparent : ""}`}>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}}>
+                    <div className={backgroundAnimation.pulseRingInner}></div>
+                </div>
+            </div>
+        </div>
+
+            <div id={pageGridStyles["system"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 4 ? transitionStyles.makeTransparent : ""}`}>
+
+                <div className={pageGridStyles.leftContent}>
+                    <div className={`${itemSelectStyles.systemListContainer} ${itemSelectStyles.selectItemListContainer}`}>
+                        <div id={itemSelectStyles["systemHighlightContainer"]} className={itemSelectStyles.boxInsetHighlightContainer}>
+                            <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
+                                <div className={`${itemSelectStyles.boxInsetHighlightTop} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightTop} ${systemMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightTop} ${systemMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightTop} ${systemMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightTop} ${systemMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightTop} ${systemMenuIndex !== 5 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightTop} ${systemMenuIndex !== 6 ? transitionStyles.makeTransparent : ""}`}></div>
                             </div>
-                            <div className={systemStyles.boxInsetHighlightMaskBottom}>
-                                <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 5 ? transitionStyles.makeTransparent : ""}`}></div>
-                                <div className={`${systemStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 6 ? transitionStyles.makeTransparent : ""}`}></div>
+                            <div className={itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                <div className={`${itemSelectStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 5 ? transitionStyles.makeTransparent : ""}`}></div>
+                                <div className={`${itemSelectStyles.boxInsetHighlightBottom} ${systemMenuIndex !== 6 ? transitionStyles.makeTransparent : ""}`}></div>
                             </div>
                         </div>
-                        <div className={systemStyles.innerListContainer} >
-                            <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${systemStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                        <div className={itemSelectStyles.innerListContainer} >
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
                                 <p>
-                                    <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Console Settings
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${systemStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
                                 <p>
-                                    <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Family Settings
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                 <p>
-                                    <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Memory
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                 <p>
-                                    <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Network Settings
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${systemStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
                                 <p>
-                                    <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Computers
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(5));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(5));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                 <p>
-                                    <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 5 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 5 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Xbox Live Vision
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={systemStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(6));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${systemStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateSystemMenu(6));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
                                 <p>
-                                    <span className={`${systemStyles.listItemHighlight} ${systemMenuIndex !== 6 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 6 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Initial Setup
                                 </p>
+                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className={systemStyles.rightContent}>
-                    <div className={systemStyles.containerReset}>
+                <div className={pageGridStyles.rightContent}>
+                    <div className={itemSelectStyles.containerReset}>
                         <div id="console-settings" className={`${systemStyles.itemSelectDescription} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}>
                             <div className={systemStyles.descTitle}>
                                 Edit your Xbox 360 system settings, including:

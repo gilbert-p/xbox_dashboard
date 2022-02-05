@@ -1,0 +1,35 @@
+.card_icon {
+    background-image: url('../assets/icons/card_icon.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    transform: rotate(-15deg) translate(15%, 20%);
+}
+
+.download_icon {
+    background-image: url('../assets/icons/download_icon.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    transform: translate(15%, 5%);
+}
+
+.crown_icon {
+    background-image: url('../assets/icons/crown_icon.png');
+    background-size: 60%;
+    background-repeat: no-repeat;
+    transform: rotate(-15deg) translate(15%, 5%);
+}
+
+.messages_icon {
+    background-image: url('../assets/icons/person_icon.png');
+    background-repeat: no-repeat;
+}
+
+.friends_icon {
+    background-image: url('../assets/icons/controller_icon.png');
+    background-repeat: no-repeat;
+}
+
+.chat_icon {
+    background-image: url('../assets/icons/join_xboxlive.png');
+    background-repeat: no-repeat;
+}
