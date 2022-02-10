@@ -1,35 +1,138 @@
 .card_icon {
-    background-image: url('../assets/icons/card_icon.png');
-    background-size: 60%;
+    background-image: url('../assets/icons/64x64_icons/card_icon.png');
+    background-size: 80%;
     background-repeat: no-repeat;
-    transform: rotate(-15deg) translate(15%, 20%);
+    transform: translateY(5px);
 }
 
 .download_icon {
-    background-image: url('../assets/icons/download_icon.png');
-    background-size: 60%;
+    background-image: url('../assets/icons/64x64_icons/game_downloads_icon.png');
+    background-size: 80%;
     background-repeat: no-repeat;
-    transform: translate(15%, 5%);
+    transform: translateY(5px);
 }
 
 .crown_icon {
-    background-image: url('../assets/icons/crown_icon.png');
+    background-image: url('../assets/icons/64x64_icons/crown_icon.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    transform: translateY(5px);
+}
+
+.joystick_icon {
+    background-image: url('../assets/icons/64x64_icons/joystick_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+.friends_icon {
+    background-image: url('../assets/icons/64x64_icons/person_icon.png');
     background-size: 60%;
     background-repeat: no-repeat;
-    transform: rotate(-15deg) translate(15%, 5%);
-}
-
-.messages_icon {
-    background-image: url('../assets/icons/person_icon.png');
-    background-repeat: no-repeat;
-}
-
-.friends_icon {
-    background-image: url('../assets/icons/controller_icon.png');
-    background-repeat: no-repeat;
+    transform: translate(15px, 5px);
 }
 
 .chat_icon {
-    background-image: url('../assets/icons/join_xboxlive.png');
+    background-image: url('../assets/icons/64x64_icons/chat_icon.png');
+    background-size: 65%;
     background-repeat: no-repeat;
+    transform: translate(15px, 5px);
+}
+
+.trophy_icon {
+    background-image: url('../assets/icons/64x64_icons/trophy_icon.png');
+    background-size: 45%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 12px);
+}
+
+.controller_icon {
+    background-image: url('../assets/icons/64x64_icons/controller_glossy_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 12px);
+}
+
+.film_icon {
+    background-image: url('../assets/icons/64x64_icons/film_icon.png');
+    background-size: 55%;
+    background-repeat: no-repeat;
+    transform: translate(22px, 10px);
+}
+
+.demos_icon {
+    background-image: url('../assets/icons/64x64_icons/games_demos_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.music_icon {
+    background-image: url('../assets/icons/64x64_icons/music_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.camera_icon {
+    background-image: url('../assets/icons/64x64_icons/camera_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.media_center_icon {
+    background-image: url('../assets/icons/64x64_icons/windows_media_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.console_icon {
+    background-image: url('../assets/icons/64x64_icons/console_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.family_settings_icon {
+    background-image: url('../assets/icons/64x64_icons/family_settings_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.mu_storage_icon {
+    background-image: url('../assets/icons/64x64_icons/mu_storage_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.adhoc_icon {
+    background-image: url('../assets/icons/64x64_icons/adhoc_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.computer_icon {
+    background-image: url('../assets/icons/64x64_icons/computers_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.xboxlive_vision {
+    background-image: url('../assets/icons/64x64_icons/xboxlive_vision.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.console_controller_icon {
+    background-image: url('../assets/icons/64x64_icons/initial_setup_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
 }

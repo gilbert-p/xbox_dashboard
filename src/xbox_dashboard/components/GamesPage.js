@@ -8,6 +8,7 @@ import { updateSelectionHighlight,
     navigateGamesMenu,
 } from '../menuSlice';
 
+import iconLibrary from "../../styles/IconStyling.module.css";
 import profileCardStyles from '../../styles/ProfileCard.module.css';
 import pageGridStyles from '../../styles/PageGrid.module.css';
 import transitionStyles from '../../styles/TransitionStyles.module.css';
@@ -112,7 +113,7 @@ const GamesPage = (props) => {
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.joystick_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.trophy_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Achievements
@@ -120,7 +121,7 @@ const GamesPage = (props) => {
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.trophy_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.controller_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Played Games
@@ -128,7 +129,7 @@ const GamesPage = (props) => {
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.joystick_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Xbox Live Arcade
@@ -136,7 +137,7 @@ const GamesPage = (props) => {
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.demos_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Demos
@@ -144,7 +145,7 @@ const GamesPage = (props) => {
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${gamesStyles.controller_icon}`}></span>
+                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.film_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Trailers

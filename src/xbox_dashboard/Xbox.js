@@ -294,7 +294,6 @@ const Xbox = () => {
     return (
         <div>
             <div onClick={()=> {}} className={styles.orientationRequestOverlay}>
-                <h2>Please click to enter full screen</h2>
             </div>
             <div className={styles.bladeContainerMask}>
                 {/* <div className={styles.topContainerBorder}></div>

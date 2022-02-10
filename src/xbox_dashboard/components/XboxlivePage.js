@@ -132,15 +132,15 @@ const XboxlivePage = (props) => {
                         </div>
                     </div>
                     <div className={itemSelectStyles.innerListContainer} >
-                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(true))}}>
-                            <span className={`${itemSelectStyles.listIcon} ${iconLibrary.messages_icon}`}></span>
+                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <span className={`${itemSelectStyles.listIcon} ${iconLibrary.joystick_icon}`}></span>
                             <p>
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 Messages
                             </p>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
-                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(true))}}>
+                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.friends_icon}`}></span>
                             <p>
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -148,7 +148,7 @@ const XboxlivePage = (props) => {
                             </p>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
-                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(true))}}>
+                        <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateXboxliveMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.chat_icon}`}></span>
                             <p>
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
