@@ -30,14 +30,14 @@ const GamesPage = (props) => {
     const isHighlightActive = useSelector(selectHighlightState);
     const gamesMenuIndex = useSelector(selectGamesMenuIndex);
 
-    const { gamesBackgroundRef, current_context_index } = props;
+    const {current_context_index } = props;
     
 
   return (
      <>
         <div id={gamesStyles["gamesContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 2 ? 1 : -1}`}}>
 
-        <div className={styles.gamesBackground} ref={gamesBackgroundRef}>
+        <div className={styles.gamesBackground}>
             <div id={backgroundAnimation["gamesPulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 2 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
                     <div className={backgroundAnimation.pulseRingInner}></div>

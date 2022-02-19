@@ -32,13 +32,13 @@ const XboxlivePage = (props) => {
     const isHighlightActive = useSelector(selectHighlightState);
     const mediaMenuIndex = useSelector(selectMediaMenuIndex);
 
-    const { mediaBackgroundRef, current_context_index } = props;
+    const { current_context_index } = props;
 
   return (
      <>
         <div id={mediaStyles["mediaContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 3 ? 1 : -1}`}}>
 
-        <div className={styles.mediaBackground} ref={mediaBackgroundRef}>
+        <div className={styles.mediaBackground}>
         <div id={backgroundAnimation["mediaPulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 3 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
                     <div className={backgroundAnimation.pulseRingInner}></div>

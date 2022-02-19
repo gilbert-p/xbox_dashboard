@@ -33,7 +33,7 @@ const XboxlivePage = (props) => {
      <>
         <div id={systemStyles["systemContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 4 ? 1 : -1}`}} >
 
-        <div className={styles.systemBackground} ref={systemBackgroundRef}>
+        <div className={styles.systemBackground}>
             <div id={backgroundAnimation["systemPulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 4 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
                     <div className={backgroundAnimation.pulseRingInner}></div>

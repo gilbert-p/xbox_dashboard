@@ -48,7 +48,7 @@ const Xbox = () => {
     const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
     const xbox_blade_container_height = useSelector(selectBladeContainerHeight);
     const transition_direction = useSelector(selectTransitionDirection);
-    const blade_size = useSelector(selectBladeSize) || 0;
+
 
     
 
@@ -97,13 +97,7 @@ const Xbox = () => {
          []
     );
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const debounceBladeResize = useCallback(
-        debounce((fn) => {
-            dispatch(fn);
-         }, 200),
-         []
-    );
+
     
     //Gets width and height of content container
     useEffect(()=> {
@@ -114,7 +108,7 @@ const Xbox = () => {
                 sizingProperties.width = xboxBladeContainerRef.current.offsetWidth;
                 sizingProperties.height = xboxBladeContainerRef.current.offsetHeight;
 
-                debounceResizeListener((updateBladeContainerSize(sizingProperties)));
+                // debounceResizeListener((updateBladeContainerSize(sizingProperties)));
                 //TODO create separate function for assigning blade size
                 // debounceBladeResize((updateBladeSize(Math.ceil(bladeRef.current.width.baseVal.value))));
             }
@@ -128,7 +122,7 @@ const Xbox = () => {
                 window.removeEventListener("resize", updateContainerSize);
             }
 
-    }, [debounceResizeListener, debounceBladeResize]);
+    }, [debounceResizeListener]);
 
 
     //Runs before browser paint in order to set a new GSAP instance for animating each unique transition.
@@ -160,7 +154,7 @@ const Xbox = () => {
             }
 
         };
-        getTransitionDirection();
+        // getTransitionDirection();
 
         return () => {
             bladeContainerTransition.current = {};
@@ -175,10 +169,10 @@ const Xbox = () => {
     
     //Runs on first render to initialize background slides
     useEffect(()=> {
-        xboxBackgroundTransition.current = gsap.timeline().to(xboxBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
-        gamesBackgroundTransition.current = gsap.timeline().to(gamesBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
-        mediaBackgroundTransition.current = gsap.timeline().to(mediaBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
-        systemBackgroundTransition.current = gsap.timeline().to(systemBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        // xboxBackgroundTransition.current = gsap.timeline().to(xboxBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        // gamesBackgroundTransition.current = gsap.timeline().to(gamesBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        // mediaBackgroundTransition.current = gsap.timeline().to(mediaBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
+        // systemBackgroundTransition.current = gsap.timeline().to(systemBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
         
     }, [xbox_blade_container_width, xbox_blade_container_height]);
 
@@ -290,24 +284,19 @@ const Xbox = () => {
 
 
 
-
     return (
         <div>
             <div onClick={()=> {}} className={styles.orientationRequestOverlay}>
+            </div>
+
+            <div className={styles.bladeMask}>
+                <NavBladesContainer/>
             </div>
             <div className={styles.bladeContainerMask}>
                 {/* <div className={styles.topContainerBorder}></div>
                 <div className={styles.bottomContainerBorder}></div> */}
                 <div className={styles.mainContainer}>
-                    <NavBladesContainer 
-                    xboxBladeContainerRef={xboxBladeContainerRef} 
-                    xboxliveRef={xboxliveRef}
-                    marketplaceRef={marketplaceRef}
-                    gamesRef={gamesRef}
-                    mediaRef={mediaRef}
-                    systemRef={systemRef}
-                    bladeRef={bladeRef}
-                    />
+                    
 
 
 
@@ -320,15 +309,15 @@ const Xbox = () => {
 
 
                     {/* Safe Viewing area */}
-                    <div className={styles.pageContentArea}>
+                    <div className={styles.pageContentArea} ref={xboxBladeContainerRef}>
                         <MarketplacePage ref={marketplaceBackgroundRef}/>
-                        <XboxlivePage ref={xboxBackgroundRef} current_context_index={current_context_index}/>
-                        <GamesPage ref={gamesBackgroundRef} current_context_index={current_context_index}/>
-                        <MediaPage ref={mediaBackgroundRef} current_context_index={current_context_index}/>
-                        <SystemPage ref={systemBackgroundRef} current_context_index={current_context_index}/>
+                        <XboxlivePage current_context_index={current_context_index}/>
+                        <GamesPage current_context_index={current_context_index}/>
+                        <MediaPage current_context_index={current_context_index}/>
+                        <SystemPage current_context_index={current_context_index}/>
 
 
-                                            {/* Buttons, System Tray */}
+                    {/* Buttons, System Tray */}
                     <div className={styles.staticContent}>
                         <div className={styles.curvedGlassOverlay}></div>
 

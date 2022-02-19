@@ -5,6 +5,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    left: 170px;
     /* background-color: lightskyblue; */
     z-index: 10;
     /* transform: translateX(var(--shiftIndex, 0) * var(--blade-size, 0)); */
@@ -12,44 +13,125 @@
     pointer-events: none;
     /* margin-left: -20px; */
     /* overflow: hidden; */
+    /* transform: translateX(-170px); */
+    /* left: -350px; */
+    /* transform: translateX(38%); */
 }
 
-.leftBlades, .rightBlades {
-    width: 50%;
-    height: 100%;
-}
-
-.leftBlades {
-    /* background-color: lavender; */
-}
-
-.rightBlades {
-    /* background-color: lemonchiffon; */
+.centeredContent {
+    position: absolute;
+    width: var(--container-width);
+    height: var(--container-height);
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    /* background-color: lightseagreen; */
 }
 
 .blade {
     position: absolute;
     /* left: -90px; */
-    max-width: 0;
+    /* width: 30px; */
     /* width: var(--blade-size); */
     height: 100%;
     /* background-color: greenyellow; */
     /* border: 1px solid black; */
     transition: transform 0.6s ease-in;
-    pointer-events: none;
+    /* pointer-events: none; */
     overflow: visible;
     /* left: calc(((100vh) * (-1/9))); */
 }
 
 
+.bladeGroup {
+    position: relative;
+    height: 100%;
+    width: 35px;
+    left: 45px;
+    /* background-color: red; */
+    overflow: visible;
+    
+}
 
+.bladeImgContainer {
+    position: absolute;
+    height: calc( 100% + 40px);
+    top: -20px;
+    left: 30px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: translateX(-35px);
+    filter: drop-shadow(-1 px 0px 4px #ffffff09);
+    /* background-color: red; */
+    pointer-events: none;
+    
+}
 
-.blade:hover {
+.svgInteractiveContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
     cursor: pointer;
 }
 
+.marketplaceActiveBlade {
+    background-image: url("../assets/images/new_marketplace_blade.png")
+}
+
+.xboxliveActiveBlade {
+    background-image: url("../assets/images/xboxlive_active_blade.png")
+}
+
+.gamesActiveBlade {
+    background-image: url("../assets/images/games_active_blade.png");
+}
+
+.mediaActiveBlade {
+    background-image: url("../assets/images/media_active_blade.png");
+}
+
+.systemActiveBlade {
+    background-image: url("../assets/images/system_active_blade.png");
+}
+
+
+.rightBladeInactive {
+    background-image: url("../assets/images/inactive_blade_right.png");
+}
+
+.leftBladeInactive {
+    background-image: url("../assets/images/inactive_blade_left_redesign.png");
+}
+
+.leftGroup {
+    position: absolute;
+    height: inherit;
+    left: -170px;
+}
+
+.rightGroup {
+    position: absolute;
+    height: inherit;
+    left: calc(100% - 305px);
+    /* left: 300px; */
+}
+
+
 .blade:nth-child(2){
-    transform: translateX(calc(((100vh) * (1/(20)))));
+    transform: translateX(calc(((100vh) * (1/(22)))));
+}
+
+.blade:nth-child(3){
+    transform: translateX(calc(((100vh) * (1/(10.8)))));
+}
+
+.blade:nth-child(4) {
+    transform: translateX(calc(((100vh) * (1/7.2))));
+}
+
+.blade:nth-child(5) {
+    transform: translateX(calc(((100vh) * (1/5.3))));
 }
 
 /* .blade:nth-child(1){
@@ -88,7 +170,7 @@
 /*** SVG STYLING ***/
 
 svg {
-    pointer-events: none;
+    /* pointer-events: none; */
     height: auto;
     transform-origin: 50% 50% ;
 }
@@ -96,7 +178,9 @@ svg {
 path {
     pointer-events: auto;
     height: 100%;
+    /* cursor: pointer; */
 }
+
 
 .bladeBase {
     position: absolute;
@@ -118,7 +202,7 @@ path {
     max-width: 65px;
     height: inherit;
     /* ???? */
-    left: calc(((100vh) * (1/30)));
+    left: calc(((100vh) * (1/32)));
     transform: translateX(0);
 }
 
@@ -175,21 +259,3 @@ path {
 }
 
 
-
-
-@media screen and (max-height: 575px) {
-    .bladeBase {
-    }
-    .bladeJewel {
-        left: calc(((100vh) * (1/24)));
-    }
-    .bladeBaseRight {
-        
-    }
-    .bladeJewelRight {
-        left: calc(((100vh) * (-1/45)));
-    }
-
-
-
-}
