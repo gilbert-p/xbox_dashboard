@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useLayoutEffect, useCallback } from 'react';
+import React, {useRef, useEffect, useLayoutEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { gsap } from 'gsap';
@@ -31,7 +31,9 @@ import GamesPage from "./components/GamesPage";
 import MediaPage from "./components/MediaPage";
 import SystemPage from "./components/SystemPage";
 
-const Xbox = () => {
+const Xbox = (props) => {
+
+    const [isMobileView, setMobileView] = useState(null);
 
     const dispatch = useDispatch();
     
@@ -108,6 +110,13 @@ const Xbox = () => {
                 sizingProperties.width = xboxBladeContainerRef.current.offsetWidth;
                 sizingProperties.height = xboxBladeContainerRef.current.offsetHeight;
 
+                if(window.innerWidth <= 900) {
+                    setMobileView(true);
+                }
+                else {
+                    setMobileView(false);
+                }
+
                 // debounceResizeListener((updateBladeContainerSize(sizingProperties)));
                 //TODO create separate function for assigning blade size
                 // debounceBladeResize((updateBladeSize(Math.ceil(bladeRef.current.width.baseVal.value))));
@@ -125,7 +134,6 @@ const Xbox = () => {
     }, [debounceResizeListener]);
 
 
-    //Runs before browser paint in order to set a new GSAP instance for animating each unique transition.
     useLayoutEffect(()=> {
 
         const getTransitionDirection = () => {
@@ -290,7 +298,7 @@ const Xbox = () => {
             </div>
 
             <div className={styles.bladeMask}>
-                <NavBladesContainer/>
+            {isMobileView !== null && <NavBladesContainer isMobileView={isMobileView}/>}
             </div>
             <div className={styles.bladeContainerMask}>
                 {/* <div className={styles.topContainerBorder}></div>
@@ -301,10 +309,7 @@ const Xbox = () => {
 
 
                     <div className={styles.backgroundsContainer}>
-                        {/* <div className={styles.marketplaceBackground} ref={marketplaceBackgroundRef}></div> */}
-                        {/* <div className={styles.gamesBackground} ref={gamesBackgroundRef}></div> */}
-                        {/* <div className={styles.mediaBackground} ref={mediaBackgroundRef}></div>
-                        <div className={styles.systemBackground} ref={systemBackgroundRef}></div> */}
+
                     </div>
 
 

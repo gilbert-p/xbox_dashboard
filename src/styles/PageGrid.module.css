@@ -44,23 +44,3 @@
     /* justify-content: space-between; */
 }
 
-
-
-/* @media screen and (max-height: 575px) {
-
-    .mainGridContent {
-        margin: 0;
-        padding-top: 40px;
-        padding-left: 30px;
-        width: 100%;
-        grid-template-columns: minmax(280px, 280px) minmax(280px, 280px);
-        column-gap: 20px;
-    }
-
-    .leftContent {
-        min-height: 200px;
-    }
-    .rightContent {
-        max-height: 200px;
-    }
-} */

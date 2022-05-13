@@ -1,7 +1,8 @@
-import React, { useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect,  useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { gsap } from 'gsap';
+import { useSwipeable } from 'react-swipeable';
 import { navigateTo, 
     selectContextIndex,
     selectXboxPos,
@@ -17,8 +18,11 @@ import bladeStyles from "../../styles/BladeStyling.module.css";
 import transitionStyles from '../../styles/TransitionStyles.module.css';
 
 const NavBladesContainer = (props) => {
+
+    const { isMobileView } = props;
     
     const dispatch = useDispatch();
+
 
     //Dashboard state variables
     const current_context_index = useSelector(selectContextIndex) || 0;
@@ -36,16 +40,18 @@ const NavBladesContainer = (props) => {
 
     // GSAP Instance Refs
     const bladeContainerTransition = useRef(null);
+    const shiftRightTransition = useRef(null);
+    const shiftLeftTransition = useRef(null);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debounceBladeResize = useCallback(
         debounce((fn) => {
             dispatch(fn);
-            }, 200),
+            }, 1000),
             []
     );
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
 
         const updateBlade = ()=> {
             if(bladeRef) {
@@ -70,22 +76,42 @@ const NavBladesContainer = (props) => {
         []
     );
 
-        const shiftRight = () => {
-            bladeContainerTransition.current = {};
+    if(isMobileView) {
+        shiftRightTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "-=17px", duration: 0.3}).pause();
+        shiftLeftTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "+=17px", duration: 0.3}).pause();
+    }
+    else {
+        shiftRightTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "-=40px", duration: 0.3}).pause();
+        shiftLeftTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "+=40px", duration: 0.3}).pause();
+    }
 
-            bladeContainerTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "-=40px", duration: 0.3});
-        }
 
-        const shiftLeft = () => {
-            bladeContainerTransition.current = {};
-            bladeContainerTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "+=40px", duration: 0.3});
-        }
 
+    const shiftRight = () => {
+        // bladeContainerTransition.current = {};
+
+        shiftRightTransition.current.play();
+    }
+
+    const shiftLeft = () => {
+        shiftLeftTransition.current.play();
+    }
+
+    const handlers = useSwipeable({
+        onSwiped: (eventData) => console.log("User Swiped!", eventData),
+      });
+
+
+    // useLayoutEffect((e)=> {
+    //     const navigateUsingSwipe = (e) => {
+
+    //     }
+    // });
           
 
 
     //Keyboard event listeners
-    useEffect((e)=> {
+    useLayoutEffect((e)=> {
         const navigateUsingKeys = (e) => {
             if(e !== undefined) {
                 switch(e.key) {
@@ -123,10 +149,10 @@ const NavBladesContainer = (props) => {
 
 
   return <>
-        <div className={bladeStyles.bladeContainer} ref={bladeContainerRef} >
+        <div className={bladeStyles.bladeContainer} {...handlers} ref={bladeContainerRef} >
             <div className={bladeStyles.centeredContent}>
             <div className={bladeStyles.leftGroup}>
-                <div id={bladeStyles["marketplaceBlade"]} className={`${bladeStyles.blade} `}  >
+                <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade} `}  >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 0 ? bladeStyles.marketplaceActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}> 
                         </div>
@@ -136,7 +162,7 @@ const NavBladesContainer = (props) => {
                     </div>
                 </div>
 
-                <div id={bladeStyles["xboxliveBlade"]} className={`${bladeStyles.blade} `} >
+                <div id={bladeStyles["xboxliveBlade-left"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 1 ? transitionStyles.instantTransparent :  bladeStyles.leftBladeInactive}`} ref={bladeRef}>
                         </div>
@@ -146,7 +172,7 @@ const NavBladesContainer = (props) => {
                     </div>
                 </div>
 
-                <div id={bladeStyles["gamesBlade"]} className={`${bladeStyles.blade} `} >
+                <div id={bladeStyles["gamesBlade-left"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 2 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
                         </div>
@@ -156,7 +182,7 @@ const NavBladesContainer = (props) => {
                     </div>
                 </div>
 
-                <div id={bladeStyles["mediaBlade"]} className={`${bladeStyles.blade} `} >
+                <div id={bladeStyles["mediaBlade-left"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 3 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
                         </div>
@@ -166,7 +192,7 @@ const NavBladesContainer = (props) => {
                     </div>
                 </div>
 
-                <div id={bladeStyles["systemBlade"]} className={`${bladeStyles.blade} `} >
+                <div id={bladeStyles["systemBlade-left"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 4 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
                         </div>
@@ -177,7 +203,7 @@ const NavBladesContainer = (props) => {
                 </div>    
             </div>
             <div className={bladeStyles.rightGroup}>
-            <div id={bladeStyles["xboxliveBlade"]} className={`${bladeStyles.blade} `} >
+            <div id={bladeStyles["xboxliveBlade-right"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 1 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
                     </div>
@@ -185,7 +211,7 @@ const NavBladesContainer = (props) => {
                     </div>
                 </div>
 
-                <div id={bladeStyles["gamesBlade"]} className={`${bladeStyles.blade} `} >
+                <div id={bladeStyles["gamesBlade-right"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 2 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
                     </div>
@@ -193,7 +219,7 @@ const NavBladesContainer = (props) => {
                     </div>
                 </div>
 
-                <div id={bladeStyles["mediaBlade"]} className={`${bladeStyles.blade} `} >
+                <div id={bladeStyles["mediaBlade-right"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 3 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
                     </div>
@@ -201,7 +227,7 @@ const NavBladesContainer = (props) => {
                     </div>
                 </div>
 
-                <div id={bladeStyles["systemBlade"]} className={`${bladeStyles.blade} `} >
+                <div id={bladeStyles["systemBlade-right"]} className={`${bladeStyles.blade} `} >
                     <div className={`${bladeStyles.bladeGroup}`}>
                         <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 4 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
                     </div>

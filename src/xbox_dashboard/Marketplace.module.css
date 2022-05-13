@@ -100,31 +100,3 @@
 }
 
 
-
-
-
-/* @media screen and (max-height: 575px) {
-
-    .selectOption {
-        max-width: 280px;
-        max-height: 75px;
-    }
-
-    .selectOption:nth-child(3){
-        display: none;
-    }
-    .selectOption:nth-child(4){
-        display: none;
-    }
-
-    .selectOption > p {
-        font-size: 1rem;
-    }
-
-
-    .imageHeaderContainer {
-        min-height: 200px;
-    }
-
-
-} */

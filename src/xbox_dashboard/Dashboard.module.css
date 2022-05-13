@@ -1,10 +1,10 @@
-.bladeOrientationOverlay {
+/* .bladeOrientationOverlay {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgb(82, 82, 82);
     z-index: 999;
-}
+} */
 
 
 .mainContainer {
@@ -228,7 +228,7 @@
     height: 100%;
     background: linear-gradient(231deg, #f78833, #f3ab58);
     background-size: 400% 400%;
-    animation: xboxlive_color_scheme_gradient 10s ease infinite;
+    /* animation: xboxlive_color_scheme_gradient 10s ease infinite; */
     z-index: -9;
 }
 
@@ -244,7 +244,7 @@
     height: 100%;
     background: linear-gradient(231deg, #69cf38, #43903d);
     background-size: 400% 400%;
-    animation: games_color_scheme_gradient 10s ease infinite;
+    /* animation: games_color_scheme_gradient 10s ease infinite; */
     z-index: -8;
 }
 
@@ -262,7 +262,7 @@
     height: 100%;
     background: linear-gradient(231deg, #449aed, #297bc4);
     background-size: 400% 400%;
-    animation: media_color_scheme_gradient 10s ease infinite;
+    /* animation: media_color_scheme_gradient 10s ease infinite; */
     z-index: -7;
 }
 
@@ -277,7 +277,7 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(250deg, #8E6ED1, #7057a7);
-    animation: system_color_scheme_gradient 10s ease infinite;
+    /* animation: system_color_scheme_gradient 10s ease infinite; */
     background-size: 400% 400%;
     z-index: -6;
 }
@@ -362,49 +362,8 @@
 
 
 
-@media screen and (max-height: 575px) {
-
+@media only screen and (max-width: 1024px) {
     .mainContainer {
-        height: 100%;
-        width: 75vw;
-    }
-    .bladeContainerMask {
-        height: 100vh;
-        max-height: 100vh;
-    }
-
-    .blade:nth-child(1){
-        transform: translateX(-55px);
-    }
-    .blade:nth-child(2){
-        transform: translateX(12px);
-    }
-    .blade:nth-child(3){
-        transform: translateX(52px);
-    }
-    .blade:nth-child(4){
-        transform: translateX(92px);
-    }
-    .blade:nth-child(5){
-        transform: translateX(132px);
-    }
-
-    .topBorder, .bottomBorder {
-        height: 30px;
-    }
-
-    .bottomBorder {
-        top: calc(100% - 30px);
+        transform: translate(-50%,-50%) scale(0.5);
     }
 }
-
-
-
-
-
-
-
-      /* Can be useful when wanting to hide content before orientating */
-    /* .bladeContainerMask {
-        visibility: hidden;
-    } */

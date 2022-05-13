@@ -3,20 +3,6 @@
     height: inherit;
 }
 
-/* #media {
-    position: static;
-    display: grid;
-    height: 100%;
-    max-height: 475px;
-    min-height: 475px;
-    width: 102%;
-    margin: 100px 0px 0 60px;
-    grid-template-columns: minmax(420px, 500px) minmax(420px, 500px);
-    column-gap: 20px;
-    grid-template-areas: 
-    "left-content right-content";
-    transition: opacity 0.4s ease-in;
-} */
 
 .leftContent {
     grid-area: left-content;
@@ -24,7 +10,3 @@
     flex-direction: column;
     text-align: left;
 }
-
-/* #mediaSelection > div {
-    background-color: red;
-} */
