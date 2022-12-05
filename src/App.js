@@ -42,13 +42,14 @@ function App() {
   return (
     <div className="App" ref={windowChange}>
       {!!screenOverlay === false ?
-      <XboxDashboard/> :
-      <div className="mobile-container">
-        <div className="center-container">
-          <h3>Rotate device!</h3>
-        </div>
-      </div> }
-
+        <XboxDashboard/> :
+        <div className="mobile-container">
+          <div className="center-container">
+            <h3>Rotate device!</h3>
+          </div>
+        </div> 
+      }
+      <XboxDashboard/> 
     </div>
   );
 }

@@ -7,11 +7,13 @@ let initialState = {
     context_index: 0,
     last_index_called: 0,
     transition_direction: "right",
+    
     is_marketplace_rightside: false,
     is_xboxlive_rightside: false,
     is_games_rightside: false,
     is_media_rightside: false,
     is_system_rightside: false,
+
     disc_tray: false,
     blade_size: 0,
     blade_container_width: 0,
