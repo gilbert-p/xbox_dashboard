@@ -40,7 +40,7 @@
     /* max-height: 760px; */
     transform: translate(-50%, -50%);
     /* background-color: #f1f2f6; */
-    background-image: linear-gradient(0deg, #B3A89E 0%, #E5E5E5 80%);
+    /* background-image: linear-gradient(0deg, #B3A89E 0%, #E5E5E5 80%); */
     overflow: hidden;
     /* visibility: hidden; */
 }
@@ -187,10 +187,13 @@
     position: absolute;
     width: calc(100% - 100px);
     height: 100%;
+    max-width: 1920px;
+    max-height: 1080px;
     /* border: 5px solid limegreen; */
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
+    border: 2px solid red;
 }
 
 .staticContent {

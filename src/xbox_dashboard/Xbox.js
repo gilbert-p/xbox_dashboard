@@ -301,16 +301,7 @@ const Xbox = (props) => {
             {isMobileView !== null && <NavBladesContainer isMobileView={isMobileView}/>}
             </div>
             <div className={styles.bladeContainerMask}>
-                {/* <div className={styles.topContainerBorder}></div>
-                <div className={styles.bottomContainerBorder}></div> */}
                 <div className={styles.mainContainer}>
-                    
-
-
-
-                    <div className={styles.backgroundsContainer}>
-
-                    </div>
 
 
                     {/* Safe Viewing area */}
