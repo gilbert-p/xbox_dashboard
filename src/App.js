@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
 import XboxDashboard from "./xbox_dashboard/Xbox";
 import './App.css';
+import backgroundStyle from "./site_styling/DashboardBackground.module.css";
 
 function App() {
 
@@ -41,14 +42,17 @@ function App() {
 
   return (
     <div className="App" ref={windowChange}>
-      {!!screenOverlay === false ?
+      {/* {!!screenOverlay === false ?
         <XboxDashboard/> :
         <div className="mobile-container">
           <div className="center-container">
             <h3>Rotate device!</h3>
           </div>
         </div> 
-      }
+      } */}
+      <div className={backgroundStyle.dashboardBackgroundContainer}>
+      </div>
+      {/* <div className={`${backgroundStyle.spinEnergy}`}></div> */}
       <XboxDashboard/> 
     </div>
   );

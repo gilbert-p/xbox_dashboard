@@ -9,19 +9,19 @@ import { updateSelectionHighlight,
 } from '../menuSlice';
 
 
-import iconLibrary from "../../styles/IconStyling.module.css";
-import profileCardStyles from '../../styles/ProfileCard.module.css';
-import pageGridStyles from '../../styles/PageGrid.module.css';
-import descriptionContentStyles from "../../styles/DescriptionContainer.module.css";
-import transitionStyles from '../../styles/TransitionStyles.module.css';
-import xboxliveStyles from '../../styles/Xboxlive.module.css';
-import itemSelectStyles from '../../styles/ItemSelect.module.css';
+import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
+import profileCardStyles from '../../dashboard_styles/ProfileCard.module.css';
+import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
+import descriptionContentStyles from "../../dashboard_styles/DescriptionContainer.module.css";
+import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
+import xboxliveStyles from '../../dashboard_styles/Xboxlive.module.css';
+import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import gamesStyles from '../Games.module.css';
-import ringAnim from '../../styles/ringAnimation.module.css';
+import ringAnim from '../../dashboard_styles/ringAnimation.module.css';
 
 import styles from "../Dashboard.module.css";
 
-import backgroundAnimation from "../../styles/BackgroundPulse.module.css";
+import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
 
 const XboxlivePage = (props) => {

@@ -1,0 +1,31 @@
+.dashboardBackgroundContainer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../assets/images/xbox_nxe_background.png");
+}
+
+.backLayer {
+    background-color: lightskyblue;
+}
+
+.spinEnergy {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../assets/images/background_energy_spin.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    /* animation: spinCircle 10s ease-in-out infinite forwards; */
+    overflow: visible;
+}
+
+@keyframes spinCircle {
+    from{
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

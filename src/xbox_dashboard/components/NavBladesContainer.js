@@ -14,8 +14,8 @@ import { navigateTo,
     updateBladeSize
 } from '../xboxSlice';
     
-import bladeStyles from "../../styles/BladeStyling.module.css";
-import transitionStyles from '../../styles/TransitionStyles.module.css';
+import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
+import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 
 const NavBladesContainer = (props) => {
 
@@ -149,97 +149,111 @@ const NavBladesContainer = (props) => {
 
 
   return <>
-        <div className={bladeStyles.bladeContainer} {...handlers} ref={bladeContainerRef} >
-            <div className={bladeStyles.centeredContent}>
-            <div className={bladeStyles.leftGroup}>
-                <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade} `}  >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 0 ? bladeStyles.marketplaceActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}> 
+        <div className={bladeStyles.centeredMask}>
+            <div className={bladeStyles.bladeContainer} {...handlers} ref={bladeContainerRef} >
+                <div className={bladeStyles.centeredContent}>
+                <div className={bladeStyles.leftGroup}>
+                    <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade} `}  >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 0 ? bladeStyles.marketplaceActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}> 
+                            </div>
+                            <h3 className={`${bladeStyles.bladeTitle} ${current_context_index === 0 ? '' : transitionStyles.instantTransparent}`} ref={bladeRef}>marketplace</h3>
+
+
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index !== 0 ? bladeStyles.leftBladeInactive : transitionStyles.instantTransparent}`} ref={bladeRef}> 
+                            </div>
+
                         </div>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index !== 0 ? bladeStyles.leftBladeInactive : transitionStyles.instantTransparent}`} ref={bladeRef}> 
+                    </div>
+
+                    <div id={bladeStyles["xboxliveBlade-left"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 1 ? transitionStyles.instantTransparent :  bladeStyles.leftBladeInactive}`} ref={bladeRef}>
+                            </div>
+                            <h3 className={`${bladeStyles.bladeTitle} ${current_context_index !== 1 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>xbox Live</h3>
+
+
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 1 ? bladeStyles.xboxliveActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id={bladeStyles["gamesBlade-left"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 2 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
+                            </div>
+                            <h3 className={`${bladeStyles.bladeTitle} ${current_context_index !== 2 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>games</h3>
+                            
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 2 ? bladeStyles.gamesActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id={bladeStyles["mediaBlade-left"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 3 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
+                            </div>
+                            <h3 className={`${bladeStyles.bladeTitle} ${current_context_index !== 3 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>media</h3>
+
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 3 ? bladeStyles.mediaActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id={bladeStyles["systemBlade-left"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 4 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
+                            </div>
+                            <h3 className={`${bladeStyles.bladeTitle} ${current_context_index !== 4 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>system</h3>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 4 ? bladeStyles.systemActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                            </div>
+
+                        </div>
+                    </div>    
+                </div>
+                <div className={bladeStyles.rightGroup}>
+                <div id={bladeStyles["xboxliveBlade-right"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 1 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
                         </div>
 
+                        </div>
+                    </div>
+
+                    <div id={bladeStyles["gamesBlade-right"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 2 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
+                        </div>
+
+                        </div>
+                    </div>
+
+                    <div id={bladeStyles["mediaBlade-right"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 3 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
+                        </div>
+
+                        </div>
+                    </div>
+
+                    <div id={bladeStyles["systemBlade-right"]} className={`${bladeStyles.blade} `} >
+                        <div className={`${bladeStyles.bladeGroup}`}>
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 4 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
+                        </div>
+
+                        </div>
                     </div>
                 </div>
-
-                <div id={bladeStyles["xboxliveBlade-left"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 1 ? transitionStyles.instantTransparent :  bladeStyles.leftBladeInactive}`} ref={bladeRef}>
-                        </div>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 1 ? bladeStyles.xboxliveActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
-                        </div>
-
-                    </div>
                 </div>
 
-                <div id={bladeStyles["gamesBlade-left"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 2 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
-                        </div>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 2 ? bladeStyles.gamesActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
-                        </div>
+            
 
-                    </div>
-                </div>
-
-                <div id={bladeStyles["mediaBlade-left"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 3 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
-                        </div>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 3 ? bladeStyles.mediaActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div id={bladeStyles["systemBlade-left"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index < 4 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
-                        </div>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index === 4 ? bladeStyles.systemActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
-                        </div>
-
-                    </div>
-                </div>    
             </div>
-            <div className={bladeStyles.rightGroup}>
-            <div id={bladeStyles["xboxliveBlade-right"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 1 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
-                    </div>
-
-                    </div>
-                </div>
-
-                <div id={bladeStyles["gamesBlade-right"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 2 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
-                    </div>
-
-                    </div>
-                </div>
-
-                <div id={bladeStyles["mediaBlade-right"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 3 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
-                    </div>
-
-                    </div>
-                </div>
-
-                <div id={bladeStyles["systemBlade-right"]} className={`${bladeStyles.blade} `} >
-                    <div className={`${bladeStyles.bladeGroup}`}>
-                        <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 4 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
-                    </div>
-
-                    </div>
-                </div>
-            </div>
-            </div>
-
-          
-
         </div>
+
   </>;
 };
 

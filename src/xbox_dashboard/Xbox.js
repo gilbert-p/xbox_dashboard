@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import reactFullscreenStatus from "../custom_hooks/useFullscreenStatus";
 
 import styles from './Dashboard.module.css';
-import transitionStyles from '../styles/TransitionStyles.module.css';
+import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
 
 
 import { navigateTo, 
@@ -337,8 +337,14 @@ const Xbox = (props) => {
                         </section>
                         
                 </div>
-            </div>
 
+            </div>
+            <div className={styles.arrowContextButtonContainer}>
+                <div className={styles.xboxHomeLogo}>
+                </div>
+                <div className={styles.leftArrow}></div>
+                <div className={styles.rightArrow}></div>
+            </div>
         </div>
     )
 }

@@ -8,16 +8,16 @@ import { updateSelectionHighlight,
 } from '../menuSlice';
 
 
-import iconLibrary from "../../styles/IconStyling.module.css";
-import pageGridStyles from '../../styles/PageGrid.module.css';
-import transitionStyles from '../../styles/TransitionStyles.module.css';
+import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
+import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
+import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 import systemStyles from '../System.module.css';
 import gamesStyles from '../Games.module.css';
-import itemSelectStyles from '../../styles/ItemSelect.module.css';
+import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 
 import styles from "../Dashboard.module.css";
 
-import backgroundAnimation from "../../styles/BackgroundPulse.module.css";
+import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
 
 const XboxlivePage = (props) => {
