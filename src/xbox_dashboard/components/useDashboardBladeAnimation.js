@@ -20,22 +20,24 @@ export default function useDashboardBladeAnimation() {
         []
     );
 
-    const mountRef = useRef({moveRight:null, moveLeft:null});
+    const mountRef = useRef(null);
 
 
 
     shiftLeftTransition.current = gsap.timeline().to(mountRef.current, {x: "+=40px", duration: 0.3}).pause();
     // shiftRightTransition.current = gsap.timeline().to(mountRef.current, {x: "-=40px", duration: 0.3}).pause();
-    mountRef.current.moveRight = gsap.timeline().to(mountRef.current, {x: "-=40px", duration: 0.3}).pause();
+    shiftRightTransition.current = gsap.timeline().to(mountRef.current, {x: "-=40px", duration: 0.3}).pause();
 
     const shiftRight = () => {
         // bladeContainerTransition.current = {};
 
-        mountRef.current.moveRight.play();
+        shiftRightTransition.current.play();
+        debounceDispatchInput(navigateTo(current_context_index + 1))
     }
 
     const shiftLeft = () => {
         shiftLeftTransition.current.play();
+        debounceDispatchInput(navigateTo(current_context_index - 1))
     }
 
 
@@ -77,5 +79,5 @@ export default function useDashboardBladeAnimation() {
 
     }, [current_context_index]);
 
-    return mountRef;
+    return {mountRef, shiftRight, shiftLeft};
 }

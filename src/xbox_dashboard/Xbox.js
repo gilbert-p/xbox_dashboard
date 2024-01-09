@@ -80,6 +80,9 @@ const Xbox = (props) => {
     const mediaBackgroundRef = useRef(null);
     const systemBackgroundRef = useRef(null);
     const bladeRef = useRef(null);
+
+    //Using keyboard to initiate animation
+    const bladeContainerRef= useDashboardAnimation();
     
     //GSAP instance Refs
     const bladeContainerTransition = useRef(null);
@@ -148,18 +151,17 @@ const Xbox = (props) => {
     }, [debounceResizeListener]);
 
 
-      // Callback function to receive the reference from the child
-    const receiveChildRef = (ref) => {
-        if (ref && ref.current) {
-            // Access and use the child reference in the parent component
-            console.log('Received child ref:', ref);
-            setSomeRef(ref);
-        }
-        else {
-            console.log("oops ref didn't work");
-        }
-    };
+    // Callback function to pass the reference to the child
+    useEffect(()=>{
 
+        // const passReferenceToChild = () => {
+        //     childRef(bladeContainerRef);
+        // };
+        // passReferenceToChild();
+    }
+    , [])
+
+    
     
     
 
@@ -171,7 +173,9 @@ const Xbox = (props) => {
             </div>
 
             <div className={styles.bladeMask}>
-            {isMobileView !== null && <NavBladesContainer isMobileView={isMobileView} childRef={receiveChildRef}/>}
+            {isMobileView !== null && <NavBladesContainer isMobileView={isMobileView} bladeContainerRef={bladeContainerRef['mountRef']} />}
+            
+            
             </div>
             <div className={styles.bladeContainerMask}>
                 <div className={styles.mainContainer}>
@@ -197,11 +201,11 @@ const Xbox = (props) => {
                         <div className={styles.rightEdge}></div>
 
                         <div className={`${styles.systemTrayContainer} ${!display_tray ? transitionStyles.makeTransparent : ''}`}>
-                                        <div className={styles.trayEllipse}></div>
-                                        <div className={styles.trayRect}></div>
-                                        <div className={styles.trayTriangleButton}></div>
-                                        <div className={styles.trayRectButton}></div>
-                                        <p>Open Tray</p>
+                            <div className={styles.trayEllipse}></div>
+                            <div className={styles.trayRect}></div>
+                            <div className={styles.trayTriangleButton}></div>
+                            <div className={styles.trayRectButton}></div>
+                            <p>Open Tray</p>
                         </div>
                     </div>
                     </div>
@@ -215,8 +219,8 @@ const Xbox = (props) => {
             </div>
             <div className={styles.arrowContextButtonContainer}>
                         <div className={styles.xboxHomeLogo}></div>
-                        <div className={styles.leftArrow} onClick={()=>{console.log("left button") }}></div>
-            <div className={styles.rightArrow} onClick={()=>{someRef.current.moveRight()}}></div>
+                        <div className={styles.leftArrow} onClick={()=>{bladeContainerRef.shiftLeft() }}></div>
+            <div className={styles.rightArrow} onClick={()=>{bladeContainerRef.shiftRight()}}></div>
             </div>
         </div>
     )

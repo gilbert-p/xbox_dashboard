@@ -21,9 +21,9 @@ import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css
 
 const NavBladesContainer = (props) => {
 
-    const { isMobileView, childRef } = props;
+    const { isMobileView, bladeContainerRef } = props;
     // const bladeContainerRef = useDashboardAnimation();
-    const bladeContainerRef= useDashboardAnimation();
+    // const bladeContainerRef= useDashboardAnimation();
     
     const dispatch = useDispatch();
 
@@ -115,14 +115,17 @@ const NavBladesContainer = (props) => {
     //     }
     // });
 
-    useEffect(()=>{
-        // Function to pass the reference to the parent
-        const passReferenceToParent = () => {
-            childRef(bladeContainerRef);
-        };
-        passReferenceToParent();
-    }
-    , [])
+      // Callback function to receive the reference from the child
+    const receiveChildRef = (ref) => {
+        if (ref.current) {
+            // Access and use the child reference in the parent component
+            console.log('Received child ref:', ref);
+            console.log(ref['current']);
+        }
+        else {
+            console.log("oops ref didn't work");
+        }
+    };
           
 
 
