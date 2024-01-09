@@ -368,21 +368,22 @@
     position: absolute;
     display: flex;
     justify-content: center;
-    width: 300px;
-    height: 110px;
+    width: 220px;
+    height: 80px;
     left: 50%;
-    top: 82%;
+    top: calc(100% - 100px);
     transform: translateX(-50%);
     border-radius: 65px;
     background-color: rgba(0, 0, 0, 0.744);
     padding-top: 10px;
+    z-index: 999;
 
 }
 
 .xboxHomeLogo {
     order: 2;
     width: 100%;
-    max-width: 90px;
+    max-width: 80px;
     background-image: url("../assets/images/xbox_home_logo.svg");
     background-repeat: no-repeat;
     background-size: contain;
@@ -391,22 +392,32 @@
 .leftArrow {
     order: 1;
     width: 100%;
-    max-width: 60px;
-    margin-right: 10px;
+    max-width: 40px;
+    margin-right: 20px;
     background-image: url("../assets/images/nav-arrow-left.png");
     background-repeat: no-repeat;
     background-size: contain;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .rightArrow {
+    z-index: 10000;
     order: 3;
     width: 100%;
-    max-width: 60px;
-    margin-left: 10px;
+    max-width: 40px;
+    margin-left: 0px;
     background-image: url("../assets/images/nav-arrow-right.png");
     background-repeat: no-repeat;
     background-size: contain;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
+
 
 
 @media only screen and (max-width: 1024px) {

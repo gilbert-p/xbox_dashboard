@@ -275,6 +275,9 @@ path {
 }
 
 
+
+
+
 @media only screen and (max-width: 1024px) {
     .bladeContainer {
         transform: translateX(-50%)  scale(0.5);

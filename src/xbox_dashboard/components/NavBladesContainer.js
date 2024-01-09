@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { gsap } from 'gsap';
 import { useSwipeable } from 'react-swipeable';
-import { navigateTo, 
+import { navigateTo,    
+    setBladeAnimationRef, 
     selectContextIndex,
     selectXboxPos,
     selectGamesPos,
@@ -13,13 +14,16 @@ import { navigateTo,
     selectBladeSize, 
     updateBladeSize
 } from '../xboxSlice';
+import useDashboardAnimation from './useDashboardBladeAnimation';
     
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 
 const NavBladesContainer = (props) => {
 
-    const { isMobileView } = props;
+    const { isMobileView, childRef } = props;
+    // const bladeContainerRef = useDashboardAnimation();
+    const bladeContainerRef= useDashboardAnimation();
     
     const dispatch = useDispatch();
 
@@ -35,7 +39,8 @@ const NavBladesContainer = (props) => {
     const blade_size = useSelector(selectBladeSize) || 0;
 
 
-    const bladeContainerRef = useRef(null);
+
+    // dispatch(setBladeAnimationRef(bladeContainerRef));
     const bladeRef = useRef(null);
 
     // GSAP Instance Refs
@@ -50,6 +55,8 @@ const NavBladesContainer = (props) => {
             }, 1000),
             []
     );
+
+
 
     useLayoutEffect(()=>{
 
@@ -76,6 +83,7 @@ const NavBladesContainer = (props) => {
         []
     );
 
+    /*
     if(isMobileView) {
         shiftRightTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "-=17px", duration: 0.3}).pause();
         shiftLeftTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "+=17px", duration: 0.3}).pause();
@@ -84,17 +92,16 @@ const NavBladesContainer = (props) => {
         shiftRightTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "-=40px", duration: 0.3}).pause();
         shiftLeftTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "+=40px", duration: 0.3}).pause();
     }
+    */
 
 
 
-    const shiftRight = () => {
-        // bladeContainerTransition.current = {};
 
-        shiftRightTransition.current.play();
-    }
 
-    const shiftLeft = () => {
-        shiftLeftTransition.current.play();
+    const ClickRightArrow = () => {
+
+        debounceDispatchInput(navigateTo(current_context_index + 1));
+
     }
 
     const handlers = useSwipeable({
@@ -107,50 +114,22 @@ const NavBladesContainer = (props) => {
 
     //     }
     // });
+
+    useEffect(()=>{
+        // Function to pass the reference to the parent
+        const passReferenceToParent = () => {
+            childRef(bladeContainerRef);
+        };
+        passReferenceToParent();
+    }
+    , [])
           
-
-
-    //Keyboard event listeners
-    useLayoutEffect((e)=> {
-        const navigateUsingKeys = (e) => {
-            if(e !== undefined) {
-                switch(e.key) {
-                    case "ArrowUp":
-                    break;
-                    case "ArrowRight":
-                        if((current_context_index + 1) < 5) {
-                            debounceDispatchInput(shiftRight());
-                        }
-                    break;
-                    case "ArrowDown":
-                    break;
-                    case "ArrowLeft":
-                        if((current_context_index - 1) >= 0) {
-                            debounceDispatchInput(shiftLeft());
-                        }
-                    break;
-                    default:
-                    break;
-                }
-            }
-        }
-        navigateUsingKeys(e);
-
-        window.addEventListener("keydown", navigateUsingKeys);
-
-
-        return () => {
-            window.removeEventListener("keydown", navigateUsingKeys);
-        }
-
-
-    }, [current_context_index, debounceDispatchInput])
-
 
 
   return <>
         <div className={bladeStyles.centeredMask}>
-            <div className={bladeStyles.bladeContainer} {...handlers} ref={bladeContainerRef} >
+
+            <div className={bladeStyles.bladeContainer} {...handlers} ref={bladeContainerRef}>
                 <div className={bladeStyles.centeredContent}>
                 <div className={bladeStyles.leftGroup}>
                     <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade} `}  >
@@ -252,6 +231,8 @@ const NavBladesContainer = (props) => {
             
 
             </div>
+
+
         </div>
 
   </>;

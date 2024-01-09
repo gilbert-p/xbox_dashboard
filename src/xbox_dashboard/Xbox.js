@@ -7,6 +7,8 @@ import reactFullscreenStatus from "../custom_hooks/useFullscreenStatus";
 import styles from './Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
 
+import useDashboardAnimation from './components/useDashboardBladeAnimation';
+
 
 import { navigateTo, 
          selectContextIndex,
@@ -22,7 +24,8 @@ import { navigateTo,
          selectTransitionDirection,
          selectLastIndexCalled,
          selectBladeSize, 
-         updateBladeSize} from './xboxSlice';
+         updateBladeSize,
+        } from './xboxSlice';
 
 import NavBladesContainer from "./components/NavBladesContainer";
 import MarketplacePage from "./components/MarketplacePage";
@@ -34,6 +37,8 @@ import SystemPage from "./components/SystemPage";
 const Xbox = (props) => {
 
     const [isMobileView, setMobileView] = useState(null);
+    const [rightButton, setRightButton] = useState(false);
+    const [someRef, setSomeRef] = useState(null);
 
     const dispatch = useDispatch();
     
@@ -90,6 +95,7 @@ const Xbox = (props) => {
 
     
 
+    //Debounced helper functions
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debounceResizeListener = useCallback(
@@ -98,6 +104,14 @@ const Xbox = (props) => {
          }, 500),
          []
     );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const debounceDispatchInput = useCallback(
+        debounce((fn) => {
+           dispatch(fn);
+        }, 200),
+        []
+      );
 
 
     
@@ -134,163 +148,22 @@ const Xbox = (props) => {
     }, [debounceResizeListener]);
 
 
-    useLayoutEffect(()=> {
-
-        const getTransitionDirection = () => {
-
-            bladeContainerTransition.current = {};
-
-            let shift_offset = (Math.abs(current_context_index - last_index_called));
-
-
-            if(transition_direction === "left") {
-                if(xbox_blade_container_height <= 575) {
-                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-=${shift_offset * 20}`, duration: 0.3});
-                }
-                else {
-                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `-=${shift_offset * 40}`, duration: 0.3});
-                }
-
-            }
-            else {
-                if(xbox_blade_container_height <= 575) {
-                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `+=${shift_offset * 20}`, duration: 0.3});
-                }
-                else {
-                    bladeContainerTransition.current = gsap.timeline().to(xboxBladeContainerRef.current, {x: `+=${shift_offset * 40}`, duration: 0.3});
-                }
-            }
-
-        };
-        // getTransitionDirection();
-
-        return () => {
-            bladeContainerTransition.current = {};
+      // Callback function to receive the reference from the child
+    const receiveChildRef = (ref) => {
+        if (ref && ref.current) {
+            // Access and use the child reference in the parent component
+            console.log('Received child ref:', ref);
+            setSomeRef(ref);
         }
-
-        
-    },[current_context_index]);
-
-
-
+        else {
+            console.log("oops ref didn't work");
+        }
+    };
 
     
-    //Runs on first render to initialize background slides
-    useEffect(()=> {
-        // xboxBackgroundTransition.current = gsap.timeline().to(xboxBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
-        // gamesBackgroundTransition.current = gsap.timeline().to(gamesBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
-        // mediaBackgroundTransition.current = gsap.timeline().to(mediaBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
-        // systemBackgroundTransition.current = gsap.timeline().to(systemBackgroundRef.current, {left: `${xbox_blade_container_width}`, duration: background_transition_duration, delay: background_transition_delay});
-        
-    }, [xbox_blade_container_width, xbox_blade_container_height]);
+    
 
-    useEffect(()=> {
-        const moveBackground = () => {
-            switch(current_context_index) {
-                case 0:
-
-                    xboxBackgroundTransition.current.play();
-                    gamesBackgroundTransition.current.play();
-                    mediaBackgroundTransition.current.play();
-                    systemBackgroundTransition.current.play();
-                break;
-                case 1:
-
-                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    mediaBackgroundTransition.current.play();
-                    gamesBackgroundTransition.current.play();
-                    systemBackgroundTransition.current.play();
-
-
-                break;
-                case 2:
-
-                    gamesBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    mediaBackgroundTransition.current.play();
-                    systemBackgroundTransition.current.play();
-
-                break;
-                case 3:
-
-                    mediaBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    gamesBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    systemBackgroundTransition.current.play();
-
-                break;
-                case 4:
-
-                    systemBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    xboxBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    gamesBackgroundTransition.current.reverse().delay(background_transition_delay);
-                    mediaBackgroundTransition.current.reverse().delay(background_transition_delay);
-                break;
-                default:
-                break;
-            }
-        };
-
-
-
-        // moveBackground();
-
-
-    }, [current_context_index,xbox_blade_container_width, xbox_blade_container_height]);
-
-
-
-    //Debounced helper functions
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const debounceDispatchInput = useCallback(
-        debounce((fn) => {
-           dispatch(fn);
-        }, 200),
-        []
-      );
       
-
-
-    //Keyboard event listeners
-    useEffect((e)=> {
-        const navigateUsingKeys = (e) => {
-            if(e !== undefined) {
-                switch(e.key) {
-                    case "ArrowUp":
-                    break;
-                    case "ArrowRight":
-                        if((current_context_index + 1) < 5) {
-                            debounceDispatchInput(navigateTo(current_context_index + 1));
-                            
-                        }
-                    break;
-                    case "ArrowDown":
-                    break;
-                    case "ArrowLeft":
-                        if((current_context_index - 1) >= 0) {
-                            debounceDispatchInput(navigateTo(current_context_index - 1));
-                        }
-                    break;
-                    default:
-                    break;
-                }
-            }
-        }
-        navigateUsingKeys(e);
-
-        window.addEventListener("keydown", navigateUsingKeys);
-
-
-        return () => {
-            window.removeEventListener("keydown", navigateUsingKeys);
-        }
-
-
-    }, [current_context_index, debounceDispatchInput])
-
-
-
 
     return (
         <div>
@@ -298,7 +171,7 @@ const Xbox = (props) => {
             </div>
 
             <div className={styles.bladeMask}>
-            {isMobileView !== null && <NavBladesContainer isMobileView={isMobileView}/>}
+            {isMobileView !== null && <NavBladesContainer isMobileView={isMobileView} childRef={receiveChildRef}/>}
             </div>
             <div className={styles.bladeContainerMask}>
                 <div className={styles.mainContainer}>
@@ -338,12 +211,12 @@ const Xbox = (props) => {
                         
                 </div>
 
+
             </div>
             <div className={styles.arrowContextButtonContainer}>
-                <div className={styles.xboxHomeLogo}>
-                </div>
-                <div className={styles.leftArrow}></div>
-                <div className={styles.rightArrow}></div>
+                        <div className={styles.xboxHomeLogo}></div>
+                        <div className={styles.leftArrow} onClick={()=>{console.log("left button") }}></div>
+            <div className={styles.rightArrow} onClick={()=>{someRef.current.moveRight()}}></div>
             </div>
         </div>
     )
