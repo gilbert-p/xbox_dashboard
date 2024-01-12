@@ -43,6 +43,8 @@ const NavBladesContainer = (props) => {
     // dispatch(setBladeAnimationRef(bladeContainerRef));
     const bladeRef = useRef(null);
 
+    const localBladeContainerRef = useRef(null);
+
     // GSAP Instance Refs
     const bladeContainerTransition = useRef(null);
     const shiftRightTransition = useRef(null);
@@ -57,7 +59,7 @@ const NavBladesContainer = (props) => {
     );
 
 
-
+    //Blade Resizing
     useLayoutEffect(()=>{
 
         const updateBlade = ()=> {
@@ -75,64 +77,15 @@ const NavBladesContainer = (props) => {
         }
     });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const debounceDispatchInput = useCallback(
-        debounce((fn) => {
-            dispatch(fn);
-        }, 200),
-        []
-    );
+    const testRef = useRef(null);
 
-    /*
-    if(isMobileView) {
-        shiftRightTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "-=17px", duration: 0.3}).pause();
-        shiftLeftTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "+=17px", duration: 0.3}).pause();
-    }
-    else {
-        shiftRightTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "-=40px", duration: 0.3}).pause();
-        shiftLeftTransition.current = gsap.timeline().to(bladeContainerRef.current, {x: "+=40px", duration: 0.3}).pause();
-    }
-    */
-
-
-
-
-
-    const ClickRightArrow = () => {
-
-        debounceDispatchInput(navigateTo(current_context_index + 1));
-
-    }
-
-    const handlers = useSwipeable({
-        onSwiped: (eventData) => console.log("User Swiped!", eventData),
-      });
-
-
-    // useLayoutEffect((e)=> {
-    //     const navigateUsingSwipe = (e) => {
-
-    //     }
-    // });
-
-      // Callback function to receive the reference from the child
-    const receiveChildRef = (ref) => {
-        if (ref.current) {
-            // Access and use the child reference in the parent component
-            console.log('Received child ref:', ref);
-            console.log(ref['current']);
-        }
-        else {
-            console.log("oops ref didn't work");
-        }
-    };
           
 
 
   return <>
         <div className={bladeStyles.centeredMask}>
 
-            <div className={bladeStyles.bladeContainer} {...handlers} ref={bladeContainerRef}>
+            <div className={bladeStyles.bladeContainer} ref={bladeContainerRef}>
                 <div className={bladeStyles.centeredContent}>
                 <div className={bladeStyles.leftGroup}>
                     <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade} `}  >

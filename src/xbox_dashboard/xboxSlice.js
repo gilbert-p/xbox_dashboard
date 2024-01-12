@@ -19,6 +19,7 @@ let initialState = {
     blade_container_width: 0,
     blade_container_height: 0,
     is_transitioning: false,
+
 }
 
 export const bladeTransitionAsync = createAsyncThunk(
@@ -160,6 +161,7 @@ export const selectBladeContainerHeight = (state) => state.dashboard.blade_conta
 export const selectTransitionState = (state) => state.dashboard.is_transitioning;
 export const selectTransitionDirection = (state) => state.dashboard.transition_direction;
 export const selectLastIndexCalled = (state) => state.dashboard.last_index_called;
+
 
 
 export default xboxSlice.reducer;

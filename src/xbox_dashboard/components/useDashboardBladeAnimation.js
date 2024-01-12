@@ -2,14 +2,18 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { gsap } from 'gsap';
-import { navigateTo, selectContextIndex } from '../xboxSlice';
+import { navigateTo , selectContextIndex} from '../xboxSlice';
 
 export default function useDashboardBladeAnimation() {
 
+    const mountRef = useRef(null);
     const shiftRightTransition = useRef(null);
     const shiftLeftTransition = useRef(null);
+    const initializeRef = useRef(null);
 
     const current_context_index = useSelector(selectContextIndex) || 0;
+
+    const [isInitialized, setIsInitialized] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -20,24 +24,43 @@ export default function useDashboardBladeAnimation() {
         []
     );
 
-    const mountRef = useRef(null);
 
 
+
+    initializeRef.current = gsap.timeline().to(mountRef.current, {opacity: 1, duration: 0}).pause();
 
     shiftLeftTransition.current = gsap.timeline().to(mountRef.current, {x: "+=40px", duration: 0.3}).pause();
     // shiftRightTransition.current = gsap.timeline().to(mountRef.current, {x: "-=40px", duration: 0.3}).pause();
     shiftRightTransition.current = gsap.timeline().to(mountRef.current, {x: "-=40px", duration: 0.3}).pause();
 
     const shiftRight = () => {
-        // bladeContainerTransition.current = {};
+        if(!isInitialized){
+            setIsInitialized(true);
+            shiftLeftTransition.current.pause();
+            shiftRightTransition.current.pause();
+        }
+        else {
+            if((current_context_index + 1) < 5) {
+                shiftRightTransition.current.play();
+                debounceDispatchInput(navigateTo(current_context_index + 1));
+            }
+        }
 
-        shiftRightTransition.current.play();
-        debounceDispatchInput(navigateTo(current_context_index + 1))
     }
 
     const shiftLeft = () => {
-        shiftLeftTransition.current.play();
-        debounceDispatchInput(navigateTo(current_context_index - 1))
+        if(!isInitialized){
+            setIsInitialized(true);
+            shiftLeftTransition.current.pause();
+            shiftRightTransition.current.pause();
+        }
+        else{
+            if((current_context_index - 1) >= 0) {
+                shiftLeftTransition.current.play();
+                debounceDispatchInput(navigateTo(current_context_index - 1));
+            }
+        }
+
     }
 
 
@@ -49,18 +72,35 @@ export default function useDashboardBladeAnimation() {
                     case "ArrowUp":
                     break;
                     case "ArrowRight":
-                        if((current_context_index + 1) < 5) {
-                            debounceDispatchInput(shiftRight());
-                            debounceDispatchInput(navigateTo(current_context_index + 1));
+                        if(!isInitialized){
+                            setIsInitialized(true);
+                            shiftLeftTransition.current.pause();
+                            shiftRightTransition.current.pause();
                         }
+                        else{
+                            if((current_context_index + 1) < 5) {
+                                shiftRightTransition.current.play();
+                                debounceDispatchInput(navigateTo(current_context_index + 1));
+                            }
+                        }
+                        
+                        
                     break;
                     case "ArrowDown":
                     break;
                     case "ArrowLeft":
-                        if((current_context_index - 1) >= 0) {
-                            debounceDispatchInput(shiftLeft());
-                            debounceDispatchInput(navigateTo(current_context_index - 1));
+                        if(!isInitialized){
+                            setIsInitialized(true);
+                            shiftLeftTransition.current.pause();
+                            shiftRightTransition.current.pause();
                         }
+                        else {
+                            if((current_context_index - 1) >= 0) {
+                                shiftLeftTransition.current.play();
+                                debounceDispatchInput(navigateTo(current_context_index - 1));
+                            }
+                        }
+
                     break;
                     default:
                     break;
@@ -77,7 +117,7 @@ export default function useDashboardBladeAnimation() {
         }
 
 
-    }, [current_context_index]);
+    }, [current_context_index, isInitialized]);
 
-    return {mountRef, shiftRight, shiftLeft};
+    return {mountRef, shiftRight, shiftLeft,};
 }

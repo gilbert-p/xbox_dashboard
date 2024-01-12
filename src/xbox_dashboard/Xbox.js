@@ -41,6 +41,17 @@ const Xbox = (props) => {
     const [someRef, setSomeRef] = useState(null);
 
     const dispatch = useDispatch();
+
+            //Using keyboard to initiate animation
+            const bladeContainerRef= useDashboardAnimation();
+
+            const testRef = useRef(null);
+
+            useEffect(()=>{
+                if(bladeContainerRef['mountRef'].current){
+                    testRef.current = bladeContainerRef['mountRef'].current;
+                }
+            }, [bladeContainerRef, testRef])
     
     
     //Dashboard state variables
@@ -81,8 +92,6 @@ const Xbox = (props) => {
     const systemBackgroundRef = useRef(null);
     const bladeRef = useRef(null);
 
-    //Using keyboard to initiate animation
-    const bladeContainerRef= useDashboardAnimation();
     
     //GSAP instance Refs
     const bladeContainerTransition = useRef(null);
@@ -150,18 +159,6 @@ const Xbox = (props) => {
 
     }, [debounceResizeListener]);
 
-
-    // Callback function to pass the reference to the child
-    useEffect(()=>{
-
-        // const passReferenceToChild = () => {
-        //     childRef(bladeContainerRef);
-        // };
-        // passReferenceToChild();
-    }
-    , [])
-
-    
     
     
 
