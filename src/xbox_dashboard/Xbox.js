@@ -175,6 +175,11 @@ const Xbox = (props) => {
             
             </div>
             <div className={styles.bladeContainerMask}>
+            <div className={styles.arrowContextButtonContainer}>
+                <div className={styles.xboxHomeLogo}></div>
+                <div className={styles.leftArrow} onClick={()=>{bladeContainerRef.shiftLeft()}}></div>
+                <div className={styles.rightArrow} onClick={()=>{bladeContainerRef.shiftRight()}}></div>
+            </div>
                 <div className={styles.mainContainer}>
 
 
@@ -214,11 +219,7 @@ const Xbox = (props) => {
 
 
             </div>
-            <div className={styles.arrowContextButtonContainer}>
-                        <div className={styles.xboxHomeLogo}></div>
-                        <div className={styles.leftArrow} onClick={()=>{bladeContainerRef.shiftLeft() }}></div>
-            <div className={styles.rightArrow} onClick={()=>{bladeContainerRef.shiftRight()}}></div>
-            </div>
+
         </div>
     )
 }
