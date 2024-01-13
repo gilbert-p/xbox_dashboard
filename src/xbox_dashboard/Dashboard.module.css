@@ -377,7 +377,11 @@
     background-color: rgba(0, 0, 0, 0.744);
     padding-top: 10px;
     z-index: 999;
+    opacity: 0.8;
 
+    &:hover {
+        opacity: 1;
+    }
 }
 
 .xboxHomeLogo {
