@@ -14,11 +14,11 @@ import profileCardStyles from '../../dashboard_styles/ProfileCard.module.css';
 import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
-import mediaStyles from '../Media.module.css';
-import gamesStyles from '../Games.module.css';
+import mediaStyles from '../../dashboard_styles/Media.module.css';
+import gamesStyles from '../../dashboard_styles/Games.module.css';
 import descriptionContentStyles from "../../dashboard_styles/DescriptionContainer.module.css";
 
-import styles from "../Dashboard.module.css";
+import styles from "../../dashboard_styles/Dashboard.module.css";
 
 import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 

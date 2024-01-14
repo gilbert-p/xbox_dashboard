@@ -378,6 +378,7 @@
     padding-top: 10px;
     z-index: 999;
     opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
 
     &:hover {
         opacity: 1;
@@ -385,13 +386,38 @@
 }
 
 .xboxHomeLogo {
+    position: relative;
     order: 2;
     width: 100%;
     max-width: 80px;
     background-image: url("../assets/images/xbox_home_logo.svg");
     background-repeat: no-repeat;
     background-size: contain;
+    cursor: pointer;
+    /* pointer-events: none; */
+    z-index: 1000;
+
+
 }
+
+.ellipseGlow {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 56px;
+    /* left: 50%;
+    top: 50%; */
+    transform: translate(-22%,0%);
+    border-radius: 50%;
+    /* border: 5px solid red; */
+    transition-duration: 0.3;
+    z-index: 0;
+
+    &:hover {
+        box-shadow: 0 0 2px #68CC39b5, 0 0 8px #68CC39b5, 0 0 16px #68CC39b5, 0 0 24px #68CC39b5, 0 0 32px #336924b5;
+    }
+}
+
 
 .leftArrow {
     order: 1;

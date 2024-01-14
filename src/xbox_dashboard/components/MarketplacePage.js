@@ -12,9 +12,8 @@ import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
-import marketplaceStyles from '../Marketplace.module.css';
-import gamesStyles from '../Games.module.css';
-import styles from '../Dashboard.module.css';
+import marketplaceStyles from '../../dashboard_styles/Marketplace.module.css';
+import styles from '../../dashboard_styles/Dashboard.module.css';
 
 import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 

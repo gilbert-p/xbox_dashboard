@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { gsap } from 'gsap';
-import { navigateTo , selectContextIndex} from '../xboxSlice';
+import { navigateTo , selectContextIndex} from '../xbox_dashboard/xboxSlice';
 
 export default function useDashboardBladeAnimation() {
 

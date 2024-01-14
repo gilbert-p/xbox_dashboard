@@ -30,7 +30,7 @@ export const menuSlice = createSlice({
         },
         navigateMarketplaceMenu: (state, action) => {
             state.marketplace_menu_index = action.payload;
-        }
+        },
     }
 });
 

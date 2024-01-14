@@ -14,7 +14,7 @@ import { navigateTo,
     selectBladeSize, 
     updateBladeSize
 } from '../xboxSlice';
-import useDashboardAnimation from './useDashboardBladeAnimation';
+import useDashboardAnimation from '../../custom_hooks/useDashboardBladeAnimation';
     
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';

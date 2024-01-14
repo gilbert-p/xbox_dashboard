@@ -16,10 +16,9 @@ import descriptionContentStyles from "../../dashboard_styles/DescriptionContaine
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 import xboxliveStyles from '../../dashboard_styles/Xboxlive.module.css';
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
-import gamesStyles from '../Games.module.css';
 import ringAnim from '../../dashboard_styles/ringAnimation.module.css';
 
-import styles from "../Dashboard.module.css";
+import styles from "../../dashboard_styles/Dashboard.module.css";
 
 import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 

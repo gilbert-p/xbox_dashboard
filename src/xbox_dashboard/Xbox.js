@@ -4,10 +4,10 @@ import { debounce } from "lodash";
 import { gsap } from 'gsap';
 import reactFullscreenStatus from "../custom_hooks/useFullscreenStatus";
 
-import styles from './Dashboard.module.css';
+import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
 
-import useDashboardAnimation from './components/useDashboardBladeAnimation';
+import useDashboardAnimation from '../custom_hooks/useDashboardBladeAnimation';
 
 
 import { navigateTo, 
@@ -37,8 +37,7 @@ import SystemPage from "./components/SystemPage";
 const Xbox = (props) => {
 
     const [isMobileView, setMobileView] = useState(null);
-    const [rightButton, setRightButton] = useState(false);
-    const [someRef, setSomeRef] = useState(null);
+
 
     const dispatch = useDispatch();
 
@@ -56,54 +55,13 @@ const Xbox = (props) => {
     
     //Dashboard state variables
     const current_context_index = useSelector(selectContextIndex);
-    const last_index_called = useSelector(selectLastIndexCalled);
-    const is_marketplace_rightside = useSelector(selectMarketplacePos);
-    const is_xboxlive_rightside = useSelector(selectXboxPos);
-    const is_games_rightside = useSelector(selectGamesPos);
-    const is_media_rightside = useSelector(selectMediaPos);
-    const is_system_rightside = useSelector(selectSystemPos);
     const display_tray = useSelector(isTrayDisplayed);
-    const xbox_blade_container_width = useSelector(selectBladeContainerWidth);
-    const xbox_blade_container_height = useSelector(selectBladeContainerHeight);
-    const transition_direction = useSelector(selectTransitionDirection);
-
-
-    
-
-    const background_transition_duration = 0.9;
-    const background_transition_delay = 0;
-    const blade_transition_duration = 0.9;
-    const blade_transition_delay = 0;
-
 
 
 
     //Refs for animating elements
     const xboxBladeContainerRef = useRef(null);
-    const xboxliveRef = useRef(null);
-    const marketplaceRef = useRef(null);
-    const gamesRef = useRef(null);
-    const mediaRef = useRef(null);
-    const systemRef = useRef(null);
-    const xboxBackgroundRef = useRef(null);
     const marketplaceBackgroundRef = useRef(null);
-    const gamesBackgroundRef = useRef(null);
-    const mediaBackgroundRef = useRef(null);
-    const systemBackgroundRef = useRef(null);
-    const bladeRef = useRef(null);
-
-    
-    //GSAP instance Refs
-    const bladeContainerTransition = useRef(null);
-    const marketplaceTransition = useRef(null);
-    const xboxBladeTransition = useRef(null);
-    const gamesBladeTransition = useRef(null);
-    const mediaBladeTransition = useRef(null);
-    const systemBladeTransition = useRef(null);
-    const xboxBackgroundTransition = useRef(null);
-    const gamesBackgroundTransition = useRef(null);
-    const mediaBackgroundTransition = useRef(null);
-    const systemBackgroundTransition = useRef(null);
 
     
 
@@ -117,13 +75,6 @@ const Xbox = (props) => {
          []
     );
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const debounceDispatchInput = useCallback(
-        debounce((fn) => {
-           dispatch(fn);
-        }, 200),
-        []
-      );
 
 
     
@@ -175,11 +126,13 @@ const Xbox = (props) => {
             
             </div>
             <div className={styles.bladeContainerMask}>
-            <div className={styles.arrowContextButtonContainer}>
-                <div className={styles.xboxHomeLogo}></div>
-                <div className={styles.leftArrow} onClick={()=>{bladeContainerRef.shiftLeft()}}></div>
-                <div className={styles.rightArrow} onClick={()=>{bladeContainerRef.shiftRight()}}></div>
-            </div>
+
+                <div className={styles.arrowContextButtonContainer}>
+                    <div className={styles.xboxHomeLogo}><span className={styles.ellipseGlow}></span></div>
+                    <div className={styles.leftArrow} onClick={()=>{bladeContainerRef.shiftLeft()}}></div>
+                    <div className={styles.rightArrow} onClick={()=>{bladeContainerRef.shiftRight()}}></div>
+                </div>
+
                 <div className={styles.mainContainer}>
 
 
