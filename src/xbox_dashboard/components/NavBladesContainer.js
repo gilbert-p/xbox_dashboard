@@ -1,21 +1,10 @@
-import React, { useState, useEffect, useLayoutEffect,  useCallback, useRef } from 'react';
+import React, { useLayoutEffect,  useCallback, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
-import { gsap } from 'gsap';
-import { useSwipeable } from 'react-swipeable';
-import { navigateTo,    
-    setBladeAnimationRef, 
+import { 
     selectContextIndex,
-    selectXboxPos,
-    selectGamesPos,
-    selectMediaPos,
-    selectSystemPos,
-    selectBladeContainerHeight,
-    selectBladeSize, 
     updateBladeSize
 } from '../xboxSlice';
-import useDashboardAnimation from '../../custom_hooks/useDashboardBladeAnimation';
-    
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 
@@ -30,25 +19,11 @@ const NavBladesContainer = (props) => {
 
     //Dashboard state variables
     const current_context_index = useSelector(selectContextIndex) || 0;
-    const is_xboxlive_rightside = useSelector(selectXboxPos);
-    const is_games_rightside = useSelector(selectGamesPos);
-    const is_media_rightside = useSelector(selectMediaPos);
-    const is_system_rightside = useSelector(selectSystemPos);
-
-    const container_height = useSelector(selectBladeContainerHeight) || 0;
-    const blade_size = useSelector(selectBladeSize) || 0;
 
 
 
     // dispatch(setBladeAnimationRef(bladeContainerRef));
     const bladeRef = useRef(null);
-
-    const localBladeContainerRef = useRef(null);
-
-    // GSAP Instance Refs
-    const bladeContainerTransition = useRef(null);
-    const shiftRightTransition = useRef(null);
-    const shiftLeftTransition = useRef(null);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debounceBladeResize = useCallback(

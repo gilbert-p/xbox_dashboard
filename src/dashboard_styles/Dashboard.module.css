@@ -1,26 +1,35 @@
-/* .bladeOrientationOverlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgb(82, 82, 82);
-    z-index: 999;
-} */
+/* CONTAINERS */
 
-
-.mainContainer {
+.appContainer {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
     width: calc(var(--container-width));
     height: calc(var(--container-height));
+    border: 3px solid pink;
+}
+
+.xboxComponent {
+    position: relative;
+    width: inherit;
+    height: inherit;
+}
+
+.mainContainer {
+    position: relative;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,-50%);
+    width: inherit;
+    height: inherit;
     /* border: 10px solid red; */
 }
 
 .bladeMask {
-    position: absolute;
-    width: 100%;
-    height: var(--container-height);
+    position: relative;
+    width: inherit;
+    height: inherit;
     /* background-color: teal; */
     left: 50%;
     top: 50%;
@@ -33,8 +42,8 @@
 
 .bladeContainerMask {
     position: absolute;
-    width: 100%;
-    height: var(--container-height);
+    width: inherit;
+    height: inherit;
     left: 50%;
     top: 50%;
     /* max-height: 760px; */
@@ -44,6 +53,11 @@
     overflow: hidden;
     /* visibility: hidden; */
 }
+
+
+
+
+
 
 .topContainerBorder {
     position: absolute;
@@ -448,10 +462,14 @@
     }
 }
 
+.appContainer {
+    transform: translate(-50%,-50%) scale(calc(var(--scaling)));
+}
 
 
-@media only screen and (max-width: 1024px) {
-    .mainContainer {
-        transform: translate(-50%,-50%) scale(0.5);
+@media only screen and (max-width: 500px) {
+    .appContainer {
+        transform: translate(-50%,-50%) scale(calc(var(--scaling)));
     }
+
 }

@@ -1,32 +1,13 @@
 import React, {useRef, useEffect, useLayoutEffect, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
-import { gsap } from 'gsap';
 import reactFullscreenStatus from "../custom_hooks/useFullscreenStatus";
-
 import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
-
 import useDashboardAnimation from '../custom_hooks/useDashboardBladeAnimation';
-
-
-import { navigateTo, 
-         selectContextIndex,
-         selectMarketplacePos,
-         selectXboxPos,
-         selectGamesPos,
-         selectMediaPos,
-         selectSystemPos,
-         isTrayDisplayed,
-         selectBladeContainerWidth,
-         selectBladeContainerHeight,
-         updateBladeContainerSize,
-         selectTransitionDirection,
-         selectLastIndexCalled,
-         selectBladeSize, 
-         updateBladeSize,
-        } from './xboxSlice';
-
+import { selectContextIndex,
+         isTrayDisplayed }
+from './xboxSlice';
 import NavBladesContainer from "./components/NavBladesContainer";
 import MarketplacePage from "./components/MarketplacePage";
 import XboxlivePage from './components/XboxlivePage';
@@ -34,23 +15,12 @@ import GamesPage from "./components/GamesPage";
 import MediaPage from "./components/MediaPage";
 import SystemPage from "./components/SystemPage";
 
+
 const Xbox = (props) => {
 
-    const [isMobileView, setMobileView] = useState(null);
 
+    const bladeContainerRef= useDashboardAnimation();
 
-    const dispatch = useDispatch();
-
-            //Using keyboard to initiate animation
-            const bladeContainerRef= useDashboardAnimation();
-
-            const testRef = useRef(null);
-
-            useEffect(()=>{
-                if(bladeContainerRef['mountRef'].current){
-                    testRef.current = bladeContainerRef['mountRef'].current;
-                }
-            }, [bladeContainerRef, testRef])
     
     
     //Dashboard state variables
@@ -63,52 +33,9 @@ const Xbox = (props) => {
     const xboxBladeContainerRef = useRef(null);
     const marketplaceBackgroundRef = useRef(null);
 
-    
-
-    //Debounced helper functions
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const debounceResizeListener = useCallback(
-        debounce((fn) => {
-            dispatch(fn);
-         }, 500),
-         []
-    );
-
 
 
     
-    //Gets width and height of content container
-    useEffect(()=> {
-        const updateContainerSize = () => {
-            let sizingProperties = {};
-
-            if(xboxBladeContainerRef){
-                sizingProperties.width = xboxBladeContainerRef.current.offsetWidth;
-                sizingProperties.height = xboxBladeContainerRef.current.offsetHeight;
-
-                if(window.innerWidth <= 900) {
-                    setMobileView(true);
-                }
-                else {
-                    setMobileView(false);
-                }
-
-                // debounceResizeListener((updateBladeContainerSize(sizingProperties)));
-                //TODO create separate function for assigning blade size
-                // debounceBladeResize((updateBladeSize(Math.ceil(bladeRef.current.width.baseVal.value))));
-            }
-        }
-
-            window.addEventListener('resize', updateContainerSize);
-
-            updateContainerSize();
-
-            return () => {
-                window.removeEventListener("resize", updateContainerSize);
-            }
-
-    }, [debounceResizeListener]);
 
     
     
@@ -116,12 +43,12 @@ const Xbox = (props) => {
       
 
     return (
-        <div>
+        <div className={styles.xboxComponent}>
             <div onClick={()=> {}} className={styles.orientationRequestOverlay}>
             </div>
 
             <div className={styles.bladeMask}>
-            {isMobileView !== null && <NavBladesContainer isMobileView={isMobileView} bladeContainerRef={bladeContainerRef['mountRef']} />}
+            {<NavBladesContainer bladeContainerRef={bladeContainerRef['mountRef']} />}
             
             
             </div>
