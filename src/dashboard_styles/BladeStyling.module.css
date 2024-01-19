@@ -9,15 +9,8 @@
     /* background-color: lightskyblue; */
     /* border: 2px solid red; */
     z-index: 10;
-    /* transform: translateX(var(--shiftIndex, 0) * var(--blade-size, 0)); */
     transition: transform 0.8s ease-out;
-    /* pointer-events: none; */
-    /* justify-content: space-between; */
-    /* margin-left: -20px; */
-    /* overflow: hidden; */
-    /* transform: translateX(-170px); */
-    /* left: -350px; */
-    /* transform: translateX(38%); */
+
 }
 
 .centeredMask {
@@ -76,9 +69,6 @@
     filter: drop-shadow(-1 px 0px 4px #ffffff09);
     /* background-color: red; */
     pointer-events: none;
-
-
-    
 }
 
 .svgInteractiveContainer {
@@ -272,77 +262,4 @@ path {
     height: 100%;
     background-color: purple;
     opacity: 1;
-}
-
-
-
-
-
-@media only screen and (max-width: 1024px) {
-    /* .bladeContainer {
-        transform: translateX(-50%)  scale(0.5);
-        width: 100%;
-        left: 51%;
-    } */
-
-    /* .leftGroup {
-        left: -10%;
-    }
-
-    .rightGroup {
-        position: relative;
-        left: 100%;
-        transform: translateX(-30%);
-    }
-
-    .centeredContent {
-        transform: translate(-50%, -50%);
-    }
-
-    .blade:nth-child(n+1){
-        transform: translateX(100px);
-    }
-
-    #marketplaceBlade-left {
-        transform: translate(calc(((100vh) * (1/5))))
-    }
-
-    #xboxliveBlade-left{
-        transform: translateX(calc(((100vh) * (3/10))));
-    }
-
-    #gamesBlade-left {
-        transform: translateX(calc(((100vh) * (3/(7.7)))));
-    }
-
-    #mediaBlade-left {
-        transform: translateX(calc(((100vh) * (3/(6.3)))));
-    }
-
-    #systemBlade-left {
-        transform: translateX(calc(((100vh) * (3/(5.3)))));
-    }
-
-
-    #xboxliveBlade-right{
-        transform: translateX(calc(((100vh) * (3/10))));
-    }
-
-    #gamesBlade-right {
-        transform: translateX(calc(((100vh) * (3/(7.7)))));
-    }
-
-    #mediaBlade-right {
-        transform: translateX(calc(((100vh) * (3/(6.3)))));
-    }
-
-    #systemBlade-right {
-        transform: translateX(calc(((100vh) * (3/(5.3)))));
-    } */
-
-    .blade {
-
-    }
-
-    
 }

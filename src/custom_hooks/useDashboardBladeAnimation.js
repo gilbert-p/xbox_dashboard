@@ -11,6 +11,9 @@ export default function useDashboardBladeAnimation() {
     const shiftLeftTransition = useRef(null);
     const initializeRef = useRef(null);
 
+    const revealGuideMenu = useRef(null);
+    const guideMenuRef = useRef(null);
+
     const current_context_index = useSelector(selectContextIndex) || 0;
 
     const [isInitialized, setIsInitialized] = useState(false);
@@ -28,10 +31,21 @@ export default function useDashboardBladeAnimation() {
 
 
     initializeRef.current = gsap.timeline().to(mountRef.current, {opacity: 1, duration: 0}).pause();
-
     shiftLeftTransition.current = gsap.timeline().to(mountRef.current, {x: "+=40px", duration: 0.3}).pause();
-    // shiftRightTransition.current = gsap.timeline().to(mountRef.current, {x: "-=40px", duration: 0.3}).pause();
     shiftRightTransition.current = gsap.timeline().to(mountRef.current, {x: "-=40px", duration: 0.3}).pause();
+
+
+    revealGuideMenu.current = gsap.timeline().to(guideMenuRef.current, {opacity: 1, duration: 0.3}).pause();
+
+    const openGuideMenu = () => {
+        if(!isInitialized){
+            setIsInitialized(true);
+            revealGuideMenu.current.pause();
+        }
+        else {
+            revealGuideMenu.current.play();
+        }
+    }
 
     const shiftRight = () => {
         if(!isInitialized){
@@ -119,5 +133,5 @@ export default function useDashboardBladeAnimation() {
 
     }, [current_context_index, isInitialized]);
 
-    return {mountRef, shiftRight, shiftLeft,};
+    return {mountRef, shiftRight, shiftLeft, guideMenuRef, openGuideMenu};
 }

@@ -7,7 +7,7 @@
     transform: translate(-50%,-50%);
     width: calc(var(--container-width));
     height: calc(var(--container-height));
-    border: 3px solid pink;
+    /* border: 3px solid pink; */
 }
 
 .xboxComponent {
@@ -421,7 +421,7 @@
     height: 56px;
     /* left: 50%;
     top: 50%; */
-    transform: translate(-22%,0%);
+    transform: translate(0%,0%);
     border-radius: 50%;
     /* border: 5px solid red; */
     transition-duration: 0.3;
@@ -462,10 +462,100 @@
     }
 }
 
+
+.guideMenuContainer {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-color: rgba(48, 48, 48, 0.422);
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;;
+}
+
+.guidePanel {
+    position: relative;
+    width: 640px;
+    height: inherit;
+    /* background-color: lightgray; */
+    overflow: hidden;
+}
+
+.nameplateEdge {
+    position: absolute;
+    display: inline-block;
+    height: calc( 100% + 40px);
+    top: -20px;
+    /* left: 30px; */
+    left: 85%;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(-1 px 0px 4px #ffffff09);
+    /* background-color: red; */
+    pointer-events: none;
+    background-image: url("../assets/images/nameplate_edge.png");
+}
+
+.guidePanelMask {
+    position: absolute;
+    width: 605px;
+    height: calc(100% + 5px);
+    overflow: hidden;
+    z-index: -1;
+}
+
+.guidePanelBackground {
+    position: absolute;
+    width: 580px;
+    height: inherit;
+    background-image: url("../assets/images/guideline_background.png");
+    z-index: -1;
+}
+
+.guidePanelTopBorder {
+    position: absolute;
+    /* width: calc(130%); */
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100% 0%;
+    height: 100px;
+    /* transform: translateX(-31%); */
+    width: 605px;
+    left: -20px;
+    /* transform: translateX(-50%); */
+    box-shadow: inset 0 -1px 7px 0px black;
+    border-radius: 0px 0px 50px 0px; 
+    z-index: -1;
+    background-image: url("../assets/images/guideline_menu_top_border.png");
+
+}
+
+.guidePanelBottomBorder {
+    position: absolute;
+    /* width: calc(130%); */
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 100% 0%;
+    height: 150px;
+    /* transform: translateX(-31%); */
+    width: 610px;
+    /* left: -20px; */
+    top: calc(100% - 150px);
+    /* transform: translateX(-50%); */
+    /* box-shadow: inset 0 -1px 7px 0px black; */
+
+    z-index: -1;
+    background-image: url("../assets/images/guideline_menu_bottom_border.png")
+
+}
+
+
 .appContainer {
     transform: translate(-50%,-50%) scale(calc(var(--scaling)));
 }
-
 
 @media only screen and (max-width: 500px) {
     .appContainer {

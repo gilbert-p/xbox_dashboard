@@ -24,6 +24,13 @@
   --z-depth:0;
   --scaling:1;
 
+  /* z-index categories */
+  --surface: 1000;
+  --level_one: 900;
+  --level_two: 800;
+  --level_three: 700;
+  --level_four: 600;
+
   /* Font Sizes */
   --text-link-size: 22px;
   --screen-heading-size: 24px;

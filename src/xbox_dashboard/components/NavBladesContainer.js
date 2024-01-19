@@ -1,4 +1,4 @@
-import React, { useLayoutEffect,  useCallback, useRef } from 'react';
+import React, { useLayoutEffect,  useCallback, useRef, forwardRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { 
@@ -11,8 +11,6 @@ import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css
 const NavBladesContainer = (props) => {
 
     const { isMobileView, bladeContainerRef } = props;
-    // const bladeContainerRef = useDashboardAnimation();
-    // const bladeContainerRef= useDashboardAnimation();
     
     const dispatch = useDispatch();
 
@@ -50,11 +48,7 @@ const NavBladesContainer = (props) => {
         return ()=> {
             window.removeEventListener("resize", updateBlade);
         }
-    });
-
-    const testRef = useRef(null);
-
-          
+    });   
 
 
   return <>
