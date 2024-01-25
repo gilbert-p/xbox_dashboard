@@ -1,5 +1,5 @@
 #marketplaceContextContainer {
-    z-index: var(--z-depth);
+    z-index: 1;
     height: inherit;
     /* width: inherit; */
 }
