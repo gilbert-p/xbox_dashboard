@@ -37,9 +37,17 @@
     max-height: 460px;
 }
 
+#systemHighlightContainer {
+    height: 325px;
+}
+
 
 .xboxliveListContainer {
     max-height: 150px;
+}
+
+#guideSelectList {
+    max-width: 400px;
 }
 
 #marketSelectList {
@@ -139,9 +147,6 @@
     height: 225px;
 }
 
-#systemHighlightContainer {
-    height: 325px;
-}
 
 #gamesHighlightContainer {
     height: 225px;

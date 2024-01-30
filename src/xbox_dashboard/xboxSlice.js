@@ -20,6 +20,8 @@ let initialState = {
     blade_container_height: 0,
     is_transitioning: false,
 
+    is_guide_menu_open: false,
+
 }
 
 export const bladeTransitionAsync = createAsyncThunk(
@@ -133,6 +135,9 @@ export const xboxSlice = createSlice({
       updateBladeSize: (state, action) => {
         state.blade_size = action.payload;
       },
+      updateGuideMenuState: (state, action) => {
+        state.is_guide_menu_open = action.payload;
+      },
     },
     extraReducers: (builder) => {
       builder
@@ -145,7 +150,7 @@ export const xboxSlice = createSlice({
     }
 });
 
-export const { navigateTo, updateBladeContainerSize, updateBladeSize, setBladeAnimationRef } = xboxSlice.actions;
+export const { navigateTo, updateBladeContainerSize, updateBladeSize, setBladeAnimationRef, updateGuideMenuState } = xboxSlice.actions;
 
 export const selectCurrentContext = (state) => state.dashboard.current_context;
 export const selectContextIndex = (state) => state.dashboard.context_index;
@@ -162,6 +167,7 @@ export const selectTransitionState = (state) => state.dashboard.is_transitioning
 export const selectTransitionDirection = (state) => state.dashboard.transition_direction;
 export const selectLastIndexCalled = (state) => state.dashboard.last_index_called;
 
+export const isGuideOpen = (state) => state.dashboard.is_guide_menu_open;
 
 
 export default xboxSlice.reducer;

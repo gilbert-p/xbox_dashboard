@@ -477,9 +477,12 @@
     left: 0%;
     transform: translateX(0%);
     background-color: rgba(48, 48, 48, 0.422);
-    /* z-index: 999; */
     opacity: 0;
     /* visibility: hidden; */
+}
+
+#guideMenuPanel{
+    /* z-index: 999; */
 }
 
 .guidePanel {
@@ -490,6 +493,7 @@
     transform: translateX(0%);
     /* background-color: lightgray; */
     /* transform: translateX(-100%); */
+    z-index: 999;
     overflow: hidden;
 }
 
@@ -559,7 +563,6 @@
 
     z-index: -1;
     background-image: url("../assets/images/guideline_menu_bottom_border.png")
-
 }
 
 .guidePanelBackground {
@@ -575,6 +578,33 @@
     padding-left: 660px;
 }
 /* Disable padding-left when extending all the way */
+
+
+.guidePanelClockContainer {
+    position: absolute;
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    /* border: 2px solid red; */
+    top: 35px;
+    margin-left: 965px;
+    padding-top: 25px;
+
+    >span {
+        font-size: calc(var(--text-link-size));
+        color: white;
+    }
+
+    >span:nth-child(1) {
+        margin-right: 1px;
+    }
+    >span:nth-child(2) {
+        margin-right: 2px;
+    }
+    >span:nth-child(3) {
+        margin-right: 10px;
+    }
+}
 
 
 .profileContainer {

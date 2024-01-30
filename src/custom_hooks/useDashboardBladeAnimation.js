@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback , useLayoutEffect  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from 'lodash';
 import { gsap } from 'gsap';
@@ -40,11 +40,11 @@ export default function useDashboardBladeAnimation() {
 
 
 
-  useEffect(()=>{
+  useLayoutEffect(()=>{
 
     const loadTimelineIntoMemory = ()=> {
       setIsInitialized(true);
-      revealGuideMenu.current.pause();
+      initializeRef.current.pause();
       shiftLeftTransition.current.pause();
       shiftRightTransition.current.pause();
     }
@@ -93,7 +93,7 @@ export default function useDashboardBladeAnimation() {
   };
 
   // Keyboard event listeners
-  useEffect(() => {
+  useLayoutEffect(() => {
     const navigateUsingKeys = (e) => {
       if (e !== undefined) {
         switch (e.key) {
@@ -125,4 +125,4 @@ export default function useDashboardBladeAnimation() {
 
 
   return { mountRef, shiftRight, shiftLeft };
-}
+};
