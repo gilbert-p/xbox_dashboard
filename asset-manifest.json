@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/xbox_dashboard/static/css/main.f87f2edc.css",
-    "main.js": "/xbox_dashboard/static/js/main.0479bb21.js",
+    "main.css": "/xbox_dashboard/static/css/main.f10952cd.css",
+    "main.js": "/xbox_dashboard/static/js/main.0f7d423e.js",
     "static/js/845.af6d7921.chunk.js": "/xbox_dashboard/static/js/845.af6d7921.chunk.js",
     "static/media/profile_icon.jpeg": "/xbox_dashboard/static/media/profile_icon.f5698d3def6b3caba4e7.jpeg",
     "static/media/guideline_background.png": "/xbox_dashboard/static/media/guideline_background.4929e83052456da5dbf1.png",
@@ -9,8 +9,10 @@
     "static/media/marketplace_arcade.png": "/xbox_dashboard/static/media/marketplace_arcade.c58bb7c245b5d591a4f2.png",
     "static/media/guideline_menu_bottom_border.png": "/xbox_dashboard/static/media/guideline_menu_bottom_border.20f1afd84c0dec277ebb.png",
     "static/media/Xbox Live Logo_vector.png": "/xbox_dashboard/static/media/Xbox Live Logo_vector.c4eb735445949ed30ebc.png",
+    "static/media/utility_sfx.mp3": "/xbox_dashboard/static/media/utility_sfx.dd44f2d11851bb6868f4.mp3",
     "static/media/guideline_menu_top_border.png": "/xbox_dashboard/static/media/guideline_menu_top_border.faf76015c71d6af549fc.png",
     "static/media/glass-overlay.png": "/xbox_dashboard/static/media/glass-overlay.86d08c9d73bbcd58f1ef.png",
+    "static/media/dashboard_white_underlay.png": "/xbox_dashboard/static/media/dashboard_white_underlay.0a12e836e4940488cb32.png",
     "static/media/xbox360_logo.png": "/xbox_dashboard/static/media/xbox360_logo.686b4dee8d43ff126199.png",
     "static/media/Convmd.ttf": "/xbox_dashboard/static/media/Convmd.820dccc32affe93b3294.ttf",
     "static/media/Themes and Gamerpictures.png": "/xbox_dashboard/static/media/Themes and Gamerpictures.27fbbca7e8a0e25c97c0.png",
@@ -21,7 +23,7 @@
     "static/media/system_active_blade.png": "/xbox_dashboard/static/media/system_active_blade.f8bf87a829ca8ec183e5.png",
     "static/media/xboxlive_active_blade.png": "/xbox_dashboard/static/media/xboxlive_active_blade.e53c2bb58967d11926fc.png",
     "static/media/new_marketplace_blade.png": "/xbox_dashboard/static/media/new_marketplace_blade.a95bcd9c547c12c06ec9.png",
-    "static/media/blade_sound_right_shift.mp3": "/xbox_dashboard/static/media/blade_sound_right_shift.ff896fd341acc14d5021.mp3",
+    "static/media/blade_sound_sfx.mp3": "/xbox_dashboard/static/media/blade_sound_sfx.ff896fd341acc14d5021.mp3",
     "static/media/inactive_blade_left_redesign.png": "/xbox_dashboard/static/media/inactive_blade_left_redesign.5cb53e2281d6596889c9.png",
     "static/media/inactive_blade_right.png": "/xbox_dashboard/static/media/inactive_blade_right.f234d56812f59a8319be.png",
     "static/media/nameplate_edge.png": "/xbox_dashboard/static/media/nameplate_edge.6ecc4ffbd2365a86e473.png",
@@ -31,14 +33,15 @@
     "static/media/xbox_controller_cropped.png": "/xbox_dashboard/static/media/xbox_controller_cropped.4c020c3c309c6603fb2f.png",
     "static/media/media_remote.png": "/xbox_dashboard/static/media/media_remote.7cb94881e55f3916d7d4.png",
     "static/media/join_xboxlive.png": "/xbox_dashboard/static/media/join_xboxlive.4c12a139112c43f1e22f.png",
+    "static/media/xbox_360_guide_logo.png": "/xbox_dashboard/static/media/xbox_360_guide_logo.57c9651d7c16b2760ac6.png",
     "static/media/xbox_home_logo.svg": "/xbox_dashboard/static/media/xbox_home_logo.4e5d9899771c920862b7.svg",
     "index.html": "/xbox_dashboard/index.html",
-    "main.f87f2edc.css.map": "/xbox_dashboard/static/css/main.f87f2edc.css.map",
-    "main.0479bb21.js.map": "/xbox_dashboard/static/js/main.0479bb21.js.map",
+    "main.f10952cd.css.map": "/xbox_dashboard/static/css/main.f10952cd.css.map",
+    "main.0f7d423e.js.map": "/xbox_dashboard/static/js/main.0f7d423e.js.map",
     "845.af6d7921.chunk.js.map": "/xbox_dashboard/static/js/845.af6d7921.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f87f2edc.css",
-    "static/js/main.0479bb21.js"
+    "static/css/main.f10952cd.css",
+    "static/js/main.0f7d423e.js"
   ]
 }
