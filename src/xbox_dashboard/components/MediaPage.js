@@ -34,44 +34,23 @@ const XboxlivePage = (props) => {
 
     const { current_context_index } = props;
 
+    const listItemHighlight = (current_menu_index, target_index) => {
+        
+        let highlight_state = false;
+
+        highlight_state = target_index !== current_menu_index ? true: false;
+
+        if(highlight_state) {
+            return transitionStyles.instantTransparent;
+        }
+        else {
+            return "";
+        }
+    };
+
   return (
      <>
         <div id={mediaStyles["mediaContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 3 ? 1 : -1}`}}>
-
-        <div className={styles.mediaBackground}>
-        <div id={backgroundAnimation["mediaPulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 3 ? transitionStyles.makeTransparent : ""}`}>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-            </div>
-        </div>
 
             <div id={mediaStyles["media"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 3 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
@@ -98,18 +77,18 @@ const XboxlivePage = (props) => {
                     <div id={itemSelectStyles["mediaSelection"]} className={itemSelectStyles.selectItemListContainer}>
                         <div id={itemSelectStyles["mediaHighlightContainer"]} className={itemSelectStyles.boxInsetHighlightContainer}>
                             <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 0 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 1 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 2 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 3 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && mediaMenuIndex !== 4 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 0)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 1)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 2)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 3)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 4)}`}></div>
                             </div>
                             <div className={itemSelectStyles.boxInsetHighlightMaskBottom}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 0 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 1 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 2 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 3 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && mediaMenuIndex !== 4 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 0)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 1)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 2)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 3)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 4)}`}></div>
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >

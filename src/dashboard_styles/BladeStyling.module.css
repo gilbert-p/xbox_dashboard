@@ -19,7 +19,7 @@
     height: calc(var(--container-height));
     left: 50%;
     transform: translateX(-50%);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .centeredContent {

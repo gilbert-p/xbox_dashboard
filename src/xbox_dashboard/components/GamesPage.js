@@ -31,46 +31,25 @@ const GamesPage = (props) => {
     const gamesMenuIndex = useSelector(selectGamesMenuIndex);
 
     const {current_context_index } = props;
+
+    const listItemHighlight = (current_menu_index, target_index) => {
+        
+        let highlight_state = false;
+
+        highlight_state = target_index !== current_menu_index ? true: false;
+
+        if(highlight_state) {
+            return transitionStyles.instantTransparent;
+        }
+        else {
+            return "";
+        }
+    };
     
 
   return (
      <>
         <div id={gamesStyles["gamesContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 2 ? 1 : -1}`}}>
-
-        <div className={styles.gamesBackground}>
-            <div id={backgroundAnimation["gamesPulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 2 ? transitionStyles.makeTransparent : ""}`}>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-            </div>
-        </div>
 
             <div id={gamesStyles["games"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 2 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
@@ -97,18 +76,18 @@ const GamesPage = (props) => {
                     <div className={itemSelectStyles.selectItemListContainer}>
                         <div id={itemSelectStyles["gamesHighlightContainer"]} className={itemSelectStyles.boxInsetHighlightContainer}>
                             <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 0 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 1 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 2 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 3 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${isHighlightActive && gamesMenuIndex !== 4 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(gamesMenuIndex, 0)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(gamesMenuIndex, 1)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(gamesMenuIndex, 2)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(gamesMenuIndex, 3)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(gamesMenuIndex, 4)}`}></div>
                             </div>
                             <div className={itemSelectStyles.boxInsetHighlightMaskBottom}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 0 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 1 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 2 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 3 ? transitionStyles.instantTransparent : ""}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${isHighlightActive && gamesMenuIndex !== 4 ? transitionStyles.instantTransparent : ""}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(gamesMenuIndex, 0)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(gamesMenuIndex, 1)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(gamesMenuIndex, 2)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(gamesMenuIndex, 3)}`}></div>
+                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(gamesMenuIndex, 4)}`}></div>
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >

@@ -37,7 +37,7 @@
 }
 
 #marketplaceGrid {
-    background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 3%, rgba(255, 255, 255, 0.397) 15%, rgba(255, 255, 255, 0.35) 85% , rgba(255, 255, 255, 0.35) 97%, rgba(255, 255, 255, 0) 100%);
+    /* background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 3%, rgba(255, 255, 255, 0.397) 15%, rgba(255, 255, 255, 0.35) 85% , rgba(255, 255, 255, 0.35) 97%, rgba(255, 255, 255, 0) 100%); */
 }
 
 #marketplaceGrid .rightContent {

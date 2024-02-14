@@ -1,46 +1,76 @@
-import { useState, useEffect, useRef, useCallback, useLayoutEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { debounce } from 'lodash';
+import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
-import { navigateTo, selectContextIndex } from '../xbox_dashboard/xboxSlice';
 
 export default function useGuidePanelAnimation() {
     const revealGuideMenu = useRef(null);
+    const extendMenu = useRef(null);
+    const closeExtendedMenu = useRef(null);
+    const guideSettingsAnimate = useRef(null);
+
     const guideMenuRef = useRef(null);
     const guidePanelRef = useRef(null);
+    const guideSettingsRef = useRef(null);
 
-    const guideMenuDOM = useRef(document.getElementById("guideMenuPanel"));
-
-    const [isGuidePanelOpen, setGuidePanelStatus] = useState(false);
-
-
+    const revealAboutDashboard = useRef(null);
+    const aboutDashboardPageRef = useRef(null);
 
 
     useLayoutEffect(()=> {
 
-            const initializeTimeline = () => {
+        const initializeTimeline = () => {
 
-    //Translate 92% to extend the menu fully
-    //55% half open
 
-        revealGuideMenu.current = gsap.timeline(
-                {
-                // onStart: () => { document.getElementById("guideMenuPanel").style.zIndex = `999`;},
-                // onReverseComplete: () => { document.getElementById("guideMenuPanel").style.zIndex = `-1000`}
-              }
-              );
+
+        /*TranslateX
+          55% to reveal guide options
+          94% to extend panel completely
+        */
+
+        revealGuideMenu.current = gsap.timeline();
         
-            revealGuideMenu.current
-            .to(guideMenuRef.current, { opacity: 1, zIndex: 999,  duration: 0.3 })
-            .to(guidePanelRef.current, { translateX: '55%', duration: 0.3 })
-            .pause();
+        revealGuideMenu.current
+        .to(guideMenuRef.current, { opacity: 1, zIndex: 999,  duration: 0.3 })
+        .to(guidePanelRef.current, { translateX: '55%', duration: 0.3 })
+        .pause();
 
 
+        extendMenu.current = gsap.timeline(
+            // {onComplete: function(){closeExtendedMenu.current.time(0).pause()}}
+        );
+
+        extendMenu.current
+        .to(guidePanelRef.current, {translateX: '94%', duration: 0.3})
+        .pause();
+
+        closeExtendedMenu.current = gsap.timeline(
+            {onComplete: function(){this.time(0).pause(); 
+                                    extendMenu.current.time(0).pause(); 
+                                    revealGuideMenu.current.time(0).pause();
+                                    guideSettingsAnimate.current.time(0).pause();
+                                    revealAboutDashboard.current.time(0).pause();
+                                   }
+            }
+        );
+
+        closeExtendedMenu.current
+        .to(guidePanelRef.current, {translateX: '0', duration: 0.3})
+        .pause();
 
 
+        guideSettingsAnimate.current = gsap.timeline();
+
+        guideSettingsAnimate.current
+        .to(guideSettingsRef.current, {opacity: 0, display: "none", duration: 0.1})
+        .pause();
 
 
-    }
+        revealAboutDashboard.current = gsap.timeline();
+
+        revealAboutDashboard.current
+        .to(aboutDashboardPageRef.current, {opacity: 1, display: "initial", duration: 0.3})
+        .pause();
+
+        }
         initializeTimeline();
 
 
@@ -55,16 +85,38 @@ export default function useGuidePanelAnimation() {
             clearTimeout(timeoutId);
             revealGuideMenu.current.kill();
         }
+
     },[]);
 
 
     //Action Function
-    const openGuideMenu = () => {
-        console.log("opened", revealGuideMenu);
-
+    const showGuideSettings = () => {
+        console.log('opened guide menu');
         !revealGuideMenu.current.time() > 0 ? revealGuideMenu.current.play() : revealGuideMenu.current.reverse();
-      };
+    };
+
+    const extendGuideMenu = () => {
+        !extendMenu.current.time() > 0 ? extendMenu.current.play() : extendMenu.current.reverse();
+
+        guideSettingsAnimate.current.play();
+
+        revealAboutDashboard.current.play();
+    }
+
+    const closeFullMenu = () => {
+        closeExtendedMenu.current.play();
+    }
 
 
-    return {revealGuideMenu, guideMenuRef, guidePanelRef, openGuideMenu}
+    return {revealGuideMenu, 
+            extendMenu,
+            revealAboutDashboard, 
+            showGuideSettings,
+            extendGuideMenu,
+            closeFullMenu,
+            guideSettingsAnimate, 
+            guideMenuRef, 
+            guidePanelRef,
+            guideSettingsRef,
+            aboutDashboardPageRef,}
 };

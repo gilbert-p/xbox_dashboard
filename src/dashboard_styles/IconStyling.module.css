@@ -136,3 +136,17 @@
     background-repeat: no-repeat;
     transform: translate(20px, 10px);
 }
+
+.github_logo {
+    background-image: url('../assets/icons/64x64_icons/github_logo.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.react_logo {
+    background-image: url('../assets/icons/64x64_icons/react_logo.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}

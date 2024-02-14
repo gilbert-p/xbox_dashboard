@@ -1,9 +1,9 @@
 import React, {useRef, useState, forwardRef, useEffect, useCallback, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import reactFullscreenStatus from "../custom_hooks/useFullscreenStatus";
-import useSound from 'use-sound';
 import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
+
+import backgroundAnimation from "../dashboard_styles/BackgroundPulse.module.css";
 
 import iconLibrary from "../dashboard_styles/IconStyling.module.css";
 
@@ -13,16 +13,15 @@ import useCurrentTime from '../custom_hooks/useCurrentTime';
 
 import { selectContextIndex,
          isTrayDisplayed,
-         updateGuideMenuState,
          isGuideOpen,}
 from './xboxSlice';
 
-import {updateSelectionHighlight,
-        navigateGuideMenu,
-        selectGuideMenuIndex,
-        selectHighlightState}
+import { selectGuideActiveState,
+         updateGuideActiveState } 
 from './menuSlice';
 
+
+import GuideMenu from "./components/GuideMenu";
 import NavBladesContainer from "./components/NavBladesContainer";
 import MarketplacePage from "./components/MarketplacePage";
 import XboxlivePage from './components/XboxlivePage';
@@ -40,59 +39,28 @@ import { debounce } from "lodash";
 
 
 
-const GuidePanelClock = () => {
-    const currentTime = useCurrentTime();
-
-    const hours = currentTime.getHours() % 12 || 12;
-    const minutes = currentTime.getMinutes();
-    const ampm = currentTime.getHours() >= 12 ? 'PM' : 'AM';
-
-    return (
-        <>
-          <span>{hours}</span>
-          <span>:</span>
-          <span>{minutes < 10 ? `0${minutes}` : minutes}</span>
-          <span>{ampm}</span>
-        </>
-      );
-};
-
-
-
-
 const Xbox = (props) => {
 
-    const bladeContainerRef= useDashboardAnimation();
+    const dispatch = useDispatch();
 
-    const guideMenuRef = useRef(null);
-    const guidePanelRef = useRef(null);
+    const bladeContainerRef= useDashboardAnimation();
     const guidePanelAnimation = useGuidePanelAnimation();
 
-
-    const currentTime = useCurrentTime();
+    const guideActiveState = useSelector(selectGuideActiveState);
 
     
     
     //Dashboard state variables
     const current_context_index = useSelector(selectContextIndex);
     const display_tray = useSelector(isTrayDisplayed);
-    const is_guide_open = useSelector(isGuideOpen);
-
-
-    const guideMenuIndex = useSelector(selectGuideMenuIndex);
-    const isHighlightActive = useSelector(selectHighlightState);
-
 
 
     //Refs for animating elements
     const xboxBladeContainerRef = useRef(null);
-    const marketplaceBackgroundRef = useRef(null);
-
-    const [isMenuOpen, setXboxMenuState] = useState(false);
-
-    const panelref = useRef(null);
 
 
+
+    //Sound Variables
     const bladeSfxSprite = {
         xbl_shift: [0,500],
         games_shift: [600, 450],
@@ -107,36 +75,29 @@ const Xbox = (props) => {
         close_guide_sfx: [1200, 500],
     }
 
+
     const bladeSFX = useAudioSound(blade_sound_sfx, bladeSfxSprite);
 
     const utilitySFX = useAudioSound(utility_sound_sfx, utilitySfxSprite);
 
-    const dispatch = useDispatch();
-
-    const delayInput = useCallback(
-        debounce((fn) => {
-            dispatch(fn);
-            }, 700),
-            []
-    );
 
 
     const shiftBladeLeft = () => {
         switch(current_context_index) {
             case 1 :
-                bladeSFX['play']({id: 'xbl_shift'});
+                bladeSFX.current['play']({id: 'xbl_shift'});
                 bladeContainerRef.shiftLeft();
                 break;
             case 2:
-                bladeSFX['play']({id: 'xbl_shift'});
+                bladeSFX.current['play']({id: 'xbl_shift'});
                 bladeContainerRef.shiftLeft();
                 break;
             case 3:
-                bladeSFX['play']({id: 'games_shift'});
+                bladeSFX.current['play']({id: 'games_shift'});
                 bladeContainerRef.shiftLeft();
                 break;
             case 4:
-                bladeSFX['play']({id: 'media_shift'});
+                bladeSFX.current['play']({id: 'media_shift'});
                 bladeContainerRef.shiftLeft();
                 break;
             case 'default': break;
@@ -146,19 +107,19 @@ const Xbox = (props) => {
     const shiftBladeRight = () => {
         switch(current_context_index) {
             case 0 :
-                bladeSFX['play']({id: 'xbl_shift'});
+                bladeSFX.current['play']({id: 'xbl_shift'});
                 bladeContainerRef.shiftRight();
                 break;
             case 1:
-                bladeSFX['play']({id: 'games_shift'});
+                bladeSFX.current['play']({id: 'games_shift'});
                 bladeContainerRef.shiftRight();
                 break;
             case 2:
-                bladeSFX['play']({id: 'media_shift'});
+                bladeSFX.current['play']({id: 'media_shift'});
                 bladeContainerRef.shiftRight();
                 break;
             case 3:
-                bladeSFX['play']({id: 'system_shift'});
+                bladeSFX.current['play']({id: 'system_shift'});
                 bladeContainerRef.shiftRight();
                 break;
             case 'default': break;
@@ -168,12 +129,12 @@ const Xbox = (props) => {
 
     const openGuideSfx = async () => {
         const playButtonSfx = async () => {
-            utilitySFX['play']({id:'std_button_press'});
-            await new Promise((resolve) => setTimeout(resolve, 300));
+            utilitySFX.current['play']({id:'std_button_press'});
+            await new Promise((resolve) => setTimeout(resolve, 150));
         }
 
         const playGuideOpenSfx = async () => {
-            utilitySFX['play']({id:'open_guide_sfx'});
+            utilitySFX.current['play']({id:'open_guide_sfx'});
             await new Promise((resolve) => setTimeout(resolve, 0));
         };
 
@@ -182,107 +143,63 @@ const Xbox = (props) => {
 
     }
 
-    const closeGuideSfx = () => {
-        utilitySFX['play']({id:'close_guide_sfx'});
-    }
-
-
-    const openGuideMenus = () => {
-        guidePanelAnimation.openGuideMenu();
+    const showGuideSettings = () => {
         openGuideSfx();
-        // updateGuideMenuState();
+        switch(guideActiveState) {
+            case 'closed':
+                guidePanelAnimation.showGuideSettings();
+                dispatch(updateGuideActiveState('half'));
+                break;
+            case 'half':
+                guidePanelAnimation.showGuideSettings();
+                dispatch(updateGuideActiveState('closed'));
+                break;
+            case 'full':
+                guidePanelAnimation.closeFullMenu();
+                dispatch(updateGuideActiveState('closed'));
+                break;
+            case 'default': break;
+        }
     }
 
+
+    const selectBackgroundAnimation = () => {
+        let backgroundPulseType = "";
+        switch(current_context_index){
+            case 0: backgroundPulseType = "marketplaceBackgroundStatic";break;
+            case 1: backgroundPulseType = "xboxlivePulse";break;
+            case 2: backgroundPulseType = "gamesPulse";break;
+            case 3: backgroundPulseType = "mediaPulse";break;
+            case 4: backgroundPulseType = "systemPulse";break;
+            default: break;
+        }
+        return backgroundPulseType;
+    }
+
+    const selectBackgroundDrop = () => {
+        let backgroundDrop = "";
+        switch(current_context_index){
+            case 1: backgroundDrop = styles.xboxliveBackground;break;
+            case 2: backgroundDrop = styles.gamesBackground;break;
+            case 3: backgroundDrop = styles.mediaBackground;break;
+            case 4: backgroundDrop = styles.systemBackground;break;
+            default: break;
+        }
+        return backgroundDrop;
+    }
       
 
     return (
         <div className={styles.xboxComponent}>
-            {/* <div onClick={()=> {}} className={styles.orientationRequestOverlay}>
-            </div> */}
 
             <div className={styles.arrowContextButtonContainer}>
-                    <div className={styles.xboxHomeLogo} onClick={()=>{openGuideMenus()}}><span className={styles.ellipseGlow}></span></div>
-                    <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
-                    <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}>
-
-                    
-
-                    </div>
+                <div className={styles.xboxHomeLogo} onClick={()=>{showGuideSettings()}}><span className={styles.ellipseGlow}></span></div>
+                <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
+                <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
             </div>
 
-            <div id={styles['guideMenuPanel']} className={styles.guideMenuContainer} ref={guidePanelAnimation['guideMenuRef']}>
-                    <div  className={styles.guidePanel} ref = {guidePanelAnimation['guidePanelRef']}>
-                        <div className={styles.nameplateEdge}></div>
-                        <div className={styles.guidePanelMask}>
-                            <div className={styles.guidePanelBackground}>
-                                    
-
-
-                                    <div className={styles.profileContainer}>
-                                        <div className={styles.profileImgContainer}>
-                                            <div className={styles.profileIcon}>
-                                                <div className={styles.iconGloss}></div>
-                                            </div>
-                                        </div>
-                                        <div className={styles.profileDescription}>
-                                            <p className={styles.gamerscoreTitle}>Gamerscore</p>
-                                            <p className={styles.gamerscoreValue}>21117</p>
-                                            <p className={styles.zoneTitle}>Status</p>
-                                            <div className={styles.zoneStatus}>Online</div>
-                                        </div>
-                                    </div>
-
-                                    <div className={styles.multiButtonListContainer}>
-                                        <p className={styles.multiButtonTitle}>About</p>
-                                        <div className={styles.buttonGroup}>
-                                            <button className={styles.skewmorphButton}></button>
-                                            <button className={styles.skewmorphButton}></button>
-                                            <button className={styles.skewmorphButton}></button>
-                                        </div>
-                                    </div>
-
-                                    <div id={itemSelectStyles["guideSelectList"]} className={`${itemSelectStyles.selectItemListContainer}`}>
-                                        <div className={itemSelectStyles.innerListContainer} >
-                                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGuideMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.card_icon}`}></span>
-                                                <p>
-                                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
-                                                    Redeem Code
-                                                </p>
-                                                <div className={itemSelectStyles.listItemBorder}></div>
-                                            </div>
-                                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGuideMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span>
-                                                <p>
-                                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
-                                                    Active Downloads
-                                                </p>
-                                                <div className={itemSelectStyles.listItemBorder}></div>
-                                            </div>
-                                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGuideMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.crown_icon}`}></span>
-                                                <p>
-                                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
-                                                    Account Management
-                                                </p>
-                                                <div className={itemSelectStyles.listItemBorder}></div>
-                                            </div>
-                                        </div>
-                    </div>
-
-
-
-                            </div>
-                            <div className={styles.guidePanelTopBorder}>
-                                <div className={styles.guidePanelClockContainer}>
-                                    <GuidePanelClock/>
-                                </div>
-                            </div>
-                            <div className={styles.guidePanelBottomBorder}></div>
-                        </div>
-
-                    </div>
-            </div>  
+            <GuideMenu guideAnimationRef={guidePanelAnimation}
+                       />
          
 
             {/* Renders the blade components */}
@@ -296,29 +213,66 @@ const Xbox = (props) => {
 
                     {/* Safe Viewing area */}
                     <div className={styles.pageContentArea} ref={xboxBladeContainerRef}>
-                        <MarketplacePage ref={marketplaceBackgroundRef}/>
+
+
+                    <div id={backgroundAnimation[`${selectBackgroundAnimation()}`]} className={`${selectBackgroundDrop()}`} >
+                        <div className={`${backgroundAnimation.pulseContainer}`}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}}>
+                                <div className={backgroundAnimation.pulseRingInner}></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        <div className={styles.dashboardWhiteUnderlay}></div>
+                        <MarketplacePage/>
                         <XboxlivePage current_context_index={current_context_index}/>
                         <GamesPage current_context_index={current_context_index}/>
                         <MediaPage current_context_index={current_context_index}/>
                         <SystemPage current_context_index={current_context_index}/>
-                    {/* Buttons, System Tray */}
-                    <div className={styles.staticContent}>
-                        <div className={styles.curvedGlassOverlay}></div>
 
-                        <div className={styles.topBorder}></div>
-                        <div className={styles.bottomBorder}></div>
+                        {/* Buttons, System Tray */}
+                        <div className={styles.staticContent}>
 
-                        <div className={styles.leftEdge}></div>
-                        <div className={styles.rightEdge}></div>
 
-                        <div className={`${styles.systemTrayContainer} ${!display_tray ? transitionStyles.makeTransparent : undefined}`}>
-                            <div className={styles.trayEllipse}></div>
-                            <div className={styles.trayRect}></div>
-                            <div className={styles.trayTriangleButton}></div>
-                            <div className={styles.trayRectButton}></div>
-                            <p>Open Tray</p>
+                            <div className={styles.leftEdge}></div>
+                            <div className={styles.rightEdge}></div>
+
+                            <div className={`${styles.systemTrayContainer} ${!display_tray ? transitionStyles.makeTransparent : undefined}`}>
+                                <div className={styles.trayEllipse}></div>
+                                <div className={styles.trayRect}></div>
+                                <div className={styles.trayTriangleButton}></div>
+                                <div className={styles.trayRectButton}></div>
+                                <p>Play Halo 3</p>
+                            </div>
                         </div>
-                    </div>
                     </div>
                         <section className={styles.gamesContainer}>
 

@@ -40,9 +40,7 @@ const XboxlivePage = (props) => {
         
         let highlight_state = false;
 
-        if(isHighlightActive) {
-            highlight_state = target_index !== current_menu_index ? true: false;
-        }
+        highlight_state = target_index !== current_menu_index ? true: false;
 
         if(highlight_state) {
             return transitionStyles.instantTransparent;
@@ -50,48 +48,12 @@ const XboxlivePage = (props) => {
         else {
             return "";
         }
-
-
     };
 
   return (
      <>
         <div id={xboxliveStyles["xboxliveContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 1 ? 1 : -1}`}}>
 
-        <div className={styles.xboxliveBackground} >
-            <div id={backgroundAnimation["xboxlivePulse"]} className={`${backgroundAnimation.pulseContainer} ${current_context_index !== 1 ? transitionStyles.makeTransparent : ""}`}>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-                <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}}>
-                    <div className={backgroundAnimation.pulseRingInner}></div>
-                </div>
-            </div>
-        </div>
 
         <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.makeTransparent : ""}`}>
             <div className={pageGridStyles.leftContent}>

@@ -79,7 +79,7 @@ function App() {
     const updateContainerSize = () => {
         let sizingProperties = {};
 
-        if(xboxBladeContainerRef.current){
+        if(xboxBladeContainerRef.current) {
             sizingProperties.width = xboxBladeContainerRef.current.offsetWidth;
             sizingProperties.height = xboxBladeContainerRef.current.offsetHeight; 
             
@@ -88,8 +88,6 @@ function App() {
 
             getUpdatedSize(window.innerWidth, window.innerHeight);
 
-
-            console.log(sizingProperties);
         }
     }
 

@@ -5,7 +5,9 @@
 }
 
 .instantTransparent {
-    visibility: hidden !important;
+    opacity: 0;
+    transition: opacity 0 linear;
+    pointer-events: none;
 }
 
 .removeDisplay {

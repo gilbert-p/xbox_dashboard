@@ -10,12 +10,14 @@
     /* border: 3px solid pink; */
 }
 
+/*TODO: Create gsap timeline to shift the centered content everytime you shift to a new tab */
 .xboxComponent {
-    position: relative;
+    position: absolute;
     display: inline-block;
     width: inherit;
+    width: inherit;
     height: inherit;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .mainContainer {
@@ -44,6 +46,7 @@
 .bladeContainerMask {
     position: absolute;
     width: inherit;
+    /* width: calc(100% + 250px); */
     height: inherit;
     left: 50%;
     top: 50%;
@@ -102,7 +105,7 @@
 
 .topBorder {
     position: absolute;
-    width: calc(100%);
+    width: calc(99%);
     height: 90px;
     left: 51%;
     transform: translateX(-50%);
@@ -118,7 +121,19 @@
     left: 51%;
     transform: translateX(-50%);
     box-shadow: inset 0 -1px 7px 0px black;
-    border-radius: 70px 70px 0px 0px;
+    border-radius: 80px 80px 0px 0px;
+}
+
+.dashboardWhiteUnderlay {
+    position: absolute;
+    left: 10px;
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/images/dashboard_white_underlay.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
+
 }
 
 .leftEdge {
@@ -469,6 +484,7 @@
 
 
 /*************************** Guide Menu  ************************************/
+
 .guideMenuContainer {
     position: absolute;
     width: inherit;
@@ -478,51 +494,12 @@
     transform: translateX(0%);
     background-color: rgba(48, 48, 48, 0.422);
     opacity: 0;
+    overflow: hidden;
     /* visibility: hidden; */
 }
 
 #guideMenuPanel{
     /* z-index: 999; */
-}
-
-.guidePanel {
-    position: relative;
-    width: 1120px;
-    height: inherit;
-    left: -105%;
-    transform: translateX(0%);
-    /* background-color: lightgray; */
-    /* transform: translateX(-100%); */
-    z-index: 999;
-    overflow: hidden;
-}
-
-.nameplateEdge {
-    position: absolute;
-    display: inline-block;
-    height: calc( 100% + 40px);
-    top: -20px;
-    /* left: 30px; */
-    left: 85%;
-    width: 100px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    filter: drop-shadow(-1 px 0px 4px #ffffff09);
-    /* background-color: red; */
-    pointer-events: none;
-    background-image: url("../assets/images/nameplate_edge.png");
-}
-
-.guidePanelMask {
-    position: absolute;
-    width: 100%;
-    left: -100px;
-    height: calc(100% + 10px);
-    /* outline: 2px solid red; */
-    overflow: hidden;
-    z-index: -1;
-    /* background-color: red; */
-
 }
 
 .guidePanelTopBorder {
@@ -531,7 +508,7 @@
     display: inline-block;
     background-repeat: no-repeat;
     background-size: 100%;
-    left: -30px;
+    left: -120px;
     /* background-position: 100% 0%; */
     height: 100px;
     /* transform: translateX(-31%); */
@@ -551,13 +528,13 @@
     display: inline-block;
     background-repeat: no-repeat;
     background-size: 100%;
-    left: 130px;
+    left: -65px;
     /* background-position: 10% 0%; */
     height: 150px;
     /* transform: translateX(-31%); */
-    width: 1020px;
+    width: 1120px;
     /* left: calc(-2%); */
-    top: calc(100% - 150px);
+    top: calc(100% - 135px);
     /* transform: translateX(-50%); */
     /* box-shadow: inset 0 -1px 7px 0px black; */
 
@@ -565,12 +542,92 @@
     background-image: url("../assets/images/guideline_menu_bottom_border.png")
 }
 
+.guidePanel {
+    position: relative;
+    width: 1120px;
+    height: inherit;
+    left: -105%;
+    transform: translateX(0%);
+    /* background-color: lightgray; */
+    /* transform: translateX(-100%); */
+    z-index: 999;
+    background-image: url("../assets/images/guideline_background.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: 5%;
+    overflow: hidden;
+}
+
+.nameplateEdge {
+    position: absolute;
+    display: inline-block;
+    height: calc( 100% + 40px);
+    top: -20px;
+    /* left: 30px; */
+    left: 85%;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(-1 px 0px 4px #ffffff09);
+    /* background-color: red; */
+    pointer-events: none;
+    background-image: url("../assets/images/nameplate_edge.png");
+}
+
+
+.guideSettingsView {
+    position: absolute;
+    width: 420px;
+    height: inherit;
+    left: calc(100% - 585px);
+    top: 110px;
+    opacity: 1;
+}
+
+
+.guideControllerIndicatorIcon {
+    position: absolute;
+    left: 25px;
+    top: 160px;
+    width: 35px;
+    height: 35px;
+    background-image: url("../assets/images/guide_controller_indicator_icon.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.guideNameplateTitle {
+    position: absolute;
+    font-size: calc(var(--text-link-size));
+    font-weight: bold;
+    /* width: auto;
+    height: auto; */
+    left: -10px;
+    top: 360px;
+    transform: rotate(90deg);
+}
+
+
+.guidePanelMask {
+    position: absolute;
+    width: 1120px;
+    left: 0px;
+    height: 770px;
+    outline: 2px solid red;
+    /* overflow: hidden; */
+    z-index: -1;
+    /* background-color: red; */
+
+}
+
+
+
 .guidePanelBackground {
     position: absolute;
     width: inherit;
     height: inherit;
     left: -30px;
-    background-image: url("../assets/images/guideline_background.png");
+    /* background-image: url("../assets/images/guideline_background.png"); */
     z-index: -1;
     padding-top: 110px;
     display: flex;
@@ -587,7 +644,7 @@
     height: 50px;
     /* border: 2px solid red; */
     top: 35px;
-    margin-left: 965px;
+    margin-left: 970px;
     padding-top: 25px;
 
     >span {
@@ -602,7 +659,7 @@
         margin-right: 2px;
     }
     >span:nth-child(3) {
-        margin-right: 10px;
+        margin-right: 5px;
     }
 }
 
@@ -734,7 +791,7 @@
     width: 400px;
     height: 95px;
     border-radius: 8px;
-    box-shadow: 0px 0px 4px 0px black;
+    box-shadow: inset 0px 0px 4px 0px black;
 }
 
 .multiButtonTitle {
@@ -751,21 +808,412 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    width: calc(100% - 20px);
+    width: calc(100% - 15px);
     height: 50px;
+    top: 40px;
     margin-left: 10px;
 }
 
+.buttonGroup > span {
+    /* display: inline-block; */
+    position: relative;
+    top: 2.7em;
+    width: 125px;
+    height: inherit;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 85%;
+        height: 65%;
+        top: 10px;
+        left: 10px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.8) 23%, rgba(255,255,255,0) 100%);
+    }
+}
+
 .skewmorphButton {
+    position: relative;
     width: 125px;
     height: inherit;
     background-color: initial;
     border: none;
     background-image: url("../assets/images/guide_menu_button.png");
     margin-right: 5px;
+    /* background-size: contain; */
+    background-repeat: no-repeat;
+
+    .buttonIcon {
+        position: absolute;
+        display: inline-block;
+        left: 0;
+        top: 0;
+        height: 100%;
+    }
+}
+
+#skewButton_1 {
+    margin-top: 3px;
+    width: 50px;
+}
+
+#skewButton_2 {
+    margin-top: -3px;
+    width: 72px;
 }
 
 
+.multiButtonListContainer .multiButtonTitle {
+    position: absolute;
+    display: block;
+    height: 2em;
+
+}
+
+.skewmorphButton:hover {
+    cursor: pointer;
+}
+
+.skewmorphButtonHighlight {
+    position: absolute;
+    width: 88%;
+    height: 60%;
+    left: 8px;
+    top: 10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4) 23%, rgba(255, 255, 255, 0) 100%);
+    /* transition: opacity var(--transition_duration); */
+}
+
+.guideMusicPlayer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: calc(0);
+    top: 10px;
+    width: 400px;
+    height: 95px;
+    border-radius: 8px;
+    box-shadow: inset 0px 0px 4px 0px black;
+}
+
+.musicPlayerActionButtonContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    padding-top: 5px;
+    padding-left: 5px;
+
+    > .skewmorphButton .skewmorphButtonHighlight {
+        width: 83%;
+    }
+
+
+    #playButton {
+        width: 85px;
+        height: inherit;
+        background-image: url("../assets/images/guide_play_button.png");
+        background-size: cover;
+        padding:0;
+
+        .guidePlayIcon {
+            position: absolute;
+            width: 22px;
+            height: inherit;
+            left: 33px;
+            top: 12px;
+            background-image: url("../assets/images/guide_play_icon.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .guidePauseIcon {
+            position: absolute;
+            width: 19px;
+            height: 45px;
+            left: 34px;
+            top: 13px;
+            background-image: url("../assets/images/guide_pause_icon.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+    }
+    #previousSelectionButton {
+        width: 70px;
+        height: inherit;
+        background-image: url("../assets/images/guide_music_secondary_button.png");
+        background-size: cover;
+        padding:0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 20px;
+            left: 35%;
+            top: 30%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #7a7a7add;
+            z-index: -1;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 60%;
+            top: 30%;
+            transform: translate(-50%);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 18px solid #7a7a7add;
+            z-index: -1;
+        }
+    }
+    #nextSelectionButton {
+        width: 70px;
+        height: inherit;
+        background-image: url("../assets/images/guide_music_secondary_button.png");
+        background-size: cover;
+        padding:0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 20px;
+            left: 60%;
+            top: 30%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #7a7a7add;
+            z-index: -1;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 35%;
+            top: 30%;
+            transform: translate(-50%);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 18px solid #7a7a7add;
+            z-index: -1;
+        }
+    }
+    #arrowSelectionButton {
+        width: 70px;
+        height: inherit;
+        background-image: url("../assets/images/guide_music_secondary_button.png");
+        background-size: cover;
+        padding:0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 15px;
+            left: 37%;
+            top: 40%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #7a7a7add;
+            z-index: -1;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 15px;
+            left: 55%;
+            top: 30%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #7a7a7add;
+            z-index: -1;
+        }
+
+        > span::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 37%;
+            top: 28%;
+            transform: translate(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 10px solid #7a7a7add;
+            z-index: -1;
+        }
+
+        > span::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 55%;
+            top: 50%;
+            transform: translate(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #7a7a7add;
+            z-index: -1;
+        }
+    }
+
+    #soundAdjustButton {
+        width: 70px;
+        height: inherit;
+        background-image: url("../assets/images/guide_music_secondary_button.png");
+        background-size: cover;
+        padding:0;
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 35px;
+            height: inherit;
+            left: 55%;
+            top: 23%;
+            transform: translate(-50%);
+            background: url("../assets/images/volume_adjust_icon.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: -1;
+        }
+    }
+
+}
+
+.musicPlayerSongTitleContainer {
+    width: calc(100% - 20px);
+    height: 25px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 8px;
+    box-shadow: inset 0px 0px 4px 0px white;
+    cursor: pointer;
+
+    > p {
+        position: relative;
+        font-size: calc(var(--meta-panel-header));
+        padding-left: 10px;
+        top: -2px;
+    }
+
+}
+
+.guideMusicPlayerTitle {
+
+}
+
+.backgroundHighlightGlow {
+    position: absolute;
+    width: 95%;
+    height: 33px;
+    left: 50%;
+    transform: translate(-50%, -5%);
+    top: 57px;
+    background: radial-gradient(ellipse, rgba(255,255,255,1) 30%, rgba(174,200,159,1) 65%);
+    border-radius:50%;
+    z-index: -1;
+}
+
+.guideMenuXboxLogoContainer {
+    position: relative;
+    width: 400px;
+    height: 95px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: inset 0px 0px 7px 4px rgb(99, 99, 99);
+    background: linear-gradient(90deg, rgba(188,191,190,1) 0%, rgba(255,255,255,1) 45%);
+
+    .xboxGuideLogo {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url("../assets/images/xbox_360_guide_logo.png");
+        background-repeat: no-repeat;
+        background-size: 70%;
+        background-position: 50%;
+    }
+}
+
+
+
+/************* Guide menu styling END ***************/
+
+
+
+.aboutDashboardContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 850px;
+    height: 560px;
+    left: 80px;
+    top: 60px;
+
+    opacity: 0;
+    display: none;
+
+    > h2 {
+        font-size: calc(var(--screen-heading-size));
+        color: white;
+        margin-bottom: 20px;
+    }
+
+}
+
+.scrollableContent {
+    position: relative;
+    width: inherit;
+    height: 520px;
+    overflow-y:auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgb(218, 218, 218) rgba(0, 0, 0, 0.201);
+
+    > h3 {
+        font-size: calc(var(--text-link-size));
+        color: white;
+        margin-top: 20px;
+    }
+}
+
+.articleImg {
+    width: 850px;
+    min-height: 200px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#timeMagazineBillGates {
+    background-image: url("../assets/images/time_magazine_bill_gates.png");
+}
+
+#wmpSkinsImg {
+    background-image: url("../assets/images/wmpSkinsImg.png");
+}
+
+.articleParagraph {
+    margin-top: 5px;
+    font-size: calc(var(--text-body-size));
+}
+
+#wmpParagraph {
+    position: relative;
+    top: 10px;
+    margin-bottom: 40px;
+}
 
 .appContainer {
     transform: translate(-50%,-50%) scale(calc(var(--scaling)));

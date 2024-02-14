@@ -32,7 +32,7 @@ const MarketplacePage = (props) => {
   return (
      <>
         <div id={marketplaceStyles["marketplaceContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 0 ? 1 : -1}`}}>
-        <div className={styles.marketplaceBackground}></div>
+        {/* <div className={styles.marketplaceBackground}></div> */}
             <div id={pageGridStyles["marketplaceGrid"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 0 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
                     <div className={marketplaceStyles.selectOption}>

@@ -47,20 +47,33 @@
         height: 150%;
     }
 }
-
-
-#systemPulse .pulseRing {
-    border-color:#6d4eaf;
+#marketplaceBackgroundStatic {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url("../assets/images/marketplace_background.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 75% 50%;
 }
 
-#xboxlivePulse .pulseRing {
+#systemPulse .pulseContainer .pulseRing {
+    border-color:#5f3ea7;
+}
+
+#xboxlivePulse .pulseContainer .pulseRing {
     border-color:#c2843d;
 }
 
-#gamesPulse .pulseRing {
+#gamesPulse .pulseContainer .pulseRing {
     border-color: #438c21;
 }
 
-#mediaPulse .pulseRing {
+#mediaPulse .pulseContainer .pulseRing {
     border-color: #216cb3;
+}
+
+/* Zeroth index will be transparent */
+ .pulseContainer .pulseRing {
+    border-color: #216cb300;
 }
