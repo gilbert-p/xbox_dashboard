@@ -33,8 +33,8 @@ export default function useDashboardBladeAnimation() {
     // GSAP Timelines
     
     initializeRef.current = gsap.timeline().to(mountRef.current, { opacity: 1, duration: 0.2 }).pause();
-    shiftLeftTransition.current = gsap.timeline().to(mountRef.current, { x: '+=40px', duration: 0.3 }).pause();
-    shiftRightTransition.current = gsap.timeline().to(mountRef.current, { x: '-=40px', duration: 0.3 }).pause();
+    shiftLeftTransition.current = gsap.timeline().to(mountRef.current, { x: '+=55px', duration: 0.3 }).pause();
+    shiftRightTransition.current = gsap.timeline().to(mountRef.current, { x: '-=55px', duration: 0.3 }).pause();
   };
   initializeTimeline();
 

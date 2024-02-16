@@ -38,7 +38,7 @@
     height: inherit;
     transform: translate(-50%, -50%);
     z-index: 10;
-    overflow: hidden;
+    /* overflow: hidden; */
     pointer-events: none;
 }
 
@@ -1156,10 +1156,11 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 850px;
+    width: 870px;
     height: 560px;
     left: 80px;
     top: 60px;
+    margin-right: 20px;
 
     opacity: 0;
     display: none;
@@ -1206,6 +1207,7 @@
 
 .articleParagraph {
     margin-top: 5px;
+    padding-right:5px;
     font-size: calc(var(--text-body-size));
 }
 

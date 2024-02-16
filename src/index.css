@@ -16,7 +16,7 @@
 }
 
 :root {
-  --blade-size: 90px;
+  --blade-size: 86px;
   --container-width: 1020px;
   --container-height: 770px;
   --border_radius: 10px;
@@ -36,6 +36,7 @@
 
   /*  Colors */
   --dashtext-color: rgba(15, 15, 15, 0.9);
+  --white-text: white;
 }
 
 * {

@@ -19,7 +19,7 @@
     height: calc(var(--container-height));
     left: 50%;
     transform: translateX(-50%);
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 
 .centeredContent {
@@ -29,28 +29,20 @@
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
-    /* background-color: lightseagreen; */
 }
 
 .blade {
     position: absolute;
-    /* left: -90px; */
-    /* width: 30px; */
-    /* width: var(--blade-size); */
     height: 100%;
-    /* background-color: greenyellow; */
-    /* border: 1px solid black; */
     transition: transform 0.6s ease-in;
-    /* pointer-events: none; */
     overflow: visible;
-    /* left: calc(((100vh) * (-1/9))); */
 }
 
 
 .bladeGroup {
     position: relative;
-    height: 100%;
-    width: 35px;
+    height: calc(100% + 20px);
+    width: 100px;
     left: 45px;
     /* background-color: red; */
     overflow: visible;
@@ -59,7 +51,7 @@
 
 .bladeImgContainer {
     position: absolute;
-    height: calc( 100% + 40px);
+    height: inherit;
     top: -20px;
     left: 30px;
     width: 100px;
@@ -78,72 +70,135 @@
     cursor: pointer;
 }
 
+#marketplaceBlade-left{}
+
+#xboxliveBlade-left{}
+
 .marketplaceActiveBlade {
-    background-image: url("../assets/images/new_marketplace_blade.png")
+    background-image: url("../assets/images/marketplace_active_blade.png");
+    background-size: cover;
 }
 
 .xboxliveActiveBlade {
-    background-image: url("../assets/images/xboxlive_active_blade.png")
+    background-image: url("../assets/images/xboxlive_active_blade.png");
+    background-size: cover;
 }
 
 .gamesActiveBlade {
     background-image: url("../assets/images/games_active_blade.png");
+    background-size: cover;
 }
 
 .mediaActiveBlade {
     background-image: url("../assets/images/media_active_blade.png");
+    background-size: cover;
 }
 
 .systemActiveBlade {
     background-image: url("../assets/images/system_active_blade.png");
+    background-size: cover;
 }
 
 
 .rightBladeInactive {
     background-image: url("../assets/images/inactive_blade_right.png");
+    /* background-size: cover; */
 }
 
 .leftBladeInactive {
-    background-image: url("../assets/images/inactive_blade_left_redesign.png");
+    background-image: url("../assets/images/inactive_blade_left.png");
+    /* background-size: cover; */
+}
+
+#marketplaceBladeLeftActive {
+    transform: translateX(-60px);
+}
+
+#marketplaceBladeLeftInactive {
+    transform: translateX(-55px);
+}
+
+#xboxliveBladeLeftActive {
+    transform: translateX(-7px);
+}
+
+#xboxliveBladeLeftInactive {
+    transform: translateX(-0px);
+}
+
+#gamesBladeLeftActive {
+    transform: translateX(47px);
+}
+
+#gamesBladeLeftInactive {
+    transform: translateX(55px);
+}
+
+#mediaBladeLeftActive {
+    transform: translateX(102px);
+}
+
+#mediaBladeLeftInactive {
+    transform: translateX(110px);
+}
+
+#systemBladeLeftActive {
+    transform: translateX(157px);
 }
 
 .leftGroup {
     position: absolute;
     height: inherit;
     left: -170px;
+
+    /* .blade:nth-child(1){
+        transform: translateX(-28px);
+    }
+
+    .blade:nth-child(2){
+        transform: translateX(25px);
+    }
+    
+    .blade:nth-child(3){
+        transform: translateX(76px);
+    }
+    
+    .blade:nth-child(4) {
+        transform: translateX(117px);
+    }
+    
+    .blade:nth-child(5) {
+        transform: translateX(158px);
+    } */
 }
 
 .rightGroup {
     position: absolute;
     height: inherit;
     left: calc(100% - 305px);
-    /* left: 300px; */
+
+    .blade:nth-child(1){
+        transform: translateX(0px);
+    }
+
+    .blade:nth-child(2){
+        transform: translateX(57px);
+    }
+    
+    .blade:nth-child(3){
+        transform: translateX(114px);
+    }
+    
+    .blade:nth-child(4) {
+        transform: translateX(171px);
+    }
+    
+    .blade:nth-child(5) {
+        transform: translateX(160px);
+    }
 }
 
-/* .blade:nth-child(1) {
-    transform: translateX(calc(((100vh) * (1/(22)))));
-} */
 
-
-.blade:nth-child(2){
-    /* transform: translateX(calc(((100vh) * (1/(22))))); */
-    transform: translateX(40px);
-}
-
-.blade:nth-child(3){
-    /* transform: translateX(calc(((100vh) * (1/(10.8))))); */
-    transform: translateX(80px);
-}
-
-.blade:nth-child(4) {
-    /* transform: translateX(calc(((100vh) * (1/7.2)))); */
-    transform: translateX(120px);
-}
-
-.blade:nth-child(5) {
-    /* transform: translateX(calc(((100vh) * (1/5.3)))); */
-    transform: translateX(160px);
-}
 
 
 
@@ -193,7 +248,7 @@ path {
     z-index: -1;
     width: inherit;
     min-width: auto;
-    max-width: 65px;
+    max-width: 86px;
     height: inherit;
     left: 0;
     fill: url("#paint0_radial_216_168");
