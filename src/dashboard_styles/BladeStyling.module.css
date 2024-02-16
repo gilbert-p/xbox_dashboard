@@ -6,8 +6,6 @@
     height: 100%;
     display: flex;
     left: 170px;
-    /* background-color: lightskyblue; */
-    /* border: 2px solid red; */
     z-index: 10;
     transition: transform 0.8s ease-out;
 
@@ -19,7 +17,6 @@
     height: calc(var(--container-height));
     left: 50%;
     transform: translateX(-50%);
-    overflow: hidden;
 }
 
 .centeredContent {
@@ -33,7 +30,8 @@
 
 .blade {
     position: absolute;
-    height: 100%;
+    height: calc(100% + 0px);
+    width: 100px;
     transition: transform 0.6s ease-in;
     overflow: visible;
 }
@@ -41,24 +39,23 @@
 
 .bladeGroup {
     position: relative;
-    height: calc(100% + 20px);
-    width: 100px;
-    left: 45px;
+    height: inherit;
+    width: 95px;
+    left:0;
     /* background-color: red; */
     overflow: visible;
-    
 }
 
 .bladeImgContainer {
     position: absolute;
+    display: inline-block;
+    width: inherit;
     height: inherit;
-    top: -20px;
-    left: 30px;
-    width: 100px;
+    top: 0;
+    left: 0;
     background-repeat: no-repeat;
-    background-size: contain;
-    transform: translateX(-35px);
-    filter: drop-shadow(-1 px 0px 4px #ffffff09);
+    background-size: auto;
+    background-position-y: -10px;
     /* background-color: red; */
     pointer-events: none;
 }
@@ -70,33 +67,38 @@
     cursor: pointer;
 }
 
-#marketplaceBlade-left{}
+#marketplaceBlade-left{
+    .bladeImgContainer {
+        /* background-color: green; */
+    }
+}
 
-#xboxliveBlade-left{}
+#xboxliveBlade-left{
+}
 
 .marketplaceActiveBlade {
     background-image: url("../assets/images/marketplace_active_blade.png");
-    background-size: cover;
+    /* background-color: blue; */
 }
 
 .xboxliveActiveBlade {
     background-image: url("../assets/images/xboxlive_active_blade.png");
-    background-size: cover;
+    background-size: auto;
 }
 
 .gamesActiveBlade {
     background-image: url("../assets/images/games_active_blade.png");
-    background-size: cover;
+    background-size: auto;
 }
 
 .mediaActiveBlade {
     background-image: url("../assets/images/media_active_blade.png");
-    background-size: cover;
+    background-size: auto;
 }
 
 .systemActiveBlade {
     background-image: url("../assets/images/system_active_blade.png");
-    background-size: cover;
+    background-size: auto;
 }
 
 
@@ -149,48 +151,28 @@
 .leftGroup {
     position: absolute;
     height: inherit;
-    left: -170px;
-
-    /* .blade:nth-child(1){
-        transform: translateX(-28px);
-    }
-
-    .blade:nth-child(2){
-        transform: translateX(25px);
-    }
-    
-    .blade:nth-child(3){
-        transform: translateX(76px);
-    }
-    
-    .blade:nth-child(4) {
-        transform: translateX(117px);
-    }
-    
-    .blade:nth-child(5) {
-        transform: translateX(158px);
-    } */
+    left: -90px;
 }
 
 .rightGroup {
     position: absolute;
     height: inherit;
-    left: calc(100% - 305px);
+    left: calc(100% - 270px);
 
     .blade:nth-child(1){
         transform: translateX(0px);
     }
 
     .blade:nth-child(2){
-        transform: translateX(57px);
+        transform: translateX(55px);
     }
     
     .blade:nth-child(3){
-        transform: translateX(114px);
+        transform: translateX(110px);
     }
     
     .blade:nth-child(4) {
-        transform: translateX(171px);
+        transform: translateX(165px);
     }
     
     .blade:nth-child(5) {
@@ -204,14 +186,33 @@
 
 .bladeTitle {
     position: relative;
-    font-size:1.4em;
+    font-size:1.5em;
     top: 27%;
-    transform: translate(85%, -140%) rotate(90deg);
     /* color: rgba(18, 18, 18, 0.938); */
     color: rgba(0, 0, 0, 0.735);
 
     z-index: 30;
     white-space: nowrap;
+}
+
+#marketplaceTitle {
+    transform: translate(-40%, -20%) rotate(90deg);
+}
+
+#xboxliveTitle {
+    transform: translate(12%, -20%) rotate(90deg);
+}
+
+#gamesTitle{
+    transform: translate(65%, -20%) rotate(90deg);
+}
+
+#mediaTitle {
+    transform: translate(120%, -20%) rotate(90deg);
+}
+
+#systemTitle {
+    transform: translate(175%, -20%) rotate(90deg);
 }
 
 

@@ -8,6 +8,8 @@ let initialState = {
     xboxlive_menu_index: null,
     marketplace_menu_index: null,
 
+    show_blades: true,
+
 
     guide_menu_active_state: 'closed',
     guide_menu_link_stack_index: 0,
@@ -31,6 +33,12 @@ export const menuSlice = createSlice({
     name: "menu",
     initialState,
     reducers: {
+
+        updateShowBlades: (state, action) => {
+            state.show_blades = action.payload;
+        },
+
+
         updateSelectionHighlight: (state, action) => {
             state.show_selection_highlight = action.payload;
         },
@@ -97,7 +105,10 @@ export const menuSlice = createSlice({
     }
 });
 
-export const { updateSelectionHighlight,
+export const { 
+               updateShowBlades,
+
+               updateSelectionHighlight,
                navigateSystemMenu, 
                navigateMediaMenu, 
                navigateGamesMenu, 
@@ -122,6 +133,8 @@ export const { updateSelectionHighlight,
                updateMusicListSize,
 
             } = menuSlice.actions;
+
+export const selectShowBladeState = (state) => state.menu.show_blades;
 
 export const selectHighlightState = (state) => state.menu.show_selection_highlight;
 export const selectSystemMainMenuIndex = (state) => state.menu.system_menu_index;

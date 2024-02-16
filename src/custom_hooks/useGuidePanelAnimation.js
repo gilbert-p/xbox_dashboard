@@ -35,7 +35,6 @@ export default function useGuidePanelAnimation() {
 
 
         extendMenu.current = gsap.timeline(
-            // {onComplete: function(){closeExtendedMenu.current.time(0).pause()}}
         );
 
         extendMenu.current

@@ -17,7 +17,8 @@ import { selectContextIndex,
 from './xboxSlice';
 
 import { selectGuideActiveState,
-         updateGuideActiveState } 
+         updateGuideActiveState,
+         updateShowBlades } 
 from './menuSlice';
 
 
@@ -149,14 +150,17 @@ const Xbox = (props) => {
             case 'closed':
                 guidePanelAnimation.showGuideSettings();
                 dispatch(updateGuideActiveState('half'));
+                dispatch(updateShowBlades(false));
                 break;
             case 'half':
                 guidePanelAnimation.showGuideSettings();
                 dispatch(updateGuideActiveState('closed'));
+                dispatch(updateShowBlades(true));
                 break;
             case 'full':
                 guidePanelAnimation.closeFullMenu();
                 dispatch(updateGuideActiveState('closed'));
+                dispatch(updateShowBlades(true));
                 break;
             case 'default': break;
         }
