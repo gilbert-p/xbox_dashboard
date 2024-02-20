@@ -29,6 +29,7 @@ let initialState = {
 
 
     show_theme_select: false,
+    selected_theme: '',
 
 };
 
@@ -112,6 +113,9 @@ export const menuSlice = createSlice({
         updateShowThemeSelect: (state, action) => {
             state.show_theme_select = action.payload;
         },
+        updateSelectedTheme: (state, action) => {
+            state.selected_theme = action.payload;
+        },
     }
 });
 
@@ -144,6 +148,7 @@ export const {
 
 
                updateShowThemeSelect,
+               updateSelectedTheme,
 
             } = menuSlice.actions;
 
@@ -175,6 +180,7 @@ export const selectMusiclistSize = (state) => state.menu.music_list_size;
 
 
 export const selectShowThemeSelect = (state) => state.menu.show_theme_select;
+export const selectThemeSelection = (state) => state.menu.selected_theme;
 
 
 

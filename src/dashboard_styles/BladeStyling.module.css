@@ -112,6 +112,57 @@
     /* background-size: cover; */
 }
 
+
+
+.marketplaceActiveBlade_Carbon {
+    background-image: url("../assets/images/carbon_marketplace_active_blade.png");
+    /* background-color: blue; */
+}
+
+.xboxliveActiveBlade_Carbon {
+    background-image: url("../assets/images/carbon_xboxlive_active_blade.png");
+    background-size: auto;
+}
+
+.gamesActiveBlade_Carbon {
+    background-image: url("../assets/images/carbon_games_active_blade.png");
+    background-size: auto;
+}
+
+.mediaActiveBlade_Carbon {
+    background-image: url("../assets/images/carbon_media_active_blade.png");
+    background-size: auto;
+}
+
+.systemActiveBlade_Carbon {
+    background-image: url("../assets/images/carbon_system_active_blade.png");
+    background-size: auto;
+}
+
+
+.rightBladeInactive_Carbon {
+    background-image: url("../assets/images/carbon_inactive_blade_right.png");
+    /* background-size: cover; */
+}
+
+.leftBladeInactive_Carbon {
+    background-image: url("../assets/images/carbon_inactive_blade_left.png");
+    /* background-size: cover; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #marketplaceBladeLeftActive {
     transform: translateX(-60px);
 }

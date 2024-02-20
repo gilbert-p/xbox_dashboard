@@ -37,6 +37,7 @@ import {updateGuideMenuHighlight,
 
     updateShowThemeSelect,
     selectShowThemeSelect,
+    updateSelectedTheme,
     }
 from '../menuSlice';
 
@@ -344,7 +345,7 @@ const GuideMenu = (props) => {
 
                     <div id={itemSelectStyles["guideSelectTheme"]} className={`${itemSelectStyles.selectItemListContainer}`}>
                         <div id={itemSelectStyles["guideInnerListContainer"]} className={itemSelectStyles.innerListContainer} >
-                            <div  className={itemSelectStyles.listItem} onClick={()=>{console.log("Change Theme")}}
+                            <div  className={itemSelectStyles.listItem} onClick={()=>{dispatch(updateSelectedTheme(''));}}
                             onMouseEnter={()=>{dispatch(navigateGuideMenu(0));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
                                 <p>
                                     <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -352,11 +353,12 @@ const GuideMenu = (props) => {
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGuideMenu(1));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{dispatch(updateSelectedTheme('_Carbon'));}}
+                            onMouseEnter={()=>{dispatch(navigateGuideMenu(1));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
                                 {/* <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span> */}
                                 <p>
                                     <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    Dark Mode
+                                    Carbon
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
