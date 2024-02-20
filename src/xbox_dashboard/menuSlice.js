@@ -27,6 +27,9 @@ let initialState = {
     current_selected_song: '',
     music_list_size: 0,
 
+
+    show_theme_select: false,
+
 };
 
 export const menuSlice = createSlice({
@@ -101,7 +104,14 @@ export const menuSlice = createSlice({
         },
         updateMusicListSize: (state, action) => {
             state.music_list_size = action.payload;
-        }
+        },
+
+
+
+
+        updateShowThemeSelect: (state, action) => {
+            state.show_theme_select = action.payload;
+        },
     }
 });
 
@@ -132,6 +142,9 @@ export const {
                updateSelectedSong,
                updateMusicListSize,
 
+
+               updateShowThemeSelect,
+
             } = menuSlice.actions;
 
 export const selectShowBladeState = (state) => state.menu.show_blades;
@@ -159,6 +172,9 @@ export const selectMusicState = (state) => state.menu.is_song_playing;
 export const selectSongIndex = (state) => state.menu.song_index;
 export const selectCurrentSong = (state) => state.menu.current_selected_song;
 export const selectMusiclistSize = (state) => state.menu.music_list_size;
+
+
+export const selectShowThemeSelect = (state) => state.menu.show_theme_select;
 
 
 

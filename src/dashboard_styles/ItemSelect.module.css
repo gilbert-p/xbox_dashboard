@@ -51,6 +51,11 @@
     margin-top: 10px;
 }
 
+#guideSelectTheme {
+    max-width: 400px;
+    margin-top: 10px;
+}
+
 #marketSelectList {
     height: 100%;
 }

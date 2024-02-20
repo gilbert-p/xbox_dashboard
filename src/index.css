@@ -32,11 +32,14 @@
   --meta-panel-header: 20px;
   --legend-text-size: 16px;
 
+
   --card-border-radius: 6px;
 
   /*  Colors */
   --dashtext-color: rgba(15, 15, 15, 0.9);
+  --some-color: orange;
   --white-text: white;
+  --black-text: rgba(15, 15, 15, 0.9);
 }
 
 * {

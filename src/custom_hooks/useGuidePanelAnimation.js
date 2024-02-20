@@ -1,5 +1,8 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
+import { useSelector } from 'react-redux';
+
+import { selectGuideActiveState } from '../xbox_dashboard/menuSlice';
 
 export default function useGuidePanelAnimation() {
     const revealGuideMenu = useRef(null);
@@ -13,6 +16,15 @@ export default function useGuidePanelAnimation() {
 
     const revealAboutDashboard = useRef(null);
     const aboutDashboardPageRef = useRef(null);
+
+    const guideSelectThemeRef = useRef(null);
+    const showThemeSelection = useRef(null);
+
+    const backButtonRef = useRef(null);
+    const backButtonAction = useRef(null);
+
+
+    const guideActiveState = useSelector(selectGuideActiveState);
 
 
     useLayoutEffect(()=> {
@@ -69,6 +81,21 @@ export default function useGuidePanelAnimation() {
         .to(aboutDashboardPageRef.current, {opacity: 1, display: "initial", duration: 0.3})
         .pause();
 
+
+        showThemeSelection.current = gsap.timeline(
+        );
+
+        showThemeSelection.current
+        .to(guideSettingsRef.current, {opacity: 0, display: "none", duration: 0.1})
+        .to(guideSelectThemeRef.current, {opacity: 1, duration: 0.3})
+        .pause();
+
+
+        backButtonAction.current = gsap.timeline();
+
+
+        
+
         }
         initializeTimeline();
 
@@ -91,7 +118,17 @@ export default function useGuidePanelAnimation() {
     //Action Function
     const showGuideSettings = () => {
         console.log('opened guide menu');
-        !revealGuideMenu.current.time() > 0 ? revealGuideMenu.current.play() : revealGuideMenu.current.reverse();
+        // !revealGuideMenu.current.time() > 0 ? revealGuideMenu.current.play() : revealGuideMenu.current.reverse();
+
+        if(!revealGuideMenu.current.time() > 0 ) {
+            revealGuideMenu.current.play();
+        }
+        else {
+            //closes guide menu sub-setting
+            console.log('close guide menu');
+            revealGuideMenu.current.reverse();
+            showThemeSelection.current.time(0).pause();
+        }
     };
 
     const extendGuideMenu = () => {
@@ -106,6 +143,24 @@ export default function useGuidePanelAnimation() {
         closeExtendedMenu.current.play();
     }
 
+    const revealThemeSelection = () => {
+        !showThemeSelection.current.time() > 0 ? showThemeSelection.current.play() : showThemeSelection.current.reverse();
+    }
+
+    const backButtonStateSelection = () => {
+        switch(guideActiveState) {
+            case 'half':
+                // showGuideSettings();
+                break;
+            case 'full':
+                extendMenu.current.reverse();
+                guideSettingsAnimate.current.reverse();
+                revealAboutDashboard.current.time(0).pause();
+                break;
+            case 'default': break;
+        }
+    }
+
 
     return {revealGuideMenu, 
             extendMenu,
@@ -113,9 +168,13 @@ export default function useGuidePanelAnimation() {
             showGuideSettings,
             extendGuideMenu,
             closeFullMenu,
+            revealThemeSelection,
+            backButtonStateSelection,
             guideSettingsAnimate, 
             guideMenuRef, 
             guidePanelRef,
             guideSettingsRef,
-            aboutDashboardPageRef,}
+            aboutDashboardPageRef,
+            showThemeSelection,
+            guideSelectThemeRef}
 };

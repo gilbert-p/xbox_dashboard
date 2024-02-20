@@ -10,9 +10,6 @@ export default function useDashboardBladeAnimation() {
   const shiftRightTransition = useRef(null);
   const shiftLeftTransition = useRef(null);
   const initializeRef = useRef(null);
-  const revealGuideMenu = useRef(null);
-  const guideMenuRef = useRef(null);
-  const guideBladeRef = useRef(null);
 
   // Redux state
   const current_context_index = useSelector(selectContextIndex) || 0;

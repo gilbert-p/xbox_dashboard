@@ -202,8 +202,7 @@ const Xbox = (props) => {
                 <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
             </div>
 
-            <GuideMenu guideAnimationRef={guidePanelAnimation}
-                       />
+            <GuideMenu guideAnimationRef={guidePanelAnimation}/>
          
 
             {/* Renders the blade components */}
