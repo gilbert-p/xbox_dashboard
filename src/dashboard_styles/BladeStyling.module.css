@@ -196,23 +196,77 @@
 }
 
 #marketplaceTitle {
-    transform: translate(-40%, -20%) rotate(90deg);
+    transform: translate(20%, -20%) rotate(90deg);
 }
 
 #xboxliveTitle {
-    transform: translate(12%, -20%) rotate(90deg);
+    transform: translate(20%, -20%) rotate(90deg);
 }
 
 #gamesTitle{
-    transform: translate(65%, -20%) rotate(90deg);
+    transform: translate(20%, -20%) rotate(90deg);
 }
 
 #mediaTitle {
-    transform: translate(120%, -20%) rotate(90deg);
+    transform: translate(20%, -20%) rotate(90deg);
 }
 
 #systemTitle {
-    transform: translate(175%, -20%) rotate(90deg);
+    transform: translate(20%, -20%) rotate(90deg);
+}
+
+
+#marketplaceTitleInactiveLeft {
+    transform: translate(10%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#xboxliveTitleInactiveLeft {
+    transform: translate(10%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#gamesTitleInactiveLeft {
+    transform: translate(8%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#mediaTitleInactiveLeft {
+    transform: translate(8%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#systemTitleInactiveLeft {
+    transform: translate(8%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+
+
+
+#marketplaceTitleInactiveRight {
+    transform: translate(10%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#xboxliveTitleInactiveRight {
+    transform: translate(-8%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#gamesTitleInactiveRight {
+    transform: translate(-8%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#mediaTitleInactiveRight {
+    transform: translate(-8%, -20%) rotate(90deg);
+    color: var(--inactive-title);
+}
+
+#systemTitleInactiveRight {
+    transform: translate(-8%, -20%) rotate(90deg);
+    color: var(--inactive-title);
 }
 
 

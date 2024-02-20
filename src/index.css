@@ -40,6 +40,7 @@
   --some-color: orange;
   --white-text: white;
   --black-text: rgba(15, 15, 15, 0.9);
+  --inactive-title: rgba(68, 68, 68, 0.9);
 }
 
 * {

@@ -61,89 +61,103 @@ const NavBladesContainer = (props) => {
 
             <div className={`${bladeStyles.bladeContainer}  ${show_blade_state ? '' : transitionStyles.instantTransparent}`} ref={bladeContainerRef}>
                 <div className={bladeStyles.centeredContent}>
-                <div className={bladeStyles.leftGroup}>
+                    <div className={bladeStyles.leftGroup}>
 
+                        <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade}`}  >
 
-                    <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade}`}  >
                             <div id={bladeStyles["marketplaceBladeLeftActive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index === 0 ? bladeStyles.marketplaceActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}> 
+                                <h3 id={bladeStyles["marketplaceTitle"]} className={`${bladeStyles.bladeTitle}`} ref={bladeRef}>marketplace</h3>
                             </div>
-                            <h3 id={bladeStyles["marketplaceTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index === 0 ? '' : transitionStyles.instantTransparent}`} ref={bladeRef}>marketplace</h3>
 
 
-                            <div id={bladeStyles["marketplaceBladeLeftInactive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index !== 0 ? bladeStyles.leftBladeInactive : transitionStyles.instantTransparent}`} ref={bladeRef}> 
+                            <div id={bladeStyles["marketplaceBladeLeftInactive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index !== 0 ? bladeStyles.leftBladeInactive : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["marketplaceTitleInactiveLeft"]} className={`${bladeStyles.bladeTitle}`}>marketplace</h3> 
                             </div>
-                    </div>
+                            
+                        </div>
 
-                    <div id={bladeStyles["xboxliveBlade-left"]} className={`${bladeStyles.blade} `} >
+                        <div id={bladeStyles["xboxliveBlade-left"]} className={`${bladeStyles.blade} `} >
+
                             <div id={bladeStyles["xboxliveBladeLeftInactive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index <= 1 ? transitionStyles.instantTransparent :  bladeStyles.leftBladeInactive}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["xboxliveTitleInactiveLeft"]} className={`${bladeStyles.bladeTitle}`}>xbox live</h3> 
                             </div>
-                            <h3 id={bladeStyles["xboxliveTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 1 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>xbox live</h3>
-
 
                             <div id={bladeStyles["xboxliveBladeLeftActive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index === 1 ? bladeStyles.xboxliveActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["xboxliveTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 1 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>xbox live</h3>
                             </div>
-                    </div>
 
-                    <div id={bladeStyles["gamesBlade-left"]} className={`${bladeStyles.blade} `} >
+                        </div>
+
+                        <div id={bladeStyles["gamesBlade-left"]} className={`${bladeStyles.blade} `} >
+
                             <div id={bladeStyles["gamesBladeLeftInactive"]}  className={`${bladeStyles.bladeImgContainer} ${current_context_index <= 2 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["gamesTitleInactiveLeft"]} className={`${bladeStyles.bladeTitle}`}>games</h3> 
                             </div>
-                            <h3 id={bladeStyles["gamesTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 2 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>games</h3>
                             
                             <div id={bladeStyles["gamesBladeLeftActive"]}  className={`${bladeStyles.bladeImgContainer} ${current_context_index === 2 ? bladeStyles.gamesActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["gamesTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 2 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>games</h3>
                             </div>
-                    </div>
 
-                    <div id={bladeStyles["mediaBlade-left"]} className={`${bladeStyles.blade} `} >
+                        </div>
+
+                        <div id={bladeStyles["mediaBlade-left"]} className={`${bladeStyles.blade} `} >
+
                             <div id={bladeStyles["mediaBladeLeftInactive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index <= 3 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["mediaTitleInactiveLeft"]} className={`${bladeStyles.bladeTitle}`}>media</h3> 
                             </div>
-                            <h3 id={bladeStyles["mediaTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 3 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>media</h3>
+                            
 
                             <div id={bladeStyles["mediaBladeLeftActive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index === 3 ? bladeStyles.mediaActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["mediaTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 3 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>media</h3>
                             </div>
 
-                    </div>
+                        </div>
 
-                    <div id={bladeStyles["systemBlade-left"]} className={`${bladeStyles.blade} `} >
-                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index <= 4 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}>
-                            </div>
-                            <h3 id={bladeStyles["systemTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 4 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>system</h3>
+                        <div id={bladeStyles["systemBlade-left"]} className={`${bladeStyles.blade} `} >
+
+                            <div className={`${bladeStyles.bladeImgContainer} ${current_context_index <= 4 ? transitionStyles.instantTransparent : bladeStyles.leftBladeInactive}`} ref={bladeRef}></div>
+                            
                             <div id={bladeStyles["systemBladeLeftActive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index === 4 ? bladeStyles.systemActiveBlade : transitionStyles.instantTransparent}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["systemTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 4 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>system</h3>
                             </div>
-                    </div>    
-                </div>
-                <div className={bladeStyles.rightGroup}>
-                <div id={bladeStyles["xboxliveBlade-right"]} className={`${bladeStyles.blade} `} >
-                        <div className={`${bladeStyles.bladeGroup}`}>
+
+                        </div>    
+                    </div>
+
+                    <div className={bladeStyles.rightGroup}>
+
+                        <div id={bladeStyles["xboxliveBlade-right"]} className={`${bladeStyles.blade} `} >
+
                             <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 1 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
+                                <h3 id={bladeStyles["xboxliveTitleInactiveRight"]} className={`${bladeStyles.bladeTitle}`}>xbox live</h3>
+                            </div>
+                                
                         </div>
 
-                        </div>
-                    </div>
+                        <div id={bladeStyles["gamesBlade-right"]} className={`${bladeStyles.blade} `} >
 
-                    <div id={bladeStyles["gamesBlade-right"]} className={`${bladeStyles.blade} `} >
-                        <div className={`${bladeStyles.bladeGroup}`}>
                             <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 2 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
-                        </div>
+                                <h3 id={bladeStyles["gamesTitleInactiveRight"]} className={`${bladeStyles.bladeTitle}`}>games</h3>
+                            </div>
 
                         </div>
-                    </div>
 
-                    <div id={bladeStyles["mediaBlade-right"]} className={`${bladeStyles.blade} `} >
-                        <div className={`${bladeStyles.bladeGroup}`}>
+                        <div id={bladeStyles["mediaBlade-right"]} className={`${bladeStyles.blade} `} >
+
                             <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 3 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
-                        </div>
+                                <h3 id={bladeStyles["mediaTitleInactiveRight"]} className={`${bladeStyles.bladeTitle}`}>media</h3>
+                            </div>
 
                         </div>
-                    </div>
 
-                    <div id={bladeStyles["systemBlade-right"]} className={`${bladeStyles.blade} `} >
-                        <div className={`${bladeStyles.bladeGroup}`}>
+                        <div id={bladeStyles["systemBlade-right"]} className={`${bladeStyles.blade} `} >
+
                             <div className={`${bladeStyles.bladeImgContainer} ${current_context_index >= 4 ? transitionStyles.instantTransparent : bladeStyles.rightBladeInactive}`} ref={bladeRef}>
-                        </div>
+                                <h3 id={bladeStyles["systemTitleInactiveRight"]} className={`${bladeStyles.bladeTitle}`}>system</h3>
+                            </div>
 
                         </div>
                     </div>
-                </div>
                 </div>
 
             

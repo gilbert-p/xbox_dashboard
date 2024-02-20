@@ -57,12 +57,13 @@ export default function useGuidePanelAnimation() {
         .pause();
 
         closeExtendedMenu.current = gsap.timeline(
-            {onComplete: function(){
-                                    this.time(0).pause(); 
-                                    extendMenu.current.time(0).pause(); 
-                                    revealGuideMenu.current.time(0).pause();
-                                    guideSettingsAnimate.current.time(0).pause();
-                                   }
+            {onComplete: 
+                function(){
+                            this.time(0).pause(); 
+                            extendMenu.current.time(0).pause(); 
+                            revealGuideMenu.current.time(0).pause();
+                            guideSettingsAnimate.current.time(0).pause();
+                          }
             }
         );
 
@@ -85,8 +86,7 @@ export default function useGuidePanelAnimation() {
         .pause();
 
 
-        showThemeSelection.current = gsap.timeline(
-        );
+        showThemeSelection.current = gsap.timeline();
 
         showThemeSelection.current
         .to(guideSettingsRef.current, {opacity: 0, display: "none", duration: 0.1})
