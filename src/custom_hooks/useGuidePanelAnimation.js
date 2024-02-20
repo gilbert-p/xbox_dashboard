@@ -1,8 +1,10 @@
 import { useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { selectGuideActiveState } from '../xbox_dashboard/menuSlice';
+import { selectGuideActiveState,
+         updateGuideActiveState,
+         updateShowBlades } from '../xbox_dashboard/menuSlice';
 
 export default function useGuidePanelAnimation() {
     const revealGuideMenu = useRef(null);
@@ -24,6 +26,7 @@ export default function useGuidePanelAnimation() {
     const backButtonAction = useRef(null);
 
 
+    const dispatch = useDispatch();
     const guideActiveState = useSelector(selectGuideActiveState);
 
 
@@ -54,11 +57,11 @@ export default function useGuidePanelAnimation() {
         .pause();
 
         closeExtendedMenu.current = gsap.timeline(
-            {onComplete: function(){this.time(0).pause(); 
+            {onComplete: function(){
+                                    this.time(0).pause(); 
                                     extendMenu.current.time(0).pause(); 
                                     revealGuideMenu.current.time(0).pause();
                                     guideSettingsAnimate.current.time(0).pause();
-                                    revealAboutDashboard.current.time(0).pause();
                                    }
             }
         );
@@ -109,34 +112,74 @@ export default function useGuidePanelAnimation() {
 
         return () => {
             clearTimeout(timeoutId);
-            revealGuideMenu.current.kill();
         }
 
     },[]);
 
 
-    //Action Function
+    //Action Functions
     const showGuideSettings = () => {
-        console.log('opened guide menu');
-        // !revealGuideMenu.current.time() > 0 ? revealGuideMenu.current.play() : revealGuideMenu.current.reverse();
 
-        if(!revealGuideMenu.current.time() > 0 ) {
-            revealGuideMenu.current.play();
-        }
-        else {
-            //closes guide menu sub-setting
-            console.log('close guide menu');
-            revealGuideMenu.current.reverse();
-            showThemeSelection.current.time(0).pause();
+        switch(guideActiveState) {
+            case 'closed':
+                revealGuideMenu.current.play();
+                dispatch(updateGuideActiveState('guide_setting_main'));
+
+                dispatch(updateShowBlades(false));
+                break;
+            case 'guide_setting_main':
+                revealGuideMenu.current.reverse();
+                dispatch(updateGuideActiveState('closed'));
+
+                dispatch(updateShowBlades(true));
+                break;
+            case 'extended_about_dashboard':
+                closeExtendedMenu.current.play();
+                revealAboutDashboard.current.time(0).pause();
+                dispatch(updateGuideActiveState('closed'));
+
+                dispatch(updateShowBlades(true));
+                break;
+            case 'theme_select':
+                revealGuideMenu.current.reverse();
+                showThemeSelection.current.reverse();
+                dispatch(updateGuideActiveState('closed'));
+
+                dispatch(updateShowBlades(true));
+                break;
+            case 'default':
+                break;
         }
     };
 
-    const extendGuideMenu = () => {
-        !extendMenu.current.time() > 0 ? extendMenu.current.play() : extendMenu.current.reverse();
+    const extendGuideMenu = (extended_state) => {
 
-        guideSettingsAnimate.current.play();
+        if(!extendMenu.current.time() > 0) {
+            extendMenu.current.play();
+            guideSettingsAnimate.current.play();
+            //What to show when extending the menu
+            switch(extended_state) {
+                case 'extended_about_dashboard':
+                    revealAboutDashboard.current.play();
+                    break;
+                case 'default':
+                    break;
+            }
+        }
+        else {
+            extendMenu.current.reverse();
+            guideSettingsAnimate.current.reverse();
 
-        revealAboutDashboard.current.play();
+            switch(extended_state) {
+                case 'extended_about_dashboard':
+                    revealAboutDashboard.current.reverse();
+                    break;
+                case 'default':
+                    break;
+            }
+        }
+
+
     }
 
     const closeFullMenu = () => {
@@ -149,15 +192,23 @@ export default function useGuidePanelAnimation() {
 
     const backButtonStateSelection = () => {
         switch(guideActiveState) {
-            case 'half':
-                // showGuideSettings();
+            case 'guide_setting_main':
+                revealGuideMenu.current.reverse();
+                dispatch(updateGuideActiveState('closed'));
+
+                dispatch(updateShowBlades(true));
                 break;
-            case 'full':
-                extendMenu.current.reverse();
+            case 'extended_about_dashboard':
+                extendGuideMenu('extended_about_dashboard');
                 guideSettingsAnimate.current.reverse();
-                revealAboutDashboard.current.time(0).pause();
+                dispatch(updateGuideActiveState('guide_setting_main'));
                 break;
-            case 'default': break;
+            case 'theme_select':
+                showThemeSelection.current.reverse();
+                dispatch(updateGuideActiveState('guide_setting_main'));
+                break;
+            case 'default':
+                break;
         }
     }
 

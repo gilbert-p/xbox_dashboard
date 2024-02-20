@@ -146,24 +146,7 @@ const Xbox = (props) => {
 
     const showGuideSettings = () => {
         openGuideSfx();
-        switch(guideActiveState) {
-            case 'closed':
-                guidePanelAnimation.showGuideSettings();
-                dispatch(updateGuideActiveState('half'));
-                dispatch(updateShowBlades(false));
-                break;
-            case 'half':
-                guidePanelAnimation.showGuideSettings();
-                dispatch(updateGuideActiveState('closed'));
-                dispatch(updateShowBlades(true));
-                break;
-            case 'full':
-                guidePanelAnimation.closeFullMenu();
-                dispatch(updateGuideActiveState('closed'));
-                dispatch(updateShowBlades(true));
-                break;
-            case 'default': break;
-        }
+        guidePanelAnimation.showGuideSettings();
     }
 
 

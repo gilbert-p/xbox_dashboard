@@ -237,7 +237,7 @@ const GuideMenu = (props) => {
 
                                 <div id={itemSelectStyles["guideSelectList"]} className={`${itemSelectStyles.selectItemListContainer}`}>
                                     <div id={itemSelectStyles["guideInnerListContainer"]} className={itemSelectStyles.innerListContainer} >
-                                        <div  className={itemSelectStyles.listItem} onClick={()=>{extendGuideMenu();dispatch(updateGuideActiveState('full'))}}
+                                        <div  className={itemSelectStyles.listItem} onClick={()=>{extendGuideMenu('extended_about_dashboard'); dispatch(updateGuideActiveState('extended_about_dashboard'));}}
                                                                                     onMouseEnter={()=>{dispatch(navigateGuideMenu(0));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
                                             <p>
                                                 <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -245,7 +245,7 @@ const GuideMenu = (props) => {
                                             </p>
                                             <div className={itemSelectStyles.listItemBorder}></div>
                                         </div>
-                                        <div className={itemSelectStyles.listItem} onClick={()=>{revealThemeSelection(); dispatch(updateShowThemeSelect('true'));}}
+                                        <div className={itemSelectStyles.listItem} onClick={()=>{revealThemeSelection(); dispatch(updateShowThemeSelect('true')); dispatch(updateGuideActiveState('theme_select'));}}
                                          onMouseEnter={()=>{dispatch(navigateGuideMenu(1));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
                                             {/* <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span> */}
                                             <p>
