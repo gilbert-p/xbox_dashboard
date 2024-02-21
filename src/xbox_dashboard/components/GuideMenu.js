@@ -10,7 +10,8 @@ import useGuidePanelAnimation from '../../custom_hooks/useGuidePanelAnimation';
 import useCurrentTime from '../../custom_hooks/useCurrentTime';
 
 
-import {updateGuideMenuHighlight,
+import {
+    updateGuideMenuHighlight,
 
     navigateGuideMenu,
     navigateGuideMenuLinkStack,
@@ -38,6 +39,11 @@ import {updateGuideMenuHighlight,
     updateShowThemeSelect,
     selectShowThemeSelect,
     updateSelectedTheme,
+    selectThemeSelection,
+    navigateThemeSelectIndex,
+    selectThemeIndex,
+    updateThemeSelectHighlight,
+    selectThemeHighlightState,
     }
 from '../menuSlice';
 
@@ -80,6 +86,11 @@ const GuideMenu = (props) => {
     const currentSongTitle = useSelector(selectCurrentSong);
     const currentSongIndex = useSelector(selectSongIndex);
     const musicListSizeMax = useSelector(selectMusiclistSize);
+
+
+    const selected_theme = useSelector(selectThemeSelection);
+    const themeSelectIndex = useSelector(selectThemeIndex);
+    const isThemeSelectHighlightActive = useSelector(selectThemeHighlightState);
 
 
     const utilitySfxSprite = {
@@ -180,23 +191,23 @@ const GuideMenu = (props) => {
         <>
         {/* Guide Menu that is opened/closed by home button */}
         <div id={styles['guideMenuPanel']} className={styles.guideMenuContainer} ref={guideMenuRef} >
-            <div  className={styles.guidePanel} ref={guidePanelRef}>
+            <div  className={styles[`${'guidePanel' + selected_theme}`]} ref={guidePanelRef}>
 
                 <div className={styles.backButtonContainer} onClick={()=>{backButtonStateSelection()}}>
                     <p>Back</p>
                     <div className={styles.bControllerImg}></div>
                 </div>
 
-                <div className={styles.nameplateEdge}>
+                <div className={styles[`${'nameplateEdge' + selected_theme}`]}>
                         <div className={styles.guideControllerIndicatorIcon}></div>
                         <p className={styles.guideNameplateTitle}>Epoxi117</p>
                 </div>
-                <div className={styles.guidePanelTopBorder}>
+                <div className={styles[`${'guidePanelTopBorder' + selected_theme}`]}>
                             <div className={styles.guidePanelClockContainer}>
                                 <GuidePanelClock/>
                             </div>
                 </div>
-                <div className={styles.guidePanelBottomBorder}>
+                <div className={styles[`${'guidePanelBottomBorder' + selected_theme}`]}>
                 </div>
                 <div className={styles.guideSettingsView} ref={guideSettingsRef}>
                                 <div className={styles.profileContainer}>
@@ -346,18 +357,17 @@ const GuideMenu = (props) => {
                     <div id={itemSelectStyles["guideSelectTheme"]} className={`${itemSelectStyles.selectItemListContainer}`}>
                         <div id={itemSelectStyles["guideInnerListContainer"]} className={itemSelectStyles.innerListContainer} >
                             <div  className={itemSelectStyles.listItem} onClick={()=>{dispatch(updateSelectedTheme(''));}}
-                            onMouseEnter={()=>{dispatch(navigateGuideMenu(0));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
+                            onMouseEnter={()=>{dispatch(navigateThemeSelectIndex(0)); dispatch(updateThemeSelectHighlight(true))}} onMouseLeave={()=>{dispatch(updateThemeSelectHighlight(false))}}>
                                 <p>
-                                    <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${isThemeSelectHighlightActive && itemSelectStyles.listItemHighlight} ${themeSelectIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Xbox 360 (Default)
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onClick={()=>{dispatch(updateSelectedTheme('_Carbon'));}}
-                            onMouseEnter={()=>{dispatch(navigateGuideMenu(1));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
-                                {/* <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span> */}
+                            onMouseEnter={()=>{dispatch(navigateThemeSelectIndex(1)); dispatch(updateThemeSelectHighlight(true))}} onMouseLeave={()=>{dispatch(updateThemeSelectHighlight(false))}}>
                                 <p>
-                                    <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <span className={`${isThemeSelectHighlightActive && itemSelectStyles.listItemHighlight} ${themeSelectIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     Carbon
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>

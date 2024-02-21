@@ -29,7 +29,9 @@ let initialState = {
 
 
     show_theme_select: false,
+    theme_select_index: null,
     selected_theme: '',
+    theme_select_highlight: false,
 
 };
 
@@ -116,6 +118,12 @@ export const menuSlice = createSlice({
         updateSelectedTheme: (state, action) => {
             state.selected_theme = action.payload;
         },
+        navigateThemeSelectIndex: (state, action) => {
+            state.theme_select_index = action.payload;
+        },
+        updateThemeSelectHighlight: (state, action) => {
+            state.theme_select_highlight = action.payload;
+        }
     }
 });
 
@@ -149,6 +157,8 @@ export const {
 
                updateShowThemeSelect,
                updateSelectedTheme,
+               navigateThemeSelectIndex,
+               updateThemeSelectHighlight
 
             } = menuSlice.actions;
 
@@ -181,6 +191,8 @@ export const selectMusiclistSize = (state) => state.menu.music_list_size;
 
 export const selectShowThemeSelect = (state) => state.menu.show_theme_select;
 export const selectThemeSelection = (state) => state.menu.selected_theme;
+export const selectThemeIndex = (state) => state.menu.theme_select_index;
+export const selectThemeHighlightState = (state) => state.menu.theme_select_highlight;
 
 
 

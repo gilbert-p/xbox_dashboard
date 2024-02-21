@@ -90,7 +90,7 @@ export default function useGuidePanelAnimation() {
 
         showThemeSelection.current
         .to(guideSettingsRef.current, {opacity: 0, display: "none", duration: 0.1})
-        .to(guideSelectThemeRef.current, {opacity: 1, duration: 0.3})
+        .to(guideSelectThemeRef.current, {opacity: 1, display: "initial", duration: 0.3})
         .pause();
 
 
