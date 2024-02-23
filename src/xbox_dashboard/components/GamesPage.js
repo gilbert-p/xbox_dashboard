@@ -20,10 +20,14 @@ import styles from "../../dashboard_styles/Dashboard.module.css";
 
 import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
+import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
+
 
 const GamesPage = (props) => {
 
     const dispatch = useDispatch();
+
+    const utilitySound = useUtilitySfx();
 
 
     //Menu state variables
@@ -53,7 +57,7 @@ const GamesPage = (props) => {
 
             <div id={gamesStyles["games"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 2 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
-                    <div className={profileCardStyles.profileContainer}>
+                    <div className={profileCardStyles.profileContainer} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <p>Epoxi117</p>
                         <div className={profileCardStyles.profileImgContainer}>
                             <div className={profileCardStyles.profileIcon}></div>
@@ -91,7 +95,8 @@ const GamesPage = (props) => {
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGamesMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.trophy_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -99,7 +104,8 @@ const GamesPage = (props) => {
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGamesMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.controller_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -107,7 +113,8 @@ const GamesPage = (props) => {
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGamesMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.joystick_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -115,7 +122,8 @@ const GamesPage = (props) => {
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGamesMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.demos_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -123,7 +131,8 @@ const GamesPage = (props) => {
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateGamesMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGamesMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.film_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></span>

@@ -19,6 +19,9 @@ export default function useGuidePanelAnimation() {
     const revealAboutDashboard = useRef(null);
     const aboutDashboardPageRef = useRef(null);
 
+    const revealGamerProfilePage = useRef(null);
+    const gamerProfilePageRef = useRef(null);
+
     const guideSelectThemeRef = useRef(null);
     const showThemeSelection = useRef(null);
 
@@ -85,6 +88,12 @@ export default function useGuidePanelAnimation() {
         .to(aboutDashboardPageRef.current, {opacity: 1, display: "initial", duration: 0.3})
         .pause();
 
+        revealGamerProfilePage.current = gsap.timeline();
+
+        revealGamerProfilePage.current
+        .to(gamerProfilePageRef.current, {opacity: 1, display: "initial", duration: 0.3})
+        .pause();
+
 
         showThemeSelection.current = gsap.timeline();
 
@@ -140,6 +149,13 @@ export default function useGuidePanelAnimation() {
 
                 dispatch(updateShowBlades(true));
                 break;
+            case 'extended_gamer_profile':
+                closeExtendedMenu.current.play();
+                revealGamerProfilePage.current.time(0).pause();
+                dispatch(updateGuideActiveState('closed'));
+
+                dispatch(updateShowBlades(true));
+                break;
             case 'theme_select':
                 revealGuideMenu.current.reverse();
                 showThemeSelection.current.reverse();
@@ -162,6 +178,9 @@ export default function useGuidePanelAnimation() {
                 case 'extended_about_dashboard':
                     revealAboutDashboard.current.play();
                     break;
+                case 'extended_gamer_profile':
+                    revealGamerProfilePage.current.play();
+                    break;
                 case 'default':
                     break;
             }
@@ -173,6 +192,9 @@ export default function useGuidePanelAnimation() {
             switch(extended_state) {
                 case 'extended_about_dashboard':
                     revealAboutDashboard.current.reverse();
+                    break;
+                case 'extended_gamer_profile':
+                    revealGamerProfilePage.current.reverse();
                     break;
                 case 'default':
                     break;
@@ -203,6 +225,11 @@ export default function useGuidePanelAnimation() {
                 guideSettingsAnimate.current.reverse();
                 dispatch(updateGuideActiveState('guide_setting_main'));
                 break;
+            case 'extended_gamer_profile':
+                extendGuideMenu('extended_gamer_profile');
+                guideSettingsAnimate.current.reverse();
+                dispatch(updateGuideActiveState('guide_setting_main'));
+                break;
             case 'theme_select':
                 showThemeSelection.current.reverse();
                 dispatch(updateGuideActiveState('guide_setting_main'));
@@ -226,6 +253,7 @@ export default function useGuidePanelAnimation() {
             guidePanelRef,
             guideSettingsRef,
             aboutDashboardPageRef,
+            gamerProfilePageRef,
             showThemeSelection,
             guideSelectThemeRef}
 };

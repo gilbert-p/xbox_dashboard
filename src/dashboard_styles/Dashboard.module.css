@@ -1255,8 +1255,8 @@
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 870px;
-    height: 560px;
+    width: calc(var(--extended-container-width));
+    height: calc(var(--extended-container-height));;
     left: 80px;
     top: 60px;
     margin-right: 20px;
@@ -1266,7 +1266,7 @@
 
     > h2 {
         font-size: calc(var(--screen-heading-size));
-        color: white;
+        color: var(--white-text);
         margin-bottom: 20px;
     }
 
@@ -1341,6 +1341,32 @@
     }
 
 }
+
+/************* Select Theme Section END ***************/
+
+/************* Gamer Profile Section ***************/
+
+.gamerProfileContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: calc(var(--extended-container-width));
+    height: calc(var(--extended-container-height));;
+    left: 80px;
+    top: 60px;
+    margin-right: 20px;
+
+    opacity: 0;
+    display: none;
+
+    > h2 {
+        font-size: calc(var(--screen-heading-size));
+        color: var(--white-text);
+        margin-bottom: 20px;
+    }
+}
+
+
 
 .appContainer {
     transform: translate(-50%,-50%) scale(calc(var(--scaling)));

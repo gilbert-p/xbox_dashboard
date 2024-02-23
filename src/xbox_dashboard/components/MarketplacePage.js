@@ -17,6 +17,8 @@ import styles from '../../dashboard_styles/Dashboard.module.css';
 
 import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
+import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
+
 
 const MarketplacePage = (props) => {
 
@@ -28,6 +30,10 @@ const MarketplacePage = (props) => {
     const isHighlightActive = useSelector(selectHighlightState);
     const marketplaceMenuIndex = useSelector(selectMarketplaceMenuIndex);
 
+    /* Utility SFX specific function */
+
+    const utilitySound = useUtilitySfx();
+
 
   return (
      <>
@@ -35,36 +41,37 @@ const MarketplacePage = (props) => {
         {/* <div className={styles.marketplaceBackground}></div> */}
             <div id={pageGridStyles["marketplaceGrid"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 0 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
-                    <div className={marketplaceStyles.selectOption}>
+                    <div className={marketplaceStyles.selectOption} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <div className={marketplaceStyles.textHighlight}></div>
                         <p>Games</p>
                     </div>
-                    <div className={marketplaceStyles.selectOption}>
+                    <div className={marketplaceStyles.selectOption} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <div className={marketplaceStyles.textHighlight}></div>
                         <p>Media and Entertainment</p>
                     </div>
-                    <div className={marketplaceStyles.selectOption}>
+                    <div className={marketplaceStyles.selectOption} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <div className={marketplaceStyles.textHighlight}></div>
                         <p>Game Demos</p>
                     </div>
-                    <div className={marketplaceStyles.selectOption}>
+                    <div className={marketplaceStyles.selectOption} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <p>Game Videos</p>
                         <div className={marketplaceStyles.textHighlight}></div>
                     </div>
-                    <div className={marketplaceStyles.selectOption}>
+                    <div className={marketplaceStyles.selectOption} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <div className={marketplaceStyles.textHighlight}></div>
                         <p>Themes and Gamer Pictures</p>
                     </div>
-                    <div className={marketplaceStyles.selectOption}>
+                    <div className={marketplaceStyles.selectOption} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <div className={marketplaceStyles.textHighlight}></div>
                         <p>Featured Downloads</p>
                     </div>
                 </div>
                 <div className={pageGridStyles.rightContent}>
                     <div className={marketplaceStyles.imageHeaderContainer}></div>
-                    <div id={itemSelectStyles["marketSelectList"]} className={`${itemSelectStyles.selectItemListContainer}`}>
+                    <div id={itemSelectStyles["marketSelectList"]} className={`${itemSelectStyles.selectItemListContainer}`} >
                         <div className={itemSelectStyles.innerListContainer} >
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.card_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -72,7 +79,8 @@ const MarketplacePage = (props) => {
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -80,7 +88,8 @@ const MarketplacePage = (props) => {
                                 </p>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                 onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.crown_icon}`}></span>
                                 <p>
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>

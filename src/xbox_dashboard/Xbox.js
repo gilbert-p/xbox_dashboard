@@ -9,7 +9,6 @@ import iconLibrary from "../dashboard_styles/IconStyling.module.css";
 
 import useDashboardAnimation from '../custom_hooks/useDashboardBladeAnimation';
 import useGuidePanelAnimation from '../custom_hooks/useGuidePanelAnimation';
-import useCurrentTime from '../custom_hooks/useCurrentTime';
 
 import { selectContextIndex,
          isTrayDisplayed,
@@ -82,7 +81,6 @@ const Xbox = (props) => {
     const utilitySFX = useAudioSound(utility_sound_sfx, utilitySfxSprite);
 
 
-
     const shiftBladeLeft = () => {
         switch(current_context_index) {
             case 1 :
@@ -141,7 +139,6 @@ const Xbox = (props) => {
 
         await playButtonSfx();
         await playGuideOpenSfx();
-
     }
 
     const showGuideSettings = () => {
@@ -185,7 +182,7 @@ const Xbox = (props) => {
                 <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
             </div>
 
-            <GuideMenu guideAnimationRef={guidePanelAnimation}/>
+            <GuideMenu guideAnimationRef={guidePanelAnimation} />
          
 
             {/* Renders the blade components */}
@@ -238,11 +235,11 @@ const Xbox = (props) => {
 
 
                         <div className={styles.dashboardWhiteUnderlay}></div>
-                        <MarketplacePage/>
-                        <XboxlivePage current_context_index={current_context_index}/>
-                        <GamesPage current_context_index={current_context_index}/>
-                        <MediaPage current_context_index={current_context_index}/>
-                        <SystemPage current_context_index={current_context_index}/>
+                        <MarketplacePage                                                  guideAnimationRef={guidePanelAnimation}/>
+                        <XboxlivePage    current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <GamesPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <MediaPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
 
                         {/* Buttons, System Tray */}
                         <div className={styles.staticContent}>

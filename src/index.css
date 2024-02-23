@@ -24,6 +24,9 @@
   --z-depth:0;
   --scaling:1;
 
+  --extended-container-width: 870px;
+  --extended-container-height: 560;
+
 
   /* Font Sizes */
   --text-link-size: 22px;
