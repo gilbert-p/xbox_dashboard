@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { transitionBlade } from '../api_features/bladeTransition';
+import { useTransitionBlade } from '../api_features/useTransitionBlade';
 
 
 let initialState = {
@@ -18,16 +18,16 @@ let initialState = {
     blade_size: 0,
     blade_container_width: 0,
     blade_container_height: 0,
-    is_transitioning: false,
+    is_transitioning: null,
 
     is_guide_menu_open: false,
 
 }
 
 export const bladeTransitionAsync = createAsyncThunk(
-  '../api_features/transitionBlade',
+  '../api_features/useTransitionBlade',
   async () => {
-    const response = await transitionBlade();
+    const response = await useTransitionBlade();
     // The value we return becomes the `fulfilled` action payload
     return response;
   }
@@ -144,13 +144,13 @@ export const xboxSlice = createSlice({
       .addCase(bladeTransitionAsync.pending, (state) => {
         state.is_transitioning = true;
       })
-      .addCase(bladeTransitionAsync.fulfilled, (state) => {
+      .addCase(bladeTransitionAsync.fulfilled, (state, action) => {
         state.is_transitioning = false;
       });
     }
 });
 
-export const { navigateTo, updateBladeContainerSize, updateBladeSize, setBladeAnimationRef, updateGuideMenuState } = xboxSlice.actions;
+export const { navigateTo, updateBladeContainerSize, updateBladeSize, setBladeAnimationRef, updateGuideMenuState, } = xboxSlice.actions;
 
 export const selectCurrentContext = (state) => state.dashboard.current_context;
 export const selectContextIndex = (state) => state.dashboard.context_index;

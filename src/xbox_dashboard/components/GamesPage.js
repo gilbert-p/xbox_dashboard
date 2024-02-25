@@ -18,6 +18,8 @@ import descriptionContentStyles from "../../dashboard_styles/DescriptionContaine
 
 import styles from "../../dashboard_styles/Dashboard.module.css";
 
+import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
+
 import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
@@ -54,6 +56,10 @@ const GamesPage = (props) => {
   return (
      <>
         <div id={gamesStyles["gamesContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 2 ? 1 : -1}`}}>
+
+
+            <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 2 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
+
 
             <div id={gamesStyles["games"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 2 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>

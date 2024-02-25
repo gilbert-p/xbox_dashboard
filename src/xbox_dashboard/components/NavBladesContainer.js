@@ -1,9 +1,10 @@
-import React, { useLayoutEffect,  useCallback, useRef, forwardRef } from 'react';
+import React, { useLayoutEffect,  useCallback, useRef, forwardRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
 import { 
     selectContextIndex,
-    updateBladeSize
+    updateBladeSize,
+    selectTransitionState,
 } from '../xboxSlice';
 
 import {
@@ -16,7 +17,7 @@ import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css
 
 const NavBladesContainer = (props) => {
 
-    const { isMobileView, bladeContainerRef } = props;
+    const { isMobileView, bladeContainerRef, centerBoxAnimateRef, dashboardUnderlayRef } = props;
     
     const dispatch = useDispatch();
 
@@ -27,6 +28,10 @@ const NavBladesContainer = (props) => {
     const show_blade_state = useSelector(selectShowBladeState);
 
     const selected_theme = useSelector(selectThemeSelection);
+
+    const is_transitioning = useSelector(selectTransitionState);
+
+
 
     // dispatch(setBladeAnimationRef(bladeContainerRef));
     const bladeRef = useRef(null);
@@ -40,30 +45,43 @@ const NavBladesContainer = (props) => {
     );
 
 
-    //Blade Resizing
-    useLayoutEffect(()=>{
+    useEffect(()=>{
+        // console.log("transition", is_transitioning);
+    }, [is_transitioning]);
 
-        const updateBlade = ()=> {
-            if(bladeRef) {
-                debounceBladeResize((updateBladeSize(Math.ceil(bladeRef.current.offsetWidth))));
-            }
+
+    const DashboardSelectUnderlay = () => {
+        switch(current_context_index) {
+            case 0:
+                return <div id={bladeStyles['marketplaceUnderlay']}  className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 0 ? bladeStyles.dashboardUnderlayActive : '' }`} ></div>;
+            case 1:
+                return <div id={bladeStyles['xboxliveUnderlay']}  className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 1 ? bladeStyles.dashboardUnderlayActive : '' }`} ></div>;
+            case 'default':
+                return <></>
         }
-
-        window.addEventListener("resize", updateBlade);
-
-        updateBlade();
-
-        return ()=> {
-            window.removeEventListener("resize", updateBlade);
-        }
-    });   
-
+    }
 
   return <>
         <div className={bladeStyles.centeredMask}>
 
+
+        <div className={bladeStyles.animateTransparentOpeningContainer}>
+
+            <div ref={centerBoxAnimateRef} className={bladeStyles.centerBlockExpand}></div>
+
+            {/* <div id={bladeStyles['marketplaceUnderlay']}  className={` ${bladeStyles.dashboardWhiteUnderlay} ${bladeStyles.marketplaceWhiteUnderlay}  ${current_context_index === 0 ? (bladeStyles.marketplaceWhiteUnderlay + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`} ></div>
+            <div id={bladeStyles['xboxliveUnderlay']} className={` ${bladeStyles.dashboardWhiteUnderlay} ${bladeStyles.xboxliveWhiteUnderlay}   ${current_context_index === 1 ? (bladeStyles.xboxliveWhiteUnderlay + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> */}
+
+            {/* <DashboardSelectUnderlay/>             */}
+
+            <div className={bladeStyles.leftEdge}></div>
+            <div className={bladeStyles.rightEdge}></div>
+
+        </div>
+
             <div className={`${bladeStyles.bladeContainer}  ${show_blade_state ? '' : transitionStyles.instantTransparent}`} ref={bladeContainerRef}>
                 <div className={bladeStyles.centeredContent}>
+
                     <div className={bladeStyles.leftGroup}>
 
                         <div id={bladeStyles["marketplaceBlade-left"]} className={`${bladeStyles.blade}`}  >

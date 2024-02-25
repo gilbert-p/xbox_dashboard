@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useRef, useLayoutEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContextIndex } from '../xboxSlice';
 
@@ -6,6 +6,8 @@ import { updateSelectionHighlight,
     selectHighlightState,
     navigateXboxliveMenu,
     selectXboxliveMenuIndex,
+    updateGuideActiveState,
+    selectGuideActiveState,
 } from '../menuSlice';
 
 
@@ -20,7 +22,7 @@ import ringAnim from '../../dashboard_styles/ringAnimation.module.css';
 
 import styles from "../../dashboard_styles/Dashboard.module.css";
 
-import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
+import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
@@ -32,16 +34,20 @@ const XboxlivePage = (props) => {
 
     const utilitySound = useUtilitySfx();
 
-    // const current_context_index = useSelector(selectContextIndex);
+
+
 
     //Menu state variables
     const isHighlightActive = useSelector(selectHighlightState);
     const xboxliveMenuIndex = useSelector(selectXboxliveMenuIndex);
 
+    const guideActiveState = useSelector(selectGuideActiveState);
+
     const { xboxBackgroundRef, current_context_index } = props;
 
 
-    const { guidePanelRef, 
+    const { 
+        guidePanelRef, 
         guideMenuRef,
         guideSelectThemeRef, 
         guideSettingsRef, 
@@ -67,14 +73,19 @@ const XboxlivePage = (props) => {
         }
     };
 
+
+    
   return (
      <>
         <div id={xboxliveStyles["xboxliveContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 1 ? 1 : -1}`}}>
 
+        <div  className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 1 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
+
+
 
         <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.makeTransparent : ""}`}>
             <div className={pageGridStyles.leftContent}>
-                <div className={profileCardStyles.profileContainer} onClick={()=>{extendGuideMenu('extended_about_dashboard'); utilitySound.current.playButtonSound();}} >
+                <div className={profileCardStyles.profileContainer} onClick={()=>{utilitySound.current.playButtonSound();}} >
                     <p>Epoxi117</p>
                     <div className={profileCardStyles.profileImgContainer} >
                         <div className={profileCardStyles.profileIcon}>
@@ -181,6 +192,8 @@ const XboxlivePage = (props) => {
             </div>
 
         </div>
+
+       
     </div>
   </>);
 };

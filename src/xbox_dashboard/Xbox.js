@@ -1,4 +1,4 @@
-import React, {useRef, useState, forwardRef, useEffect, useCallback, useLayoutEffect } from 'react';
+import React, {useRef, useState, forwardRef, useLayoutEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
@@ -60,6 +60,8 @@ const Xbox = (props) => {
 
 
 
+
+
     //Sound Variables
     const bladeSfxSprite = {
         xbl_shift: [0,500],
@@ -102,6 +104,7 @@ const Xbox = (props) => {
             case 'default': break;
         }
     };
+
 
     const shiftBladeRight = () => {
         switch(current_context_index) {
@@ -171,6 +174,8 @@ const Xbox = (props) => {
         }
         return backgroundDrop;
     }
+
+    const xboxliveRef = useRef(null);
       
 
     return (
@@ -187,7 +192,8 @@ const Xbox = (props) => {
 
             {/* Renders the blade components */}
             <div className={styles.bladeMask}>
-            {<NavBladesContainer bladeContainerRef={bladeContainerRef['mountRef']} />} 
+            {<NavBladesContainer bladeContainerRef={bladeContainerRef['mountRef']} centerBoxAnimateRef={bladeContainerRef['centerBlockExpandRef']}
+                                 dashboardUnderlayRef={bladeContainerRef['dashboardUnderlayRef']} />} 
             </div>
 
             {/* Provides a mask to prevent overflow from the page content */}
@@ -234,7 +240,7 @@ const Xbox = (props) => {
                     </div>
 
 
-                        <div className={styles.dashboardWhiteUnderlay}></div>
+                        {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
                         <MarketplacePage                                                  guideAnimationRef={guidePanelAnimation}/>
                         <XboxlivePage    current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <GamesPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
@@ -244,9 +250,10 @@ const Xbox = (props) => {
                         {/* Buttons, System Tray */}
                         <div className={styles.staticContent}>
 
+                            
 
-                            <div className={styles.leftEdge}></div>
-                            <div className={styles.rightEdge}></div>
+                            {/* <div className={styles.leftEdge}></div>
+                            <div className={styles.rightEdge}></div> */}
 
                             <div className={`${styles.systemTrayContainer} ${!display_tray ? transitionStyles.makeTransparent : undefined}`}>
                                 <div className={styles.trayEllipse}></div>

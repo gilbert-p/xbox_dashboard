@@ -15,6 +15,8 @@ import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import marketplaceStyles from '../../dashboard_styles/Marketplace.module.css';
 import styles from '../../dashboard_styles/Dashboard.module.css';
 
+import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
+
 import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
@@ -38,7 +40,9 @@ const MarketplacePage = (props) => {
   return (
      <>
         <div id={marketplaceStyles["marketplaceContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 0 ? 1 : -1}`}}>
-        {/* <div className={styles.marketplaceBackground}></div> */}
+
+        <div className={` ${bladeStyles.dashboardWhiteUnderlay}  ${current_context_index === 0 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
+
             <div id={pageGridStyles["marketplaceGrid"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 0 ? transitionStyles.makeTransparent : ""}`}>
                 <div className={pageGridStyles.leftContent}>
                     <div className={marketplaceStyles.selectOption} onClick={()=>{utilitySound.current.playButtonSound()}}>

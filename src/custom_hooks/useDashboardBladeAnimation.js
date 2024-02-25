@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback , useLayoutEffect  } from 'rea
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from 'lodash';
 import { gsap } from 'gsap';
-import { navigateTo, selectContextIndex } from '../xbox_dashboard/xboxSlice';
+import { navigateTo, selectContextIndex, selectTransitionState, bladeTransitionAsync } from '../xbox_dashboard/xboxSlice';
 
 export default function useDashboardBladeAnimation() {
   // Refs
@@ -11,8 +11,17 @@ export default function useDashboardBladeAnimation() {
   const shiftLeftTransition = useRef(null);
   const initializeRef = useRef(null);
 
+  const centerBlockExpandRef = useRef(null);
+  const centerBlockExpandAnimate = useRef(null);
+
+  const dashboardUnderlayRef = useRef(null);
+  const dashboardUnderlayReveal = useRef(null);
+
   // Redux state
   const current_context_index = useSelector(selectContextIndex) || 0;
+
+  const is_transitioning = useSelector(selectTransitionState);
+
   const dispatch = useDispatch();
 
   // State
@@ -32,9 +41,27 @@ export default function useDashboardBladeAnimation() {
     initializeRef.current = gsap.timeline().to(mountRef.current, { opacity: 1, duration: 0.2 }).pause();
     shiftLeftTransition.current = gsap.timeline().to(mountRef.current, { x: '+=55px', duration: 0.3 }).pause();
     shiftRightTransition.current = gsap.timeline().to(mountRef.current, { x: '-=55px', duration: 0.3 }).pause();
+
+
+    dashboardUnderlayReveal.current = gsap.timeline().to(dashboardUnderlayRef.current, {opacity: 1, delay:0.7, duration: 0.5}).pause();
+
+
+    centerBlockExpandAnimate.current = gsap.timeline({defaults:{ease: "elastic.out(1,0.3)"}});
+
+    centerBlockExpandAnimate.current = gsap.timeline().to(centerBlockExpandRef.current, {height: '350px', opacity: 1, duration: 0.1})
+                                                      .to(centerBlockExpandRef.current, {height: '350px', opacity: 0.9, duration: 0.1})
+                                                      .to(centerBlockExpandRef.current, {height: '630px', opacity: 0.7, duration: 0.33})
+                                                      .to(centerBlockExpandRef.current, {height: '600px', opacity: 0.5, duration: 0.33})
+                                                      .to(centerBlockExpandRef.current, {height: '600px', opacity: 0, duration: 0.1})
+                                                      .to(centerBlockExpandRef.current, {height: '350px', opacity: 0, duration: 0.1})
+                                                      .pause();
   };
   initializeTimeline();
 
+
+  useEffect(()=>{
+    console.log(is_transitioning);
+  },[is_transitioning]);
 
 
   useLayoutEffect(()=>{
@@ -70,7 +97,16 @@ export default function useDashboardBladeAnimation() {
       shiftRightTransition.current.pause();
     } else {
       if (current_context_index + 1 < 5) {
+
+        dispatch(bladeTransitionAsync());
+
         shiftRightTransition.current.play();
+
+        centerBlockExpandAnimate.current.play();
+
+        dashboardUnderlayReveal.current.play();
+
+
         debounceDispatchInput(navigateTo(current_context_index + 1));
       }
     }
@@ -84,6 +120,9 @@ export default function useDashboardBladeAnimation() {
     } else {
       if (current_context_index - 1 >= 0) {
         shiftLeftTransition.current.play();
+
+        centerBlockExpandAnimate.current.play();
+
         debounceDispatchInput(navigateTo(current_context_index - 1));
       }
     }
@@ -121,5 +160,5 @@ export default function useDashboardBladeAnimation() {
 
 
 
-  return { mountRef, shiftRight, shiftLeft };
+  return { mountRef, centerBlockExpandRef, dashboardUnderlayRef, shiftRight, shiftLeft };
 };

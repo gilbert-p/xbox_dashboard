@@ -26,6 +26,7 @@ import {
     selectGuideMusicPlayerIndex,
     selectGuideMusicPlayerHighlight,
     navigateGuideMusicPlayer,
+    selectGuideActiveState,
 
     playMusic,
     selectMusicState,
@@ -47,7 +48,6 @@ import {
     }
 from '../menuSlice';
 
-import utility_sound_sfx from "../../assets/audio/utility_sfx.mp3";
 import musicPlaylist from "../../assets/audio/music_playlist.mp3";
 
 import useAudioSound from "../../custom_hooks/useAudioSound";
@@ -69,6 +69,7 @@ const GuideMenu = (props) => {
             revealThemeSelection,
             backButtonStateSelection,
           } = props['guideAnimationRef'];
+
 
 
     const dispatch = useDispatch();
@@ -96,16 +97,19 @@ const GuideMenu = (props) => {
     const themeSelectIndex = useSelector(selectThemeIndex);
     const isThemeSelectHighlightActive = useSelector(selectThemeHighlightState);
 
+
+    const guideMenuActiveState = useSelector(selectGuideActiveState);
+
     //TODO: Utility SFX needs to be included in a separate hook function because
     //the soudns are used in for every button selection including clicking on any menu item
+
+
 
 
     const musicSprite = {
         overture:[0,15000],
         heavy_price_paid:[16000, 15000],
-    }
-
-
+    };
 
 
     /* Utility SFX specific function */
@@ -195,6 +199,8 @@ const GuideMenu = (props) => {
           );
     };
 
+
+
     return (
         <>
         {/* Guide Menu that is opened/closed by home button */}
@@ -218,7 +224,7 @@ const GuideMenu = (props) => {
                 <div className={styles[`${'guidePanelBottomBorder' + selected_theme}`]}>
                 </div>
                 <div className={styles.guideSettingsView} ref={guideSettingsRef}>
-                                <div className={styles.profileContainer} onClick={()=>{extendGuideMenu('extended_gamer_profile'); dispatch(updateGuideActiveState('extended_gamer_profile')); utilitySound.current.playButtonSound()}}>
+                                <div className={styles.profileContainer} onClick={()=>{ utilitySound.current.playButtonSound()}}>
                                     <div className={styles.profileImgContainer}>
                                         <div className={styles.profileIcon}>
                                             <div className={styles.iconGloss}></div>
