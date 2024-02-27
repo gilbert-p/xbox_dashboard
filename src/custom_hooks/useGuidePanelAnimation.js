@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect } from 'react';
+import { useRef, useLayoutEffect, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -27,6 +27,8 @@ export default function useGuidePanelAnimation() {
 
     const backButtonRef = useRef(null);
     const backButtonAction = useRef(null);
+
+    const extendRevealPanel = useRef(null);
 
 
     const dispatch = useDispatch();
@@ -72,6 +74,13 @@ export default function useGuidePanelAnimation() {
 
         closeExtendedMenu.current
         .to(guidePanelRef.current, {translateX: '0', duration: 0.3})
+        .pause();
+
+        extendRevealPanel.current = gsap.timeline();
+
+        extendRevealPanel.current
+        .to(guideMenuRef.current, {opacity: 1, zIndex: 999, duration: 0.3 })
+        .to(guidePanelRef.current, { translateX: '94%', duration: 0.3})
         .pause();
 
 
@@ -126,6 +135,7 @@ export default function useGuidePanelAnimation() {
     },[]);
 
 
+
     //Action Functions
     const showGuideSettings = () => {
 
@@ -167,6 +177,28 @@ export default function useGuidePanelAnimation() {
                 break;
         }
     };
+
+    const extendRevealContent = (extended_state) => {
+
+        if(!extendRevealPanel.current.time() > 0) {
+            extendRevealPanel.current.play();
+            guideSettingsAnimate.current.play();
+
+            switch(extended_state) {
+                case 'extended_about_dashboard':
+                    dispatch(updateShowBlades(false));
+                    revealAboutDashboard.current.play();
+                    break;
+                case 'extended_gamer_profile':
+                    dispatch(updateShowBlades(false));
+                    revealGamerProfilePage.current.play();
+                    break;
+                case 'default':
+                    break;
+            }
+        }
+
+    }
 
     const extendGuideMenu = (extended_state) => {
 
@@ -246,6 +278,7 @@ export default function useGuidePanelAnimation() {
             showGuideSettings,
             extendGuideMenu,
             closeFullMenu,
+            extendRevealContent,
             revealThemeSelection,
             backButtonStateSelection,
             guideSettingsAnimate, 

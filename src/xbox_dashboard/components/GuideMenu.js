@@ -9,6 +9,8 @@ import itemSelectStyles from "../../dashboard_styles/ItemSelect.module.css";
 import useGuidePanelAnimation from '../../custom_hooks/useGuidePanelAnimation';
 import useCurrentTime from '../../custom_hooks/useCurrentTime';
 
+import energyCircles from '../../dashboard_styles/EnergyCirclesAnimation.module.css';
+
 
 import {
     updateGuideMenuHighlight,
@@ -224,7 +226,7 @@ const GuideMenu = (props) => {
                 <div className={styles[`${'guidePanelBottomBorder' + selected_theme}`]}>
                 </div>
                 <div className={styles.guideSettingsView} ref={guideSettingsRef}>
-                                <div className={styles.profileContainer} onClick={()=>{ utilitySound.current.playButtonSound()}}>
+                                <div className={styles.profileContainer} onClick={()=>{ extendGuideMenu('extended_gamer_profile'); dispatch(updateGuideActiveState('extended_gamer_profile')); utilitySound.current.playButtonSound()}}>
                                     <div className={styles.profileImgContainer}>
                                         <div className={styles.profileIcon}>
                                             <div className={styles.iconGloss}></div>
@@ -396,34 +398,24 @@ const GuideMenu = (props) => {
                     <h2 className={styles.aboutDashboardTitle}>
                         Xbox 360 Dashboard Blade UI
                     </h2>
-                    <div className={styles.scrollableContent}>
-                        <div id={styles['timeMagazineBillGates']} className={styles.articleImg}></div>
-                        <h3>Overview</h3>
-                        <p className={styles.articleParagraph}>
 
-                            The foundational concept behind the original Xbox 360 Dashboard design was centered on evoking a sense of 
-                            infinite energy and power. The incorporation of curved elements, such as the blades and buttons, serves to 
-                            harmonize with the console's inherent characteristics, drawing inspiration from the Nexus logo and the industrial 
-                            design of the hardware. The sound effects compliment the interface as they were envisioned as a powerful force 
-                            waiting to be unleashed, aligning with the overall Xbox experience. This cohesive approach is designed to instill a 
-                            feeling of tranquility in the user experience. The elegantly curved blades not only mirror the aesthetics of the 
-                            console but also establish a symbiotic connection between the hardware and software, reinforcing the bond between 
-                            the two facets of the gaming experience.
-
-                        </p>
-                        <h3>Design Era of Early 2000s</h3>
-                        <div id={styles['wmpSkinsImg']} className={styles.articleImg}></div>
-                        <p id={styles['wmpParagraph']} className={styles.articleParagraph}>
-
-                            An exemplary illustration of design trends from the early 2000s is embodied in the Windows Media Player (WMP) skins
-                            designed for Windows XP. These skins epitomized a period when customization and personalization were paramount
-                            considerations. The themes developed for the media player showcased a wide spectrum of design choices, with each
-                            iteration presenting a distinctive visual identity. Notably, this occurred prior to the industry's shift towards
-                            minimalistic design, a transformation prompted by the advent of mobile devices. As these devices entered the market,
-                            the challenge arose for interfaces to seamlessly operate on both mobile and desktop environments, marking a
-                            significant shift in design preferences.
-
-                        </p>
+                    <div className={styles.gamerProfileContent}>
+                        <div className={energyCircles.animationContainer}>
+                            <div id={energyCircles['r13']} class={energyCircles.ring}></div>
+                            <div id={energyCircles['r12']} class={energyCircles.ring}></div>
+                            <div id={energyCircles['r11']} class={energyCircles.ring}></div>
+                            <div id={energyCircles['r10']} class={energyCircles.ring}></div>
+                            <div id={energyCircles['r9']}  class={energyCircles.ring}></div>
+                            <div id={energyCircles['r8']}  class={energyCircles.ring}></div> 
+                            <div id={energyCircles['r7']}  class={energyCircles.ring}></div>
+                            <div id={energyCircles['r6']}  class={energyCircles.ring}></div>
+                            <div id={energyCircles['r5']}  class={energyCircles.ring}></div>
+                            <div id={energyCircles['r4']}  class={energyCircles.ring}></div> 
+                            <div id={energyCircles['r3']}  class={energyCircles.ring}></div>
+                            <div id={energyCircles['r2']}  class={energyCircles.ring}></div>
+                            <div id={energyCircles['r1']}  class={energyCircles.ring}></div>
+                        </div>
+                        <styles className={styles.backgroundOverlay}></styles>
                     </div>
                 </div>
 

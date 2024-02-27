@@ -1,0 +1,263 @@
+
+
+.animationContainer {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 80%;
+    left: -10%;
+    opacity: 0.5;
+}
+
+.ring {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+  }
+  
+  #r1 {
+    width: var(--r1);
+    height: var(--r1);
+    border: 15px solid var(--r1_color);
+    transform: translate(8px, -10px);
+    animation: grow_r1 var(--duration) var(--golden_ease) 0.5s infinite forwards,
+               vanish_late var(--duration) linear 0.5s infinite forwards;
+  }
+  
+  #r2 {
+    width: var(--r2);
+    height: var(--r2);
+    border: 7px solid var(--r2_color);
+    transform: translateY(15px);
+    animation: grow_r2 var(--duration) var(--golden_ease) 1.2s infinite forwards,
+               vanish_late var(--duration) linear 1.2s infinite forwards;
+  }
+  
+  #r3 {
+    width: var(--r3);
+    height: var(--r3);
+    border: 15px solid var(--r3_color);
+    transform: translate(8px, -10px);
+    animation: grow_r3 var(--duration) var(--golden_ease) 1.8s infinite forwards,
+               vanish_late var(--duration) linear 1.8s infinite forwards;
+  }
+  
+  #r4 {
+    width: var(--r4);
+    height: var(--r4);
+    border: 5px solid var(--r4_color);
+    transform: translate(-21px, 4px);
+    animation: grow_r4 var(--duration) var(--golden_ease) 2.3s infinite forwards,
+               vanish_late var(--duration) linear 2.3s infinite forwards;
+  }
+  
+  #r5 {
+    width: var(--r5);
+    height: var(--r5);
+    border: 8px solid var(--r5_color);
+    transform: translate(1px, 19px);
+    animation: grow_r5 var(--duration) var(--golden_ease) 2.9s infinite forwards,
+               vanish_late var(--duration) linear 2.9s infinite forwards;
+  }
+  
+  #r6 {
+    width: var(--r6);
+    height: var(--r6);
+    border: 4px solid var(--r6_color);
+    transform: translate(-21px, 3px);
+    animation: grow_r6 var(--duration) var(--golden_ease) 3.5s infinite forwards,
+               vanish_late var(--duration) linear 3.5s infinite forwards;
+  }
+  
+  #r7 {
+    width: var(--r7);
+    height: var(--r7);
+    border: 7px solid var(--r7_color);
+    transform: translate(-1px, 18px);
+    animation: grow_r7 var(--duration) var(--golden_ease) 4.1s infinite forwards,
+               vanish_late var(--duration) linear 4.1s infinite forwards;
+  }
+  
+  #r8 {
+    width: var(--r8);
+    height: var(--r8);
+    border: 20px solid var(--r8_color);
+    transform: translate(11px, -1px);
+    animation: grow_r8 var(--duration) var(--golden_ease) 4.7s infinite forwards,
+               vanish_late var(--duration) linear 4.7s infinite forwards;
+  }
+  
+  #r9 {
+    width: var(--r9);
+    height: var(--r9);
+    border: 20px solid var(--r9_color);
+    transform: translate(-21px, 4px);
+    animation: grow_r9 var(--duration) var(--golden_ease) 5.3s infinite forwards,
+               vanish_late var(--duration) linear 5.3s infinite forwards;
+  }
+  
+  #r10 {
+    width: var(--r10);
+    height: var(--r10);
+    border: 11px solid var(--r10_color);
+    animation: grow_r10 var(--duration) var(--golden_ease) 5.8s infinite forwards,
+               vanish_late var(--duration) linear 5.8s infinite forwards;
+  }
+  
+  #r11 {
+    width: var(--r11);
+    height: var(--r11);
+    border: 11px solid var(--r11_color);
+    transform: translate(6px, -27px);
+    animation: grow_r11 var(--duration) var(--golden_ease) 6.4s infinite forwards,
+               vanish_late var(--duration) linear 6.4s infinite forwards;
+  }
+  
+  #r12 {
+    width: var(--r12);
+    height: var(--r12);
+    border: 11px solid var(--r10_color);
+    transform: translate(-19px, -10px);
+    animation: grow_r12 var(--duration) var(--golden_ease) 7s infinite forwards,
+               vanish_late var(--duration) linear 7s infinite forwards;
+  }
+  
+  #r13 {
+    width: var(--r13);
+    height: var(--r13);
+    border: 11px solid var(--r10_color);
+    animation: grow_r13 var(--duration) var(--golden_ease) 7.6s infinite forwards,
+               vanish_late var(--duration) linear 7.6s infinite forwards;
+  }
+  
+  @keyframes vanish_late {
+    0% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes grow_r1 {
+    from {
+      transform: translate(8px, -10px) scale(1);
+    }
+    to {
+      transform: translate(282.84px, -282.84px) scale(var(--scale_1));
+    }
+  }
+  
+  @keyframes grow_r2 {
+    from {
+      transform: translateY(15px) scale(1);
+    }
+    to {
+      transform: translate(300px, -300px) scale(var(--scale_2));
+    }
+  }
+  
+  @keyframes grow_r3 {
+    from {
+      transform: translate(8px, -10px) scale(1);
+    }
+    to {
+      transform: translate(282.84px, -282.84px) scale(var(--scale_1));
+    }
+  }
+  
+  @keyframes grow_r4 {
+    from {
+      transform: translate(-21px, 4px) scale(1);
+    }
+    to {
+      transform: translate(282.84px, -282.84px) scale(var(--scale_2));
+    }
+  }
+  
+  @keyframes grow_r5 {
+    from {
+      transform: translate(1px, 19px) scale(1);
+    }
+    to {
+      transform: translate(300px, -300px) scale(var(--scale_1));
+    }
+  }
+  
+  @keyframes grow_r6 {
+    from {
+      transform: translate(-21px, 3px) scale(1);
+    }
+    to {
+      transform: translate(292.63px, -292.63px) scale(var(--scale_2));
+    }
+  }
+  
+  @keyframes grow_r7 {
+    from {
+      transform: translate(-1px, 18px) scale(1);
+    }
+    to {
+      transform: translate(288.6px, -288.6px) scale(var(--scale_1));
+    }
+  }
+  
+  @keyframes grow_r8 {
+    from {
+      transform: translate(11px, -1px) scale(1);
+    }
+    to {
+      transform: translate(292.63px, -292.63px) scale(var(--scale_2));
+    }
+  }
+  
+  @keyframes grow_r9 {
+    from {
+      transform: translate(-21px, 4px) scale(1);
+    }
+    to {
+      transform: translate(282.84px, -282.84px) scale(var(--scale_1));
+    }
+  }
+  
+  @keyframes grow_r10 {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: translate(300px, -300px) scale(var(--scale_2));
+    }
+  }
+  
+  @keyframes grow_r11 {
+    from {
+      transform: translate(6px, -27px) scale(1);
+    }
+    to {
+      transform: translate(338.1px, -338.1px) scale(var(--scale_1));
+    }
+  }
+  
+  @keyframes grow_r12 {
+    from {
+      transform: translate(-19px, -10px) scale(1);
+    }
+    to {
+      transform: translate(282.84px, -282.84px) scale(var(--scale_2));
+    }
+  }
+  
+  @keyframes grow_r13 {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: translate(300px, -300px) scale(var(--scale_1));
+    }
+  }

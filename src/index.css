@@ -44,6 +44,44 @@
   --white-text: white;
   --black-text: rgba(15, 15, 15, 0.9);
   --inactive-title: rgba(68, 68, 68, 0.9);
+
+
+
+  /*Animation Specific Variables*/
+  --r1: 188px;
+  --r2: 80px;
+  --r3: 90px;
+  --r4: 80px;
+  --r5: 183px;
+  --r6: 182px;
+  --r7: 285px;
+  --r8: 295px;
+  --r9: 297px;
+  --r10: 361px;
+  --r11: 391px;
+  --r12: 398px;
+  --r13: 385px;
+
+  --r1_color: #92c83e;
+  --r2_color: #92c83d;
+  --r3_color: #dae13b;
+  --r4_color: #9ecd52;
+  --r5_color: #92c83e;
+  --r6_color: #93c740;
+  --r7_color: #91c73d;
+  --r8_color: #dae13b;
+  --r9_color: #92c83e;
+  --r10_color: #99cc48;
+  --r11_color: #dbe23a;
+  --r12_color: #92c83e;
+  --r13_color: #93c83d;
+
+  --duration: 21s;
+  --scale_1: 1.2;
+  --scale_2: 1.3;
+  
+  --golden_ease: cubic-bezier(0.55, 0.055, 0.675, 1.06);
+
 }
 
 * {

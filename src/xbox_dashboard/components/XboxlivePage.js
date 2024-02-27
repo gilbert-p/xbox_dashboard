@@ -43,7 +43,7 @@ const XboxlivePage = (props) => {
 
     const guideActiveState = useSelector(selectGuideActiveState);
 
-    const { xboxBackgroundRef, current_context_index } = props;
+    const { xboxBackgroundRef, current_context_index, guidePanelAction } = props;
 
 
     const { 
@@ -74,6 +74,7 @@ const XboxlivePage = (props) => {
     };
 
 
+
     
   return (
      <>
@@ -85,7 +86,7 @@ const XboxlivePage = (props) => {
 
         <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.makeTransparent : ""}`}>
             <div className={pageGridStyles.leftContent}>
-                <div className={profileCardStyles.profileContainer} onClick={()=>{utilitySound.current.playButtonSound();}} >
+                <div className={profileCardStyles.profileContainer} onClick={()=>{guidePanelAction();utilitySound.current.playButtonSound();}} >
                     <p>Epoxi117</p>
                     <div className={profileCardStyles.profileImgContainer} >
                         <div className={profileCardStyles.profileIcon}>

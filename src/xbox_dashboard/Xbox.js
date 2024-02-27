@@ -176,15 +176,22 @@ const Xbox = (props) => {
     }
 
     const xboxliveRef = useRef(null);
+
+
+    const extendMenuPanel = () => {
+        dispatch(updateGuideActiveState('extended_about_dashboard'));
+        guidePanelAnimation.extendRevealContent('extended_about_dashboard');
+    }
       
 
     return (
         <div className={styles.xboxComponent}>
 
-            <div className={styles.arrowContextButtonContainer}>
+            <div className={styles.arrowContextButtonContainer}  >
                 <div className={styles.xboxHomeLogo} onClick={()=>{showGuideSettings()}}><span className={styles.ellipseGlow}></span></div>
                 <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
                 <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
+                {/* onClick={()=>{extendMenuPanel()}} */}
             </div>
 
             <GuideMenu guideAnimationRef={guidePanelAnimation} />
@@ -242,7 +249,7 @@ const Xbox = (props) => {
 
                         {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
                         <MarketplacePage                                                  guideAnimationRef={guidePanelAnimation}/>
-                        <XboxlivePage    current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <XboxlivePage  guidePanelAction={extendMenuPanel}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <GamesPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <MediaPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
