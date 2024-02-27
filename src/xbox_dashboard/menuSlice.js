@@ -33,6 +33,8 @@ let initialState = {
     selected_theme: '',
     theme_select_highlight: false,
 
+    external_panel_navigate: false,
+
 };
 
 export const menuSlice = createSlice({
@@ -123,6 +125,10 @@ export const menuSlice = createSlice({
         },
         updateThemeSelectHighlight: (state, action) => {
             state.theme_select_highlight = action.payload;
+        },
+
+        updateExternalPanelNavigate: (state, action) => {
+            state.external_panel_navigate = action.payload;
         }
     }
 });
@@ -158,7 +164,9 @@ export const {
                updateShowThemeSelect,
                updateSelectedTheme,
                navigateThemeSelectIndex,
-               updateThemeSelectHighlight
+               updateThemeSelectHighlight,
+
+               updateExternalPanelNavigate,
 
             } = menuSlice.actions;
 
@@ -193,6 +201,8 @@ export const selectShowThemeSelect = (state) => state.menu.show_theme_select;
 export const selectThemeSelection = (state) => state.menu.selected_theme;
 export const selectThemeIndex = (state) => state.menu.theme_select_index;
 export const selectThemeHighlightState = (state) => state.menu.theme_select_highlight;
+
+export const selectExternalNavigationState = (state) => state.menu.external_panel_navigate;
 
 
 

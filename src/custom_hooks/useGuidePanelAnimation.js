@@ -4,7 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { selectGuideActiveState,
          updateGuideActiveState,
-         updateShowBlades } from '../xbox_dashboard/menuSlice';
+         updateShowBlades,
+         updateExternalPanelNavigate,
+         selectExternalNavigationState } from '../xbox_dashboard/menuSlice';
 
 export default function useGuidePanelAnimation() {
     const revealGuideMenu = useRef(null);
@@ -33,6 +35,8 @@ export default function useGuidePanelAnimation() {
 
     const dispatch = useDispatch();
     const guideActiveState = useSelector(selectGuideActiveState);
+
+    const isExternalNavigate = useSelector(selectExternalNavigationState);
 
 
     useLayoutEffect(()=> {
@@ -139,42 +143,48 @@ export default function useGuidePanelAnimation() {
     //Action Functions
     const showGuideSettings = () => {
 
-        switch(guideActiveState) {
-            case 'closed':
-                revealGuideMenu.current.play();
-                dispatch(updateGuideActiveState('guide_setting_main'));
-
-                dispatch(updateShowBlades(false));
-                break;
-            case 'guide_setting_main':
-                revealGuideMenu.current.reverse();
-                dispatch(updateGuideActiveState('closed'));
-
-                dispatch(updateShowBlades(true));
-                break;
-            case 'extended_about_dashboard':
-                closeExtendedMenu.current.play();
-                revealAboutDashboard.current.time(0).pause();
-                dispatch(updateGuideActiveState('closed'));
-
-                dispatch(updateShowBlades(true));
-                break;
-            case 'extended_gamer_profile':
-                closeExtendedMenu.current.play();
-                revealGamerProfilePage.current.time(0).pause();
-                dispatch(updateGuideActiveState('closed'));
-
-                dispatch(updateShowBlades(true));
-                break;
-            case 'theme_select':
-                revealGuideMenu.current.reverse();
-                showThemeSelection.current.reverse();
-                dispatch(updateGuideActiveState('closed'));
-
-                dispatch(updateShowBlades(true));
-                break;
-            case 'default':
-                break;
+        if(isExternalNavigate){
+            console.log("external navigate")
+            extendRevealContent(guideActiveState);
+        }
+        else {
+            switch(guideActiveState) {
+                case 'closed':
+                    revealGuideMenu.current.play();
+                    dispatch(updateGuideActiveState('guide_setting_main'));
+    
+                    dispatch(updateShowBlades(false));
+                    break;
+                case 'guide_setting_main':
+                    revealGuideMenu.current.reverse();
+                    dispatch(updateGuideActiveState('closed'));
+    
+                    dispatch(updateShowBlades(true));
+                    break;
+                case 'extended_about_dashboard':
+                    closeExtendedMenu.current.play();
+                    revealAboutDashboard.current.time(0).pause();
+                    dispatch(updateGuideActiveState('closed'));
+    
+                    dispatch(updateShowBlades(true));
+                    break;
+                case 'extended_gamer_profile':
+                    closeExtendedMenu.current.play();
+                    revealGamerProfilePage.current.time(0).pause();
+                    dispatch(updateGuideActiveState('closed'));
+    
+                    dispatch(updateShowBlades(true));
+                    break;
+                case 'theme_select':
+                    revealGuideMenu.current.reverse();
+                    showThemeSelection.current.reverse();
+                    dispatch(updateGuideActiveState('closed'));
+    
+                    dispatch(updateShowBlades(true));
+                    break;
+                case 'default':
+                    break;
+            }
         }
     };
 
@@ -184,6 +194,8 @@ export default function useGuidePanelAnimation() {
             extendRevealPanel.current.play();
             guideSettingsAnimate.current.play();
 
+            dispatch(updateExternalPanelNavigate(true));
+
             switch(extended_state) {
                 case 'extended_about_dashboard':
                     dispatch(updateShowBlades(false));
@@ -192,6 +204,28 @@ export default function useGuidePanelAnimation() {
                 case 'extended_gamer_profile':
                     dispatch(updateShowBlades(false));
                     revealGamerProfilePage.current.play();
+                    break;
+                case 'default':
+                    break;
+            }
+        }
+        else {
+            guideSettingsAnimate.current.reverse();
+
+            dispatch(updateExternalPanelNavigate(false));
+
+            switch(extended_state) {
+                case 'extended_about_dashboard':
+                    dispatch(updateShowBlades(true));
+                    dispatch(updateGuideActiveState('closed'));
+                    extendRevealPanel.current.reverse();
+                    revealAboutDashboard.current.reverse();
+                    break;
+                case 'extended_gamer_profile':
+                    dispatch(updateShowBlades(true));
+                    dispatch(updateGuideActiveState('closed'));
+                    extendRevealPanel.current.reverse();
+                    revealGamerProfilePage.current.reverse();
                     break;
                 case 'default':
                     break;
@@ -245,30 +279,37 @@ export default function useGuidePanelAnimation() {
     }
 
     const backButtonStateSelection = () => {
-        switch(guideActiveState) {
-            case 'guide_setting_main':
-                revealGuideMenu.current.reverse();
-                dispatch(updateGuideActiveState('closed'));
 
-                dispatch(updateShowBlades(true));
-                break;
-            case 'extended_about_dashboard':
-                extendGuideMenu('extended_about_dashboard');
-                guideSettingsAnimate.current.reverse();
-                dispatch(updateGuideActiveState('guide_setting_main'));
-                break;
-            case 'extended_gamer_profile':
-                extendGuideMenu('extended_gamer_profile');
-                guideSettingsAnimate.current.reverse();
-                dispatch(updateGuideActiveState('guide_setting_main'));
-                break;
-            case 'theme_select':
-                showThemeSelection.current.reverse();
-                dispatch(updateGuideActiveState('guide_setting_main'));
-                break;
-            case 'default':
-                break;
+        if(isExternalNavigate) {
+            extendRevealContent(guideActiveState);
         }
+        else {
+            switch(guideActiveState) {
+                case 'guide_setting_main':
+                    revealGuideMenu.current.reverse();
+                    dispatch(updateGuideActiveState('closed'));
+    
+                    dispatch(updateShowBlades(true));
+                    break;
+                case 'extended_about_dashboard':
+                    extendGuideMenu('extended_about_dashboard');
+                    guideSettingsAnimate.current.reverse();
+                    dispatch(updateGuideActiveState('guide_setting_main'));
+                    break;
+                case 'extended_gamer_profile':
+                    extendGuideMenu('extended_gamer_profile');
+                    guideSettingsAnimate.current.reverse();
+                    dispatch(updateGuideActiveState('guide_setting_main'));
+                    break;
+                case 'theme_select':
+                    showThemeSelection.current.reverse();
+                    dispatch(updateGuideActiveState('guide_setting_main'));
+                    break;
+                case 'default':
+                    break;
+            }
+        }
+
     }
 
 

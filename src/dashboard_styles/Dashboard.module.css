@@ -1370,13 +1370,14 @@
     position: relative;
     width: inherit;
     height: 520px;
+    overflow: hidden;
 }
 
 .backgroundOverlay {
     position: absolute;
     width: inherit;
     height: inherit;
-    background-color: rgba(191, 191, 191, 0.349);
+    background-color: rgba(139, 139, 139, 0.349);
 }
 
 

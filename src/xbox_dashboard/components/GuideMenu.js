@@ -401,21 +401,21 @@ const GuideMenu = (props) => {
 
                     <div className={styles.gamerProfileContent}>
                         <div className={energyCircles.animationContainer}>
-                            <div id={energyCircles['r13']} class={energyCircles.ring}></div>
-                            <div id={energyCircles['r12']} class={energyCircles.ring}></div>
-                            <div id={energyCircles['r11']} class={energyCircles.ring}></div>
-                            <div id={energyCircles['r10']} class={energyCircles.ring}></div>
-                            <div id={energyCircles['r9']}  class={energyCircles.ring}></div>
-                            <div id={energyCircles['r8']}  class={energyCircles.ring}></div> 
-                            <div id={energyCircles['r7']}  class={energyCircles.ring}></div>
-                            <div id={energyCircles['r6']}  class={energyCircles.ring}></div>
-                            <div id={energyCircles['r5']}  class={energyCircles.ring}></div>
-                            <div id={energyCircles['r4']}  class={energyCircles.ring}></div> 
-                            <div id={energyCircles['r3']}  class={energyCircles.ring}></div>
-                            <div id={energyCircles['r2']}  class={energyCircles.ring}></div>
-                            <div id={energyCircles['r1']}  class={energyCircles.ring}></div>
+                            <div id={energyCircles['r13']} className={energyCircles.ring}></div>
+                            <div id={energyCircles['r12']} className={energyCircles.ring}></div>
+                            <div id={energyCircles['r11']} className={energyCircles.ring}></div>
+                            <div id={energyCircles['r10']} className={energyCircles.ring}></div>
+                            <div id={energyCircles['r9']}  className={energyCircles.ring}></div>
+                            <div id={energyCircles['r8']}  className={energyCircles.ring}></div> 
+                            <div id={energyCircles['r7']}  className={energyCircles.ring}></div>
+                            <div id={energyCircles['r6']}  className={energyCircles.ring}></div>
+                            <div id={energyCircles['r5']}  className={energyCircles.ring}></div>
+                            <div id={energyCircles['r4']}  className={energyCircles.ring}></div> 
+                            <div id={energyCircles['r3']}  className={energyCircles.ring}></div>
+                            <div id={energyCircles['r2']}  className={energyCircles.ring}></div>
+                            <div id={energyCircles['r1']}  className={energyCircles.ring}></div>
                         </div>
-                        <styles className={styles.backgroundOverlay}></styles>
+                        <div className={styles.backgroundOverlay}></div>
                     </div>
                 </div>
 

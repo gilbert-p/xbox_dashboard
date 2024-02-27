@@ -179,8 +179,8 @@ const Xbox = (props) => {
 
 
     const extendMenuPanel = () => {
-        dispatch(updateGuideActiveState('extended_about_dashboard'));
-        guidePanelAnimation.extendRevealContent('extended_about_dashboard');
+        dispatch(updateGuideActiveState('extended_gamer_profile'));
+        guidePanelAnimation.extendRevealContent('extended_gamer_profile');
     }
       
 
