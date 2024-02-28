@@ -101,8 +101,8 @@
     width: var(--r10);
     height: var(--r10);
     border: 11px solid var(--r10_color);
-    animation: grow_r10 var(--duration) var(--golden_ease) 9.5s infinite forwards,
-               vanish_late var(--duration) linear 9.5s infinite forwards;
+    animation: grow_r10 var(--duration) var(--golden_ease) 2.5s infinite forwards,
+               vanish_late var(--duration) linear 2.5s infinite forwards;
   }
   
   #r11 {
@@ -110,8 +110,8 @@
     height: var(--r11);
     border: 11px solid var(--r11_color);
     transform: translate(6px, -27px);
-    animation: grow_r11 var(--duration) var(--golden_ease)10.5s infinite forwards,
-               vanish_late var(--duration) linear 10.5s infinite forwards;
+    animation: grow_r11 var(--duration) var(--golden_ease) 2.5s infinite forwards,
+               vanish_late var(--duration) linear 2.5s infinite forwards;
   }
   
   #r12 {
@@ -119,16 +119,16 @@
     height: var(--r12);
     border: 11px solid var(--r10_color);
     transform: translate(-19px, -10px);
-    animation: grow_r12 var(--duration) var(--golden_ease) 11.5s infinite forwards,
-               vanish_late var(--duration) linear 11.5s infinite forwards;
+    animation: grow_r12 var(--duration) var(--golden_ease) 2.5s infinite forwards,
+               vanish_late var(--duration) linear 2.5s infinite forwards;
   }
   
   #r13 {
     width: var(--r13);
     height: var(--r13);
     border: 11px solid var(--r10_color);
-    animation: grow_r13 var(--duration) var(--golden_ease) 12.5s infinite forwards,
-               vanish_late var(--duration) linear 12.5s infinite forwards;
+    animation: grow_r13 var(--duration) var(--golden_ease) 2.5s infinite forwards,
+               vanish_late var(--duration) linear 2.5s infinite forwards;
   }
   
   @keyframes vanish_late {
@@ -147,56 +147,56 @@
   }
   
   @keyframes grow_r1 {
-    from {
+    20% {
       transform: translate(8px, -10px) scale(1);
     }
-    to {
-      transform: translate(382.84px, -382.84px) scale(var(--scale_1));
+    100% {
+      transform: translate(482.84px, -382.84px) scale(var(--scale_1));
     }
   }
   
   @keyframes grow_r2 {
-    from {
+    20% {
       transform: translateY(15px) scale(1);
     }
-    to {
+    100% {
       transform: translate(400px, -400px) scale(var(--scale_2));
     }
   }
   
   @keyframes grow_r3 {
-    from {
+    20% {
       transform: translate(8px, -10px) scale(1);
     }
-    to {
-      transform: translate(382.84px, -382.84px) scale(var(--scale_1));
+    100% {
+      transform: translate(482.84px, -382.84px) scale(var(--scale_1));
     }
   }
   
   @keyframes grow_r4 {
-    from {
+    20% {
       transform: translate(-21px, 4px) scale(1);
     }
-    to {
-      transform: translate(382.84px, -382.84px) scale(var(--scale_2));
+    100% {
+      transform: translate(482.84px, -382.84px) scale(var(--scale_2));
     }
   }
   
   @keyframes grow_r5 {
-    from {
+    20% {
       transform: translate(1px, 19px) scale(1);
     }
-    to {
-      transform: translate(400px, -400px) scale(var(--scale_1));
+    100% {
+      transform: translate(500px, -400px) scale(var(--scale_1));
     }
   }
   
   @keyframes grow_r6 {
-    from {
+    20% {
       transform: translate(-21px, 3px) scale(1);
     }
-    to {
-      transform: translate(392.63px, -392.63px) scale(var(--scale_2));
+    100% {
+      transform: translate(592.63px, -392.63px) scale(var(--scale_2));
     }
   }
   
@@ -205,7 +205,7 @@
       transform: translate(-1px, 18px) scale(1);
     }
     to {
-      transform: translate(388.6px, -388.6px) scale(var(--scale_1));
+      transform: translate(588.6px, -388.6px) scale(var(--scale_1));
     }
   }
   

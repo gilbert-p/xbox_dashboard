@@ -6,6 +6,8 @@ import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import itemSelectStyles from "../../dashboard_styles/ItemSelect.module.css";
 
+import profileCardStyles from "../../dashboard_styles/ProfileCard.module.css";
+
 import useGuidePanelAnimation from '../../custom_hooks/useGuidePanelAnimation';
 import useCurrentTime from '../../custom_hooks/useCurrentTime';
 
@@ -247,18 +249,36 @@ const GuideMenu = (props) => {
                                     <div className={styles.buttonGroup}>
                                         <button className={styles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(0));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
-                                            <span id={styles["skewButton_1"]} className={`${styles.buttonIcon} ${iconLibrary.github_logo}`}></span>
-                                            <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
+
+
+                                            <a href="https://github.com/gilbert-p/xbox_dashboard" target="_blank" rel="noopener noreferrer">
+                                                <span id={styles["skewButton_1"]} className={`${styles.buttonIcon} ${iconLibrary.github_logo}`}></span>
+                                                <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
+                                            </a>
+
+                                           
                                         </button>
                                         <button className={styles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(1));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
-                                            <span id={styles["skewButton_2"]} className={`${styles.buttonIcon} ${iconLibrary.react_logo}`}></span>
-                                            <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
+
+
+                                            <a href="https://gilbert-p.github.io/" target="_blank" rel="noopener noreferrer">
+                                                <span id={styles["skewButton_2"]} className={`${styles.buttonIcon} ${iconLibrary.react_logo}`}></span>
+                                                <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
+                                            </a>
+
+
                                         </button>
                                         <button className={styles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(2));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
-                                            <span id={styles["skewButton_2"]} className={`${styles.buttonIcon} ${iconLibrary.react_logo}`}></span>
-                                            <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
+
+
+                                            <a href="https://github.com/gilbert-p/xbox_dashboard" target="_blank" rel="noopener noreferrer">
+                                                <span id={styles["skewButton_2"]} className={`${styles.buttonIcon} ${iconLibrary.react_logo}`}></span>
+                                                <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
+                                            </a>
+
+
                                         </button>
                                     </div>
                                 </div>
@@ -395,12 +415,13 @@ const GuideMenu = (props) => {
                 </div>
 
                 <div className={styles.gamerProfileContainer} ref={gamerProfilePageRef}>
+                <div className={styles.backgroundOverlay}></div>
+
                     <h2 className={styles.aboutDashboardTitle}>
-                        Xbox 360 Dashboard Blade UI
+                        Web Developer
                     </h2>
 
-                    <div className={styles.gamerProfileContent}>
-                        <div className={energyCircles.animationContainer}>
+                    <div className={energyCircles.animationContainer}>
                             <div id={energyCircles['r13']} className={energyCircles.ring}></div>
                             <div id={energyCircles['r12']} className={energyCircles.ring}></div>
                             <div id={energyCircles['r11']} className={energyCircles.ring}></div>
@@ -414,8 +435,92 @@ const GuideMenu = (props) => {
                             <div id={energyCircles['r3']}  className={energyCircles.ring}></div>
                             <div id={energyCircles['r2']}  className={energyCircles.ring}></div>
                             <div id={energyCircles['r1']}  className={energyCircles.ring}></div>
-                        </div>
+                    </div>
+
+                    <div className={styles.gamerProfileContent}>
+
+
                         <div className={styles.backgroundOverlay}></div>
+
+                            <div className={styles.contentContainer}>
+                                <div id={styles['toolsSection']} className={styles.blockContent}>
+                                    <h3>Tools</h3>
+
+                                    <p>
+                                        This dashboard as a web application to practice web development along with animations.
+                                        The following tools were used in this project:
+                                    </p>
+
+                                    <ul>
+                                        <li>React JS</li>
+                                        <li>GSAP (Greensock Animation Library)</li>
+                                        <li>Figma</li>
+                                        <li>Original Xbox 360 Style Guide (Reference)</li>
+                                    </ul>
+                                </div>
+
+                                <div id={styles['inspirationSection']} className={styles.blockContent}>
+                                    <h3>Inspiration</h3>
+
+                                    <p>
+                                        Big thanks to <b>Rowland Brown</b> for his heavy influence in making this 
+                                        dashboard come to life!
+                                    </p>
+
+                                    <ul>
+                                        <li id={styles['website_gamecase']}>
+                                            <a href="https://rowlandbrown.com/xbox-360-dashboard-ui-blades" target="_blank" rel="noopener noreferrer">
+                                            Rowland Brown Website
+                                            </a>
+                                        </li>
+                                        <li>      
+                                            <a href="https://www.behance.net/rowbrown" target="_blank" rel="noopener noreferrer">
+                                            Rowland Brown Behance
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://digiex.net/threads/xbox-360-style-guide.15469/" target="_blank" rel="noopener noreferrer">
+                                            Xbox 360 Style Guide
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div className={styles.contentContainer}>
+                                <div id={styles['profileCard']} className={styles.blockContent}>
+                                    <div id={profileCardStyles['guideProfile']} className={profileCardStyles.profileContainer} >
+                                        <p>Epoxi117</p>
+                                        <div className={profileCardStyles.profileImgContainer} >
+                                            <div className={profileCardStyles.profileIcon}>
+                                                <div className={profileCardStyles.iconGloss}></div>
+                                            </div>
+                                        </div>
+                                        <div className={profileCardStyles.profileDescription}>
+                                            <p className={profileCardStyles.repTitle}>Rep</p>
+                                            <div className={profileCardStyles.reputationStars}>
+                                                <div className={profileCardStyles.starIcon}></div>
+                                                <div className={profileCardStyles.starIcon}></div>
+                                                <div className={profileCardStyles.starIcon}></div>
+                                                <div className={profileCardStyles.starIcon}></div>
+                                                <div className={profileCardStyles.starIcon}></div>
+                                            </div>
+                                            <p className={profileCardStyles.gamerscoreTitle}>Gamerscore</p>
+                                            <p className={profileCardStyles.gamerscoreValue}>21117</p>
+                                            <p className={profileCardStyles.zoneTitle}>Zone</p>
+                                            <div className={profileCardStyles.zoneStatus}>Pro</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div  id={styles['profileDetails']} className={styles.blockContent}>
+                                
+                                        <p>United States</p>
+                                        <p>https://gilbert-p.github.io/</p>
+                                    
+                                </div>
+                            </div>
+
+
                     </div>
                 </div>
 

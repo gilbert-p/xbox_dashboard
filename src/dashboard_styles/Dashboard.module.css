@@ -1359,6 +1359,8 @@
     opacity: 0;
     display: none;
 
+    > p {}
+
     > h2 {
         font-size: calc(var(--screen-heading-size));
         color: var(--white-text);
@@ -1371,14 +1373,137 @@
     width: inherit;
     height: 520px;
     overflow: hidden;
+    display: flex;
+
+    .contentContainer {
+        width: 420px;
+        height: inherit;
+        display: flex;
+        flex-direction: column;
+        
+        &:nth-child(2){
+            margin-right: 25px;
+        }
+
+        .blockContent {
+            width: inherit;
+            height: auto;
+            border-radius: 8px;
+            border: 2px solid #656565;
+            padding-left: 10px;
+            padding-right: 10px;
+
+            
+            &:nth-child(1) {
+                margin-bottom: 15px;
+            }
+            
+            
+
+        }
+
+
+
+    }
+}
+
+#toolsSection {
+    h3 {
+        font-size: calc(var(--screen-heading-size));
+    }
+
+    p {
+        position: relative;
+        top: 5px;
+        font-size: calc(var(--text-body-size));
+    }
+
+    ul {
+        position: relative;
+        width: inherit;
+        height: auto;
+        left: -10px;
+        
+        
+    }
+
+    li {
+        font-size: calc(var(--text-link-size));
+        margin-left: 20px;
+    }
+}
+
+#inspirationSection {
+    h3 {
+        font-size: calc(var(--screen-heading-size));
+    }
+
+    p {
+        position: relative;
+        top: 10px;
+        font-size: calc(var(--text-link-size));
+    }
+
+    ul {
+        width: inherit;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+    }
+
+    li {
+        cursor: pointer;
+        width: 90px;
+        height: 132px;
+        background-color: lightskyblue;
+        margin-left: 35px;
+
+
+        > a {
+            position: relative;
+            text-decoration: none;
+            top: 35px;
+            left: 5px;
+            font-size: 20px;
+            color: var(--white-text);
+        }
+
+        &:nth-child(1) {
+            background: url("../assets/images/rowland_brown_website_gamecase.png");
+        }
+        &:nth-child(2) {
+            background: url("../assets/images/rowland_brown_behance_gamecase.png");
+        }
+        &:nth-child(3) {
+            background: url("../assets/images/xbox_360_styleguide_gamecase.png");
+        }
+    }
+}
+
+#profileCard {
+    position: relative;
+    padding: 0;
+    border: initial;
+    top: 4px;
+}
+
+#profileDetails {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    > p {
+        font-size: calc(var(--text-link-size));
+    }
 }
 
 .backgroundOverlay {
     position: absolute;
     width: inherit;
     height: inherit;
-    background-color: rgba(139, 139, 139, 0.349);
+    /* background-color: rgba(139, 139, 139, 0.349); */
+    /* background-color: rgba(156, 156, 156, 0.444); */
+    z-index: -1;
 }
+
 
 
 .appContainer {
