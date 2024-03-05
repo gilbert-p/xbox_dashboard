@@ -1,4 +1,4 @@
-import React, {useRef, useState, forwardRef, useLayoutEffect, useCallback } from 'react';
+import React, {useRef, useMemo, useState, forwardRef, useLayoutEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
@@ -17,7 +17,11 @@ from './xboxSlice';
 
 import { selectGuideActiveState,
          updateGuideActiveState,
-         updateShowBlades } 
+         updateShowBlades,
+        
+         updateSubMenuNavigate,
+         selectSubMenuNavActive,
+         updateNavigateContext,} 
 from './menuSlice';
 
 
@@ -47,6 +51,8 @@ const Xbox = (props) => {
     const guidePanelAnimation = useGuidePanelAnimation();
 
     const guideActiveState = useSelector(selectGuideActiveState);
+
+    const isSubMenuActive = useSelector(selectSubMenuNavActive);
 
     
     
@@ -132,7 +138,7 @@ const Xbox = (props) => {
     const openGuideSfx = async () => {
         const playButtonSfx = async () => {
             utilitySFX.current['play']({id:'std_button_press'});
-            await new Promise((resolve) => setTimeout(resolve, 150));
+            await new Promise((resolve) => setTimeout(resolve, 50));
         }
 
         const playGuideOpenSfx = async () => {
@@ -178,10 +184,22 @@ const Xbox = (props) => {
     const xboxliveRef = useRef(null);
 
 
+    //Foreign extension
     const extendMenuPanel = () => {
-        dispatch(updateGuideActiveState('extended_gamer_profile'));
-        guidePanelAnimation.extendRevealContent('extended_gamer_profile');
+        dispatch(updateNavigateContext('foreign_extension'));
+        dispatch(updateGuideActiveState('foreign_gamer_profile'));
+        guidePanelAnimation.extendRevealContent('foreign_gamer_profile');
     }
+
+    function slideBladesAway () {
+
+        bladeContainerRef.slideBladesOut();
+    }
+
+    function slideBladesBack () {
+        bladeContainerRef.slideBladesBack();
+    }
+    
       
 
     return (
@@ -199,8 +217,11 @@ const Xbox = (props) => {
 
             {/* Renders the blade components */}
             <div className={styles.bladeMask}>
-            {<NavBladesContainer bladeContainerRef={bladeContainerRef['mountRef']} centerBoxAnimateRef={bladeContainerRef['centerBlockExpandRef']}
-                                 dashboardUnderlayRef={bladeContainerRef['dashboardUnderlayRef']} />} 
+            {<NavBladesContainer bladeContainerRef={bladeContainerRef['mountRef']} 
+                                 centerBoxAnimateRef={bladeContainerRef['centerBlockExpandRef']}
+                                 dashboardUnderlayRef={bladeContainerRef['dashboardUnderlayRef']}
+                                 leftBladeGroupRef={bladeContainerRef['leftBladeGroupRef']}
+                                 rightBladeGroupRef={bladeContainerRef['rightBladeGroupRef']} />} 
             </div>
 
             {/* Provides a mask to prevent overflow from the page content */}
@@ -248,7 +269,7 @@ const Xbox = (props) => {
 
 
                         {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
-                        <MarketplacePage                                                  guideAnimationRef={guidePanelAnimation}/>
+                        <MarketplacePage slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
                         <XboxlivePage  guidePanelAction={extendMenuPanel}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <GamesPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <MediaPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>

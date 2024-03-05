@@ -46,6 +46,11 @@
     max-height: 150px;
 }
 
+
+.marketplaceSpotlightContainer {
+    max-height: 380px;
+}
+
 #guideSelectList {
     max-width: 400px;
     margin-top: 10px;
@@ -82,6 +87,8 @@
     width: 100%;
     /* background-color: chocolate; */
 }
+
+
 
 .stackLinkIcon {
     width: 48px;
@@ -134,7 +141,7 @@
 .listItemHighlight {
     position: absolute;
     width: 115%;
-    height: 2.1em;
+    height: 50px;
     /* background-color: lightblue; */
     background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.322) 5%, #a1939300 65%),
     radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.315) 5%, #a1939300 65%);
@@ -146,8 +153,6 @@
 
 
 
-
-
 .boxInsetHighlightContainer {
     position: absolute;
     width: calc(100% + 30px);
@@ -156,6 +161,7 @@
     left: 0px;
     pointer-events: none;
     /* background-color: red; */
+    /* outline: 2px solid blue; */
 }
 
 #mediaHighlightContainer {
@@ -275,68 +281,77 @@
 
 
 
-/* #marketplaceSection > .boxInsetHighlightContainer {
-    top: 55px;
+
+#marketplaceSpotlightInnerList {
+    .listItem {
+        position: relative;
+        display: flex;
+        height: 90px;
+        width: 100%;
+
+        > p {
+            top: calc(50% - 10px);
+        }
+
+        .listItemSubText {
+            top: calc(100% - 25px);
+            font-size: var(--text-body-size);
+
+        }
+
+
+
+        .listItemHighlight {
+            position: absolute;
+            width: 115%;
+            height: 100%;
+            /* background-color: lightblue; */
+            background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.322) 5%, #a1939300 65%),
+            radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.315) 5%, #a1939300 65%);
+            top: 2px;
+            left: -90px;
+            z-index: -1;
+            transition: opacity var(--transition_duration);
+        }
+    }
 }
 
-#marketplaceSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
-    top: -50px;
+#marketplaceSpotlightInsetHighlightContainer {
+    height: 320px;
 }
 
-#marketplaceSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
-    height: 108px;
+#marketplaceSpotlightMaskBottom {
+
+    .boxInsetHighlightBottom {
+        &:nth-child(1) {
+            top: 45px ;
+        }
+        &:nth-child(2) {
+            top: 135px ;
+        }
+        &:nth-child(3) {
+            top: 225px ;
+        }
+        &:nth-child(4) {
+            top: 315px ;
+        }
+    }
 }
 
+#marketplaceSpotlightMaskTop {
 
-
-
-#xboxliveSection > .boxInsetHighlightContainer {
-    top: 55px;
+    .boxInsetHighlightTop {
+        &:nth-child(1) {
+            top: calc(-100% + 15px);
+        }
+        &:nth-child(2) {
+            top: calc(-100% + 105px);
+        }
+        &:nth-child(3) {
+            top: calc(-100% + 195px);
+        }
+        &:nth-child(4) {
+            top: calc(-100% + 285px);
+        }
+    }
 }
-
-#xboxliveSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
-    top: -50px;
-}
-
-#xboxliveSection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
-    height: 108px;
-}
-
-
-
-
-#gamesSelection >.innerListContainer {
-    top: 0;
-    min-height: 250px;
-}
-
-#gamesSelection > .boxInsetHighlightContainer {
-    top: 55px;
-}
-
-#gamesSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
-    top: -50px;
-}
-
-#gamesSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
-    height: 250px;
-}
-
-
-
-
-#mediaSelection >.innerListContainer {
-    top: 0;
-}
-
-#mediaSelection > .boxInsetHighlightContainer {
-    top: 55px;
-}
-
-#mediaSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskTop {
-    top: -50px;
-}
-
-#mediaSelection > .boxInsetHighlightContainer > .boxInsetHighlightMaskBottom {
-    height: 250px;
-} */

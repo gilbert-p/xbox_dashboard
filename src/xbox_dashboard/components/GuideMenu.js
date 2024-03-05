@@ -49,6 +49,8 @@ import {
     selectThemeIndex,
     updateThemeSelectHighlight,
     selectThemeHighlightState,
+
+    selectNavigationContext,
     }
 from '../menuSlice';
 
@@ -104,6 +106,8 @@ const GuideMenu = (props) => {
 
     const guideMenuActiveState = useSelector(selectGuideActiveState);
 
+    const menuNavigationContext = useSelector(selectNavigationContext);
+
     //TODO: Utility SFX needs to be included in a separate hook function because
     //the soudns are used in for every button selection including clicking on any menu item
 
@@ -142,7 +146,7 @@ const GuideMenu = (props) => {
             dispatch(playMusic(false));
             dispatch(updateSelectedSong(''));
         }
-    }
+    };
 
     const playNextSong = async () => {
 
@@ -163,7 +167,7 @@ const GuideMenu = (props) => {
 
         await pauseCurrentSongPlaying();
         await playNext();
-    }
+    };
 
     const playPrevSong = async () => {
         const pauseCurrentSongPlaying = async () => {
@@ -183,7 +187,7 @@ const GuideMenu = (props) => {
 
         await pauseCurrentSongPlaying();
         await playPrevious();
-    }
+    };
 
 
     const GuidePanelClock = () => {
@@ -203,6 +207,16 @@ const GuideMenu = (props) => {
           );
     };
 
+    const handleBackButton = () => {
+        switch(menuNavigationContext) {
+            case 'external_navigate':
+                backButtonStateSelection('external_navigate');
+                break;
+            case 'guide_panel':
+                backButtonStateSelection('guide_panel');
+                break;
+        }
+    };
 
 
     return (
@@ -467,19 +481,19 @@ const GuideMenu = (props) => {
                                         dashboard come to life!
                                     </p>
 
-                                    <ul>
-                                        <li id={styles['website_gamecase']}>
-                                            <a href="https://rowlandbrown.com/xbox-360-dashboard-ui-blades" target="_blank" rel="noopener noreferrer">
+                                    <ul className={styles.gamecaseList}>
+                                        <li id={styles['website_gamecase']} className={styles.gameCaseListItem}>
+                                            <a className={styles.gamecaseAnchorTag} href="https://rowlandbrown.com/xbox-360-dashboard-ui-blades" target="_blank" rel="noopener noreferrer">
                                             Rowland Brown Website
                                             </a>
                                         </li>
-                                        <li>      
-                                            <a href="https://www.behance.net/rowbrown" target="_blank" rel="noopener noreferrer">
+                                        <li id={styles['behance_gamecase']}>      
+                                            <a className={styles.gamecaseAnchorTag} href="https://www.behance.net/rowbrown" target="_blank" rel="noopener noreferrer">
                                             Rowland Brown Behance
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="https://digiex.net/threads/xbox-360-style-guide.15469/" target="_blank" rel="noopener noreferrer">
+                                        <li id={styles['styleguide_gamecase']}>
+                                            <a className={styles.gamecaseAnchorTag} href="https://digiex.net/threads/xbox-360-style-guide.15469/" target="_blank" rel="noopener noreferrer">
                                             Xbox 360 Style Guide
                                             </a>
                                         </li>

@@ -63,13 +63,13 @@ const XboxlivePage = (props) => {
         
         let highlight_state = false;
 
-        highlight_state = target_index !== current_menu_index ? true: false;
+        highlight_state = target_index == current_menu_index ? true: false;
 
-        if(highlight_state) {
+        if(!highlight_state) {
             return transitionStyles.instantTransparent;
         }
         else {
-            return "";
+            return null;
         }
     };
 

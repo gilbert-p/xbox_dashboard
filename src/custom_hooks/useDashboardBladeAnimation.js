@@ -17,6 +17,14 @@ export default function useDashboardBladeAnimation() {
   const dashboardUnderlayRef = useRef(null);
   const dashboardUnderlayReveal = useRef(null);
 
+  const leftBladeGroupRef = useRef(null);
+  const rightBladeGroupRef = useRef(null);
+  const slideAwayAnimate = useRef(null);
+
+  const slideBackAnimate = useRef(null);
+
+  
+
   // Redux state
   const current_context_index = useSelector(selectContextIndex) || 0;
 
@@ -25,7 +33,7 @@ export default function useDashboardBladeAnimation() {
   const dispatch = useDispatch();
 
   // State
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(true);
 
   // Debounce dispatch input
   const debounceDispatchInput = useCallback(
@@ -55,6 +63,20 @@ export default function useDashboardBladeAnimation() {
                                                       .to(centerBlockExpandRef.current, {height: '600px', opacity: 0, duration: 0.1})
                                                       .to(centerBlockExpandRef.current, {height: '350px', opacity: 0, duration: 0.1})
                                                       .pause();
+
+    slideAwayAnimate.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out", opacity: 1}});
+    
+    slideAwayAnimate.current.to(leftBladeGroupRef.current, {x: '-=200px', opacity: 0})
+                            .to(rightBladeGroupRef.current, {x: '+=200px', opacity: 0}, "-=0.5")
+                            .pause();
+
+    slideBackAnimate.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out", opacity: 0}});
+
+    slideBackAnimate.current.to(leftBladeGroupRef.current, {x: '+=200px', opacity: 1})
+                            .to(rightBladeGroupRef.current, {x: '-=200px', opacity: 1}, "-=0.5")
+                            .pause();
+
+
   };
   initializeTimeline();
 
@@ -62,30 +84,6 @@ export default function useDashboardBladeAnimation() {
   useEffect(()=>{
     console.log(is_transitioning);
   },[is_transitioning]);
-
-
-  useLayoutEffect(()=>{
-
-    const loadTimelineIntoMemory = ()=> {
-      setIsInitialized(true);
-      initializeRef.current.pause();
-      shiftLeftTransition.current.pause();
-      shiftRightTransition.current.pause();
-    }
-
-    const delayMilliseconds = 300;
-    const timeoutId = setTimeout(loadTimelineIntoMemory, delayMilliseconds);
-
-
-
-    return () => {
-      clearTimeout(timeoutId);
-      shiftLeftTransition.current.kill();
-      shiftRightTransition.current.kill();
-    }
-  }, []);
-
-
 
 
 
@@ -128,6 +126,15 @@ export default function useDashboardBladeAnimation() {
     }
   };
 
+  const slideBladesOut = () => {
+      slideAwayAnimate.current.play();
+      centerBlockExpandAnimate.current.play();
+  }
+
+  const slideBladesBack = () => {
+    slideBackAnimate.current.play();
+  }
+
   // Keyboard event listeners
   useLayoutEffect(() => {
     const navigateUsingKeys = (e) => {
@@ -160,5 +167,14 @@ export default function useDashboardBladeAnimation() {
 
 
 
-  return { mountRef, centerBlockExpandRef, dashboardUnderlayRef, shiftRight, shiftLeft };
+  return { mountRef, 
+    centerBlockExpandRef, 
+    dashboardUnderlayRef, 
+    leftBladeGroupRef,
+    rightBladeGroupRef,
+
+    shiftRight, 
+    shiftLeft, 
+    slideBladesOut,
+    slideBladesBack};
 };

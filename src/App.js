@@ -50,26 +50,45 @@ function App() {
   }, []);
 
   const getUpdatedSize = (windowWidth, windowHeight) => {
-    let origX = 1020;
+    let origX = 1190;
     let origY = 765;
 
-    // let calc_new_width = (4*windowHeight)/3;
-    // let calc_new_height = (3*windowWidth)/4;
 
 
-    let sizeReduction = 0;
+    let sizeReduction = 1;
 
-
-    if(windowHeight < origY) {
-      sizeReduction = (windowHeight - 75) / origY;
-      console.log("Sized Reduced based on height", sizeReduction);
-      document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
+    if(windowWidth > 765){
+      
+      if(windowHeight < origY) {
+        sizeReduction = (windowHeight - 75) / origY;
+        console.log("Sized Reduced based on height", sizeReduction);
+        document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
+      }
+      else if(windowWidth < origX) {
+        
+        sizeReduction = (windowWidth - 90) / origX;
+        document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
+        console.log("Sized Reduced based on width", windowWidth, sizeReduction);
+      }
     }
-    else if(windowWidth < origX) {
-      console.log("called");
-      sizeReduction = (windowWidth- 75) / origX;
-      document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
+
+    else if(windowWidth - 170 < 765) {
+      // if(windowHeight < origY) {
+      //   sizeReduction = (windowHeight - 75) / origY;
+      //   console.log("Sized Reduced based on height", sizeReduction);
+      //   document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
+      // }
+      // else if(windowWidth < origX) {
+        
+
+        sizeReduction = (windowWidth -  150) / origX;
+        document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
+        console.log("Sized Reduced based on small width", windowWidth, sizeReduction);
+      // }
     }
+
+
+
   
 
   }
@@ -79,7 +98,12 @@ function App() {
     const updateContainerSize = () => {
         let sizingProperties = {};
 
-        if(xboxBladeContainerRef.current) {
+        let current_width = window.innerWidth || 0;
+        console.log("current window width", current_width);
+
+        
+
+
             sizingProperties.width = xboxBladeContainerRef.current.offsetWidth;
             sizingProperties.height = xboxBladeContainerRef.current.offsetHeight; 
             
@@ -88,23 +112,31 @@ function App() {
 
             getUpdatedSize(window.innerWidth, window.innerHeight);
 
-        }
+
+
     }
 
-    const delayedResize = debounce(updateContainerSize, 200);
+    const delayedResize = debounce(updateContainerSize, 50);
     window.addEventListener('resize', delayedResize);
 
     return () => {
         window.removeEventListener("resize", delayedResize);
     }
 
-}, [xboxBladeContainerRef.current]);
+}, [window.innerWidth]);
+
+
 
 
   return (
-    <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef} >
+    
+    <div className={dashboard_style.safeBorder}>
+            <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef} >
       <XboxDashboard/> 
+
     </div>
+    </div>
+
   );
 }
 

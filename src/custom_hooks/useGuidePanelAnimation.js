@@ -6,7 +6,11 @@ import { selectGuideActiveState,
          updateGuideActiveState,
          updateShowBlades,
          updateExternalPanelNavigate,
-         selectExternalNavigationState } from '../xbox_dashboard/menuSlice';
+         selectExternalNavigationState,
+        
+         selectSubMenuNavActive,
+         selectNavigationContext,
+         updateNavigateContext} from '../xbox_dashboard/menuSlice';
 
 export default function useGuidePanelAnimation() {
     const revealGuideMenu = useRef(null);
@@ -37,6 +41,12 @@ export default function useGuidePanelAnimation() {
     const guideActiveState = useSelector(selectGuideActiveState);
 
     const isExternalNavigate = useSelector(selectExternalNavigationState);
+
+    const isSubMenuActive = useSelector(selectSubMenuNavActive);
+
+    const menuNavigationContext = useSelector(selectNavigationContext);
+
+
 
 
     useLayoutEffect(()=> {
@@ -138,72 +148,125 @@ export default function useGuidePanelAnimation() {
 
     },[]);
 
+    const showGuideInitial = () => {
+        if(revealGuideMenu.current.time() <= 0) {
+            revealGuideMenu.current.play();
+        }
+        else {
+            revealGuideMenu.current.reverse();
+        }
+    };
+
+    const showThemeMenu = () => {
+        if(showThemeSelection.current.time() <= 0) {
+            showThemeSelection.current.play();
+        }
+        else {
+            showThemeSelection.current.reverse();
+        }
+    }
+
+    const showGamerProfile = () => {
+        if(revealGamerProfilePage.current.time() <= 0) {
+            revealGamerProfilePage.current.play();
+        }
+        else {
+            revealGamerProfilePage.current.reverse();
+        }
+    }
 
 
     //Action Functions
     const showGuideSettings = () => {
 
-        if(isExternalNavigate){
-            console.log("external navigate")
-            extendRevealContent(guideActiveState);
+        // console.log("navigation context", menuNavigationContext);
+        switch(menuNavigationContext) {
+            case 'main_menu':
+                //in guide panel and in initial half open panel
+                dispatch(updateNavigateContext('guide_panel_main'));
+                dispatch(updateGuideActiveState('guide_setting_main'));
+
+                switch(guideActiveState) {
+                    case 'closed':
+                        showGuideInitial();
+                        dispatch(updateGuideActiveState('guide_setting_main'));
+        
+                        dispatch(updateShowBlades(false));
+                        break;
+        
+                    case 'external_gamer_profile':
+                        extendRevealContent('extended_gamer_profile');
+                        break;
+        
+                    case 'default':
+                        break;
+                }
+                break;
+            case 'guide_panel_main':
+
+                switch(guideActiveState){
+                    case 'guide_setting_main':
+                        dispatch(updateShowBlades(true));
+                        //update outer context
+                        dispatch(updateNavigateContext('main_menu'));
+                        //update specific context
+                        dispatch(updateGuideActiveState('closed'));
+                        showGuideInitial();
+                        break;
+                    case 'theme_select':
+                        showGuideInitial();
+                        showThemeMenu();
+
+                        dispatch(updateGuideActiveState('closed'));
+                        dispatch(updateNavigateContext('main_menu'));
+                        dispatch(updateShowBlades(true));
+                        break;
+                    case 'extended_about_dashboard':
+                        closeExtendedMenu.current.play();
+                        revealAboutDashboard.current.time(0).pause();
+                        dispatch(updateGuideActiveState('closed'));
+                        dispatch(updateNavigateContext('main_menu'));
+        
+                        dispatch(updateShowBlades(true));
+                        break;
+                    case 'extended_gamer_profile':
+                        closeExtendedMenu.current.play();
+                        revealGamerProfilePage.current.time(0).pause();
+                        dispatch(updateGuideActiveState('closed'));
+                        dispatch(updateNavigateContext('main_menu'));
+        
+                        dispatch(updateShowBlades(true));
+                        break;
+                }
+                break;
+
+            case 'foreign_extension':
+
+                extendRevealContent(guideActiveState);
+                break;
         }
-        else {
-            switch(guideActiveState) {
-                case 'closed':
-                    revealGuideMenu.current.play();
-                    dispatch(updateGuideActiveState('guide_setting_main'));
-    
-                    dispatch(updateShowBlades(false));
-                    break;
-                case 'guide_setting_main':
-                    revealGuideMenu.current.reverse();
-                    dispatch(updateGuideActiveState('closed'));
-    
-                    dispatch(updateShowBlades(true));
-                    break;
-                case 'extended_about_dashboard':
-                    closeExtendedMenu.current.play();
-                    revealAboutDashboard.current.time(0).pause();
-                    dispatch(updateGuideActiveState('closed'));
-    
-                    dispatch(updateShowBlades(true));
-                    break;
-                case 'extended_gamer_profile':
-                    closeExtendedMenu.current.play();
-                    revealGamerProfilePage.current.time(0).pause();
-                    dispatch(updateGuideActiveState('closed'));
-    
-                    dispatch(updateShowBlades(true));
-                    break;
-                case 'theme_select':
-                    revealGuideMenu.current.reverse();
-                    showThemeSelection.current.reverse();
-                    dispatch(updateGuideActiveState('closed'));
-    
-                    dispatch(updateShowBlades(true));
-                    break;
-                case 'default':
-                    break;
-            }
-        }
+        
+
+        
     };
 
     const extendRevealContent = (extended_state) => {
 
-        if(!extendRevealPanel.current.time() > 0) {
+        if(extendRevealPanel.current.time() <= 0) {
             extendRevealPanel.current.play();
             guideSettingsAnimate.current.play();
 
-            dispatch(updateExternalPanelNavigate(true));
+            console.log("extendRevealContent called");
+            console.log(extended_state);
+
+            // dispatch(updateExternalPanelNavigate(true));
 
             switch(extended_state) {
-                case 'extended_about_dashboard':
+                case 'foreign_gamer_profile':
                     dispatch(updateShowBlades(false));
-                    revealAboutDashboard.current.play();
-                    break;
-                case 'extended_gamer_profile':
-                    dispatch(updateShowBlades(false));
-                    revealGamerProfilePage.current.play();
+                    console.log("reveal foreign gamer profile")
+                    showGamerProfile();
+
                     break;
                 case 'default':
                     break;
@@ -212,20 +275,16 @@ export default function useGuidePanelAnimation() {
         else {
             guideSettingsAnimate.current.reverse();
 
-            dispatch(updateExternalPanelNavigate(false));
+            // dispatch(updateExternalPanelNavigate(false));
 
             switch(extended_state) {
-                case 'extended_about_dashboard':
+                case 'foreign_gamer_profile':
                     dispatch(updateShowBlades(true));
                     dispatch(updateGuideActiveState('closed'));
+                    dispatch(updateNavigateContext('main_menu'));
                     extendRevealPanel.current.reverse();
-                    revealAboutDashboard.current.reverse();
-                    break;
-                case 'extended_gamer_profile':
-                    dispatch(updateShowBlades(true));
-                    dispatch(updateGuideActiveState('closed'));
-                    extendRevealPanel.current.reverse();
-                    revealGamerProfilePage.current.reverse();
+                    guideSettingsAnimate.current.reverse();
+                    showGamerProfile();
                     break;
                 case 'default':
                     break;
@@ -278,7 +337,15 @@ export default function useGuidePanelAnimation() {
         !showThemeSelection.current.time() > 0 ? showThemeSelection.current.play() : showThemeSelection.current.reverse();
     }
 
+
+    /*
     const backButtonStateSelection = () => {
+
+        //Opening Guide Menu from outside the guide menu context
+
+        if(isSubMenuActive) {
+
+        }
 
         if(isExternalNavigate) {
             extendRevealContent(guideActiveState);
@@ -311,7 +378,54 @@ export default function useGuidePanelAnimation() {
         }
 
     }
+    */
 
+    
+    const backButtonStateSelection = () => {
+        //  guide_panel, external_navigate, marketplace, xboxlive, games, media, system 
+        switch(menuNavigationContext) {
+            case 'guide_panel_main':
+                switch(guideActiveState) {
+                    case 'guide_setting_main':
+                        dispatch(updateGuideActiveState('closed'));
+                        dispatch(updateNavigateContext('main_menu'));
+                        dispatch(updateShowBlades(true));
+                        showGuideInitial();
+                        break;
+                    case 'theme_select':
+                        dispatch(updateGuideActiveState('guide_setting_main'));
+                        showThemeMenu();
+                        guideSettingsAnimate.reverse();
+                        break;
+                    case 'extended_gamer_profile':
+                        extendGuideMenu('extended_gamer_profile');
+                        guideSettingsAnimate.current.reverse();
+                        dispatch(updateGuideActiveState('guide_setting_main'));
+                        break;
+                    case 'extended_about_dashboard':
+                        extendGuideMenu('extended_about_dashboard');
+                        guideSettingsAnimate.current.reverse();
+                        dispatch(updateGuideActiveState('guide_setting_main'));
+                        break;
+                }
+                break;
+            case 'foreign_extension':
+                switch(guideActiveState) {
+                    case 'foreign_gamer_profile':
+                        extendRevealContent(guideActiveState);
+                        break;
+                }
+                break;
+            
+            case 'marketplace':
+                dispatch(updateNavigateContext('main_menu'));
+                break;
+            case 'default':
+                break;
+        }
+
+    }
+    
 
     return {revealGuideMenu, 
             extendMenu,

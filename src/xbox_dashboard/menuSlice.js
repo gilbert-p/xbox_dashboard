@@ -7,11 +7,12 @@ let initialState = {
     games_menu_index: null,
     xboxlive_menu_index: null,
     marketplace_menu_index: null,
+    marketplace_spotlight_index: 0,
+    marketplace_spotlight_category: 'games',
 
     show_blades: true,
 
 
-    guide_menu_active_state: 'closed',
     guide_menu_link_stack_index: 0,
     guide_menu_link_stack_highlight: false,
     guide_menu_index: null,
@@ -33,7 +34,13 @@ let initialState = {
     selected_theme: '',
     theme_select_highlight: false,
 
+
+    guide_menu_active_state: 'closed',
     external_panel_navigate: false,
+    sub_menu_navigate: false,
+
+    //guide_panel, external_navigate, marketplace
+    navigate_context: 'main_menu',
 
 };
 
@@ -62,8 +69,16 @@ export const menuSlice = createSlice({
         navigateXboxliveMenu: (state, action) => {
             state.xboxlive_menu_index = action.payload;
         },
+
+
         navigateMarketplaceMenu: (state, action) => {
             state.marketplace_menu_index = action.payload;
+        },
+        navigateMarketplaceSpotlightMenu: (state, action) => {
+            state.marketplace_spotlight_index = action.payload;
+        },
+        updateMarketplaceSpotlightCategory: (state, action) => {
+            state.marketplace_spotlight_category = action.payload;
         },
 
 
@@ -129,6 +144,17 @@ export const menuSlice = createSlice({
 
         updateExternalPanelNavigate: (state, action) => {
             state.external_panel_navigate = action.payload;
+        },
+
+
+
+        updateSubMenuNavigate: (state, action) => {
+            state.sub_menu_navigate = action.payload;
+        },
+
+
+        updateNavigateContext: (state, action) => {
+            state.navigate_context = action.payload;
         }
     }
 });
@@ -141,7 +167,10 @@ export const {
                navigateMediaMenu, 
                navigateGamesMenu, 
                navigateXboxliveMenu,
+
                navigateMarketplaceMenu,
+               navigateMarketplaceSpotlightMenu,
+               updateMarketplaceSpotlightCategory,
 
                
                navigateGuideMenuLinkStack,
@@ -168,6 +197,10 @@ export const {
 
                updateExternalPanelNavigate,
 
+               updateSubMenuNavigate,
+
+               updateNavigateContext,
+
             } = menuSlice.actions;
 
 export const selectShowBladeState = (state) => state.menu.show_blades;
@@ -177,7 +210,10 @@ export const selectSystemMainMenuIndex = (state) => state.menu.system_menu_index
 export const selectMediaMenuIndex = (state) => state.menu.media_menu_index;
 export const selectGamesMenuIndex = (state) => state.menu.games_menu_index;
 export const selectXboxliveMenuIndex = (state) => state.menu.xboxlive_menu_index;
+
 export const selectMarketplaceMenuIndex = (state) => state.menu.marketplace_menu_index;
+export const selectMarketplaceSpotlightMenuIndex = (state) => state.menu.marketplace_spotlight_index;
+export const selectMarketplaceSpotlightCategoryTitle = (state) => state.menu.marketplace_spotlight_category;
 
 
 export const selectGuideActiveState = (state) => state.menu.guide_menu_active_state;
@@ -203,6 +239,12 @@ export const selectThemeIndex = (state) => state.menu.theme_select_index;
 export const selectThemeHighlightState = (state) => state.menu.theme_select_highlight;
 
 export const selectExternalNavigationState = (state) => state.menu.external_panel_navigate;
+
+
+export const selectSubMenuNavActive = (state) => state.menu.sub_menu_navigate;
+
+
+export const selectNavigationContext = (state) => state.menu.navigate_context;
 
 
 

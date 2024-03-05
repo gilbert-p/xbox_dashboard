@@ -23,9 +23,11 @@
   --transition_duration: 0.6s;
   --z-depth:0;
   --scaling:1;
+  --shift_resized_dashboard_x: 0px;
+  --safe_border_height: 770px;
 
   --extended-container-width: 870px;
-  --extended-container-height: 560;
+  --extended-container-height: 560px;
 
 
   /* Font Sizes */

@@ -51,9 +51,9 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background-image: url("../assets/images/marketplace_background.png");
+    background-image: url("../assets/images/marketplace_background_img.png");
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: 75% 50%;
 }
 

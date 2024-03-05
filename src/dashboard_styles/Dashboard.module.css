@@ -1,5 +1,14 @@
 /* CONTAINERS */
 
+.safeBorder {
+    position: absolute;
+    width: 100vw;
+    height: calc(var(--safe_border_height));
+    top: 50%;
+    transform: translateY(-50%);
+    /* background-color: red; */
+}
+
 .appContainer {
     position: absolute;
     left: 50%;
@@ -8,6 +17,7 @@
     width: calc(var(--container-width));
     height: calc(var(--container-height));
     /* border: 3px solid pink; */
+    transform: translate(-50%,-50%) scale(calc(var(--scaling)));
 }
 
 /*TODO: Create gsap timeline to shift the centered content everytime you shift to a new tab */
@@ -1444,40 +1454,49 @@
         font-size: calc(var(--text-link-size));
     }
 
-    ul {
-        width: inherit;
-        height: auto;
-        display: flex;
-        flex-direction: row;
-    }
+}
 
-    li {
-        cursor: pointer;
-        width: 90px;
-        height: 132px;
-        background-color: lightskyblue;
-        margin-left: 35px;
+#website_gamecase {
+    background: url("../assets/images/rowland_brown_website_gamecase.png");
+    background-repeat: no-repeat;
+}
 
+#behance_gamecase {
+    background: url("../assets/images/rowland_brown_behance_gamecase.png");
+    background-repeat: no-repeat;
+}
 
-        > a {
-            position: relative;
-            text-decoration: none;
-            top: 35px;
-            left: 5px;
-            font-size: 20px;
-            color: var(--white-text);
-        }
+#styleguide_gamecase {
+    background: url("../assets/images/xbox_360_styleguide_gamecase.png");
+    background-repeat: no-repeat;
+}
 
-        &:nth-child(1) {
-            background: url("../assets/images/rowland_brown_website_gamecase.png");
-        }
-        &:nth-child(2) {
-            background: url("../assets/images/rowland_brown_behance_gamecase.png");
-        }
-        &:nth-child(3) {
-            background: url("../assets/images/xbox_360_styleguide_gamecase.png");
-        }
-    }
+.gamecaseList {
+    width: inherit;
+    height: 132px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+.gameCaseLisItem {
+    cursor: pointer;
+    width: 90px;
+    height: 132px;
+    background-color: lightskyblue;
+    margin-left: 35px;
+
+}
+
+.gamecaseAnchorTag {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    width: 90px;
+    top: 35px;
+    left: 5px;
+    font-size: 20px;
+    color: var(--white-text);
 }
 
 #profileCard {
@@ -1506,13 +1525,13 @@
 
 
 
-.appContainer {
-    transform: translate(-50%,-50%) scale(calc(var(--scaling)));
-}
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 765px) {
     .appContainer {
-        transform: translate(-50%,-50%) scale(calc(var(--scaling)));
+        transform: translate(-51%,-50%) scale(calc(var(--scaling)));
+    }
+    .bladeMask {
+        overflow: hidden;
     }
 
 }
