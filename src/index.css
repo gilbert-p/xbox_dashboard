@@ -29,6 +29,8 @@
   --extended-container-width: 870px;
   --extended-container-height: 560px;
 
+  --guidemenu_content_height: 520px;
+
 
   /* Font Sizes */
   --text-link-size: 22px;
@@ -36,6 +38,7 @@
   --text-body-size: 18px;
   --meta-panel-header: 20px;
   --legend-text-size: 16px;
+
 
 
   --card-border-radius: 6px;

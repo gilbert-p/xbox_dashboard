@@ -28,11 +28,12 @@ export default function useGuidePanelAnimation() {
     const revealGamerProfilePage = useRef(null);
     const gamerProfilePageRef = useRef(null);
 
+    const revealCommunityPage = useRef(null);
+    const communityDashboardPageRef = useRef(null);
+
     const guideSelectThemeRef = useRef(null);
     const showThemeSelection = useRef(null);
 
-    const backButtonRef = useRef(null);
-    const backButtonAction = useRef(null);
 
     const extendRevealPanel = useRef(null);
 
@@ -114,7 +115,14 @@ export default function useGuidePanelAnimation() {
         revealGamerProfilePage.current = gsap.timeline();
 
         revealGamerProfilePage.current
-        .to(gamerProfilePageRef.current, {opacity: 1, display: "initial", duration: 0.3})
+        .to(communityDashboardPageRef.current, {opacity: 1, display: "initial", duration: 0.3})
+        .pause();
+
+
+        revealCommunityPage.current = gsap.timeline();
+
+        revealCommunityPage.current
+        .to(communityDashboardPageRef.current, {opacity: 1, display: "initial", duration: 0.3})
         .pause();
 
 
@@ -126,7 +134,6 @@ export default function useGuidePanelAnimation() {
         .pause();
 
 
-        backButtonAction.current = gsap.timeline();
 
 
         
@@ -337,49 +344,6 @@ export default function useGuidePanelAnimation() {
         !showThemeSelection.current.time() > 0 ? showThemeSelection.current.play() : showThemeSelection.current.reverse();
     }
 
-
-    /*
-    const backButtonStateSelection = () => {
-
-        //Opening Guide Menu from outside the guide menu context
-
-        if(isSubMenuActive) {
-
-        }
-
-        if(isExternalNavigate) {
-            extendRevealContent(guideActiveState);
-        }
-        else {
-            switch(guideActiveState) {
-                case 'guide_setting_main':
-                    revealGuideMenu.current.reverse();
-                    dispatch(updateGuideActiveState('closed'));
-    
-                    dispatch(updateShowBlades(true));
-                    break;
-                case 'extended_about_dashboard':
-                    extendGuideMenu('extended_about_dashboard');
-                    guideSettingsAnimate.current.reverse();
-                    dispatch(updateGuideActiveState('guide_setting_main'));
-                    break;
-                case 'extended_gamer_profile':
-                    extendGuideMenu('extended_gamer_profile');
-                    guideSettingsAnimate.current.reverse();
-                    dispatch(updateGuideActiveState('guide_setting_main'));
-                    break;
-                case 'theme_select':
-                    showThemeSelection.current.reverse();
-                    dispatch(updateGuideActiveState('guide_setting_main'));
-                    break;
-                case 'default':
-                    break;
-            }
-        }
-
-    }
-    */
-
     
     const backButtonStateSelection = () => {
         //  guide_panel, external_navigate, marketplace, xboxlive, games, media, system 
@@ -443,5 +407,6 @@ export default function useGuidePanelAnimation() {
             aboutDashboardPageRef,
             gamerProfilePageRef,
             showThemeSelection,
-            guideSelectThemeRef}
+            guideSelectThemeRef,
+            communityDashboardPageRef}
 };

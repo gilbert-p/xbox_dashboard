@@ -1381,7 +1381,7 @@
 .gamerProfileContent {
     position: relative;
     width: inherit;
-    height: 520px;
+    height: var(--guidemenu_content_height);
     overflow: hidden;
     display: flex;
 
@@ -1479,6 +1479,7 @@
     justify-content: space-around;
 
 }
+
 .gameCaseLisItem {
     cursor: pointer;
     width: 90px;
@@ -1521,6 +1522,187 @@
     /* background-color: rgba(139, 139, 139, 0.349); */
     /* background-color: rgba(156, 156, 156, 0.444); */
     z-index: -1;
+}
+
+/************* Gamer Profile Section  END***************/
+
+/************* Community Section  ***************/
+
+
+.communitySectionContainer {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 970px;
+    height: calc(var(--extended-container-height));
+    left: 80px;
+    top: 60px;
+    z-index: -1;
+
+    opacity: 0;
+    display: none;
+
+    > p {}
+
+    > h2 {
+        position: relative;
+        font-size: calc(var(--screen-heading-size));
+        color: var(--white-text);
+        top: -5px;
+        /* margin-bottom: 20px; */
+    }
+}
+
+
+
+.communityNavFolders {
+    position: absolute;
+    width: inherit;
+    height: calc(100% - 3px);
+    left: -65px;
+    transform: translateY(-5px);
+
+
+
+}
+
+#navFolderMessages {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: url("../assets/images/folder_messages_open.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 30%;
+}
+
+#navFolderFriends {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: url("../assets/images/folder_friends_open.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+#navFolderPlayers {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background: url("../assets/images/folder_players_open.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+}
+
+.communityNavButtons {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    width: inherit;
+    height: 55px;
+    /* background-color: red; */
+    margin-top: 10px;
+
+
+}
+
+.navButton {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    width: 320px;
+    /* background-color: blue; */
+
+    > p {
+        font-size: 28px;
+        /* font-weight: bold; */
+    }
+
+    &:nth-child(1) {
+        left: 30px;
+    }
+
+    &:nth-child(2) {
+        left: -85px;
+    }
+    &:nth-child(3) {
+        left: -60px;
+    }
+}
+
+.communityMessages {
+
+}
+
+.iconContainerActive {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    /* outline: 2px solid red; */
+    margin-right: 15px;
+}
+
+.iconContainerInactive {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    /* outline: 2px solid red; */
+    /* margin-right: 15px; */
+    margin-left: 180px;
+}
+
+#navButtonInactive {
+    top: 5px;
+    opacity: 0.85;
+    > p {
+        opacity: 0;
+    }
+    > .iconContainerInactive {
+        background-size: contain;
+    }
+}
+
+#communityMessageIcon {
+    background: url("../assets/icons/64x64_icons/mail_shadow_icon.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#communityFriendsIcon {
+    background: url("../assets/icons/64x64_icons/person_icon.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#communityPlayersIcon {
+    background: url("../assets/icons/64x64_icons/controller_glossy_icon.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+.communitySectionContent {
+    position: relative;
+    width: inherit;
+    height: 550px;
+    top: -5px;
+    left: -65px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+
+
+    .contentContainer {
+        width: inherit;
+        height: inherit;
+        
+
+
+    }
 }
 
 

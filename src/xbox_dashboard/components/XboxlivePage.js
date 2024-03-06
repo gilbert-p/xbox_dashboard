@@ -124,7 +124,7 @@ const XboxlivePage = (props) => {
                     <div className={itemSelectStyles.innerListContainer} > 
                         <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                            <span className={`${itemSelectStyles.listIcon} ${iconLibrary.joystick_icon}`}></span>
+                            <span className={`${itemSelectStyles.listIcon} ${iconLibrary.mail_shadow_icon}`}></span>
                             <p>
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 Messages

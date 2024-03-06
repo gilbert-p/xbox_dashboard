@@ -74,6 +74,7 @@ const GuideMenu = (props) => {
             extendGuideMenu, 
             revealThemeSelection,
             backButtonStateSelection,
+            communityDashboardPageRef,
           } = props['guideAnimationRef'];
 
 
@@ -429,7 +430,7 @@ const GuideMenu = (props) => {
                 </div>
 
                 <div className={styles.gamerProfileContainer} ref={gamerProfilePageRef}>
-                <div className={styles.backgroundOverlay}></div>
+                {/* <div className={styles.backgroundOverlay}></div> */}
 
                     <h2 className={styles.aboutDashboardTitle}>
                         Web Developer
@@ -533,6 +534,41 @@ const GuideMenu = (props) => {
                                     
                                 </div>
                             </div>
+
+
+                    </div>
+                </div>
+
+
+                <div className={styles.communitySectionContainer} ref={communityDashboardPageRef}>
+                {/* <div className={styles.backgroundOverlay}></div> */}
+
+                    <h2 className={styles.aboutDashboardTitle}>
+                        Community
+                    </h2>
+
+                    <div className={styles.communityNavFolders}>
+                        <div id={styles['navFolderMessages']}></div>
+                        {/* <div id={styles['navFolderFriends']}></div> */}
+                        {/* <div id={styles['navFolderPlayers']}></div> */}
+                        <nav className={styles.communityNavButtons}>
+                            <div  className={styles.navButton}>
+                                <div id={styles['communityMessageIcon']} className={`${styles.iconContainerActive}`}></div>
+                                <p>Messages</p>
+                            </div>
+                            <div id={styles['navButtonInactive']} className={styles.navButton}>
+                                <div id={styles['communityFriendsIcon']} className={`${styles.iconContainerInactive}`}></div>
+                                <p>Friends</p>
+                            </div>
+                            <div id={styles.navButtonInactive} className={styles.navButton}>
+                                <div id={styles['communityPlayersIcon']} className={`${styles.iconContainerInactive}`}></div>
+                                <p>Players</p>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <div className={styles.communitySectionContent}>
+
 
 
                     </div>

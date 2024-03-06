@@ -137,6 +137,20 @@
     transform: translate(20px, 10px);
 }
 
+.mail_glossy_icon {
+    background-image: url('../assets/icons/64x64_icons/mail_glossy_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
+.mail_shadow_icon {
+    background-image: url('../assets/icons/64x64_icons/mail_shadow_icon.png');
+    background-size: 50%;
+    background-repeat: no-repeat;
+    transform: translate(20px, 10px);
+}
+
 .github_logo {
     background-image: url('../assets/icons/64x64_icons/github_logo.png');
     background-size: 50%;

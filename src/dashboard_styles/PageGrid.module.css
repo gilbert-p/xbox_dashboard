@@ -127,6 +127,8 @@
 
 #marketplaceNavItemActive {
     color: black;
+    font-size: 26px;
+    font-weight: bold;
 }
 
 .marketplaceContentView {
