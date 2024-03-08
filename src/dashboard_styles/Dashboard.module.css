@@ -1602,6 +1602,7 @@
     justify-content: space-around;
     width: inherit;
     height: 55px;
+    top: 20px;
     /* background-color: red; */
     margin-top: 10px;
 
@@ -1615,6 +1616,7 @@
     align-items: center;
     height: inherit;
     width: 320px;
+    cursor: pointer;
     /* background-color: blue; */
 
     > p {
@@ -1663,6 +1665,7 @@
     }
     > .iconContainerInactive {
         background-size: contain;
+
     }
 }
 
@@ -1687,22 +1690,13 @@
 
 .communitySectionContent {
     position: relative;
-    width: inherit;
-    height: 550px;
-    top: -5px;
-    left: -65px;
+    width: calc(100% - 100px);
+    height: 470px;
+    left: -0px;
     overflow: hidden;
     display: flex;
-    flex-direction: row;
-
-
-    .contentContainer {
-        width: inherit;
-        height: inherit;
-        
-
-
-    }
+    margin-top: 75px;
+    /* outline: 2px solid red; */
 }
 
 

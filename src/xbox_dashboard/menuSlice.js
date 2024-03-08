@@ -10,6 +10,8 @@ let initialState = {
     marketplace_spotlight_index: 0,
     marketplace_spotlight_category: 'games',
 
+    community_category: 'messages',
+
     show_blades: true,
 
 
@@ -79,6 +81,10 @@ export const menuSlice = createSlice({
         },
         updateMarketplaceSpotlightCategory: (state, action) => {
             state.marketplace_spotlight_category = action.payload;
+        },
+
+        navigateCommunityCategory: (state, action) => {
+            state.community_category = action.payload;
         },
 
 
@@ -172,6 +178,8 @@ export const {
                navigateMarketplaceSpotlightMenu,
                updateMarketplaceSpotlightCategory,
 
+               navigateCommunityCategory,
+
                
                navigateGuideMenuLinkStack,
                navigateGuideMenu,
@@ -214,6 +222,8 @@ export const selectXboxliveMenuIndex = (state) => state.menu.xboxlive_menu_index
 export const selectMarketplaceMenuIndex = (state) => state.menu.marketplace_menu_index;
 export const selectMarketplaceSpotlightMenuIndex = (state) => state.menu.marketplace_spotlight_index;
 export const selectMarketplaceSpotlightCategoryTitle = (state) => state.menu.marketplace_spotlight_category;
+
+export const selectCommunityCategory = (state) => state.menu.community_category;
 
 
 export const selectGuideActiveState = (state) => state.menu.guide_menu_active_state;

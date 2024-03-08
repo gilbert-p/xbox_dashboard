@@ -51,6 +51,8 @@ import {
     selectThemeHighlightState,
 
     selectNavigationContext,
+    selectCommunityCategory,
+    navigateCommunityCategory,
     }
 from '../menuSlice';
 
@@ -108,6 +110,8 @@ const GuideMenu = (props) => {
     const guideMenuActiveState = useSelector(selectGuideActiveState);
 
     const menuNavigationContext = useSelector(selectNavigationContext);
+
+    const communityCategory = useSelector(selectCommunityCategory);
 
     //TODO: Utility SFX needs to be included in a separate hook function because
     //the soudns are used in for every button selection including clicking on any menu item
@@ -543,35 +547,102 @@ const GuideMenu = (props) => {
                 <div className={styles.communitySectionContainer} ref={communityDashboardPageRef}>
                 {/* <div className={styles.backgroundOverlay}></div> */}
 
+
                     <h2 className={styles.aboutDashboardTitle}>
                         Community
                     </h2>
 
                     <div className={styles.communityNavFolders}>
-                        <div id={styles['navFolderMessages']}></div>
-                        {/* <div id={styles['navFolderFriends']}></div> */}
-                        {/* <div id={styles['navFolderPlayers']}></div> */}
-                        <nav className={styles.communityNavButtons}>
-                            <div  className={styles.navButton}>
-                                <div id={styles['communityMessageIcon']} className={`${styles.iconContainerActive}`}></div>
-                                <p>Messages</p>
-                            </div>
-                            <div id={styles['navButtonInactive']} className={styles.navButton}>
-                                <div id={styles['communityFriendsIcon']} className={`${styles.iconContainerInactive}`}></div>
-                                <p>Friends</p>
-                            </div>
-                            <div id={styles.navButtonInactive} className={styles.navButton}>
-                                <div id={styles['communityPlayersIcon']} className={`${styles.iconContainerInactive}`}></div>
-                                <p>Players</p>
-                            </div>
-                        </nav>
+                        <div id={styles[communityCategory === 'messages' ? 'navFolderMessages' : '']}></div>
+                        <div id={styles[communityCategory === 'friends' ? 'navFolderFriends' : '']}></div>
+                        <div id={styles[communityCategory === 'players' ? 'navFolderPlayers' : '']}></div>
                     </div>
 
                     <div className={styles.communitySectionContent}>
+                        
+                        <div className={itemSelectStyles.communityPageItemContainer}>
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>Cortana</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p>Where is the Chief at? </p>
+                                </div>
+                            </div>
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>Bill Gates Clone</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p> Welcome to the Xbox Experience.</p>
+                                </div>
+                            </div>
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>John-117</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p>Need backup in the Warthog, ASAP!</p>
+                                </div>
+                            </div>
 
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>Lara Croft</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p>Exploring ancient tombs, anyone joining?</p>
+                                </div>
+                            </div>
 
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>Commander Shepard</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p>Reapers inbound! Calling all N7 operatives!</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>Marcus Fenix</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p>Locust Horde spotted, grab your Lancers!</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>Ezio Auditore</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p>Assassins, assemble in the shadows.</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <p>Alan Wake</p>
+                                <div className={itemSelectStyles.communityMessageContent}>
+                                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                                    <p>Darkness is closing in, need a flashlight!</p>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
+
+                    <nav className={styles.communityNavButtons}>
+                            <div id={styles[communityCategory === 'messages' ? '' : 'navButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('messages'))}}
+                             className={styles.navButton}>
+                                <div id={styles['communityMessageIcon']} className={`${styles.iconContainerActive}`}></div>
+                                <p>Messages</p>
+                            </div>
+                            <div id={styles[communityCategory === 'friends' ? '' : 'navButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('friends'))}}
+                             className={styles.navButton}>
+                                <div id={styles['communityFriendsIcon']} className={`${styles.iconContainerInactive}`}></div>
+                                <p>Friends</p>
+                            </div>
+                            <div id={styles[communityCategory === 'players' ? '' : 'navButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('players'))}}
+                             className={styles.navButton}>
+                                <div id={styles['communityPlayersIcon']} className={`${styles.iconContainerInactive}`}></div>
+                                <p>Players</p>
+                            </div>
+                    </nav>
                 </div>
 
 
