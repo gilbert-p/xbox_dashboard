@@ -558,9 +558,12 @@ const GuideMenu = (props) => {
                         <div id={styles[communityCategory === 'players' ? 'navFolderPlayers' : '']}></div>
                     </div>
 
-                    <div className={styles.communitySectionContent}>
+                    <div id={styles[styles.communityMessageSection]} className={`${communityCategory === "messages" ? styles.communitySectionContent: transitionStyles.removeDisplay}`}>
                         
                         <div className={itemSelectStyles.communityPageItemContainer}>
+                        <div className={itemSelectStyles.groupContainer}>
+                            <p>Create New</p>
+                        </div>
                             <div className={itemSelectStyles.groupContainer}>
                                 <p>Cortana</p>
                                 <div className={itemSelectStyles.communityMessageContent}>
@@ -626,20 +629,172 @@ const GuideMenu = (props) => {
 
                     </div>
 
+                    <div className={`${communityCategory === "friends" ? styles.communitySectionContent: transitionStyles.removeDisplay}`}>
+                        
+                        <div className={itemSelectStyles.communityPageItemContainer}>
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>MartyTheElder </p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Halo 3</p>
+                                </div>
+                            </div>
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>LunaTheGamer</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Halo 3: ODST</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>ShadowPlayerX</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Assassin's Creed</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>EpicGamer23</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Call of Duty: Modern Warfare 2</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>TechNinja76</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Left 4 Dead</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>StealthGaming</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Fallout 3</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>NovaPlayer99</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Gears of War 2</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>SkywalkerGamer</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>Batman: Arkham Asylum</p>
+                                </div>
+                            </div>
+
+                            <div className={itemSelectStyles.groupContainer}>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                                    <p className={itemSelectStyles.gamerTag}>QuantumPlayer</p>
+                                </div>
+                                <div className={itemSelectStyles.flexInnerContainer}>
+                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                                    <p className={itemSelectStyles.friendStatus}>BioShock 2</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+                    <div className={`${communityCategory === "players" ? styles.communitySectionContent: transitionStyles.removeDisplay}`}>
+                        
+                        <div className={itemSelectStyles.communityPageItemContainer}>
+                            <div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
+                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            SultanOfSpuzz21
+                                        </p>
+                                        <div className={itemSelectStyles.recentPlayerRepStars}>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIconInactive}></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                </div>
+                                
+                            </div>
+                            <div className={itemSelectStyles.playerGroupContainer}>
+
+                                
+</div>
+<div className={itemSelectStyles.playerGroupContainer}>
+
+                                
+</div>
+<div className={itemSelectStyles.playerGroupContainer}>
+
+                                
+</div>
+<div className={itemSelectStyles.playerGroupContainer}>
+
+                                
+</div>
+<div className={itemSelectStyles.playerGroupContainer}>
+
+                                
+</div>
+                        </div>
+
+                    </div>
+
                     <nav className={styles.communityNavButtons}>
-                            <div id={styles[communityCategory === 'messages' ? '' : 'navButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('messages'))}}
+                            <div id={styles[communityCategory === 'messages' ? '' : 'messageButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('messages'))}}
                              className={styles.navButton}>
-                                <div id={styles['communityMessageIcon']} className={`${styles.iconContainerActive}`}></div>
+                                <div id={styles['communityMessageIcon']} className={`${communityCategory === 'messages' ? styles.iconContainerActive : styles.iconContainerInactive}`}></div>
                                 <p>Messages</p>
                             </div>
-                            <div id={styles[communityCategory === 'friends' ? '' : 'navButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('friends'))}}
+                            <div id={styles[communityCategory === 'friends' ? '' : 'friendsButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('friends'))}}
                              className={styles.navButton}>
-                                <div id={styles['communityFriendsIcon']} className={`${styles.iconContainerInactive}`}></div>
+                                <div id={styles['communityFriendsIcon']} className={`${communityCategory === 'friends' ? styles.iconContainerActive : styles.iconContainerInactive}`}></div>
                                 <p>Friends</p>
                             </div>
-                            <div id={styles[communityCategory === 'players' ? '' : 'navButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('players'))}}
+                            <div id={styles[communityCategory === 'players' ? '' : 'playerButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('players'))}}
                              className={styles.navButton}>
-                                <div id={styles['communityPlayersIcon']} className={`${styles.iconContainerInactive}`}></div>
+                                <div id={styles['communityPlayersIcon']} className={`${communityCategory === 'players' ? styles.iconContainerActive : styles.iconContainerInactive}`}></div>
                                 <p>Players</p>
                             </div>
                     </nav>

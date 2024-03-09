@@ -356,6 +356,10 @@
     }
 }
 
+/* .fullLengthHighlight {
+    wid
+} */
+
 
 /*** Community Page Dashboard Select Styles ***/
 
@@ -367,30 +371,7 @@
     height: inherit;
     /* border: 2px solid yellow; */
 
-    .groupContainer {
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        /* justify-content: space-between; */
-        align-items: center;
-        width: inherit;
-        height: 40px;
-        margin-bottom: 5px;
-        /* outline: 2px solid blue; */
 
-        > p {
-            position: absolute;
-        }
-
-        &:before {
-            content: "";
-            position: absolute;
-            width: inherit;
-            height: 0.1em;
-            left: 0;
-            top: calc(100% - 1px);
-            background-color: var(--black-text);
-        }
 
 
 
@@ -423,7 +404,224 @@
             
 
         }
-    }
+    
     
 }
 
+.groupContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: center;
+    width: inherit;
+    height: 40px;
+    /* outline: 2px solid blue; */
+    cursor: pointer;
+    margin-bottom: 1px;
+
+    > p {
+        position: absolute;
+    }
+
+    &:nth-child(1) {
+        &:after {
+            content: "";
+            position: absolute;
+            width: inherit;
+            height: 0.1em;
+            left: 0;
+            top: 0;
+            background-color: rgb(58, 58, 58);
+        }
+    }
+
+
+    &:hover {
+        background: radial-gradient(circle, rgba(255,255,255,0.5) 8%, rgba(255,255,255,0.4) 46%, rgba(251,251,251,0) 75%);
+        /* background-size: cover; */
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        
+    }
+
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: inherit;
+        height: 0.06em;
+        left: 0;
+        top: calc(100% + 0em);
+        background-color: rgb(58, 58, 58);
+    }
+}
+
+.flexInnerContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 320px;
+    height: inherit;
+    /* background-color: orange; */
+    /* margin-left: 380px; */
+
+    > p {
+        font-size: var(--meta-panel-header)
+    }
+
+    > div {
+        margin-right: 10px;
+    }
+
+    &:nth-child(1) {
+        left: 5px;
+    }
+
+    &:nth-child(2) {
+        left: 100px;
+    }
+
+}
+
+.gamerProfileIcon {
+    width: 30px;
+    height: calc(100% - 10px);
+    background-color: lightskyblue;
+    background: url("../assets/images/profile_icon.jpeg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.friendOnlineIcon {
+    position: relative;
+    top: 2px;
+    width: 25px;
+    height: calc(100% - 10px);
+    background: url("../assets/icons/64x64_icons/friend_online_icon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+
+
+
+
+
+.playerGroupContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: center;
+    width: inherit;
+    height: 65px;
+    /* outline: 2px solid blue; */
+    cursor: pointer;
+    margin-bottom: 1px;
+
+    > p {
+        position: absolute;
+    }
+
+    &:nth-child(1) {
+        &:after {
+            content: "";
+            position: absolute;
+            width: inherit;
+            height: 0.1em;
+            left: 0;
+            top: 0;
+            background-color: rgb(58, 58, 58);
+        }
+    }
+
+
+    &:hover {
+        background: radial-gradient(circle, rgba(255,255,255,0.5) 8%, rgba(255,255,255,0.4) 46%, rgba(251,251,251,0) 75%);
+        /* background-size: cover; */
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        
+    }
+
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: inherit;
+        height: 0.06em;
+        left: 0;
+        top: calc(100% + 0em);
+        background-color: rgb(58, 58, 58);
+    }
+}
+
+.playerFlexInnerContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 320px;
+    height: inherit;
+}
+
+.recentPlayerIcon {
+    width: 55px;
+    height: calc(100% - 10px);
+    background-color: lightskyblue;
+    background: url("../assets/images/profile_icon.jpeg");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.recentPlayerNameRepList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 200px;
+    height: inherit;
+    /* background-color: yellow; */
+    margin-left: 5px;
+
+    > p {
+        font-size: var(--meta-panel-header);
+    }
+
+    .recentPlayerRepStars {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: calc(100% - 10px);
+        height: 35px;
+        margin-top: 13px;
+        /* background-color: red; */
+
+
+        .starIcon {
+            width: 23px;
+            height: inherit;
+            background: url("../assets/icons/64x64_icons/reputation_star.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .starIconInactive {
+            width: 23px;
+            height: inherit;
+            background: url("../assets/icons/64x64_icons/reputation_star_inactive.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+    }
+}
