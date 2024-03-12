@@ -37,12 +37,13 @@ let initialState = {
     theme_select_highlight: false,
 
 
-    guide_menu_active_state: 'closed',
+
     external_panel_navigate: false,
     sub_menu_navigate: false,
 
-    //guide_panel, external_navigate, marketplace
+    //guide_panel, foreign_extension, marketplace
     navigate_context: 'main_menu',
+    guide_menu_active_state: 'closed',
 
 };
 

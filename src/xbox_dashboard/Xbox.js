@@ -185,10 +185,16 @@ const Xbox = (props) => {
 
 
     //Foreign extension
-    const extendMenuPanel = () => {
+    const foreignExtendGamerProfile = () => {
         dispatch(updateNavigateContext('foreign_extension'));
         dispatch(updateGuideActiveState('foreign_gamer_profile'));
         guidePanelAnimation.extendRevealContent('foreign_gamer_profile');
+    }
+
+    const foreignExtendCommunityPage = () => {
+        dispatch(updateNavigateContext('foreign_extension'));
+        dispatch(updateGuideActiveState('foreign_community_profile'));
+        guidePanelAnimation.extendRevealContent('foreign_community_profile');
     }
 
     function slideBladesAway () {
@@ -209,7 +215,7 @@ const Xbox = (props) => {
                 <div className={styles.xboxHomeLogo} onClick={()=>{showGuideSettings()}}><span className={styles.ellipseGlow}></span></div>
                 <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
                 <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
-                {/* onClick={()=>{extendMenuPanel()}} */}
+                {/* onClick={()=>{foreignExtendGamerProfile()}} */}
             </div>
 
             <GuideMenu guideAnimationRef={guidePanelAnimation} />
@@ -270,7 +276,7 @@ const Xbox = (props) => {
 
                         {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
                         <MarketplacePage slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
-                        <XboxlivePage  guidePanelAction={extendMenuPanel}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <XboxlivePage    foreignExtendGamerProfile={foreignExtendGamerProfile} foreignExtendCommunityPage={foreignExtendCommunityPage}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <GamesPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <MediaPage       current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>

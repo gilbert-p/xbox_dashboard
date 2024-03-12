@@ -8,6 +8,7 @@ import { updateSelectionHighlight,
     selectXboxliveMenuIndex,
     updateGuideActiveState,
     selectGuideActiveState,
+    navigateCommunityCategory,
 } from '../menuSlice';
 
 
@@ -43,7 +44,7 @@ const XboxlivePage = (props) => {
 
     const guideActiveState = useSelector(selectGuideActiveState);
 
-    const { xboxBackgroundRef, current_context_index, guidePanelAction } = props;
+    const { xboxBackgroundRef, current_context_index, foreignExtendGamerProfile, foreignExtendCommunityPage } = props;
 
 
     const { 
@@ -86,7 +87,7 @@ const XboxlivePage = (props) => {
 
         <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.makeTransparent : ""}`}>
             <div className={pageGridStyles.leftContent}>
-                <div className={profileCardStyles.profileContainer} onClick={()=>{guidePanelAction();utilitySound.current.playButtonSound();}} >
+                <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile();utilitySound.current.playButtonSound();}} >
                     <p>Epoxi117</p>
                     <div className={profileCardStyles.profileImgContainer} >
                         <div className={profileCardStyles.profileIcon}>
@@ -122,7 +123,7 @@ const XboxlivePage = (props) => {
                         </div>
                     </div>
                     <div className={itemSelectStyles.innerListContainer} > 
-                        <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('messages')); utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.mail_shadow_icon}`}></span>
                             <p>
@@ -131,7 +132,7 @@ const XboxlivePage = (props) => {
                             </p>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
-                        <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('friends')); utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.friends_icon}`}></span>
                             <p>
@@ -140,12 +141,12 @@ const XboxlivePage = (props) => {
                             </p>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
-                        <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('players')); utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.chat_icon}`}></span>
                             <p>
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
-                                Chat
+                                Recent
                             </p>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>

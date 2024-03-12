@@ -753,30 +753,157 @@ const GuideMenu = (props) => {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.playerControllerIcon}></div>
+                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            Call of Duty 4
+                                        </p>
+                                        <p>Last met yesterday.</p>
+                                    </div>
+
                                 </div>
                                 
                             </div>
                             <div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
+                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            SultanOfSpuzz21
+                                        </p>
+                                        <div className={itemSelectStyles.recentPlayerRepStars}>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIconInactive}></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                
-</div>
-<div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.playerControllerIcon}></div>
+                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            Call of Duty 4
+                                        </p>
+                                        <p>Last met yesterday.</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                                
-</div>
-<div className={itemSelectStyles.playerGroupContainer}>
+                            <div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
+                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            PixelWarrior99
+                                        </p>
+                                        <div className={itemSelectStyles.recentPlayerRepStars}>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIconInactive}></div>
+                                            <div className={itemSelectStyles.starIconInactive}></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                
-</div>
-<div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.playerControllerIcon}></div>
+                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            Call of Duty MW2
+                                        </p>
+                                        <p>Online</p>
+                                    </div>
+                                </div>
+                            </div>
 
-                                
-</div>
-<div className={itemSelectStyles.playerGroupContainer}>
+                            <div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
+                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            GhostReaper9000
+                                        </p>
+                                        <div className={itemSelectStyles.recentPlayerRepStars}>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                
-</div>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.playerControllerIcon}></div>
+                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            Gears of War 2
+                                        </p>
+                                        <p>Last met yesterday.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
+                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                        ShadowStrikerX
+                                        </p>
+                                        <div className={itemSelectStyles.recentPlayerRepStars}>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.playerControllerIcon}></div>
+                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            Feeding Frenzy
+                                        </p>
+                                        <p>Last met yesterday.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={itemSelectStyles.playerGroupContainer}>
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
+                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                        ShadowStrikerX
+                                        </p>
+                                        <div className={itemSelectStyles.recentPlayerRepStars}>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                            <div className={itemSelectStyles.starIcon}></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                                    <div className={itemSelectStyles.playerControllerIcon}></div>
+                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
+                                        <p className={itemSelectStyles.recentPlayerTitle}>
+                                            Geometry Wars
+                                        </p>
+                                        <p>Last met yesterday.</p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

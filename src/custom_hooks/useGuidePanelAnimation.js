@@ -115,7 +115,7 @@ export default function useGuidePanelAnimation() {
         revealGamerProfilePage.current = gsap.timeline();
 
         revealGamerProfilePage.current
-        .to(communityDashboardPageRef.current, {opacity: 1, display: "initial", duration: 0.3})
+        .to(gamerProfilePageRef.current, {opacity: 1, display: "initial", duration: 0.3})
         .pause();
 
 
@@ -181,6 +181,16 @@ export default function useGuidePanelAnimation() {
             revealGamerProfilePage.current.reverse();
         }
     }
+
+    const showCommunityPage = () => {
+        if(revealCommunityPage.current.time() <= 0) {
+            revealCommunityPage.current.play();
+        }
+        else {
+            revealCommunityPage.current.reverse();
+        }
+    }
+
 
 
     //Action Functions
@@ -271,9 +281,14 @@ export default function useGuidePanelAnimation() {
             switch(extended_state) {
                 case 'foreign_gamer_profile':
                     dispatch(updateShowBlades(false));
-                    console.log("reveal foreign gamer profile")
+                    console.log("reveal foreign gamer profile");
                     showGamerProfile();
 
+                    break;
+                case 'foreign_community_profile':
+                    dispatch(updateShowBlades(false));
+                    console.log("reveal foreign community profile");
+                    showCommunityPage();
                     break;
                 case 'default':
                     break;
@@ -292,6 +307,14 @@ export default function useGuidePanelAnimation() {
                     extendRevealPanel.current.reverse();
                     guideSettingsAnimate.current.reverse();
                     showGamerProfile();
+                    break;
+                case 'foreign_community_profile':
+                    dispatch(updateShowBlades(true));
+                    dispatch(updateGuideActiveState('closed'));
+                    dispatch(updateNavigateContext('main_menu'));
+                    extendRevealPanel.current.reverse();
+                    guideSettingsAnimate.current.reverse();
+                    showCommunityPage();
                     break;
                 case 'default':
                     break;
@@ -376,6 +399,9 @@ export default function useGuidePanelAnimation() {
             case 'foreign_extension':
                 switch(guideActiveState) {
                     case 'foreign_gamer_profile':
+                        extendRevealContent(guideActiveState);
+                        break;
+                    case 'foreign_community_profile':
                         extendRevealContent(guideActiveState);
                         break;
                 }

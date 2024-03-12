@@ -574,6 +574,10 @@
     justify-content: flex-start;
     width: 320px;
     height: inherit;
+
+    &:nth-child(2) {
+        margin-left: 100px;
+    }
 }
 
 .recentPlayerIcon {
@@ -622,6 +626,29 @@
             background: url("../assets/icons/64x64_icons/reputation_star_inactive.png");
             background-repeat: no-repeat;
             background-size: contain;
+        }
+    }
+}
+
+.playerControllerIcon {
+    width: 35px;
+    height: inherit;
+    background: url("../assets/icons/64x64_icons/controller_white_icon_shadow.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-top: 35px;
+}
+
+#playerRecentDetails {
+    > p {
+
+        &:nth-child(1) {
+            position: relative;
+            padding-top: 5px;
+        }
+        &:nth-child(2) {
+            position: relative;
+            padding-bottom: 5px;
         }
     }
 }
