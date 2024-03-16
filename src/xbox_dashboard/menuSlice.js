@@ -42,7 +42,7 @@ let initialState = {
     sub_menu_navigate: false,
 
     //guide_panel, foreign_extension, marketplace
-    navigate_context: 'main_menu',
+    navigate_context: 'main_menu_marketplace',
     guide_menu_active_state: 'closed',
 
 };

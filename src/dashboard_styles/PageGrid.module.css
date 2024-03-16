@@ -140,8 +140,9 @@
     margin-left: 20px;
     margin-top: 20px;
     /* background-color: lightskyblue; */
-
 }
+
+
 
 .scrollList {
     width: 400px;
@@ -219,3 +220,21 @@
 }
 
 
+
+
+/*******GAMES PAGE********/
+
+#playedGames {
+    justify-content: space-around;
+}
+
+.playedGamesContentView {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 820px;
+    height: 380px;
+    /* margin-left: 20px; */
+    margin-top: 20px;
+    outline: 2px solid blue;
+}

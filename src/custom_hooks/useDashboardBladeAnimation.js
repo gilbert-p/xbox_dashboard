@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from 'lodash';
 import { gsap } from 'gsap';
 import { navigateTo, selectContextIndex, selectTransitionState, bladeTransitionAsync } from '../xbox_dashboard/xboxSlice';
+import { updateNavigateContext } from "../xbox_dashboard/menuSlice";
 
 export default function useDashboardBladeAnimation() {
   // Refs
@@ -22,6 +23,15 @@ export default function useDashboardBladeAnimation() {
   const slideAwayAnimate = useRef(null);
 
   const slideBackAnimate = useRef(null);
+  const gamesTabAnimate = useRef(null);
+
+
+  const l_gamesBladeActiveRef = useRef(null);
+
+  const l_marketplaceBladeInactiveRef = useRef(null);
+  const l_xboxliveBladeInactiveRef = useRef(null);
+  const r_mediaBladeInactiveRef = useRef(null);
+  const r_systemBladeInactiveRef = useRef(null);
 
   
 
@@ -77,6 +87,17 @@ export default function useDashboardBladeAnimation() {
                             .pause();
 
 
+    gamesTabAnimate.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out",}});
+
+    gamesTabAnimate.current.to(l_gamesBladeActiveRef.current, {x: '-25px', ease: "bounce.out", duration: 0.1 }, "<")
+                           .to(l_marketplaceBladeInactiveRef.current, {x: '-=200px', opacity: 0})
+                           .to(l_xboxliveBladeInactiveRef.current, {x: '-200px', opacity: 0}, "<")
+                           .to(r_mediaBladeInactiveRef.current, {x: '+200px', opacity: 0}, "<")
+                           .to(r_systemBladeInactiveRef.current, {x: '+200px', opacity: 0}, "<")
+
+                           .pause();
+
+
   };
   initializeTimeline();
 
@@ -86,7 +107,7 @@ export default function useDashboardBladeAnimation() {
   },[is_transitioning]);
 
 
-
+  const mainMenuMap = ['main_menu_marketplace', 'main_menu_xboxlive', 'main_menu_games', 'main_menu_media', 'main_menu_system'];
 
   const shiftRight = () => {
     if (!isInitialized) {
@@ -103,6 +124,8 @@ export default function useDashboardBladeAnimation() {
         centerBlockExpandAnimate.current.play();
 
         dashboardUnderlayReveal.current.play();
+
+        dispatch(updateNavigateContext(mainMenuMap[current_context_index + 1]));
 
 
         debounceDispatchInput(navigateTo(current_context_index + 1));
@@ -121,6 +144,8 @@ export default function useDashboardBladeAnimation() {
 
         centerBlockExpandAnimate.current.play();
 
+        dispatch(updateNavigateContext(mainMenuMap[current_context_index - 1]));
+
         debounceDispatchInput(navigateTo(current_context_index - 1));
       }
     }
@@ -133,6 +158,10 @@ export default function useDashboardBladeAnimation() {
 
   const slideBladesBack = () => {
     slideBackAnimate.current.play();
+  }
+
+  const gamesSubPageAnimation = () => {
+    gamesTabAnimate.current.play();
   }
 
   // Keyboard event listeners
@@ -172,9 +201,15 @@ export default function useDashboardBladeAnimation() {
     dashboardUnderlayRef, 
     leftBladeGroupRef,
     rightBladeGroupRef,
+    l_marketplaceBladeInactiveRef,
+    l_xboxliveBladeInactiveRef,
+    l_gamesBladeActiveRef,
+    r_mediaBladeInactiveRef,
+    r_systemBladeInactiveRef,
 
     shiftRight, 
     shiftLeft, 
     slideBladesOut,
-    slideBladesBack};
+    slideBladesBack,
+    gamesSubPageAnimation};
 };

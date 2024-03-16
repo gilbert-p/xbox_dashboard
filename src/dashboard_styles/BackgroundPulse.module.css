@@ -67,6 +67,7 @@
 
 #gamesPulse .pulseContainer .pulseRing {
     border-color: #438c21;
+    /* border-color: #438c21; */
 }
 
 #mediaPulse .pulseContainer .pulseRing {

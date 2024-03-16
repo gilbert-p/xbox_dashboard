@@ -62,7 +62,7 @@ const XboxlivePage = (props) => {
             <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 3 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
 
 
-            <div id={mediaStyles["media"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 3 ? transitionStyles.makeTransparent : ""}`}>
+            <div id={mediaStyles["media"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 3 ? transitionStyles.removeDisplay : ""}`}>
                 <div className={pageGridStyles.leftContent}>
                     <div className={profileCardStyles.profileContainer} onClick={()=>{utilitySound.current.playButtonSound()}}>
                         <p>Epoxi117</p>

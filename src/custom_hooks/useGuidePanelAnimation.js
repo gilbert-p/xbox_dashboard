@@ -10,7 +10,9 @@ import { selectGuideActiveState,
         
          selectSubMenuNavActive,
          selectNavigationContext,
-         updateNavigateContext} from '../xbox_dashboard/menuSlice';
+         updateNavigateContext } from '../xbox_dashboard/menuSlice';
+
+import { selectContextIndex } from '../xbox_dashboard/xboxSlice';
 
 export default function useGuidePanelAnimation() {
     const revealGuideMenu = useRef(null);
@@ -40,12 +42,10 @@ export default function useGuidePanelAnimation() {
 
     const dispatch = useDispatch();
     const guideActiveState = useSelector(selectGuideActiveState);
-
     const isExternalNavigate = useSelector(selectExternalNavigationState);
-
     const isSubMenuActive = useSelector(selectSubMenuNavActive);
-
     const menuNavigationContext = useSelector(selectNavigationContext);
+    const current_context_index = useSelector(selectContextIndex);
 
 
 
@@ -192,13 +192,14 @@ export default function useGuidePanelAnimation() {
     }
 
 
+    const mainMenuMap = ['main_menu_marketplace', 'main_menu_xboxlive', 'main_menu_games', 'main_menu_media', 'main_menu_system'];
 
     //Action Functions
     const showGuideSettings = () => {
 
         // console.log("navigation context", menuNavigationContext);
         switch(menuNavigationContext) {
-            case 'main_menu':
+            case mainMenuMap[current_context_index]:
                 //in guide panel and in initial half open panel
                 dispatch(updateNavigateContext('guide_panel_main'));
                 dispatch(updateGuideActiveState('guide_setting_main'));
@@ -225,7 +226,7 @@ export default function useGuidePanelAnimation() {
                     case 'guide_setting_main':
                         dispatch(updateShowBlades(true));
                         //update outer context
-                        dispatch(updateNavigateContext('main_menu'));
+                        dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
                         //update specific context
                         dispatch(updateGuideActiveState('closed'));
                         showGuideInitial();
@@ -235,14 +236,14 @@ export default function useGuidePanelAnimation() {
                         showThemeMenu();
 
                         dispatch(updateGuideActiveState('closed'));
-                        dispatch(updateNavigateContext('main_menu'));
+                        dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
                         dispatch(updateShowBlades(true));
                         break;
                     case 'extended_about_dashboard':
                         closeExtendedMenu.current.play();
                         revealAboutDashboard.current.time(0).pause();
                         dispatch(updateGuideActiveState('closed'));
-                        dispatch(updateNavigateContext('main_menu'));
+                        dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
         
                         dispatch(updateShowBlades(true));
                         break;
@@ -250,7 +251,7 @@ export default function useGuidePanelAnimation() {
                         closeExtendedMenu.current.play();
                         revealGamerProfilePage.current.time(0).pause();
                         dispatch(updateGuideActiveState('closed'));
-                        dispatch(updateNavigateContext('main_menu'));
+                        dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
         
                         dispatch(updateShowBlades(true));
                         break;
@@ -303,7 +304,7 @@ export default function useGuidePanelAnimation() {
                 case 'foreign_gamer_profile':
                     dispatch(updateShowBlades(true));
                     dispatch(updateGuideActiveState('closed'));
-                    dispatch(updateNavigateContext('main_menu'));
+                    dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
                     extendRevealPanel.current.reverse();
                     guideSettingsAnimate.current.reverse();
                     showGamerProfile();
@@ -311,7 +312,7 @@ export default function useGuidePanelAnimation() {
                 case 'foreign_community_profile':
                     dispatch(updateShowBlades(true));
                     dispatch(updateGuideActiveState('closed'));
-                    dispatch(updateNavigateContext('main_menu'));
+                    dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
                     extendRevealPanel.current.reverse();
                     guideSettingsAnimate.current.reverse();
                     showCommunityPage();
@@ -375,7 +376,7 @@ export default function useGuidePanelAnimation() {
                 switch(guideActiveState) {
                     case 'guide_setting_main':
                         dispatch(updateGuideActiveState('closed'));
-                        dispatch(updateNavigateContext('main_menu'));
+                        dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
                         dispatch(updateShowBlades(true));
                         showGuideInitial();
                         break;
@@ -408,7 +409,7 @@ export default function useGuidePanelAnimation() {
                 break;
             
             case 'marketplace':
-                dispatch(updateNavigateContext('main_menu'));
+                dispatch(updateNavigateContext(mainMenuMap[current_context_index]));
                 break;
             case 'default':
                 break;

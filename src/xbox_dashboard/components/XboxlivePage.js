@@ -85,7 +85,7 @@ const XboxlivePage = (props) => {
 
 
 
-        <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.makeTransparent : ""}`}>
+        <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.removeDisplay : ""}`}>
             <div className={pageGridStyles.leftContent}>
                 <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile();utilitySound.current.playButtonSound();}} >
                     <p>Epoxi117</p>

@@ -197,7 +197,6 @@ const MarketplacePage = (props) => {
           }
       };
 
-      console.log(spotlightContent.games.listItems['0'].title)
 
 
 
@@ -206,33 +205,33 @@ const MarketplacePage = (props) => {
         <div id={marketplaceStyles["marketplaceContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 0 ? 1 : -1}`}}>
 
 
-            <div className={`${(navigationContext !== 'marketplace') ? pageGridStyles.marketplaceMainContent: transitionStyles.instantTransparent}`}>
+            <div className={`${(navigationContext == 'main_menu_marketplace') ? pageGridStyles.marketplaceMainContent: transitionStyles.removeDisplay}`}>
                 <div className={` ${bladeStyles.dashboardWhiteUnderlay}  ${current_context_index === 0 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}>
                 </div> 
 
                 <div id={pageGridStyles["marketplaceGrid"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 0 ? transitionStyles.makeTransparent : ""}`}>
                     <div className={pageGridStyles.leftContent}>
-                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace')); dispatch(updateMarketplaceSpotlightCategory('games')); utilitySound.current.playButtonSound()}}>
+                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace_spotlight')); dispatch(updateMarketplaceSpotlightCategory('games')); utilitySound.current.playButtonSound()}}>
                             <div className={marketplaceStyles.textHighlight}></div>
                             <p>Games</p>
                         </div>
-                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace')); dispatch(updateMarketplaceSpotlightCategory('videos')); utilitySound.current.playButtonSound()}}>
+                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace_spotlight')); dispatch(updateMarketplaceSpotlightCategory('videos')); utilitySound.current.playButtonSound()}}>
                             <div className={marketplaceStyles.textHighlight}></div>
                             <p>Media and Entertainment</p>
                         </div>
-                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace')); dispatch(updateMarketplaceSpotlightCategory('demos')); utilitySound.current.playButtonSound()}}>
+                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace_spotlight')); dispatch(updateMarketplaceSpotlightCategory('demos')); utilitySound.current.playButtonSound()}}>
                             <div className={marketplaceStyles.textHighlight}></div>
                             <p>Game Demos</p>
                         </div>
-                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace')); dispatch(updateMarketplaceSpotlightCategory('videos')); utilitySound.current.playButtonSound()}}>
+                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace_spotlight')); dispatch(updateMarketplaceSpotlightCategory('videos')); utilitySound.current.playButtonSound()}}>
                             <p>Game Videos</p>
                             <div className={marketplaceStyles.textHighlight}></div>
                         </div>
-                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace')); dispatch(updateMarketplaceSpotlightCategory('themes')); utilitySound.current.playButtonSound()}}>
+                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace_spotlight')); dispatch(updateMarketplaceSpotlightCategory('themes')); utilitySound.current.playButtonSound()}}>
                             <div className={marketplaceStyles.textHighlight}></div>
                             <p>Themes and Gamer Pictures</p>
                         </div>
-                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace')); dispatch(updateMarketplaceSpotlightCategory('featured')); utilitySound.current.playButtonSound()}}>
+                        <div className={marketplaceStyles.selectOption} onClick={()=>{slideBladesAway(); dispatch(updateNavigateContext('marketplace_spotlight')); dispatch(updateMarketplaceSpotlightCategory('featured')); utilitySound.current.playButtonSound()}}>
                             <div className={marketplaceStyles.textHighlight}></div>
                             <p>Featured Downloads</p>
                         </div>
@@ -276,7 +275,7 @@ const MarketplacePage = (props) => {
 
 
 
-            <div className={`${(navigationContext== 'marketplace') ? pageGridStyles.marketplaceSpotlightPage : transitionStyles.instantTransparent}`}>
+            <div className={`${(navigationContext == 'marketplace_spotlight') ? pageGridStyles.marketplaceSpotlightPage : transitionStyles.makeTransparent}`}>
 
                 <div className={pageGridStyles.subMenuUnderlay}></div>
 
@@ -302,71 +301,71 @@ const MarketplacePage = (props) => {
 
 
                     <div className={pageGridStyles.scrollList}>
-                    <div className={`${itemSelectStyles.marketplaceSpotlightContainer} ${itemSelectStyles.selectItemListContainer}`}>
-                        <div id={itemSelectStyles['marketplaceSpotlightInsetHighlightContainer']} className={itemSelectStyles.boxInsetHighlightContainer}>
-                            <div id={itemSelectStyles['marketplaceSpotlightMaskTop']} className={itemSelectStyles.boxInsetHighlightMaskTop}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
-                            </div>
-                            <div id={itemSelectStyles['marketplaceSpotlightMaskBottom']} className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
-                            </div>
-                        </div>
-                        <div id={itemSelectStyles[`marketplaceSpotlightInnerList`]} className={itemSelectStyles.innerListContainer} > 
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <p>
-                                    {spotlightContent[spotlightCategoryTitle].listItems['0'].title}
-                                </p>
-                                <p className={itemSelectStyles.listItemSubText}>
-                                    {spotlightContent[spotlightCategoryTitle].listItems['0'].subtitle}
-                                </p>
-                                <div className={itemSelectStyles.listItemBorder}></div>
-                            </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
-                                <p>
+                      <div className={`${itemSelectStyles.marketplaceSpotlightContainer} ${itemSelectStyles.selectItemListContainer}`}>
+                          <div id={itemSelectStyles['marketplaceSpotlightInsetHighlightContainer']} className={itemSelectStyles.boxInsetHighlightContainer}>
+                              <div id={itemSelectStyles['marketplaceSpotlightMaskTop']} className={itemSelectStyles.boxInsetHighlightMaskTop}>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
+                              </div>
+                              <div id={itemSelectStyles['marketplaceSpotlightMaskBottom']} className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
+                                  <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
+                              </div>
+                          </div>
+                          <div id={itemSelectStyles[`marketplaceSpotlightInnerList`]} className={itemSelectStyles.innerListContainer} > 
+                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
+                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
+                                  <p>
+                                      {spotlightContent[spotlightCategoryTitle].listItems['0'].title}
+                                  </p>
+                                  <p className={itemSelectStyles.listItemSubText}>
+                                      {spotlightContent[spotlightCategoryTitle].listItems['0'].subtitle}
+                                  </p>
+                                  <div className={itemSelectStyles.listItemBorder}></div>
+                              </div>
+                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
+                                  <p>
+                                        
+                                  {spotlightContent[spotlightCategoryTitle].listItems['1'].title}
+                                  </p>
+                                  <p className={itemSelectStyles.listItemSubText}>
+                                      {spotlightContent[spotlightCategoryTitle].listItems['1'].subtitle}
+                                  </p>
+                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
+                                  <div className={itemSelectStyles.listItemBorder}></div>
+                              </div>
+                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
+                                  <p>
                                       
-                                {spotlightContent[spotlightCategoryTitle].listItems['1'].title}
-                                </p>
-                                <p className={itemSelectStyles.listItemSubText}>
-                                    {spotlightContent[spotlightCategoryTitle].listItems['1'].subtitle}
-                                </p>
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <div className={itemSelectStyles.listItemBorder}></div>
-                            </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
-                                <p>
-                                    
-                                {spotlightContent[spotlightCategoryTitle].listItems['2'].title}
-                                </p>
-                                <p className={itemSelectStyles.listItemSubText}>
-                                    {spotlightContent[spotlightCategoryTitle].listItems['2'].subtitle}
-                                </p>
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <div className={itemSelectStyles.listItemBorder}></div>
-                            </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
-                                <p>
-                                    
-                                {spotlightContent[spotlightCategoryTitle].listItems['3'].title}
-                                </p>
-                                <p className={itemSelectStyles.listItemSubText}>
-                                    {spotlightContent[spotlightCategoryTitle].listItems['3'].subtitle}
-                                </p>
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <div className={itemSelectStyles.listItemBorder}></div>
-                            </div>
-                        </div>
-                </div>
+                                  {spotlightContent[spotlightCategoryTitle].listItems['2'].title}
+                                  </p>
+                                  <p className={itemSelectStyles.listItemSubText}>
+                                      {spotlightContent[spotlightCategoryTitle].listItems['2'].subtitle}
+                                  </p>
+                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
+                                  <div className={itemSelectStyles.listItemBorder}></div>
+                              </div>
+                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
+                                  <p>
+                                      
+                                  {spotlightContent[spotlightCategoryTitle].listItems['3'].title}
+                                  </p>
+                                  <p className={itemSelectStyles.listItemSubText}>
+                                      {spotlightContent[spotlightCategoryTitle].listItems['3'].subtitle}
+                                  </p>
+                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
+                                  <div className={itemSelectStyles.listItemBorder}></div>
+                              </div>
+                          </div>
+                      </div>
                     </div>
 
 
@@ -383,7 +382,7 @@ const MarketplacePage = (props) => {
                 </div>
 
                 <div className={pageGridStyles.navButtonContainer}>
-                    <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{slideBladesBack(); dispatch(updateNavigateContext('main_menu')); utilitySound.current.playButtonSound()}}>
+                    <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{slideBladesBack(); dispatch(updateNavigateContext('main_menu_marketplace')); utilitySound.current.playButtonSound()}}>
                         <p>Back</p>
                         <div className={pageGridStyles.bControllerImg}></div>
                     </div>
