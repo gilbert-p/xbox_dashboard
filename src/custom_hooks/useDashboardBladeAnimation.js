@@ -24,6 +24,7 @@ export default function useDashboardBladeAnimation() {
 
   const slideBackAnimate = useRef(null);
   const gamesTabAnimate = useRef(null);
+  const gamesTabReverse = useRef(null);
 
 
   const l_gamesBladeActiveRef = useRef(null);
@@ -89,13 +90,22 @@ export default function useDashboardBladeAnimation() {
 
     gamesTabAnimate.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out",}});
 
-    gamesTabAnimate.current.to(l_gamesBladeActiveRef.current, {x: '-25px', ease: "bounce.out", duration: 0.1 }, "<")
+    gamesTabAnimate.current.to(l_gamesBladeActiveRef.current, {x: '-5px', ease: "bounce.out", duration: 0.1 }, "<")
                            .to(l_marketplaceBladeInactiveRef.current, {x: '-=200px', opacity: 0})
                            .to(l_xboxliveBladeInactiveRef.current, {x: '-200px', opacity: 0}, "<")
                            .to(r_mediaBladeInactiveRef.current, {x: '+200px', opacity: 0}, "<")
                            .to(r_systemBladeInactiveRef.current, {x: '+200px', opacity: 0}, "<")
-
                            .pause();
+
+    gamesTabReverse.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out",}});
+
+    gamesTabReverse.current.to(l_gamesBladeActiveRef.current, {x: '0px', ease: "bounce.out", duration: 0.1 }, "<")
+                            .to(l_marketplaceBladeInactiveRef.current, {x: '+=200px', opacity: 1})
+                            .to(l_xboxliveBladeInactiveRef.current, {x: '+=200px', opacity: 1}, "<")
+                            .to(r_mediaBladeInactiveRef.current, {x: '-=200px', opacity: 1}, "<")
+                            .to(r_systemBladeInactiveRef.current, {x: '-=200px', opacity: 1}, "<")
+                            .pause();
+
 
 
   };
@@ -163,6 +173,9 @@ export default function useDashboardBladeAnimation() {
   const gamesSubPageAnimation = () => {
     gamesTabAnimate.current.play();
   }
+  const gamesSubPageExit = () => {
+    gamesTabReverse.current.play();
+  }
 
   // Keyboard event listeners
   useLayoutEffect(() => {
@@ -211,5 +224,6 @@ export default function useDashboardBladeAnimation() {
     shiftLeft, 
     slideBladesOut,
     slideBladesBack,
-    gamesSubPageAnimation};
+    gamesSubPageAnimation,
+    gamesSubPageExit,};
 };

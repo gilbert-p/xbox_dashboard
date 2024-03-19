@@ -138,6 +138,9 @@ export const xboxSlice = createSlice({
       updateGuideMenuState: (state, action) => {
         state.is_guide_menu_open = action.payload;
       },
+      updateDiscTrayState: (state, action) => {
+        state.disc_tray = action.payload;
+      }
     },
     extraReducers: (builder) => {
       builder
@@ -150,7 +153,14 @@ export const xboxSlice = createSlice({
     }
 });
 
-export const { navigateTo, updateBladeContainerSize, updateBladeSize, setBladeAnimationRef, updateGuideMenuState, } = xboxSlice.actions;
+export const {
+   navigateTo,
+   updateBladeContainerSize, 
+   updateBladeSize, 
+   setBladeAnimationRef, 
+   updateGuideMenuState,
+   updateDiscTrayState,
+   } = xboxSlice.actions;
 
 export const selectCurrentContext = (state) => state.dashboard.current_context;
 export const selectContextIndex = (state) => state.dashboard.context_index;

@@ -87,7 +87,7 @@ const XboxlivePage = (props) => {
 
         <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.removeDisplay : ""}`}>
             <div className={pageGridStyles.leftContent}>
-                <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile();utilitySound.current.playButtonSound();}} >
+                <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile(); utilitySound.current.playButtonSound();}} >
                     <p>Epoxi117</p>
                     <div className={profileCardStyles.profileImgContainer} >
                         <div className={profileCardStyles.profileIcon}>
@@ -127,27 +127,30 @@ const XboxlivePage = (props) => {
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.mail_shadow_icon}`}></span>
                             <p>
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
+
                                 Messages
                             </p>
+                            <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
                         <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('friends')); utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.friends_icon}`}></span>
                             <p>
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
+
                                 Friends
                             </p>
+                            <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
                         <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('players')); utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.chat_icon}`}></span>
                             <p>
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
+
                                 Recent
                             </p>
+                            <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
                     </div>

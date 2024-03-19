@@ -1,11 +1,11 @@
 .makeTransparent {
-    opacity: 0;
+    opacity: 0 !important;
     transition: opacity 0.6s ease-in;
     pointer-events: none;
 }
 
 .instantTransparent {
-    opacity: 0;
+    opacity: 0 !important;
     transition: opacity 0 linear;
     pointer-events: none;
 }
