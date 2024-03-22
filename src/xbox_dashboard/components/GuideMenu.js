@@ -1,6 +1,9 @@
 import React, {useRef, useState, forwardRef, useEffect, useCallback, useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../../dashboard_styles/Dashboard.module.css';
+
+import guideMenuStyles from '../../dashboard_styles/GuideMenu.module.css';
+
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
@@ -62,7 +65,6 @@ import useAudioSound from "../../custom_hooks/useAudioSound";
 
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
-import { debounce } from "lodash";
 
 
 const GuideMenu = (props) => {
@@ -212,89 +214,77 @@ const GuideMenu = (props) => {
           );
     };
 
-    const handleBackButton = () => {
-        switch(menuNavigationContext) {
-            case 'external_navigate':
-                backButtonStateSelection('external_navigate');
-                break;
-            case 'guide_panel':
-                backButtonStateSelection('guide_panel');
-                break;
-        }
-    };
-
-
     return (
         <>
         {/* Guide Menu that is opened/closed by home button */}
-        <div id={styles['guideMenuPanel']} className={styles.guideMenuContainer} ref={guideMenuRef} >
-            <div  className={styles[`${'guidePanel' + selected_theme}`]} ref={guidePanelRef}>
+        <div id={guideMenuStyles['guideMenuPanel']} className={guideMenuStyles.guideMenuContainer} ref={guideMenuRef} >
+            <div  className={guideMenuStyles[`${'guidePanel' + selected_theme}`]} ref={guidePanelRef}>
 
-                <div className={styles.backButtonContainer} onClick={()=>{backButtonStateSelection(); utilitySound.current.playButtonSound()}}>
+                <div className={guideMenuStyles.backButtonContainer} onClick={()=>{backButtonStateSelection(); utilitySound.current.playButtonSound()}}>
                     <p>Back</p>
-                    <div className={styles.bControllerImg}></div>
+                    <div className={guideMenuStyles.bControllerImg}></div>
                 </div>
 
-                <div className={styles[`${'nameplateEdge' + selected_theme}`]}>
-                        <div className={styles.guideControllerIndicatorIcon}></div>
-                        <p className={styles.guideNameplateTitle}>Epoxi117</p>
+                <div className={guideMenuStyles[`${'nameplateEdge' + selected_theme}`]}>
+                        <div className={guideMenuStyles.guideControllerIndicatorIcon}></div>
+                        <p className={guideMenuStyles.guideNameplateTitle}>Epoxi117</p>
                 </div>
-                <div className={styles[`${'guidePanelTopBorder' + selected_theme}`]}>
-                            <div className={styles.guidePanelClockContainer}>
+                <div className={guideMenuStyles[`${'guidePanelTopBorder' + selected_theme}`]}>
+                            <div className={guideMenuStyles.guidePanelClockContainer}>
                                 <GuidePanelClock/>
                             </div>
                 </div>
-                <div className={styles[`${'guidePanelBottomBorder' + selected_theme}`]}>
+                <div className={guideMenuStyles[`${'guidePanelBottomBorder' + selected_theme}`]}>
                 </div>
-                <div className={styles.guideSettingsView} ref={guideSettingsRef}>
-                                <div className={styles.profileContainer} onClick={()=>{ extendGuideMenu('extended_gamer_profile'); dispatch(updateGuideActiveState('extended_gamer_profile')); utilitySound.current.playButtonSound()}}>
-                                    <div className={styles.profileImgContainer}>
-                                        <div className={styles.profileIcon}>
-                                            <div className={styles.iconGloss}></div>
+                <div className={guideMenuStyles.guideSettingsView} ref={guideSettingsRef}>
+                                <div className={guideMenuStyles.profileContainer} onClick={()=>{ extendGuideMenu('extended_gamer_profile'); dispatch(updateGuideActiveState('extended_gamer_profile')); utilitySound.current.playButtonSound()}}>
+                                    <div className={guideMenuStyles.profileImgContainer}>
+                                        <div className={guideMenuStyles.profileIcon}>
+                                            <div className={guideMenuStyles.iconGloss}></div>
                                         </div>
                                     </div>
-                                    <div className={styles.profileDescription}>
-                                        <p className={styles.gamerscoreTitle}>Gamerscore</p>
-                                        <p className={styles.gamerscoreValue}>21117</p>
-                                        <p className={styles.zoneTitle}>Status</p>
-                                        <div className={styles.zoneStatus}>Online</div>
+                                    <div className={guideMenuStyles.profileDescription}>
+                                        <p className={guideMenuStyles.gamerscoreTitle}>Gamerscore</p>
+                                        <p className={guideMenuStyles.gamerscoreValue}>21117</p>
+                                        <p className={guideMenuStyles.zoneTitle}>Status</p>
+                                        <div className={guideMenuStyles.zoneStatus}>Online</div>
                                     </div>
                                 </div>
 
-                                <div className={styles.multiButtonListContainer}>
-                                    <span className={`${styles.multiButtonTitle}`}>{guideMenuLinkStackIndex == 0 ? "Github": ""}</span>
-                                    <span className={`${styles.multiButtonTitle}`}>{guideMenuLinkStackIndex == 1 ? "My Website": ""}</span>
-                                    <span className={`${styles.multiButtonTitle}`}>{guideMenuLinkStackIndex == 2 ? "Hmmm": ""}</span>
-                                    <div className={styles.buttonGroup}>
-                                        <button className={styles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={guideMenuStyles.multiButtonListContainer}>
+                                    <span className={`${guideMenuStyles.multiButtonTitle}`}>{guideMenuLinkStackIndex == 0 ? "Github": ""}</span>
+                                    <span className={`${guideMenuStyles.multiButtonTitle}`}>{guideMenuLinkStackIndex == 1 ? "My Website": ""}</span>
+                                    <span className={`${guideMenuStyles.multiButtonTitle}`}>{guideMenuLinkStackIndex == 2 ? "Hmmm": ""}</span>
+                                    <div className={guideMenuStyles.buttonGroup}>
+                                        <button className={guideMenuStyles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(0));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
 
 
                                             <a href="https://github.com/gilbert-p/xbox_dashboard" target="_blank" rel="noopener noreferrer">
-                                                <span id={styles["skewButton_1"]} className={`${styles.buttonIcon} ${iconLibrary.github_logo}`}></span>
-                                                <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
+                                                <span id={guideMenuStyles["skewButton_1"]} className={`${guideMenuStyles.buttonIcon} ${iconLibrary.github_logo}`}></span>
+                                                <span className={`${isLinkStackHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
                                             </a>
 
                                            
                                         </button>
-                                        <button className={styles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                        <button className={guideMenuStyles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(1));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
 
 
                                             <a href="https://gilbert-p.github.io/" target="_blank" rel="noopener noreferrer">
-                                                <span id={styles["skewButton_2"]} className={`${styles.buttonIcon} ${iconLibrary.react_logo}`}></span>
-                                                <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
+                                                <span id={guideMenuStyles["skewButton_2"]} className={`${guideMenuStyles.buttonIcon} ${iconLibrary.react_logo}`}></span>
+                                                <span className={`${isLinkStackHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
                                             </a>
 
 
                                         </button>
-                                        <button className={styles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                        <button className={guideMenuStyles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(2));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
 
 
                                             <a href="https://github.com/gilbert-p/xbox_dashboard" target="_blank" rel="noopener noreferrer">
-                                                <span id={styles["skewButton_2"]} className={`${styles.buttonIcon} ${iconLibrary.react_logo}`}></span>
-                                                <span className={`${isLinkStackHighlightActive && styles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
+                                                <span id={guideMenuStyles["skewButton_2"]} className={`${guideMenuStyles.buttonIcon} ${iconLibrary.react_logo}`}></span>
+                                                <span className={`${isLinkStackHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
                                             </a>
 
 
@@ -307,58 +297,60 @@ const GuideMenu = (props) => {
                                         <div  className={itemSelectStyles.listItem} onClick={()=>{extendGuideMenu('extended_about_dashboard'); dispatch(updateGuideActiveState('extended_about_dashboard')); utilitySound.current.playButtonSound()}}
                                                                                     onMouseEnter={()=>{dispatch(navigateGuideMenu(0));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
                                             <p>
-                                                <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
+                                                
                                                 About Dashboard
                                             </p>
+                                            <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                             <div className={itemSelectStyles.listItemBorder}></div>
                                         </div>
                                         <div className={itemSelectStyles.listItem} onClick={()=>{revealThemeSelection(); dispatch(updateShowThemeSelect('true')); dispatch(updateGuideActiveState('theme_select')); utilitySound.current.playButtonSound() }}
                                          onMouseEnter={()=>{dispatch(navigateGuideMenu(1));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
                                             {/* <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span> */}
                                             <p>
-                                                <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
+
                                                 Dashboard Settings
                                             </p>
+                                            <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                             <div className={itemSelectStyles.listItemBorder}></div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className={styles.guideMusicPlayer}>
-                                    <div className={styles.musicPlayerActionButtonContainer}>
-                                        <button id={styles["playButton"]} className={styles.skewmorphButton} onClick={()=>{playSong(); utilitySound.current.playButtonSound()}}
+                                <div className={guideMenuStyles.guideMusicPlayer}>
+                                    <div className={guideMenuStyles.musicPlayerActionButtonContainer}>
+                                        <button id={guideMenuStyles["playButton"]} className={guideMenuStyles.skewmorphButton} onClick={()=>{playSong(); utilitySound.current.playButtonSound()}}
                                             onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(0));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                                            <span className={!isSongPlaying ? styles.guidePlayIcon : styles.guidePauseIcon }></span>
-                                            <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
+                                            <span className={!isSongPlaying ? guideMenuStyles.guidePlayIcon : guideMenuStyles.guidePauseIcon }></span>
+                                            <span className={`${isGuideMusicPlayerHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
                                         </button>
-                                        <button id={styles["previousSelectionButton"]} className={styles.skewmorphButton} onClick={()=>{playPrevSong(); utilitySound.current.playButtonSound()}}
+                                        <button id={guideMenuStyles["previousSelectionButton"]} className={guideMenuStyles.skewmorphButton} onClick={()=>{playPrevSong(); utilitySound.current.playButtonSound()}}
                                             onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(1));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                                            <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
+                                            <span className={`${isGuideMusicPlayerHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
                                         </button>
-                                        <button id={styles["nextSelectionButton"]} className={styles.skewmorphButton} onClick={()=>{playNextSong(); utilitySound.current.playButtonSound()}}
+                                        <button id={guideMenuStyles["nextSelectionButton"]} className={guideMenuStyles.skewmorphButton} onClick={()=>{playNextSong(); utilitySound.current.playButtonSound()}}
                                             onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(2));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                                            <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
+                                            <span className={`${isGuideMusicPlayerHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
                                         </button>
-                                        <button id={styles["arrowSelectionButton"]} className={styles.skewmorphButton} 
+                                        <button id={guideMenuStyles["arrowSelectionButton"]} className={guideMenuStyles.skewmorphButton} 
                                             onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(3));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                                            <span className={styles.arrowPoint}></span>
+                                            <span className={guideMenuStyles.arrowPoint}></span>
                                             {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 3 ? transitionStyles.removeDisplay : ""}`}></span> */}
                                         </button>
-                                        <button id={styles["soundAdjustButton"]} className={styles.skewmorphButton} 
+                                        <button id={guideMenuStyles["soundAdjustButton"]} className={guideMenuStyles.skewmorphButton} 
                                         onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(4));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
                                             {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 4 ? transitionStyles.removeDisplay : ""}`}></span> */}
                                         </button>
                                     </div>
-                                    <div className={styles.musicPlayerSongTitleContainer}
+                                    <div className={guideMenuStyles.musicPlayerSongTitleContainer}
                                         onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(5));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
                                         {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.backgroundHighlightGlow} ${guideMusicPlayerIndex !== 5 ? transitionStyles.removeDisplay : ""}`}></span> */}
-                                        <p className={styles.guideMusicPlayerTitle}>{`${isSongPlaying ? currentSongTitle : 'Select Music'}`}</p>
+                                        <p className={guideMenuStyles.guideMusicPlayerTitle}>{`${isSongPlaying ? currentSongTitle : 'Select Music'}`}</p>
                                     </div>
                                 </div>
 
-                                <div className={styles.guideMenuXboxLogoContainer}>
-                                    <div className={styles.guideMenuXbox360}>
-                                        <div className={styles.xboxGuideLogo}></div>
+                                <div className={guideMenuStyles.guideMenuXboxLogoContainer}>
+                                    <div className={guideMenuStyles.guideMenuXbox360}>
+                                        <div className={guideMenuStyles.xboxGuideLogo}></div>
                                     </div>
                                 </div>
 
@@ -367,8 +359,8 @@ const GuideMenu = (props) => {
 
                 </div>
 
-                <div className={styles.guideSelectThemeContainer} ref={guideSelectThemeRef}>
-                    <h2 id={styles["themeSelectTitle"]}>
+                <div className={guideMenuStyles.guideSelectThemeContainer} ref={guideSelectThemeRef}>
+                    <h2 id={guideMenuStyles["themeSelectTitle"]}>
                         Themes
                     </h2>
                     <h3>Select a theme</h3>
@@ -378,17 +370,19 @@ const GuideMenu = (props) => {
                             <div  className={itemSelectStyles.listItem} onClick={()=>{dispatch(updateSelectedTheme('')); utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateThemeSelectIndex(0)); dispatch(updateThemeSelectHighlight(true))}} onMouseLeave={()=>{dispatch(updateThemeSelectHighlight(false))}}>
                                 <p>
-                                    <span className={`${isThemeSelectHighlightActive && itemSelectStyles.listItemHighlight} ${themeSelectIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
+
                                     Xbox 360 (Default)
                                 </p>
+                                <span className={`${isThemeSelectHighlightActive && itemSelectStyles.listItemHighlight} ${themeSelectIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                             <div className={itemSelectStyles.listItem} onClick={()=>{dispatch(updateSelectedTheme('_Carbon')); utilitySound.current.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateThemeSelectIndex(1)); dispatch(updateThemeSelectHighlight(true))}} onMouseLeave={()=>{dispatch(updateThemeSelectHighlight(false))}}>
                                 <p>
-                                    <span className={`${isThemeSelectHighlightActive && itemSelectStyles.listItemHighlight} ${themeSelectIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
+
                                     Carbon
                                 </p>
+                                <span className={`${isThemeSelectHighlightActive && itemSelectStyles.listItemHighlight} ${themeSelectIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
                         </div>
@@ -398,14 +392,14 @@ const GuideMenu = (props) => {
 
 
                 {/* Extensible Content from Guide Menu */}
-                <div className={styles.aboutDashboardContainer} ref={aboutDashboardPageRef}>
-                    <h2 className={styles.aboutDashboardTitle}>
+                <div className={guideMenuStyles.aboutDashboardContainer} ref={aboutDashboardPageRef}>
+                    <h2 className={guideMenuStyles.aboutDashboardTitle}>
                         Xbox 360 Dashboard Blade UI
                     </h2>
-                    <div className={styles.scrollableContent}>
-                        <div id={styles['timeMagazineBillGates']} className={styles.articleImg}></div>
+                    <div className={guideMenuStyles.scrollableContent}>
+                        <div id={guideMenuStyles['timeMagazineBillGates']} className={guideMenuStyles.articleImg}></div>
                         <h3>Overview</h3>
-                        <p className={styles.articleParagraph}>
+                        <p className={guideMenuStyles.articleParagraph}>
 
                             The foundational concept behind the original Xbox 360 Dashboard design was centered on evoking a sense of 
                             infinite energy and power. The incorporation of curved elements, such as the blades and buttons, serves to 
@@ -418,8 +412,8 @@ const GuideMenu = (props) => {
 
                         </p>
                         <h3>Design Era of Early 2000s</h3>
-                        <div id={styles['wmpSkinsImg']} className={styles.articleImg}></div>
-                        <p id={styles['wmpParagraph']} className={styles.articleParagraph}>
+                        <div id={guideMenuStyles['wmpSkinsImg']} className={guideMenuStyles.articleImg}></div>
+                        <p id={guideMenuStyles['wmpParagraph']} className={guideMenuStyles.articleParagraph}>
 
                             An exemplary illustration of design trends from the early 2000s is embodied in the Windows Media Player (WMP) skins
                             designed for Windows XP. These skins epitomized a period when customization and personalization were paramount
@@ -433,10 +427,10 @@ const GuideMenu = (props) => {
                     </div>
                 </div>
 
-                <div className={styles.gamerProfileContainer} ref={gamerProfilePageRef}>
+                <div className={guideMenuStyles.gamerProfileContainer} ref={gamerProfilePageRef}>
                 {/* <div className={styles.backgroundOverlay}></div> */}
 
-                    <h2 className={styles.aboutDashboardTitle}>
+                    <h2 className={guideMenuStyles.aboutDashboardTitle}>
                         Web Developer
                     </h2>
 
@@ -456,13 +450,13 @@ const GuideMenu = (props) => {
                             <div id={energyCircles['r1']}  className={energyCircles.ring}></div>
                     </div>
 
-                    <div className={styles.gamerProfileContent}>
+                    <div className={guideMenuStyles.gamerProfileContent}>
 
 
-                        <div className={styles.backgroundOverlay}></div>
+                        <div className={guideMenuStyles.backgroundOverlay}></div>
 
-                            <div className={styles.contentContainer}>
-                                <div id={styles['toolsSection']} className={styles.blockContent}>
+                            <div className={guideMenuStyles.contentContainer}>
+                                <div id={guideMenuStyles['toolsSection']} className={guideMenuStyles.blockContent}>
                                     <h3>Tools</h3>
 
                                     <p>
@@ -478,7 +472,7 @@ const GuideMenu = (props) => {
                                     </ul>
                                 </div>
 
-                                <div id={styles['inspirationSection']} className={styles.blockContent}>
+                                <div id={guideMenuStyles['inspirationSection']} className={guideMenuStyles.blockContent}>
                                     <h3>Inspiration</h3>
 
                                     <p>
@@ -486,19 +480,19 @@ const GuideMenu = (props) => {
                                         dashboard come to life!
                                     </p>
 
-                                    <ul className={styles.gamecaseList}>
-                                        <li id={styles['website_gamecase']} className={styles.gameCaseListItem}>
-                                            <a className={styles.gamecaseAnchorTag} href="https://rowlandbrown.com/xbox-360-dashboard-ui-blades" target="_blank" rel="noopener noreferrer">
+                                    <ul className={guideMenuStyles.gamecaseList}>
+                                        <li id={guideMenuStyles['website_gamecase']} className={guideMenuStyles.gameCaseListItem}>
+                                            <a className={guideMenuStyles.gamecaseAnchorTag} href="https://rowlandbrown.com/xbox-360-dashboard-ui-blades" target="_blank" rel="noopener noreferrer">
                                             Rowland Brown Website
                                             </a>
                                         </li>
-                                        <li id={styles['behance_gamecase']}>      
-                                            <a className={styles.gamecaseAnchorTag} href="https://www.behance.net/rowbrown" target="_blank" rel="noopener noreferrer">
+                                        <li id={guideMenuStyles['behance_gamecase']}>      
+                                            <a className={guideMenuStyles.gamecaseAnchorTag} href="https://www.behance.net/rowbrown" target="_blank" rel="noopener noreferrer">
                                             Rowland Brown Behance
                                             </a>
                                         </li>
-                                        <li id={styles['styleguide_gamecase']}>
-                                            <a className={styles.gamecaseAnchorTag} href="https://digiex.net/threads/xbox-360-style-guide.15469/" target="_blank" rel="noopener noreferrer">
+                                        <li id={guideMenuStyles['styleguide_gamecase']}>
+                                            <a className={guideMenuStyles.gamecaseAnchorTag} href="https://digiex.net/threads/xbox-360-style-guide.15469/" target="_blank" rel="noopener noreferrer">
                                             Xbox 360 Style Guide
                                             </a>
                                         </li>
@@ -506,8 +500,8 @@ const GuideMenu = (props) => {
                                 </div>
 
                             </div>
-                            <div className={styles.contentContainer}>
-                                <div id={styles['profileCard']} className={styles.blockContent}>
+                            <div className={guideMenuStyles.contentContainer}>
+                                <div id={guideMenuStyles['profileCard']} className={guideMenuStyles.blockContent}>
                                     <div id={profileCardStyles['guideProfile']} className={profileCardStyles.profileContainer} >
                                         <p>Epoxi117</p>
                                         <div className={profileCardStyles.profileImgContainer} >
@@ -531,7 +525,7 @@ const GuideMenu = (props) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div  id={styles['profileDetails']} className={styles.blockContent}>
+                                <div  id={guideMenuStyles['profileDetails']} className={guideMenuStyles.blockContent}>
                                 
                                         <p>United States</p>
                                         <p>https://gilbert-p.github.io/</p>
@@ -544,21 +538,21 @@ const GuideMenu = (props) => {
                 </div>
 
 
-                <div className={styles.communitySectionContainer} ref={communityDashboardPageRef}>
+                <div className={guideMenuStyles.communitySectionContainer} ref={communityDashboardPageRef}>
                 {/* <div className={styles.backgroundOverlay}></div> */}
 
 
-                    <h2 className={styles.aboutDashboardTitle}>
+                    <h2 className={guideMenuStyles.aboutDashboardTitle}>
                         Community
                     </h2>
 
-                    <div className={styles.communityNavFolders}>
-                        <div id={styles[communityCategory === 'messages' ? 'navFolderMessages' : '']}></div>
-                        <div id={styles[communityCategory === 'friends' ? 'navFolderFriends' : '']}></div>
-                        <div id={styles[communityCategory === 'players' ? 'navFolderPlayers' : '']}></div>
+                    <div className={guideMenuStyles.communityNavFolders}>
+                        <div id={guideMenuStyles[communityCategory === 'messages' ? 'navFolderMessages' : '']}></div>
+                        <div id={guideMenuStyles[communityCategory === 'friends' ? 'navFolderFriends' : '']}></div>
+                        <div id={guideMenuStyles[communityCategory === 'players' ? 'navFolderPlayers' : '']}></div>
                     </div>
 
-                    <div id={styles[styles.communityMessageSection]} className={`${communityCategory === "messages" ? styles.communitySectionContent: transitionStyles.removeDisplay}`}>
+                    <div id={guideMenuStyles[guideMenuStyles.communityMessageSection]} className={`${communityCategory === "messages" ? guideMenuStyles.communitySectionContent: transitionStyles.removeDisplay}`}>
                         
                         <div className={itemSelectStyles.communityPageItemContainer}>
                         <div className={itemSelectStyles.groupContainer}>
@@ -629,7 +623,7 @@ const GuideMenu = (props) => {
 
                     </div>
 
-                    <div className={`${communityCategory === "friends" ? styles.communitySectionContent: transitionStyles.removeDisplay}`}>
+                    <div className={`${communityCategory === "friends" ? guideMenuStyles.communitySectionContent: transitionStyles.removeDisplay}`}>
                         
                         <div className={itemSelectStyles.communityPageItemContainer}>
                             <div className={itemSelectStyles.groupContainer}>
@@ -734,7 +728,7 @@ const GuideMenu = (props) => {
 
                     </div>
 
-                    <div className={`${communityCategory === "players" ? styles.communitySectionContent: transitionStyles.removeDisplay}`}>
+                    <div className={`${communityCategory === "players" ? guideMenuStyles.communitySectionContent: transitionStyles.removeDisplay}`}>
                         
                         <div className={itemSelectStyles.communityPageItemContainer}>
                             <div className={itemSelectStyles.playerGroupContainer}>
@@ -908,20 +902,20 @@ const GuideMenu = (props) => {
 
                     </div>
 
-                    <nav className={styles.communityNavButtons}>
-                            <div id={styles[communityCategory === 'messages' ? '' : 'messageButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('messages'))}}
-                             className={styles.navButton}>
-                                <div id={styles['communityMessageIcon']} className={`${communityCategory === 'messages' ? styles.iconContainerActive : styles.iconContainerInactive}`}></div>
+                    <nav className={guideMenuStyles.communityNavButtons}>
+                            <div id={guideMenuStyles[communityCategory === 'messages' ? '' : 'messageButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('messages'))}}
+                             className={guideMenuStyles.navButton}>
+                                <div id={guideMenuStyles['communityMessageIcon']} className={`${communityCategory === 'messages' ? guideMenuStyles.iconContainerActive : guideMenuStyles.iconContainerInactive}`}></div>
                                 <p>Messages</p>
                             </div>
-                            <div id={styles[communityCategory === 'friends' ? '' : 'friendsButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('friends'))}}
-                             className={styles.navButton}>
-                                <div id={styles['communityFriendsIcon']} className={`${communityCategory === 'friends' ? styles.iconContainerActive : styles.iconContainerInactive}`}></div>
+                            <div id={guideMenuStyles[communityCategory === 'friends' ? '' : 'friendsButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('friends'))}}
+                             className={guideMenuStyles.navButton}>
+                                <div id={guideMenuStyles['communityFriendsIcon']} className={`${communityCategory === 'friends' ? guideMenuStyles.iconContainerActive : guideMenuStyles.iconContainerInactive}`}></div>
                                 <p>Friends</p>
                             </div>
-                            <div id={styles[communityCategory === 'players' ? '' : 'playerButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('players'))}}
-                             className={styles.navButton}>
-                                <div id={styles['communityPlayersIcon']} className={`${communityCategory === 'players' ? styles.iconContainerActive : styles.iconContainerInactive}`}></div>
+                            <div id={guideMenuStyles[communityCategory === 'players' ? '' : 'playerButtonInactive']} onClick={()=>{dispatch(navigateCommunityCategory('players'))}}
+                             className={guideMenuStyles.navButton}>
+                                <div id={guideMenuStyles['communityPlayersIcon']} className={`${communityCategory === 'players' ? guideMenuStyles.iconContainerActive : guideMenuStyles.iconContainerInactive}`}></div>
                                 <p>Players</p>
                             </div>
                     </nav>

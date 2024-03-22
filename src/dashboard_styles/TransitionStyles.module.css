@@ -8,6 +8,7 @@
     opacity: 0 !important;
     transition: opacity 0 linear;
     pointer-events: none;
+    
 }
 
 .removeDisplay {

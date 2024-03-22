@@ -25,14 +25,19 @@ export default function useDashboardBladeAnimation() {
   const slideBackAnimate = useRef(null);
   const gamesTabAnimate = useRef(null);
   const gamesTabReverse = useRef(null);
+  const mediaTabAnimate = useRef(null);
+  const mediaTabReverse = useRef(null);
 
 
   const l_gamesBladeActiveRef = useRef(null);
+  const l_mediaBladeActiveRef = useRef(null);
 
   const l_marketplaceBladeInactiveRef = useRef(null);
   const l_xboxliveBladeInactiveRef = useRef(null);
+  const l_gamesBladeInactiveRef = useRef(null);
   const r_mediaBladeInactiveRef = useRef(null);
   const r_systemBladeInactiveRef = useRef(null);
+
 
   
 
@@ -65,15 +70,16 @@ export default function useDashboardBladeAnimation() {
     dashboardUnderlayReveal.current = gsap.timeline().to(dashboardUnderlayRef.current, {opacity: 1, delay:0.7, duration: 0.5}).pause();
 
 
-    centerBlockExpandAnimate.current = gsap.timeline({defaults:{ease: "elastic.out(1,0.3)"}});
+    // centerBlockExpandAnimate.current = gsap.timeline({defaults:{ease: "elastic.out(1,0.3)"}});
 
-    centerBlockExpandAnimate.current = gsap.timeline().to(centerBlockExpandRef.current, {height: '350px', opacity: 1, duration: 0.1})
-                                                      .to(centerBlockExpandRef.current, {height: '350px', opacity: 0.9, duration: 0.1})
-                                                      .to(centerBlockExpandRef.current, {height: '630px', opacity: 0.7, duration: 0.33})
-                                                      .to(centerBlockExpandRef.current, {height: '600px', opacity: 0.5, duration: 0.33})
-                                                      .to(centerBlockExpandRef.current, {height: '600px', opacity: 0, duration: 0.1})
-                                                      .to(centerBlockExpandRef.current, {height: '350px', opacity: 0, duration: 0.1})
-                                                      .pause();
+    centerBlockExpandAnimate.current = gsap.timeline()
+                                        .to(centerBlockExpandRef.current, {height: '350px', opacity: 1, duration: 0.1})
+                                        .to(centerBlockExpandRef.current, {height: '350px', opacity: 0.9, duration: 0.1})
+                                        .to(centerBlockExpandRef.current, {height: '630px', opacity: 0.7, duration: 0.33})
+                                        .to(centerBlockExpandRef.current, {height: '600px', opacity: 0.5, duration: 0.33})
+                                        .to(centerBlockExpandRef.current, {height: '600px', opacity: 0, duration: 0.1})
+                                        .to(centerBlockExpandRef.current, {height: '350px', opacity: 0, duration: 0.1})
+                                        .pause();
 
     slideAwayAnimate.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out", opacity: 1}});
     
@@ -90,22 +96,43 @@ export default function useDashboardBladeAnimation() {
 
     gamesTabAnimate.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out",}});
 
-    gamesTabAnimate.current.to(l_gamesBladeActiveRef.current, {x: '-5px', ease: "bounce.out", duration: 0.1 }, "<")
+    gamesTabAnimate.current
                            .to(l_marketplaceBladeInactiveRef.current, {x: '-=200px', opacity: 0})
                            .to(l_xboxliveBladeInactiveRef.current, {x: '-200px', opacity: 0}, "<")
                            .to(r_mediaBladeInactiveRef.current, {x: '+200px', opacity: 0}, "<")
                            .to(r_systemBladeInactiveRef.current, {x: '+200px', opacity: 0}, "<")
+                           .to(l_gamesBladeActiveRef.current, {x: '-=20px', ease: "power2.out", duration: 0.5, delay:0.1 }, "<")
                            .pause();
 
     gamesTabReverse.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out",}});
 
-    gamesTabReverse.current.to(l_gamesBladeActiveRef.current, {x: '0px', ease: "bounce.out", duration: 0.1 }, "<")
-                            .to(l_marketplaceBladeInactiveRef.current, {x: '+=200px', opacity: 1})
-                            .to(l_xboxliveBladeInactiveRef.current, {x: '+=200px', opacity: 1}, "<")
-                            .to(r_mediaBladeInactiveRef.current, {x: '-=200px', opacity: 1}, "<")
-                            .to(r_systemBladeInactiveRef.current, {x: '-=200px', opacity: 1}, "<")
-                            .pause();
 
+    gamesTabReverse.current.to(l_marketplaceBladeInactiveRef.current, {x: '+=200px', opacity: 1})
+                           .to(l_xboxliveBladeInactiveRef.current, {x: '+=200px', opacity: 1}, "<")
+                           .to(r_mediaBladeInactiveRef.current, {x: '-=200px', opacity: 1}, "<")
+                           .to(r_systemBladeInactiveRef.current, {x: '-=200px', opacity: 1}, "<")
+                           .to(l_gamesBladeActiveRef.current, {x: '+=20px', ease: "power2.out", duration: 0.5 }, "<")
+                           .pause();
+
+    mediaTabAnimate.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out",}});
+
+    mediaTabAnimate.current
+                          .to(l_marketplaceBladeInactiveRef.current, {x: '-=200px', opacity: 0})
+                          .to(l_xboxliveBladeInactiveRef.current, {x: '-=200px', opacity: 0}, "<")
+                          .to(l_gamesBladeInactiveRef.current, {x: '-=200px', opacity: 0}, "<")
+                          .to(r_systemBladeInactiveRef.current, {x: '+=200px', opacity: 0}, "<")
+                          .to(l_mediaBladeActiveRef.current, {x: '-=20px', ease: "power2.out", duration: 0.5, delay:0.1 }, "<")
+                          .pause();
+
+    mediaTabReverse.current = gsap.timeline({defaults:{duration: 0.5, ease: "power2.out",}});
+
+
+    mediaTabReverse.current.to(l_marketplaceBladeInactiveRef.current, {x: '+=200px', opacity: 1})
+                          .to(l_xboxliveBladeInactiveRef.current, {x: '+=200px', opacity: 1}, "<")
+                          .to(l_gamesBladeInactiveRef.current, {x: '+=200px', opacity: 1}, "<")
+                          .to(r_systemBladeInactiveRef.current, {x: '-=200px', opacity: 1}, "<")
+                          .to(l_mediaBladeActiveRef.current, {x: '+=20px', ease: "power2.out", duration: 0.5 }, "<")
+                          .pause();
 
 
   };
@@ -177,6 +204,14 @@ export default function useDashboardBladeAnimation() {
     gamesTabReverse.current.play();
   }
 
+  const mediaSubPageAnimation = () => {
+    mediaTabAnimate.current.play();
+  }
+
+  const mediaSubPageExit = () => {
+    mediaTabReverse.current.play();
+  }
+
   // Keyboard event listeners
   useLayoutEffect(() => {
     const navigateUsingKeys = (e) => {
@@ -212,11 +247,17 @@ export default function useDashboardBladeAnimation() {
   return { mountRef, 
     centerBlockExpandRef, 
     dashboardUnderlayRef, 
+
     leftBladeGroupRef,
     rightBladeGroupRef,
+
     l_marketplaceBladeInactiveRef,
     l_xboxliveBladeInactiveRef,
+    l_gamesBladeInactiveRef,
+    
+    l_mediaBladeActiveRef,
     l_gamesBladeActiveRef,
+
     r_mediaBladeInactiveRef,
     r_systemBladeInactiveRef,
 
@@ -225,5 +266,8 @@ export default function useDashboardBladeAnimation() {
     slideBladesOut,
     slideBladesBack,
     gamesSubPageAnimation,
-    gamesSubPageExit,};
+    gamesSubPageExit,
+    mediaSubPageAnimation,
+    mediaSubPageExit,
+  };
 };

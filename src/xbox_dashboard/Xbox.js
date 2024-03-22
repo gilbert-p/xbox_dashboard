@@ -230,6 +230,8 @@ const Xbox = (props) => {
                                  rightBladeGroupRef={bladeContainerRef['rightBladeGroupRef']}
                                  l_marketplaceBladeInactiveRef={bladeContainerRef['l_marketplaceBladeInactiveRef']}
                                  l_xboxliveBladeInactiveRef={bladeContainerRef['l_xboxliveBladeInactiveRef']}
+                                 l_gamesBladeInactiveRef={bladeContainerRef['l_gamesBladeInactiveRef']}
+                                 l_mediaBladeActiveRef={bladeContainerRef['l_mediaBladeActiveRef']}
                                  l_gamesBladeActiveRef={bladeContainerRef['l_gamesBladeActiveRef']}
                                  r_mediaBladeInactiveRef={bladeContainerRef['r_mediaBladeInactiveRef']}
                                  r_systemBladeInactiveRef={bladeContainerRef['r_systemBladeInactiveRef']} />} 
@@ -282,8 +284,8 @@ const Xbox = (props) => {
                         {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
                         <MarketplacePage slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
                         <XboxlivePage    foreignExtendGamerProfile={foreignExtendGamerProfile} foreignExtendCommunityPage={foreignExtendCommunityPage}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
-                        <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={bladeContainerRef['gamesSubPageExit']}gamesSubPageAnimation={bladeContainerRef['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
-                        <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={bladeContainerRef['gamesSubPageExit']} gamesSubPageAnimation={bladeContainerRef['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} mediaSubPageExit={bladeContainerRef['mediaSubPageExit']} mediaSubPageAnimation={bladeContainerRef['mediaSubPageAnimation']} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
 
                         {/* Buttons, System Tray */}

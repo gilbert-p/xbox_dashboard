@@ -3,17 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectContextIndex } from '../xboxSlice';
 
 import { updateSelectionHighlight,
-    selectHighlightState,
-    selectMarketplaceMenuIndex,
-    navigateMarketplaceMenu,
+         selectHighlightState,
+
     navigateMarketplaceSpotlightMenu,
     selectMarketplaceSpotlightMenuIndex,
     selectMarketplaceSpotlightCategoryTitle,
-    updateMarketplaceSpotlightCategory,
 
 
     updateNavigateContext,
-    selectSubMenuNavActive,
     selectNavigationContext,
     selectGamesMenuIndex,
     navigateGamesMenu,

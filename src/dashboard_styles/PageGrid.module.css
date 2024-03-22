@@ -307,3 +307,13 @@
         margin-right: 20px;
     }
 }
+
+.musicPlayerControls {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: inherit;
+    border-radius: var(--border_radius);
+    box-shadow: inset 0px 0px 8px 1px rgba(0, 0, 0, 0.701);
+}

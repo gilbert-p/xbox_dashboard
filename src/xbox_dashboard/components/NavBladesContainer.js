@@ -27,7 +27,11 @@ const NavBladesContainer = (props) => {
             rightBladeGroupRef,
             l_marketplaceBladeInactiveRef,
             l_xboxliveBladeInactiveRef,
+            l_gamesBladeInactiveRef,
+
             l_gamesBladeActiveRef,
+            l_mediaBladeActiveRef,
+            
             r_mediaBladeInactiveRef,
             r_systemBladeInactiveRef, } = props;
     
@@ -123,13 +127,13 @@ const NavBladesContainer = (props) => {
 
                         </div>
 
-                        <div ref={l_gamesBladeActiveRef} id={bladeStyles["gamesBlade-left"]} className={`${bladeStyles.blade} `} >
+                        <div  id={bladeStyles["gamesBlade-left"]} className={`${bladeStyles.blade} `} >
 
-                            <div id={bladeStyles["gamesBladeLeftInactive"]}  className={`${bladeStyles.bladeImgContainer} ${current_context_index <= 2 ? transitionStyles.instantTransparent : bladeStyles[`${'leftBladeInactive' + selected_theme}`]}`} >
+                            <div ref={l_gamesBladeInactiveRef} id={bladeStyles["gamesBladeLeftInactive"]}  className={`${bladeStyles.bladeImgContainer} ${current_context_index <= 2 ? transitionStyles.instantTransparent : bladeStyles[`${'leftBladeInactive' + selected_theme}`]}`} >
                                 <h3 id={bladeStyles["gamesTitleInactiveLeft"]} className={`${bladeStyles.bladeTitle}`}>games</h3> 
                             </div>
                             
-                            <div id={bladeStyles["gamesBladeLeftActive"]}  className={`${bladeStyles.bladeImgContainer} ${current_context_index === 2 ? bladeStyles[`${'gamesActiveBlade' + selected_theme}`] : transitionStyles.instantTransparent}`} >
+                            <div ref={l_gamesBladeActiveRef} id={bladeStyles["gamesBladeLeftActive"]}  className={`${bladeStyles.bladeImgContainer} ${current_context_index === 2 ? bladeStyles[`${'gamesActiveBlade' + selected_theme}`] : transitionStyles.instantTransparent}`} >
                                 <h3 id={bladeStyles["gamesTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 2 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>games</h3>
                             </div>
 
@@ -142,7 +146,7 @@ const NavBladesContainer = (props) => {
                             </div>
                             
 
-                            <div id={bladeStyles["mediaBladeLeftActive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index === 3 ? bladeStyles[`${'mediaActiveBlade' + selected_theme}`] : transitionStyles.instantTransparent}`} >
+                            <div ref={l_mediaBladeActiveRef} id={bladeStyles["mediaBladeLeftActive"]} className={`${bladeStyles.bladeImgContainer} ${current_context_index === 3 ? bladeStyles[`${'mediaActiveBlade' + selected_theme}`] : transitionStyles.instantTransparent}`} >
                                 <h3 id={bladeStyles["mediaTitle"]} className={`${bladeStyles.bladeTitle} ${current_context_index !== 3 ? transitionStyles.instantTransparent :  ''}`} ref={bladeRef}>media</h3>
                             </div>
 

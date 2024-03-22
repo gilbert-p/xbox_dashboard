@@ -63,6 +63,7 @@
 #guideSelectList {
     max-width: 400px;
     margin-top: 10px;
+    height: 100px;
 }
 
 #guideSelectTheme {
@@ -132,6 +133,7 @@
     font-size: var(--text-link-size);
     margin-left: 20px;
 }
+
 
 #guideInnerListContainer .listItem > p {
     left: 10px;
