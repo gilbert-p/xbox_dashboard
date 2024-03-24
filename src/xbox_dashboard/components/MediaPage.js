@@ -4,17 +4,20 @@ import { selectContextIndex } from '../xboxSlice';
 
 
 import {
- updateSelectionHighlight,
  selectHighlightState,
-
  selectMediaMenuIndex,
- navigateMediaMenu,
  selectNavigationContext,
- navigateMarketplaceSpotlightMenu,
  selectMarketplaceSpotlightMenuIndex,
  selectMarketplaceSpotlightCategoryTitle,
 
+ navigateMediaMenu,
+ navigateMarketplaceSpotlightMenu,
+ navigateGuideMusicPlayer,
+
+ updateSelectionHighlight,
  updateNavigateContext,
+ updateGuideMusicPlayerHighlight,
+
 
  selectMusicState,
  selectCurrentSong,
@@ -37,6 +40,8 @@ import gamesStyles from '../../dashboard_styles/Games.module.css';
 import descriptionContentStyles from "../../dashboard_styles/DescriptionContainer.module.css";
 
 import guideMenuStyles from '../../dashboard_styles/GuideMenu.module.css';
+
+import musicPlayerStyles from '../../dashboard_styles/MediaMusicPlayer.module.css';
 
 import styles from "../../dashboard_styles/Dashboard.module.css";
 
@@ -89,6 +94,20 @@ const XboxlivePage = (props) => {
             return "";
         }
     };
+
+    const playSong = () => {
+
+
+  };
+
+  const playNextSong = async () => {
+
+
+  };
+
+  const playPrevSong = async () => {
+
+  };
 
             //Spotlight nav
             const spotlightMenuIndex = useSelector(selectMarketplaceSpotlightMenuIndex);
@@ -227,7 +246,7 @@ const XboxlivePage = (props) => {
         <div id={mediaStyles["mediaContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 3 ? 1 : -1}`}}>
 
 
-            <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 3 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
+            <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${navigationContext == "main_menu_media" ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
 
 
             <div id={mediaStyles["media"]} className={`${pageGridStyles.mainGridContent} ${navigationContext == "main_menu_media" ? '' : transitionStyles.removeDisplay}`}>
@@ -329,99 +348,93 @@ const XboxlivePage = (props) => {
             </div>
 
             <div id={pageGridStyles["mediaMusicPlayer"]} className={`${pageGridStyles.mainGridContent} ${navigationContext == "media_music_player" ? '' : transitionStyles.removeDisplay}`}>
-                <div className={pageGridStyles.playedGamesContentView}>
+                <div className={pageGridStyles.mediaMusicPlayerContentView}>
                   <h2>Music Player</h2>
 
                   <div className={pageGridStyles.musicPlayerControls}>
-                    <div className={guideMenuStyles.guideMusicPlayer}>
-                                        <div className={guideMenuStyles.musicPlayerActionButtonContainer}>
-                                            <button id={guideMenuStyles["playButton"]} className={guideMenuStyles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                                onMouseEnter={()=>{}} onMouseLeave={()=>{}}>
-                                                <span className={!isSongPlaying ? guideMenuStyles.guidePlayIcon : guideMenuStyles.guidePauseIcon }></span>
-                                                <span className={`${isGuideMusicPlayerHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
-                                            </button>
-                                            <button id={guideMenuStyles["previousSelectionButton"]} className={guideMenuStyles.skewmorphButton} onClick={()=>{ utilitySound.current.playButtonSound()}}
-                                                onMouseEnter={()=>{}} onMouseLeave={()=>{}}>
-                                                <span className={`${isGuideMusicPlayerHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
-                                            </button>
-                                            <button id={guideMenuStyles["nextSelectionButton"]} className={guideMenuStyles.skewmorphButton} onClick={()=>{ utilitySound.current.playButtonSound()}}
-                                                onMouseEnter={()=>{}} onMouseLeave={()=>{}}>
-                                                <span className={`${isGuideMusicPlayerHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
-                                            </button>
-                                            <button id={guideMenuStyles["arrowSelectionButton"]} className={guideMenuStyles.skewmorphButton} 
-                                                onMouseEnter={()=>{}} onMouseLeave={()=>{}}>
-                                                <span className={guideMenuStyles.arrowPoint}></span>
-                                                {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 3 ? transitionStyles.removeDisplay : ""}`}></span> */}
-                                            </button>
-                                            <button id={guideMenuStyles["soundAdjustButton"]} className={guideMenuStyles.skewmorphButton} 
-                                            onMouseEnter={()=>{}} onMouseLeave={()=>{}}>
-                                                {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 4 ? transitionStyles.removeDisplay : ""}`}></span> */}
-                                            </button>
-                                        </div>
-                                        <div className={guideMenuStyles.musicPlayerSongTitleContainer}
-                                            onMouseEnter={()=>{}} onMouseLeave={()=>{}}>
-                                            {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.backgroundHighlightGlow} ${guideMusicPlayerIndex !== 5 ? transitionStyles.removeDisplay : ""}`}></span> */}
-                                            <p className={guideMenuStyles.guideMusicPlayerTitle}>{`${isSongPlaying ? currentSongTitle : 'Select Music'}`}</p>
-                                        </div>
+                    <div className={musicPlayerStyles.guideMusicPlayer}>
+                        <div className={musicPlayerStyles.musicPlayerActionButtonContainer}>
+                            <button id={musicPlayerStyles["playButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playSong(); utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(0));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
+                                <span className={!isSongPlaying ? musicPlayerStyles.guidePlayIcon : musicPlayerStyles.guidePauseIcon }></span>
+                                <span className={`${isGuideMusicPlayerHighlightActive && musicPlayerStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
+                            </button>
+                            <button id={musicPlayerStyles["previousSelectionButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playPrevSong(); utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(1));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
+                                <span className={`${isGuideMusicPlayerHighlightActive && musicPlayerStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
+                            </button>
+                            <button id={musicPlayerStyles["nextSelectionButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playNextSong(); utilitySound.current.playButtonSound()}}
+                                onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(2));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
+                                <span className={`${isGuideMusicPlayerHighlightActive && musicPlayerStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
+                            </button>
+                            <button id={musicPlayerStyles["arrowSelectionButton"]} className={musicPlayerStyles.skewmorphButton} 
+                                onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(3));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
+                                <span className={musicPlayerStyles.arrowPoint}></span>
+                                {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 3 ? transitionStyles.removeDisplay : ""}`}></span> */}
+                            </button>
+                            <button id={musicPlayerStyles["soundAdjustButton"]} className={musicPlayerStyles.skewmorphButton} 
+                            onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(4));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
+                                {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 4 ? transitionStyles.removeDisplay : ""}`}></span> */}
+                            </button>
                         </div>
+                        <div className={musicPlayerStyles.musicPlayerSongTitleContainer}
+                            onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(5));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
+                            {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.backgroundHighlightGlow} ${guideMusicPlayerIndex !== 5 ? transitionStyles.removeDisplay : ""}`}></span> */}
+                            <p className={musicPlayerStyles.guideMusicPlayerTitle}>{`${isSongPlaying ? currentSongTitle : 'Select Music'}`}</p>
+                        </div>
+
+                        <div className={musicPlayerStyles.musicVisualContainer}>
+                          <p className={musicPlayerStyles.artistTitle}>Album</p>
+                          <p className={musicPlayerStyles.songTitle}>Artist</p>
+
+                          <div className={musicPlayerStyles.musicVisualizer}></div>
+
+                        </div>
+                    </div>
+
+
                   </div>
 
-                  <div className={pageGridStyles.scrollList}>
+                  <div className={pageGridStyles.musicSelectionList}>
                     <h3> Current Playlist </h3>
-                    <div className={`${itemSelectStyles.gamesPlayedListContainer} ${itemSelectStyles.selectItemListContainer}`}>
-                        <div id={itemSelectStyles["gamesPlayedHighlightContainer"]}   className={itemSelectStyles.boxInsetHighlightContainer}>
-                            <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
-                            </div>
-                            <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
-                            </div>
-                        </div>
+                    <div className={`${itemSelectStyles.gamesPlayedListContainer} ${itemSelectStyles.musicPlayerSelectItemList}`}>
                         <div  className={itemSelectStyles.innerListContainer} > 
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <p>
                                     {spotlightContent[spotlightCategoryTitle].listItems['0'].title}
                                 </p>
                                 
-                                <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
                                 <p>
                                         
                                 {spotlightContent[spotlightCategoryTitle].listItems['1'].title}
                                 </p>
                                 
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <div className={itemSelectStyles.listItemBorder}></div>
+                                
+                                
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
                                 <p>
                                     
                                 {spotlightContent[spotlightCategoryTitle].listItems['2'].title}
                                 </p>
                                 
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <div className={itemSelectStyles.listItemBorder}></div>
+                                
+                                
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
                                 <p>
                                     
                                 {spotlightContent[spotlightCategoryTitle].listItems['3'].title}
                                 </p>
                                 
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <div className={itemSelectStyles.listItemBorder}></div>
+                                
+                                
                             </div>
                         </div>
                     </div>

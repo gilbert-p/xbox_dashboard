@@ -1,0 +1,345 @@
+.skewmorphButton {
+    position: relative;
+    width: 125px;
+    height: inherit;
+    background-color: initial;
+    border: none;
+    margin-right: 5px;
+    outline: 1px solid rgba(43, 43, 43, 0.515);
+    border-radius: 8px;
+/* 
+    &:after {
+        content: "";
+        position: absolute;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        background: linear-gradient(0deg, rgba(255,255,255,0) 45%, rgba(255, 255, 255, 0.59) 87%);
+    } */
+
+    .buttonIcon {
+        position: absolute;
+        display: inline-block;
+        left: 0;
+        top: 0;
+        height: 100%;
+    }
+}
+
+.skewmorphButton:hover {
+    cursor: pointer;
+}
+
+.skewmorphButtonHighlight {
+    position: absolute;
+    width: 88%;
+    height: 60%;
+    left: 8px;
+    top: 10px;
+    /* background: linear-gradient(180deg, rgba(255,255,255,0.4) 23%, rgba(255, 255, 255, 0) 100%); */
+    /* transition: opacity var(--transition_duration); */
+}
+
+.guideMusicPlayer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: calc(0);
+    top: 10px;
+    margin-left: 10px;
+    /* padding-right: 10px; */
+    width: 400px;
+    height: 95px;
+    border-radius: 8px;
+    /* box-shadow: inset 0px 0px 4px 0px black; */
+}
+
+.musicPlayerActionButtonContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 35px;
+    padding-top: 5px;
+
+    > .skewmorphButton .skewmorphButtonHighlight {
+        width: 83%;
+    }
+
+
+    #playButton {
+        width: 70px;
+        height: inherit;
+        /* background-image: url("../assets/icons/64x64_icons/music_player_button_black.png"); */
+        /* background-size: cover; */
+        padding:0;
+        display: flex;
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            border-radius: inherit;
+            background: linear-gradient(0deg, rgba(255,255,255,0) 45%, rgba(255, 255, 255, 0.404) 87%);
+        }
+
+
+
+        .guidePlayIcon {
+            position: absolute;
+            width: 21px;
+            height: inherit;
+            left: 54%;
+            transform: translateX(-50%);
+            background-image: url("../assets/icons/64x64_icons/guide_play_icon_black.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: 0px 3px;
+            /* outline: 2px solid red; */
+        }
+
+        .guidePauseIcon {
+            position: absolute;
+            width: 19px;
+            height: 45px;
+            left: 34px;
+            top: 13px;
+            background-image: url("../assets/icons/64x64_icons/guide_pause_icon_black.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+    }
+    #previousSelectionButton {
+        width: 70px;
+        height: inherit;
+        /* background-image: url("../assets/images/guide_music_secondary_button.png"); */
+        background-size: cover;
+        padding:0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 20px;
+            left: 35%;
+            top: 20%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #000000dd;
+            z-index: -1;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 60%;
+            top: 20%;
+            transform: translate(-50%);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 18px solid #000000dd;
+            z-index: -1;
+        }
+    }
+    #nextSelectionButton {
+        width: 70px;
+        height: inherit;
+        /* background-image: url("../assets/images/guide_music_secondary_button.png"); */
+        background-size: cover;
+        padding:0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 20px;
+            left: 60%;
+            top: 20%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #000000dd;
+            z-index: -1;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 35%;
+            top: 20%;
+            transform: translate(-50%);
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 18px solid #000000dd;
+            z-index: -1;
+        }
+    }
+    #arrowSelectionButton {
+        width: 70px;
+        height: inherit;
+        /* background-image: url("../assets/images/guide_music_secondary_button.png"); */
+        background-size: cover;
+        padding:0;
+
+        &:before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 15px;
+            left: 37%;
+            top: 35%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #000000dd;
+            z-index: -1;
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 15px;
+            left: 55%;
+            top: 30%;
+            transform: translate(-50%);
+            border-radius: 1px;
+            background-color: #000000dd;
+            z-index: -1;
+        }
+
+        > span::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 37%;
+            top: 15%;
+            transform: translate(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 10px solid #000000dd;
+            z-index: -1;
+        }
+
+        > span::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: 55%;
+            top: 55%;
+            transform: translate(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #000000dd;
+            z-index: -1;
+        }
+    }
+
+    #soundAdjustButton {
+        width: 70px;
+        height: inherit;
+        /* background-image: url("../assets/images/guide_music_secondary_button.png"); */
+        background-size: cover;
+        padding:0;
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: inherit;
+            left: 55%;
+            top: 15%;
+            transform: translate(-50%);
+            background: url("../assets/icons/64x64_icons/volume_adjust_icon_black.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            z-index: -1;
+        }
+    }
+
+}
+
+.musicPlayerSongTitleContainer {
+    width: 375px;
+    height: 25px;
+    border: 1px solid black;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: inset 0px 0px 4px 0px white;
+    cursor: pointer;
+
+    > p {
+        position: relative;
+        font-size: calc(var(--meta-panel-header));
+        padding-left: 10px;
+        top: -2px;
+    }
+
+}
+
+.guideMusicPlayerTitle {
+
+}
+
+.backgroundHighlightGlow {
+    position: absolute;
+    width: 95%;
+    height: 33px;
+    left: 50%;
+    transform: translate(-50%, -5%);
+    top: 57px;
+    background: radial-gradient(ellipse, rgba(255,255,255,1) 30%, rgba(174,200,159,1) 65%);
+    border-radius:50%;
+    z-index: -1;
+}
+
+
+
+
+.musicVisualContainer {
+    position: relative;
+    width: calc(100% - 20px);
+    min-height: 415px;
+    margin-top: 10px;
+    border-radius: 8px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 120px;
+        border-radius: 8px 8px 0 0;
+        background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgb(0, 0, 0) 25%);
+        z-index: -1;
+        
+    }
+
+    > p {
+        color: white;
+        margin-left: 15px;
+        margin-top: 15px;
+    }
+
+    .artistTitle{
+        font-size: 20px
+    }
+
+    .songTitle {
+        font-size: var(--screen-heading-size);
+        font-weight: bold;
+    }
+}
+
+.musicVisualizer {
+    position: absolute;
+    width: 100%;
+    height: 335px;
+    background: url("../assets/images/music_visualizer_temp.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: -100px 0;
+    z-index: -2;
+}
