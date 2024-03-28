@@ -38,6 +38,7 @@
   --text-body-size: 18px;
   --meta-panel-header: 20px;
   --legend-text-size: 16px;
+  --large-title: 26px;
 
 
 
@@ -49,6 +50,7 @@
   --white-text: white;
   --black-text: rgba(15, 15, 15, 0.9);
   --inactive-title: rgba(68, 68, 68, 0.9);
+  --listItem-border-gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 1) 50%, rgba(255, 255, 255, 0) 100%);
 
 
 

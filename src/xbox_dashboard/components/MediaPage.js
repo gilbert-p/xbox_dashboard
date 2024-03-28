@@ -415,6 +415,7 @@ const XboxlivePage = (props) => {
                             controls={true}
                             width="100%"
                             height="350px"
+                            muted={true}
                           />
 
 
