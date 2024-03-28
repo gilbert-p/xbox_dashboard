@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContextIndex } from '../xboxSlice';
 
@@ -52,12 +52,29 @@ import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.c
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 
+//Placeholder images
+
+import image1 from '../../assets/media_pics_placeholder/astronaut.jpg';
+import image2 from '../../assets/media_pics_placeholder/distant_city.jpg';
+import image3 from '../../assets/media_pics_placeholder/dog_van_gogh.jpg';
+import image4 from '../../assets/media_pics_placeholder/fish_tank.jpg';
+import image5 from '../../assets/media_pics_placeholder/geometric_cat.jpg';
+import image6 from '../../assets/media_pics_placeholder/geometry_titan.jpg';
+import image7 from '../../assets/media_pics_placeholder/hexagon_art.jpg';
+import image8 from '../../assets/media_pics_placeholder/keanu_spartan.jpg';
+import image9 from '../../assets/media_pics_placeholder/planet_rings.jpg';
+
+import windowsMediaVisual from "../../assets/video/windows_media_compressed_40.flv";
+
+
 const XboxlivePage = (props) => {
 
     const dispatch = useDispatch();
 
 
     const utilitySound = useUtilitySfx();
+
+    const playerRef = useRef(null);
 
 
     //Menu state variables
@@ -95,9 +112,10 @@ const XboxlivePage = (props) => {
         }
     };
 
-    const playSong = () => {
-
-
+  const playSong = () => {
+    if (playerRef.current) {
+      playerRef.current.seekTo(10, "seconds");
+    }
   };
 
   const playNextSong = async () => {
@@ -108,6 +126,16 @@ const XboxlivePage = (props) => {
   const playPrevSong = async () => {
 
   };
+
+  const revealUnderlayMedia = (state) => {
+    switch(state) {
+      case 'main_menu_media':
+        return true; 
+      case 'media_videos':
+        return true;
+      case 'default': return false;
+    }
+  }
 
             //Spotlight nav
             const spotlightMenuIndex = useSelector(selectMarketplaceSpotlightMenuIndex);
@@ -246,7 +274,7 @@ const XboxlivePage = (props) => {
         <div id={mediaStyles["mediaContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 3 ? 1 : -1}`}}>
 
 
-            <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${navigationContext == "main_menu_media" ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
+            <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${revealUnderlayMedia(navigationContext) ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
 
 
             <div id={mediaStyles["media"]} className={`${pageGridStyles.mainGridContent} ${navigationContext == "main_menu_media" ? '' : transitionStyles.removeDisplay}`}>
@@ -278,14 +306,12 @@ const XboxlivePage = (props) => {
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 1)}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 2)}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 3)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(mediaMenuIndex, 4)}`}></div>
                             </div>
                             <div className={itemSelectStyles.boxInsetHighlightMaskBottom}>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 0)}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 1)}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 2)}`}></div>
                                 <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 3)}`}></div>
-                                <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(mediaMenuIndex, 4)}`}></div>
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >
@@ -299,7 +325,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_pictures')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMediaMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.camera_icon}`}></span>
                                 <p>
@@ -309,7 +335,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_videos')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMediaMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.film_icon}`}></span>
                                 <p>
@@ -319,16 +345,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                onMouseEnter={()=>{dispatch(navigateMediaMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
-                                <span className={`${itemSelectStyles.listIcon} ${iconLibrary.media_center_icon}`}></span>
-                                <p>
 
-                                    Media Center
-                                </p>
-                                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
-                                <div className={itemSelectStyles.listItemBorder}></div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -387,7 +404,8 @@ const XboxlivePage = (props) => {
                           <p className={musicPlayerStyles.artistTitle}>Album</p>
                           <p className={musicPlayerStyles.songTitle}>Artist</p>
 
-                          <div className={musicPlayerStyles.musicVisualizer}></div>
+                          {/* <div className={musicPlayerStyles.musicVisualizer}></div> */}
+
 
                         </div>
                     </div>
@@ -446,6 +464,176 @@ const XboxlivePage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.gamesSubNavButton}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                            <p>Back</p>
+                            <div className={pageGridStyles.bControllerImg}></div>
+                        </div>
+                </div>
+
+            </div>
+
+            <div id={pageGridStyles["mediaPictures"]}  className={`${pageGridStyles.mainGridContent} ${navigationContext == "media_pictures" ? '' : transitionStyles.removeDisplay}`}>
+                <div className={pageGridStyles.mediaPicturesContentView}>
+                  <h2>Pictures</h2>
+
+                  <div className={pageGridStyles.scrollList}>
+                    <div id={itemSelectStyles["picturesSelectContainer"]} className={itemSelectStyles.groupContainer}>
+                                  <div className={itemSelectStyles.flexInnerContainer}>
+                                      <p className={itemSelectStyles.gamerTag}>Play Slideshow</p>
+                                  </div>
+                    </div>
+                  </div>
+
+
+
+                  <div className={pageGridStyles.mediaPicturesView}>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>astronaut.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image1} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>distant_city.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image2} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>dog_van_gogh.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image3} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>fish_tank.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image4} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>geometric_cat.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image5} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>geometry_titan.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image6} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>hexagon_art.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image7} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>keanu_spartan.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image8} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>planet_rings.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image9} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>astronaut.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image1} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>distant_city.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image2} alt="Portrait astronaut" />
+                    </div>
+                    <div className={pageGridStyles.mediaPictureContainer}>
+                      <p>dog_van_gogh.jpg</p>
+                      <img className={pageGridStyles.mediaPictureImg} src={image3} alt="Portrait astronaut" />
+                    </div>
+
+
+                  </div>
+
+
+
+
+
+                </div>
+                <div className={pageGridStyles.gamesSubNavButton}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                            <p>Back</p>
+                            <div className={pageGridStyles.bControllerImg}></div>
+                        </div>
+                </div>
+
+            </div>
+
+            <div id={pageGridStyles["mediaVideos"]} className={`${pageGridStyles.mediaLayoutContent} ${navigationContext == "media_videos" ? '' : transitionStyles.removeDisplay}`}>
+                <div className={pageGridStyles.mediaContentView}>
+                  <h2>Videos</h2>
+
+                    <div className={pageGridStyles.scrollList}>
+                        <div className={`${itemSelectStyles.gamesPlayedListContainer} ${itemSelectStyles.selectItemListContainer}`}>
+                            <div id={itemSelectStyles["gamesPlayedHighlightContainer"]}   className={itemSelectStyles.boxInsetHighlightContainer}>
+                                <div className={itemSelectStyles.boxInsetHighlightMaskTop}>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
+                                </div>
+                                <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
+                                    <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
+                                </div>
+                            </div>
+                            <div  className={itemSelectStyles.innerListContainer} > 
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                    onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
+                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <p>
+                                        {spotlightContent[spotlightCategoryTitle].listItems['0'].title}
+                                    </p>
+                                    
+                                    <div className={itemSelectStyles.listItemBorder}></div>
+                                </div>
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                    onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
+                                    <p>
+                                            
+                                    {spotlightContent[spotlightCategoryTitle].listItems['1'].title}
+                                    </p>
+                                    
+                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <div className={itemSelectStyles.listItemBorder}></div>
+                                </div>
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                    onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
+                                    <p>
+                                        
+                                    {spotlightContent[spotlightCategoryTitle].listItems['2'].title}
+                                    </p>
+                                    
+                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <div className={itemSelectStyles.listItemBorder}></div>
+                                </div>
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                    onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
+                                    <p>
+                                        
+                                    {spotlightContent[spotlightCategoryTitle].listItems['3'].title}
+                                    </p>
+                                    
+                                    <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
+                                    <div className={itemSelectStyles.listItemBorder}></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className={pageGridStyles.gamesDescriptionBox}>
+                        <div className={pageGridStyles.gamesdDescriptionTitleContainer}>
+                          <h3 className={pageGridStyles.gamesDescriptionTitle}>
+                          {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
+                          </h3>
+                        </div>
+                        <div className={pageGridStyles.gamesDescriptionContent}>
+                            <p>
+                            {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div className={pageGridStyles.mediaSubNavButton}>
                         <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>

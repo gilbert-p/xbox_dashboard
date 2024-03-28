@@ -31,6 +31,10 @@ import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.c
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 
+//Temp spotlight images
+import halo3Cover from '../../assets/temp_media/halo_3_boxshot.jpg';
+
+
 const MarketplacePage = (props) => {
 
     const { slideBladesAway, slideBladesBack } = props;
@@ -320,12 +324,16 @@ const MarketplacePage = (props) => {
                               <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
                                   onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
                                   <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
-                                  <p>
-                                      {spotlightContent[spotlightCategoryTitle].listItems['0'].title}
-                                  </p>
-                                  <p className={itemSelectStyles.listItemSubText}>
-                                      {spotlightContent[spotlightCategoryTitle].listItems['0'].subtitle}
-                                  </p>
+                                    
+                                    <img src={halo3Cover} alt="Halo 3 Cover Art Boxshot" />
+                                    <div className={itemSelectStyles.titleInfoStack}>
+                                      <p>
+                                        {spotlightContent[spotlightCategoryTitle].listItems['0'].title}
+                                      </p>
+                                      <p className={itemSelectStyles.listItemSubText}>
+                                          {spotlightContent[spotlightCategoryTitle].listItems['0'].subtitle}
+                                      </p>
+                                    </div>
                                   <div className={itemSelectStyles.listItemBorder}></div>
                               </div>
                               <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
