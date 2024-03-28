@@ -2,6 +2,9 @@ import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContextIndex } from '../xboxSlice';
 
+import ReactPlayer from 'react-player'
+
+
 
 import {
  selectHighlightState,
@@ -405,6 +408,14 @@ const XboxlivePage = (props) => {
                           <p className={musicPlayerStyles.songTitle}>Artist</p>
 
                           {/* <div className={musicPlayerStyles.musicVisualizer}></div> */}
+
+                          <ReactPlayer
+                            ref={playerRef}
+                            url={windowsMediaVisual}
+                            controls={true}
+                            width="100%"
+                            height="350px"
+                          />
 
 
                         </div>

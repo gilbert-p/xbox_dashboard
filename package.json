@@ -12,6 +12,7 @@
     "lodash-es": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-player": "^2.15.1",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
     "react-swipeable": "^6.2.0",
