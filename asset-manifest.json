@@ -1,8 +1,22 @@
 {
   "files": {
     "main.css": "/xbox_dashboard/static/css/main.cbe5db3f.css",
-    "main.js": "/xbox_dashboard/static/js/main.90879cf5.js",
-    "static/js/845.af6d7921.chunk.js": "/xbox_dashboard/static/js/845.af6d7921.chunk.js",
+    "main.js": "/xbox_dashboard/static/js/main.6fc75b26.js",
+    "static/js/845.bdb3e3be.chunk.js": "/xbox_dashboard/static/js/845.bdb3e3be.chunk.js",
+    "reactPlayerYouTube.js": "/xbox_dashboard/static/js/reactPlayerYouTube.edcbc49c.chunk.js",
+    "reactPlayerSoundCloud.js": "/xbox_dashboard/static/js/reactPlayerSoundCloud.02d0935d.chunk.js",
+    "reactPlayerVimeo.js": "/xbox_dashboard/static/js/reactPlayerVimeo.051913c0.chunk.js",
+    "reactPlayerMux.js": "/xbox_dashboard/static/js/reactPlayerMux.13975b10.chunk.js",
+    "reactPlayerFacebook.js": "/xbox_dashboard/static/js/reactPlayerFacebook.9b3c6636.chunk.js",
+    "reactPlayerStreamable.js": "/xbox_dashboard/static/js/reactPlayerStreamable.4cca8b86.chunk.js",
+    "reactPlayerWistia.js": "/xbox_dashboard/static/js/reactPlayerWistia.6cf031fc.chunk.js",
+    "reactPlayerTwitch.js": "/xbox_dashboard/static/js/reactPlayerTwitch.b2d7d346.chunk.js",
+    "reactPlayerDailyMotion.js": "/xbox_dashboard/static/js/reactPlayerDailyMotion.054d4127.chunk.js",
+    "reactPlayerMixcloud.js": "/xbox_dashboard/static/js/reactPlayerMixcloud.84fa5d3c.chunk.js",
+    "reactPlayerVidyard.js": "/xbox_dashboard/static/js/reactPlayerVidyard.33cbf1cb.chunk.js",
+    "reactPlayerKaltura.js": "/xbox_dashboard/static/js/reactPlayerKaltura.9f74c0c5.chunk.js",
+    "reactPlayerFilePlayer.js": "/xbox_dashboard/static/js/reactPlayerFilePlayer.2934022e.chunk.js",
+    "reactPlayerPreview.js": "/xbox_dashboard/static/js/reactPlayerPreview.d6404baa.chunk.js",
     "static/media/windows_media_compressed_40.flv": "/xbox_dashboard/static/media/windows_media_compressed_40.593bc06d5bb2cb849de0.flv",
     "static/media/music_playlist.mp3": "/xbox_dashboard/static/media/music_playlist.a60ef102d7aaa01f9b7f.mp3",
     "static/media/guideline_background.png": "/xbox_dashboard/static/media/guideline_background.faa00892688118aa8581.png",
@@ -70,11 +84,25 @@
     "static/media/xbox_home_logo.svg": "/xbox_dashboard/static/media/xbox_home_logo.4e5d9899771c920862b7.svg",
     "index.html": "/xbox_dashboard/index.html",
     "main.cbe5db3f.css.map": "/xbox_dashboard/static/css/main.cbe5db3f.css.map",
-    "main.90879cf5.js.map": "/xbox_dashboard/static/js/main.90879cf5.js.map",
-    "845.af6d7921.chunk.js.map": "/xbox_dashboard/static/js/845.af6d7921.chunk.js.map"
+    "main.6fc75b26.js.map": "/xbox_dashboard/static/js/main.6fc75b26.js.map",
+    "845.bdb3e3be.chunk.js.map": "/xbox_dashboard/static/js/845.bdb3e3be.chunk.js.map",
+    "reactPlayerYouTube.edcbc49c.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerYouTube.edcbc49c.chunk.js.map",
+    "reactPlayerSoundCloud.02d0935d.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerSoundCloud.02d0935d.chunk.js.map",
+    "reactPlayerVimeo.051913c0.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerVimeo.051913c0.chunk.js.map",
+    "reactPlayerMux.13975b10.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerMux.13975b10.chunk.js.map",
+    "reactPlayerFacebook.9b3c6636.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerFacebook.9b3c6636.chunk.js.map",
+    "reactPlayerStreamable.4cca8b86.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerStreamable.4cca8b86.chunk.js.map",
+    "reactPlayerWistia.6cf031fc.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerWistia.6cf031fc.chunk.js.map",
+    "reactPlayerTwitch.b2d7d346.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerTwitch.b2d7d346.chunk.js.map",
+    "reactPlayerDailyMotion.054d4127.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerDailyMotion.054d4127.chunk.js.map",
+    "reactPlayerMixcloud.84fa5d3c.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerMixcloud.84fa5d3c.chunk.js.map",
+    "reactPlayerVidyard.33cbf1cb.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerVidyard.33cbf1cb.chunk.js.map",
+    "reactPlayerKaltura.9f74c0c5.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerKaltura.9f74c0c5.chunk.js.map",
+    "reactPlayerFilePlayer.2934022e.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerFilePlayer.2934022e.chunk.js.map",
+    "reactPlayerPreview.d6404baa.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerPreview.d6404baa.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cbe5db3f.css",
-    "static/js/main.90879cf5.js"
+    "static/js/main.6fc75b26.js"
   ]
 }
