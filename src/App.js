@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
 import XboxDashboard from "./xbox_dashboard/Xbox";
 import './App.css';
 import dashboard_style from './dashboard_styles/Dashboard.module.css';
-import backgroundStyle from "./site_styling/DashboardBackground.module.css";
 
 import { debounce } from 'lodash';
 import { gsap } from 'gsap';

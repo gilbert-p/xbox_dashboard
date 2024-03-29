@@ -454,15 +454,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
 @media only screen and (max-width: 765px) {
     .appContainer {
         transform: translate(-51%,-50%) scale(calc(var(--scaling)));

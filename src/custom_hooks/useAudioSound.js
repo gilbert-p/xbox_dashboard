@@ -14,5 +14,4 @@ export default function useAudioSound(audio_file, sprite) {
 
 
     return audioRef;
-
 }
