@@ -1,19 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContextIndex } from '../xboxSlice';
-
-import {
-    updateSelectionHighlight,
-    selectHighlightState,
-    selectMarketplaceMenuIndex,
-    navigateMarketplaceMenu,
-    navigateMarketplaceSpotlightMenu,
-    selectMarketplaceSpotlightMenuIndex,
-    selectMarketplaceSpotlightCategoryTitle,
-    updateMarketplaceSpotlightCategory,
-
-    updateNavigateContext,
-    selectNavigationContext,
-} from '../menuSlice';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
@@ -41,6 +26,23 @@ import digitalph33rGuideThumbnail from '../../assets/temp_media/digitalPh33r_gui
 import xboxWelcomeThumbnail from '../../assets/temp_media/xbox360_welcome_thumbnail.png';
 import massEffectLaunchThumbnail from '../../assets/temp_media/mass_effect_trailer_thumbnail.png';
 import haloThemepackThumbnail from '../../assets/temp_media/halo_themepack_thumbnail.png';
+
+import { selectContextIndex } from '../../redux_slices/xboxSlice';
+
+import {
+  updateSelectionHighlight,
+  selectHighlightState,
+  selectMarketplaceMenuIndex,
+  navigateMarketplaceMenu,
+  navigateMarketplaceSpotlightMenu,
+  selectMarketplaceSpotlightMenuIndex,
+  selectMarketplaceSpotlightCategoryTitle,
+  updateMarketplaceSpotlightCategory,
+
+  updateNavigateContext,
+  selectNavigationContext,
+} from '../../redux_slices/menuSlice';
+
 
 
 

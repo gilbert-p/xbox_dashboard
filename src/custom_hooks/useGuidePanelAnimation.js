@@ -10,9 +10,9 @@ import { selectGuideActiveState,
         
          selectSubMenuNavActive,
          selectNavigationContext,
-         updateNavigateContext } from '../xbox_dashboard/menuSlice';
+         updateNavigateContext } from '../redux_slices/menuSlice';
 
-import { selectContextIndex } from '../xbox_dashboard/xboxSlice';
+import { selectContextIndex } from '../redux_slices/xboxSlice';
 
 export default function useGuidePanelAnimation() {
     const revealGuideMenu = useRef(null);

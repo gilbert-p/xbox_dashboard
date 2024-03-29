@@ -1,6 +1,16 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
+import profileCardStyles from '../../dashboard_styles/ProfileCard.module.css';
+import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
+import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
+import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
+import gamesStyles from '../../dashboard_styles/Games.module.css';
+import descriptionContentStyles from "../../dashboard_styles/DescriptionContainer.module.css";
+import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
+import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
+
 import {
     updateSelectionHighlight,
     selectHighlightState,
@@ -13,21 +23,9 @@ import {
     selectNavigationContext,
     selectGamesMenuIndex,
     navigateGamesMenu,
-} from '../menuSlice';
+} from '../../redux_slices/menuSlice';
 
-import { updateDiscTrayState } from '../xboxSlice';
-
-import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
-import profileCardStyles from '../../dashboard_styles/ProfileCard.module.css';
-import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
-import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
-import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
-import gamesStyles from '../../dashboard_styles/Games.module.css';
-import descriptionContentStyles from "../../dashboard_styles/DescriptionContainer.module.css";
-
-import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-
-import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
+import { updateDiscTrayState } from '../../redux_slices/xboxSlice';
 
 
 const GamesPage = (props) => {

@@ -1,18 +1,19 @@
 import React, {useCallback, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from "lodash";
+
+import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
+import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
+
 import { 
     selectContextIndex,
     selectTransitionState,
-} from '../xboxSlice';
+} from '../../redux_slices/xboxSlice';
 
 import {
     selectShowBladeState,
     selectThemeSelection,
-    } from '../menuSlice';
-
-import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
+    } from '../../redux_slices/menuSlice';
 
 const NavBladesContainer = (props) => {
 

@@ -46,7 +46,7 @@ import {
     selectCommunityCategory,
     navigateCommunityCategory,
     }
-from '../menuSlice';
+from '../../redux_slices/menuSlice';
 
 import musicPlaylist from "../../assets/audio/music_playlist.mp3";
 

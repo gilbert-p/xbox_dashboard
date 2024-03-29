@@ -1,12 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { updateSelectionHighlight,
-    selectSystemMainMenuIndex,
-    navigateSystemMenu,
-} from '../menuSlice';
-
-
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
@@ -14,6 +8,11 @@ import systemStyles from '../../dashboard_styles/System.module.css';
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
+
+import { updateSelectionHighlight,
+    selectSystemMainMenuIndex,
+    navigateSystemMenu,
+} from '../../redux_slices/menuSlice';
 
 
 const XboxlivePage = (props) => {

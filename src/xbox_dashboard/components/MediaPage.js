@@ -14,6 +14,20 @@ import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 import ReactPlayer from 'react-player';
 
+//Placeholder images
+
+import image1 from '../../assets/media_pics_placeholder/astronaut.jpg';
+import image2 from '../../assets/media_pics_placeholder/distant_city.jpg';
+import image3 from '../../assets/media_pics_placeholder/dog_van_gogh.jpg';
+import image4 from '../../assets/media_pics_placeholder/fish_tank.jpg';
+import image5 from '../../assets/media_pics_placeholder/geometric_cat.jpg';
+import image6 from '../../assets/media_pics_placeholder/geometry_titan.jpg';
+import image7 from '../../assets/media_pics_placeholder/hexagon_art.jpg';
+import image8 from '../../assets/media_pics_placeholder/keanu_spartan.jpg';
+import image9 from '../../assets/media_pics_placeholder/planet_rings.jpg';
+
+import windowsMediaVisual from "../../assets/video/windows_media_compressed_40.flv";
+
 import {
   selectHighlightState,
   selectMediaMenuIndex,
@@ -33,23 +47,8 @@ import {
   selectCurrentSong,
   selectGuideMusicPlayerIndex,
   selectGuideMusicPlayerHighlight,
- } from '../menuSlice';
- import { updateDiscTrayState } from '../xboxSlice';
-
-
-//Placeholder images
-
-import image1 from '../../assets/media_pics_placeholder/astronaut.jpg';
-import image2 from '../../assets/media_pics_placeholder/distant_city.jpg';
-import image3 from '../../assets/media_pics_placeholder/dog_van_gogh.jpg';
-import image4 from '../../assets/media_pics_placeholder/fish_tank.jpg';
-import image5 from '../../assets/media_pics_placeholder/geometric_cat.jpg';
-import image6 from '../../assets/media_pics_placeholder/geometry_titan.jpg';
-import image7 from '../../assets/media_pics_placeholder/hexagon_art.jpg';
-import image8 from '../../assets/media_pics_placeholder/keanu_spartan.jpg';
-import image9 from '../../assets/media_pics_placeholder/planet_rings.jpg';
-
-import windowsMediaVisual from "../../assets/video/windows_media_compressed_40.flv";
+ } from '../../redux_slices/menuSlice';
+ import { updateDiscTrayState } from '../../redux_slices/xboxSlice';
 
 
 const XboxlivePage = (props) => {

@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, useCallback , useLayoutEffect  } from 'rea
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from 'lodash';
 import { gsap } from 'gsap';
-import { navigateTo, selectContextIndex, selectTransitionState, bladeTransitionAsync } from '../xbox_dashboard/xboxSlice';
-import { updateNavigateContext } from "../xbox_dashboard/menuSlice";
+import { navigateTo, selectContextIndex, selectTransitionState, bladeTransitionAsync } from '../redux_slices/xboxSlice';
+import { updateNavigateContext } from "../redux_slices/menuSlice";
 
 export default function useDashboardBladeAnimation() {
   // Refs

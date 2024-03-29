@@ -1,4 +1,4 @@
-import React, {useRef, useMemo, useState, forwardRef, useLayoutEffect, useCallback } from 'react';
+import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
@@ -8,11 +8,11 @@ import useGuidePanelAnimation from '../custom_hooks/useGuidePanelAnimation';
 
 import { selectContextIndex,
          isTrayDisplayed,}
-from './xboxSlice';
+from '../redux_slices/xboxSlice';
 
 import { updateGuideActiveState,
          updateNavigateContext,} 
-from './menuSlice';
+from '../redux_slices/menuSlice';
 
 
 import GuideMenu from "./components/GuideMenu";

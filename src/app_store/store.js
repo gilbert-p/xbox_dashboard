@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import xboxReducer from '../xbox_dashboard/xboxSlice';
-import menuReducer from '../xbox_dashboard/menuSlice';
+import xboxReducer from '../redux_slices/xboxSlice';
+import menuReducer from '../redux_slices/menuSlice';
 import thunk from 'redux-thunk'; 
 
 

@@ -1,4 +1,3 @@
-import { React, useRef, useLayoutEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
@@ -17,7 +16,7 @@ import { updateSelectionHighlight,
     navigateXboxliveMenu,
     selectXboxliveMenuIndex,
     navigateCommunityCategory,
-} from '../menuSlice';
+} from '../../redux_slices/menuSlice';
 
 const XboxlivePage = (props) => {
 
