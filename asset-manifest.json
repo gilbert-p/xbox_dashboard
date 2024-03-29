@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/xbox_dashboard/static/css/main.cbe5db3f.css",
-    "main.js": "/xbox_dashboard/static/js/main.6fc75b26.js",
+    "main.css": "/xbox_dashboard/static/css/main.06178c62.css",
+    "main.js": "/xbox_dashboard/static/js/main.a2dad63a.js",
     "static/js/845.bdb3e3be.chunk.js": "/xbox_dashboard/static/js/845.bdb3e3be.chunk.js",
     "reactPlayerYouTube.js": "/xbox_dashboard/static/js/reactPlayerYouTube.edcbc49c.chunk.js",
     "reactPlayerSoundCloud.js": "/xbox_dashboard/static/js/reactPlayerSoundCloud.02d0935d.chunk.js",
@@ -33,12 +33,24 @@
     "static/media/geometric_cat.jpg": "/xbox_dashboard/static/media/geometric_cat.88099c64ece14fd8eab1.jpg",
     "static/media/geometry_titan.jpg": "/xbox_dashboard/static/media/geometry_titan.a8721dffabfacaf6e766.jpg",
     "static/media/time_magazine_bill_gates.png": "/xbox_dashboard/static/media/time_magazine_bill_gates.f78ae0002a043384b622.png",
+    "static/media/halo3_believe_thumbnail.png": "/xbox_dashboard/static/media/halo3_believe_thumbnail.b8056909a70ec0fbde2a.png",
+    "static/media/bioshock_coverart.png": "/xbox_dashboard/static/media/bioshock_coverart.4298f364949f8c840f1b.png",
     "static/media/marketplace_arcade.png": "/xbox_dashboard/static/media/marketplace_arcade.c58bb7c245b5d591a4f2.png",
+    "static/media/deadrising_coverart.png": "/xbox_dashboard/static/media/deadrising_coverart.4c69223946fbf2df5216.png",
+    "static/media/devilmaycry4_coverart.png": "/xbox_dashboard/static/media/devilmaycry4_coverart.4e06e95d2bc2b9556451.png",
+    "static/media/left4dead_coverart.png": "/xbox_dashboard/static/media/left4dead_coverart.38ec6b7c5c00ac074514.png",
+    "static/media/crackdown_coverart.png": "/xbox_dashboard/static/media/crackdown_coverart.57e73bd31ee965ec9175.png",
     "static/media/keanu_spartan.jpg": "/xbox_dashboard/static/media/keanu_spartan.63de442b02e84ec50f0a.jpg",
+    "static/media/halo_themepack_thumbnail.png": "/xbox_dashboard/static/media/halo_themepack_thumbnail.8dc872cb6808a827b40d.png",
+    "static/media/assassins_creed_coverart.png": "/xbox_dashboard/static/media/assassins_creed_coverart.effa5fe058e956ecd30f.png",
     "static/media/wmpSkinsImg.png": "/xbox_dashboard/static/media/wmpSkinsImg.f35ff611fd0998f1af2a.png",
     "static/media/hexagon_art.jpg": "/xbox_dashboard/static/media/hexagon_art.3dd4cb2ef69b4d7ef12e.jpg",
     "static/media/Xbox Live Logo_vector.png": "/xbox_dashboard/static/media/Xbox Live Logo_vector.c4eb735445949ed30ebc.png",
+    "static/media/digitalPh33r_guide_to_machinima_thumbnail.png": "/xbox_dashboard/static/media/digitalPh33r_guide_to_machinima_thumbnail.a3d6c5877a2d0f6b9706.png",
     "static/media/utility_sfx.mp3": "/xbox_dashboard/static/media/utility_sfx.dd44f2d11851bb6868f4.mp3",
+    "static/media/gtaiv_cover.png": "/xbox_dashboard/static/media/gtaiv_cover.c99fd4fb0d75b20df3c1.png",
+    "static/media/xbox360_welcome_thumbnail.png": "/xbox_dashboard/static/media/xbox360_welcome_thumbnail.d0206dd316ba51662f5d.png",
+    "static/media/bomberman_live_coverart.png": "/xbox_dashboard/static/media/bomberman_live_coverart.b6f9190f0b94fb699d17.png",
     "static/media/guideline_menu_top_border.png": "/xbox_dashboard/static/media/guideline_menu_top_border.faf76015c71d6af549fc.png",
     "static/media/guideline_menu_bottom_border.png": "/xbox_dashboard/static/media/guideline_menu_bottom_border.b56dab2cbab4e47e89f8.png",
     "static/media/glass-overlay.png": "/xbox_dashboard/static/media/glass-overlay.86d08c9d73bbcd58f1ef.png",
@@ -46,6 +58,7 @@
     "static/media/xbox360_logo.png": "/xbox_dashboard/static/media/xbox360_logo.686b4dee8d43ff126199.png",
     "static/media/Convmd.ttf": "/xbox_dashboard/static/media/Convmd.820dccc32affe93b3294.ttf",
     "static/media/Themes and Gamerpictures.png": "/xbox_dashboard/static/media/Themes and Gamerpictures.27fbbca7e8a0e25c97c0.png",
+    "static/media/easkate_cover.png": "/xbox_dashboard/static/media/easkate_cover.1def3b5b4f94fba391f6.png",
     "static/media/Conv.ttf": "/xbox_dashboard/static/media/Conv.94f20dbf0b6105efa695.ttf",
     "static/media/Convb.ttf": "/xbox_dashboard/static/media/Convb.12ac65dff3fd1f5b17ea.ttf",
     "static/media/carbon_games_active_blade.png": "/xbox_dashboard/static/media/carbon_games_active_blade.9af4cab873c0b0ce7af9.png",
@@ -72,6 +85,7 @@
     "static/media/inactive_blade_left.png": "/xbox_dashboard/static/media/inactive_blade_left.ab9eb3b44a4792e0e56b.png",
     "static/media/inactive_blade_right.png": "/xbox_dashboard/static/media/inactive_blade_right.3343f4ec569a27f30b81.png",
     "static/media/guide_menu_nameplate.png": "/xbox_dashboard/static/media/guide_menu_nameplate.48295c82e6728f988d1c.png",
+    "static/media/mass_effect_trailer_thumbnail.png": "/xbox_dashboard/static/media/mass_effect_trailer_thumbnail.29294a6a952ef6cfc289.png",
     "static/media/game_demos.png": "/xbox_dashboard/static/media/game_demos.3de8e7c183d30b45f6b7.png",
     "static/media/film_reel.png": "/xbox_dashboard/static/media/film_reel.47cee7c6072f45f7f523.png",
     "static/media/woman_megaphone.png": "/xbox_dashboard/static/media/woman_megaphone.f57342fab6100026fba4.png",
@@ -83,8 +97,8 @@
     "static/media/xbox_360_guide_logo.png": "/xbox_dashboard/static/media/xbox_360_guide_logo.57c9651d7c16b2760ac6.png",
     "static/media/xbox_home_logo.svg": "/xbox_dashboard/static/media/xbox_home_logo.4e5d9899771c920862b7.svg",
     "index.html": "/xbox_dashboard/index.html",
-    "main.cbe5db3f.css.map": "/xbox_dashboard/static/css/main.cbe5db3f.css.map",
-    "main.6fc75b26.js.map": "/xbox_dashboard/static/js/main.6fc75b26.js.map",
+    "main.06178c62.css.map": "/xbox_dashboard/static/css/main.06178c62.css.map",
+    "main.a2dad63a.js.map": "/xbox_dashboard/static/js/main.a2dad63a.js.map",
     "845.bdb3e3be.chunk.js.map": "/xbox_dashboard/static/js/845.bdb3e3be.chunk.js.map",
     "reactPlayerYouTube.edcbc49c.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerYouTube.edcbc49c.chunk.js.map",
     "reactPlayerSoundCloud.02d0935d.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerSoundCloud.02d0935d.chunk.js.map",
@@ -102,7 +116,7 @@
     "reactPlayerPreview.d6404baa.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerPreview.d6404baa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cbe5db3f.css",
-    "static/js/main.6fc75b26.js"
+    "static/css/main.06178c62.css",
+    "static/js/main.a2dad63a.js"
   ]
 }
