@@ -70,7 +70,6 @@ export default function useDashboardBladeAnimation() {
     dashboardUnderlayReveal.current = gsap.timeline().to(dashboardUnderlayRef.current, {opacity: 1, delay:0.7, duration: 0.5}).pause();
 
 
-    // centerBlockExpandAnimate.current = gsap.timeline({defaults:{ease: "elastic.out(1,0.3)"}});
 
     centerBlockExpandAnimate.current = gsap.timeline()
                                         .to(centerBlockExpandRef.current, {height: '350px', opacity: 1, duration: 0.1})

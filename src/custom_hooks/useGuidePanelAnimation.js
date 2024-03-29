@@ -197,7 +197,6 @@ export default function useGuidePanelAnimation() {
     //Action Functions
     const showGuideSettings = () => {
 
-        // console.log("navigation context", menuNavigationContext);
         switch(menuNavigationContext) {
             case mainMenuMap[current_context_index]:
                 //in guide panel and in initial half open panel
@@ -277,8 +276,6 @@ export default function useGuidePanelAnimation() {
             console.log("extendRevealContent called");
             console.log(extended_state);
 
-            // dispatch(updateExternalPanelNavigate(true));
-
             switch(extended_state) {
                 case 'foreign_gamer_profile':
                     dispatch(updateShowBlades(false));
@@ -298,7 +295,6 @@ export default function useGuidePanelAnimation() {
         else {
             guideSettingsAnimate.current.reverse();
 
-            // dispatch(updateExternalPanelNavigate(false));
 
             switch(extended_state) {
                 case 'foreign_gamer_profile':
