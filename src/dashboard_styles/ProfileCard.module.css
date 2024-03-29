@@ -49,8 +49,6 @@
 
 .profileImgContainer {
     grid-area: profile-img;
-
-    /* background-color: violet; */
 }
 
 .profileIcon {
@@ -93,18 +91,15 @@
     "zone-title . . zone-status";
     margin-right: 15px;
     margin-top: 5px;
-    /* height: 90%; */
     font-size: var(--text-link-size);
 }
 
 .repTitle {
     grid-area: rep-title;
-    /* background-color: lightgrey; */
 }
 
 .reputationStars {
     grid-area: rep-stars;
-    /* background-color: darkgray; */
     display: flex;
     justify-content: flex-end;
 
@@ -112,24 +107,20 @@
 
 .gamerscoreTitle {
     grid-area: gamerscore-title;
-    /* background-color: lightsteelblue; */
 }
 
 .gamerscoreValue {
     grid-area: gamerscore-value;
-    /* background-color: darkkhaki; */
     text-align: right;
     margin-right: 9px;
 }
 
 .zoneTitle {
     grid-area: zone-title;
-    /* background-color: lightyellow; */
 }
 
 .zoneStatus {
     grid-area: zone-status;
-    /* background-color: darkturquoise; */
     text-align: right;
     margin-right: 10px;
 }
@@ -148,7 +139,6 @@
 
 .selectItemListContainer {
     width: 100%;
-    /* background-color: lavender; */
 }
 
 .innerListContainer {
@@ -165,7 +155,6 @@
     display: flex;
     width: 100%;
     height: 50%;
-    /* background-color: chocolate; */
 }
 
 .listItem:after {
@@ -199,9 +188,6 @@
     position: relative;
     display: inline-block;
     padding-left: 15px;
-    /* background-color: lavender; */
-    /* top: 50%;
-    transform: translateY(-50%); */
 }
 
 .innerListContainer > div:nth-child(1) > p {
@@ -265,7 +251,6 @@
     grid-template-columns: 100%;
     grid-template-rows: repeat(auto-fit, minmax(175px, 175px));
     row-gap: 20px;
-    /* background-color: slategrey; */
 }
 
 

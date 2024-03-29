@@ -1,37 +1,5 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContextIndex } from '../xboxSlice';
-
-import ReactPlayer from 'react-player'
-
-
-
-import {
- selectHighlightState,
- selectMediaMenuIndex,
- selectNavigationContext,
- selectMarketplaceSpotlightMenuIndex,
- selectMarketplaceSpotlightCategoryTitle,
-
- navigateMediaMenu,
- navigateMarketplaceSpotlightMenu,
- navigateGuideMusicPlayer,
-
- updateSelectionHighlight,
- updateNavigateContext,
- updateGuideMusicPlayerHighlight,
-
-
- selectMusicState,
- selectCurrentSong,
- selectSongIndex,
- selectMusiclistSize,
- selectGuideMusicPlayerIndex,
- selectGuideMusicPlayerHighlight,
-} from '../menuSlice';
-
-import { updateDiscTrayState } from '../xboxSlice';
-
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import profileCardStyles from '../../dashboard_styles/ProfileCard.module.css';
@@ -41,18 +9,32 @@ import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import mediaStyles from '../../dashboard_styles/Media.module.css';
 import gamesStyles from '../../dashboard_styles/Games.module.css';
 import descriptionContentStyles from "../../dashboard_styles/DescriptionContainer.module.css";
-
-import guideMenuStyles from '../../dashboard_styles/GuideMenu.module.css';
-
 import musicPlayerStyles from '../../dashboard_styles/MediaMusicPlayer.module.css';
-
-import styles from "../../dashboard_styles/Dashboard.module.css";
-
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-
-import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
-
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
+import ReactPlayer from 'react-player';
+
+import {
+  selectHighlightState,
+  selectMediaMenuIndex,
+  selectNavigationContext,
+  selectMarketplaceSpotlightMenuIndex,
+  selectMarketplaceSpotlightCategoryTitle,
+ 
+  navigateMediaMenu,
+  navigateMarketplaceSpotlightMenu,
+  navigateGuideMusicPlayer,
+ 
+  updateSelectionHighlight,
+  updateNavigateContext,
+  updateGuideMusicPlayerHighlight,
+ 
+  selectMusicState,
+  selectCurrentSong,
+  selectGuideMusicPlayerIndex,
+  selectGuideMusicPlayerHighlight,
+ } from '../menuSlice';
+ import { updateDiscTrayState } from '../xboxSlice';
 
 
 //Placeholder images
@@ -92,8 +74,6 @@ const XboxlivePage = (props) => {
     
     const isSongPlaying = useSelector(selectMusicState);
     const currentSongTitle = useSelector(selectCurrentSong);
-    const currentSongIndex = useSelector(selectSongIndex);
-    const musicListSizeMax = useSelector(selectMusiclistSize);
     //...TODO
 
     const { current_context_index,

@@ -1,8 +1,8 @@
-import { useRef, memo} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectContextIndex } from '../xboxSlice';
 
-import { updateSelectionHighlight,
+import {
+    updateSelectionHighlight,
     selectHighlightState,
     selectMarketplaceMenuIndex,
     navigateMarketplaceMenu,
@@ -11,9 +11,7 @@ import { updateSelectionHighlight,
     selectMarketplaceSpotlightCategoryTitle,
     updateMarketplaceSpotlightCategory,
 
-
     updateNavigateContext,
-    selectSubMenuNavActive,
     selectNavigationContext,
 } from '../menuSlice';
 
@@ -22,11 +20,7 @@ import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import marketplaceStyles from '../../dashboard_styles/Marketplace.module.css';
-import styles from '../../dashboard_styles/Dashboard.module.css';
-
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-
-import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 

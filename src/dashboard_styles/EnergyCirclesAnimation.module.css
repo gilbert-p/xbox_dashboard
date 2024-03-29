@@ -132,9 +132,6 @@
   }
   
   @keyframes vanish_late {
-    /* 0% {
-      opacity: 0;
-    } */
     10% {
       opacity: 1;
     }

@@ -2,25 +2,15 @@ import React, {useRef, useMemo, useState, forwardRef, useLayoutEffect, useCallba
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
-
 import backgroundAnimation from "../dashboard_styles/BackgroundPulse.module.css";
-
-import iconLibrary from "../dashboard_styles/IconStyling.module.css";
-
 import useDashboardAnimation from '../custom_hooks/useDashboardBladeAnimation';
 import useGuidePanelAnimation from '../custom_hooks/useGuidePanelAnimation';
 
 import { selectContextIndex,
-         isTrayDisplayed,
-         isGuideOpen,}
+         isTrayDisplayed,}
 from './xboxSlice';
 
-import { selectGuideActiveState,
-         updateGuideActiveState,
-         updateShowBlades,
-        
-         updateSubMenuNavigate,
-         selectSubMenuNavActive,
+import { updateGuideActiveState,
          updateNavigateContext,} 
 from './menuSlice';
 
@@ -33,13 +23,11 @@ import GamesPage from "./components/GamesPage";
 import MediaPage from "./components/MediaPage";
 import SystemPage from "./components/SystemPage";
 
-import itemSelectStyles from "../dashboard_styles/ItemSelect.module.css";
 
 import blade_sound_sfx from "../assets/audio/blade_sound_sfx.mp3";
 import utility_sound_sfx from "../assets/audio/utility_sfx.mp3";
 
 import useAudioSound from "../custom_hooks/useAudioSound";
-import { debounce } from "lodash";
 
 
 
@@ -49,11 +37,6 @@ const Xbox = (props) => {
 
     const bladeContainerRef= useDashboardAnimation();
     const guidePanelAnimation = useGuidePanelAnimation();
-
-    const guideActiveState = useSelector(selectGuideActiveState);
-
-    const isSubMenuActive = useSelector(selectSubMenuNavActive);
-
     
     
     //Dashboard state variables
@@ -63,10 +46,6 @@ const Xbox = (props) => {
 
     //Refs for animating elements
     const xboxBladeContainerRef = useRef(null);
-
-
-
-
 
     //Sound Variables
     const bladeSfxSprite = {
@@ -181,7 +160,6 @@ const Xbox = (props) => {
         return backgroundDrop;
     }
 
-    const xboxliveRef = useRef(null);
 
 
     //Foreign extension

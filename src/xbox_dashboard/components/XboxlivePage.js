@@ -1,16 +1,5 @@
 import { React, useRef, useLayoutEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContextIndex } from '../xboxSlice';
-
-import { updateSelectionHighlight,
-    selectHighlightState,
-    navigateXboxliveMenu,
-    selectXboxliveMenuIndex,
-    updateGuideActiveState,
-    selectGuideActiveState,
-    navigateCommunityCategory,
-} from '../menuSlice';
-
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import profileCardStyles from '../../dashboard_styles/ProfileCard.module.css';
@@ -20,12 +9,15 @@ import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css
 import xboxliveStyles from '../../dashboard_styles/Xboxlive.module.css';
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import ringAnim from '../../dashboard_styles/ringAnimation.module.css';
-
-import styles from "../../dashboard_styles/Dashboard.module.css";
-
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
+
+import { updateSelectionHighlight,
+    selectHighlightState,
+    navigateXboxliveMenu,
+    selectXboxliveMenuIndex,
+    navigateCommunityCategory,
+} from '../menuSlice';
 
 const XboxlivePage = (props) => {
 
@@ -35,29 +27,12 @@ const XboxlivePage = (props) => {
 
     const utilitySound = useUtilitySfx();
 
-
-
-
     //Menu state variables
     const isHighlightActive = useSelector(selectHighlightState);
     const xboxliveMenuIndex = useSelector(selectXboxliveMenuIndex);
 
-    const guideActiveState = useSelector(selectGuideActiveState);
+    const {current_context_index, foreignExtendGamerProfile, foreignExtendCommunityPage } = props;
 
-    const { xboxBackgroundRef, current_context_index, foreignExtendGamerProfile, foreignExtendCommunityPage } = props;
-
-
-    const { 
-        guidePanelRef, 
-        guideMenuRef,
-        guideSelectThemeRef, 
-        guideSettingsRef, 
-        aboutDashboardPageRef,
-        gamerProfilePageRef, 
-        extendGuideMenu, 
-        revealThemeSelection,
-        backButtonStateSelection,
-      } = props['guideAnimationRef'];
 
 
     const listItemHighlight = (current_menu_index, target_index) => {

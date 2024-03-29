@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContextIndex } from '../xboxSlice';
 
 import { updateSelectionHighlight,
     selectSystemMainMenuIndex,
@@ -13,13 +12,7 @@ import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
 import systemStyles from '../../dashboard_styles/System.module.css';
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
-
-import styles from "../../dashboard_styles/Dashboard.module.css";
-
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-
-import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
-
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 

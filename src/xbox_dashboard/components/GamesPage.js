@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectContextIndex } from '../xboxSlice';
 
-import { updateSelectionHighlight,
-         selectHighlightState,
+import {
+    updateSelectionHighlight,
+    selectHighlightState,
 
     navigateMarketplaceSpotlightMenu,
     selectMarketplaceSpotlightMenuIndex,
     selectMarketplaceSpotlightCategoryTitle,
-
 
     updateNavigateContext,
     selectNavigationContext,
@@ -26,11 +25,7 @@ import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import gamesStyles from '../../dashboard_styles/Games.module.css';
 import descriptionContentStyles from "../../dashboard_styles/DescriptionContainer.module.css";
 
-import styles from "../../dashboard_styles/Dashboard.module.css";
-
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-
-import backgroundAnimation from "../../dashboard_styles/BackgroundPulse.module.css";
 
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
@@ -47,7 +42,7 @@ const GamesPage = (props) => {
     const isHighlightActive = useSelector(selectHighlightState);
     const gamesMenuIndex = useSelector(selectGamesMenuIndex);
 
-    const {current_context_index, slideBladesAway, slideBladesBack, gamesSubPageAnimation, gamesSubPageExit, foreignExtendGamerProfile, } = props;
+    const {current_context_index, gamesSubPageAnimation, gamesSubPageExit, foreignExtendGamerProfile, } = props;
 
     const listItemHighlight = (current_menu_index, target_index) => {
         

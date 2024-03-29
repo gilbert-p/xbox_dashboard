@@ -6,7 +6,6 @@
     height: calc(var(--safe_border_height));
     top: 50%;
     transform: translateY(-50%);
-    /* background-color: red; */
 }
 
 .appContainer {
@@ -16,7 +15,6 @@
     transform: translate(-50%,-50%);
     width: calc(var(--container-width));
     height: calc(var(--container-height));
-    /* border: 3px solid pink; */
     transform: translate(-50%,-50%) scale(calc(var(--scaling)));
 }
 
@@ -27,7 +25,6 @@
     width: inherit;
     width: inherit;
     height: inherit;
-    /* overflow: hidden; */
 }
 
 .mainContainer {
@@ -37,7 +34,6 @@
     transform: translate(-50%,-50%);
     width: inherit;
     height: inherit;
-    /* border: 10px solid red; */
 }
 
 .bladeMask {
@@ -48,7 +44,6 @@
     height: inherit;
     transform: translate(-50%, -50%);
     z-index: 10;
-    /* overflow: hidden; */
     pointer-events: none;
 }
 
@@ -56,16 +51,10 @@
 .bladeContainerMask {
     position: absolute;
     width: inherit;
-    /* width: calc(100% + 250px); */
     height: inherit;
     left: 50%;
     top: 50%;
-    /* max-height: 760px; */
     transform: translate(-50%, -50%);
-    /* background-color: #f1f2f6; */
-    /* background-image: linear-gradient(0deg, #B3A89E 0%, #E5E5E5 80%); */
-    /* overflow: hidden; */
-    /* visibility: hidden; */
 }
 
 
@@ -133,17 +122,6 @@
     box-shadow: inset 0 -1px 7px 0px black;
     border-radius: 80px 80px 0px 0px;
 }
-
-/* .dashboardWhiteUnderlay {
-    position: absolute;
-    left: 10px;
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/images/dashboard_white_underlay.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 50% 50%;
-} */
 
 .leftEdge {
     position: absolute;
@@ -226,18 +204,15 @@
     height: 100%;
     max-width: calc(var(--container-width));
     max-height: var(--container-height);
-    /* border: 5px solid limegreen; */
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
-    /* border: 2px solid red; */
 }
 
 .staticContent {
     position: absolute;
     width: 100%;
     height: inherit;
-    /* border: 5px solid red; */
     z-index: 1;
     pointer-events: none;
 }
@@ -254,7 +229,6 @@
     position: absolute;
     width: calc(100%);
     height: 100%;
-    /* background: linear-gradient(89.59deg, #F47B1E 0.88%, #FFA743 50.8%, #F47B1E 99.29%); */
     background-image: url("../assets/images/marketplace_background.png");
     background-repeat: no-repeat;
     background-size: 100%;
@@ -268,7 +242,6 @@
     height: 100%;
     background: linear-gradient(231deg, #f78833, #f3ab58);
     background-size: 400% 400%;
-    /* animation: xboxlive_color_scheme_gradient 10s ease infinite; */
     z-index: -9;
 }
 
@@ -284,7 +257,6 @@
     height: 100%;
     background: linear-gradient(231deg, #69cf38, #43903d);
     background-size: 400% 400%;
-    /* animation: games_color_scheme_gradient 10s ease infinite; */
     z-index: -8;
 }
 
@@ -302,7 +274,6 @@
     height: 100%;
     background: linear-gradient(231deg, #449aed, #297bc4);
     background-size: 400% 400%;
-    /* animation: media_color_scheme_gradient 10s ease infinite; */
     z-index: -7;
 }
 
@@ -317,7 +288,6 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(250deg, #8E6ED1, #7057a7);
-    /* animation: system_color_scheme_gradient 10s ease infinite; */
     background-size: 400% 400%;
     z-index: -6;
 }
@@ -353,7 +323,6 @@
 }
 
 .systemTrayContainer > p {
-    /* left: 30px; */
     position: absolute;
     top: 50%;
     left: 85px;
@@ -434,7 +403,6 @@
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
-    /* pointer-events: none; */
     z-index: 1000;
 
 
@@ -445,11 +413,8 @@
     display: inline-block;
     width: 56px;
     height: 56px;
-    /* left: 50%;
-    top: 50%; */
     transform: translate(0%,0%);
     border-radius: 50%;
-    /* border: 5px solid red; */
     transition-duration: 0.3;
     z-index: 0;
 

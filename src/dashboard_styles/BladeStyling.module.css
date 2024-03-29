@@ -57,7 +57,6 @@
     top: 0;
     width: 100%;
     height: 100%;
-    /* background-image: url("../assets/images/dashboard_white_underlay.png"); */
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 50% 50%;
@@ -91,11 +90,7 @@
     width: 100%;
     height: 350px;
     background-color: rgba(219, 219, 219, 0.2);
-    /* background-color: rgba(255, 255, 255, 1); */
     opacity: 0;
-    /* filter: drop-shadow(0px 4px 4px #00000082)
-            drop-shadow(0px -4px 4px #00000084); */
-    /* animation: expandBox 0.66s cubic-bezier(0.18, 0.89, 0.32, 1.28) infinite forwards; */
 }
 
 @keyframes expandBox {
@@ -141,7 +136,6 @@
     height: inherit;
     width: 95px;
     left:0;
-    /* background-color: red; */
     overflow: visible;
 }
 
@@ -155,7 +149,6 @@
     background-repeat: no-repeat;
     background-size: auto;
     background-position-y: -10px;
-    /* background-color: red; */
     pointer-events: none;
 }
 
@@ -166,18 +159,12 @@
     cursor: pointer;
 }
 
-#marketplaceBlade-left{
-    .bladeImgContainer {
-        /* background-color: green; */
-    }
-}
 
 #xboxliveBlade-left{
 }
 
 .marketplaceActiveBlade {
     background-image: url("../assets/images/marketplace_active_blade.png");
-    /* background-color: blue; */
 }
 
 .xboxliveActiveBlade {
@@ -203,19 +190,16 @@
 
 .rightBladeInactive {
     background-image: url("../assets/images/inactive_blade_right.png");
-    /* background-size: cover; */
 }
 
 .leftBladeInactive {
     background-image: url("../assets/images/inactive_blade_left.png");
-    /* background-size: cover; */
 }
 
 
 
 .marketplaceActiveBlade_Carbon {
     background-image: url("../assets/images/carbon_marketplace_active_blade.png");
-    /* background-color: blue; */
 }
 
 .xboxliveActiveBlade_Carbon {
@@ -241,12 +225,10 @@
 
 .rightBladeInactive_Carbon {
     background-image: url("../assets/images/carbon_inactive_blade_right.png");
-    /* background-size: cover; */
 }
 
 .leftBladeInactive_Carbon {
     background-image: url("../assets/images/carbon_inactive_blade_left.png");
-    /* background-size: cover; */
 }
 
 
@@ -336,7 +318,6 @@
     position: relative;
     font-size:1.5em;
     top: 27%;
-    /* color: rgba(18, 18, 18, 0.938); */
     color: rgba(0, 0, 0, 0.735);
 
     z-index: 30;
@@ -434,7 +415,6 @@
 /*** SVG STYLING ***/
 
 svg {
-    /* pointer-events: none; */
     height: auto;
     transform-origin: 50% 50% ;
 }
@@ -442,7 +422,6 @@ svg {
 path {
     pointer-events: auto;
     height: 100%;
-    /* cursor: pointer; */
 }
 
 
@@ -465,7 +444,6 @@ path {
     min-width: auto;
     max-width: 65px;
     height: inherit;
-    /* ???? */
     left: calc(((100vh) * (1/32)));
     transform: translateX(0);
 }
@@ -503,7 +481,6 @@ path {
 }
 
 .inactiveBladeFill {
-    /* transform: scale(0.80) translateY(40px); */
     fill: url("#paint0_radial_216_167");
     transition: fill 2s;
 }

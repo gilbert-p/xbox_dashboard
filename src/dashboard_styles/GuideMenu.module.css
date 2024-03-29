@@ -428,7 +428,6 @@
 }
 
 .buttonGroup > span {
-    /* display: inline-block; */
     position: relative;
     top: 2.7em;
     width: 125px;
@@ -453,7 +452,6 @@
     border: none;
     background-image: url("../assets/images/guide_menu_button.png");
     margin-right: 5px;
-    /* background-size: contain; */
     background-repeat: no-repeat;
 
     .buttonIcon {
@@ -494,7 +492,6 @@
     left: 8px;
     top: 10px;
     background: linear-gradient(180deg, rgba(255,255,255,0.4) 23%, rgba(255, 255, 255, 0) 100%);
-    /* transition: opacity var(--transition_duration); */
 }
 
 .guideMusicPlayer {
@@ -1023,8 +1020,6 @@
     position: absolute;
     width: inherit;
     height: inherit;
-    /* background-color: rgba(139, 139, 139, 0.349); */
-    /* background-color: rgba(156, 156, 156, 0.444); */
     z-index: -1;
 }
 
@@ -1103,11 +1098,9 @@
 .communityNavButtons {
     position: absolute;
     display: flex;
-    /* justify-content: space-around; */
     width: inherit;
     height: 55px;
     top: 20px;
-    /* background-color: red; */
     margin-top: 10px;
 
 
@@ -1121,7 +1114,6 @@
     height: inherit;
     width: 320px;
     cursor: pointer;
-    /* background-color: blue; */
 
     > .iconContainerActive {
         margin-right: 10px;
@@ -1129,7 +1121,6 @@
 
     > p {
         font-size: 28px;
-        /* font-weight: bold; */
     }
 
     &:nth-child(1) {
@@ -1152,16 +1143,12 @@
     position: relative;
     width: 30px;
     height: 30px;
-    /* outline: 2px solid red; */
-    /* margin-right: 15px; */
 }
 
 .iconContainerInactive {
     position: absolute;
     width: 30px;
     height: 35px;
-    /* outline: 2px solid red; */
-    /* margin-right: 15px; */
 
 }
 
@@ -1233,5 +1220,4 @@
     overflow: hidden;
     display: flex;
     margin-top: 75px;
-    /* outline: 2px solid red; */
 }

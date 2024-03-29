@@ -12,7 +12,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* border: 2px solid red; */
     grid-template-columns: 345px 345px;
     grid-template-rows: 550px;
     column-gap: 20px;
@@ -82,7 +81,6 @@
     >h2 {
         position: relative;
         margin-left: 60px;
-        /* top: 30px; */
         font-size: var(--screen-heading-size);
         color: var(--white-text);
         margin-bottom: 20px;
@@ -91,7 +89,6 @@
     .marketplaceBannerContainer {
         display: flex;
         position: relative;
-        /* top: 50px; */
         width: inherit;
         height: 100px;
         justify-content: center;
@@ -114,7 +111,6 @@
 .marketplaceNavSelectContainer {
     width: inherit;
     height: 40px;
-    /* background-color: purple; */
 }
 
 .marketplaceNavSelectList {
@@ -149,7 +145,6 @@
     height: 380px;
     margin-left: 20px;
     margin-top: 20px;
-    /* background-color: lightskyblue; */
 }
 
 
@@ -164,7 +159,6 @@
     flex-direction: column;
     width: 400px;
     height: inherit;
-    /* border: 2px solid blue; */
     border-radius: 8px;
     box-shadow: inset 0px 0px 8px 2px rgb(0, 0, 0);
     padding-left: 20px;
@@ -192,7 +186,6 @@
     position: relative;
     width: inherit;
     height: 50px;
-    /* background-color: orange; */
     margin-top: 10px;
 }
 
@@ -202,7 +195,6 @@
     height: 50px;
     left: -10px;
     top: calc(100% - 20px);
-    /* background-color: orange; */
     margin-top: 10px;
 }
 
@@ -212,8 +204,6 @@
     height: 50px;
     left: -55px;
     top: calc(100% + 10px);
-    /* background-color: orange; */
-    /* margin-top: 20px; */
 }
 
 .subMenuBackButtonContainer {
@@ -265,9 +255,7 @@
     justify-content: space-between;
     width: 820px;
     height: 520px;
-    /* margin-left: 20px; */
     margin-top: 0px;
-    /* outline: 2px solid blue; */
 
     >h2 {
         position: absolute;
@@ -284,9 +272,7 @@
     justify-content: space-between;
     width: 820px;
     height: 520px;
-    /* margin-left: 20px; */
     margin-top: 0px;
-    /* outline: 2px solid blue; */
 
     >h2 {
         position: absolute;
@@ -303,11 +289,6 @@
     flex-direction: column;
     width: 400px;
     height: inherit;
-    /* border: 2px solid blue; */
-    /* border-radius: 8px; */
-    /* box-shadow: inset 0px 0px 8px 2px rgb(0, 0, 0); */
-    /* padding-left: 20px; */
-    /* padding-right: 20px; */
 }
 
 .gamesdDescriptionTitleContainer {
@@ -317,12 +298,8 @@
     border-radius: var(--border_radius);
     box-shadow: inset 0px 0px 8px 1px rgba(0, 0, 0, 0.701);
 
-    /* outline: 2px solid red; */
 }
 
-/* .gamesDescriptionContent {
-    position: relative;
-} */
 
 .gamesDescriptionTitle {
     width: inherit;
@@ -366,13 +343,10 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
     left: -20px;
     width: 820px;
     height: 520px;
-    /* margin-left: 20px; */
     margin-top: 0px;
-    /* outline: 2px solid blue; */
 
     > h2 {
         position: absolute;
@@ -393,13 +367,10 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-between; */
     left: -20px;
     width: 820px;
     height: 520px;
-    /* margin-left: 20px; */
     margin-top: 0px;
-    /* outline: 2px solid blue; */
 
     > h2 {
         position: absolute;
@@ -413,7 +384,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* align-items: flex-start; */
     column-gap: 10px;
     row-gap: 10px;
     width: 380px;

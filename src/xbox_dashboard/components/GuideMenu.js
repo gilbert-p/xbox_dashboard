@@ -1,19 +1,11 @@
-import React, {useRef, useState, forwardRef, useEffect, useCallback, useLayoutEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styles from '../../dashboard_styles/Dashboard.module.css';
-
 import guideMenuStyles from '../../dashboard_styles/GuideMenu.module.css';
-
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
-
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import itemSelectStyles from "../../dashboard_styles/ItemSelect.module.css";
-
 import profileCardStyles from "../../dashboard_styles/ProfileCard.module.css";
-
-import useGuidePanelAnimation from '../../custom_hooks/useGuidePanelAnimation';
 import useCurrentTime from '../../custom_hooks/useCurrentTime';
-
 import energyCircles from '../../dashboard_styles/EnergyCirclesAnimation.module.css';
 
 
@@ -33,7 +25,6 @@ import {
     selectGuideMusicPlayerIndex,
     selectGuideMusicPlayerHighlight,
     navigateGuideMusicPlayer,
-    selectGuideActiveState,
 
     playMusic,
     selectMusicState,
@@ -45,7 +36,6 @@ import {
     selectMusiclistSize,
 
     updateShowThemeSelect,
-    selectShowThemeSelect,
     updateSelectedTheme,
     selectThemeSelection,
     navigateThemeSelectIndex,
@@ -53,7 +43,6 @@ import {
     updateThemeSelectHighlight,
     selectThemeHighlightState,
 
-    selectNavigationContext,
     selectCommunityCategory,
     navigateCommunityCategory,
     }
@@ -93,32 +82,19 @@ const GuideMenu = (props) => {
     const isGuideMenuHighlightActive = useSelector(selectGuideMenuHighlightState);
     const isLinkStackHighlightActive = useSelector(selectGuideMenuLinkStackHighlight);
 
-
     const guideMusicPlayerIndex = useSelector(selectGuideMusicPlayerIndex);
     const isGuideMusicPlayerHighlightActive = useSelector(selectGuideMusicPlayerHighlight);
 
-    
     const isSongPlaying = useSelector(selectMusicState);
     const currentSongTitle = useSelector(selectCurrentSong);
     const currentSongIndex = useSelector(selectSongIndex);
     const musicListSizeMax = useSelector(selectMusiclistSize);
 
-
     const selected_theme = useSelector(selectThemeSelection);
     const themeSelectIndex = useSelector(selectThemeIndex);
     const isThemeSelectHighlightActive = useSelector(selectThemeHighlightState);
 
-
-    const guideMenuActiveState = useSelector(selectGuideActiveState);
-
-    const menuNavigationContext = useSelector(selectNavigationContext);
-
     const communityCategory = useSelector(selectCommunityCategory);
-
-    //TODO: Utility SFX needs to be included in a separate hook function because
-    //the soudns are used in for every button selection including clicking on any menu item
-
-
 
 
     const musicSprite = {
@@ -126,18 +102,10 @@ const GuideMenu = (props) => {
         heavy_price_paid:[16000, 15000],
     };
 
-
     /* Utility SFX specific function */
-
     const utilitySound = useUtilitySfx();
-
-
-
-
     const musicList = useAudioSound(musicPlaylist, musicSprite);
     dispatch(updateMusicListSize(2));
-
-
     const musicTitles = ['overture', 'heavy_price_paid'];
 
 
