@@ -1,13 +1,16 @@
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
+import mobileStyles from '../dashboard_styles/mobilePage.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
 import backgroundAnimation from "../dashboard_styles/BackgroundPulse.module.css";
 import useDashboardAnimation from '../custom_hooks/useDashboardBladeAnimation';
 import useGuidePanelAnimation from '../custom_hooks/useGuidePanelAnimation';
 
 import { selectContextIndex,
-         isTrayDisplayed,}
+         isTrayDisplayed,
+         selectMobileDeviceStatus,
+         updateMobileStatus,}
 from '../redux_slices/xboxSlice';
 
 import { updateGuideActiveState,
@@ -33,7 +36,11 @@ import useAudioSound from "../custom_hooks/useAudioSound";
 
 const Xbox = (props) => {
 
+    const { handleFullScreen } = props;
+
     const dispatch = useDispatch();
+
+    const isMobileDevice = useSelector(selectMobileDeviceStatus);
 
     const bladeContainerRef= useDashboardAnimation();
     const guidePanelAnimation = useGuidePanelAnimation();
@@ -189,7 +196,8 @@ const Xbox = (props) => {
     return (
         <div className={styles.xboxComponent}>
 
-            <div className={styles.arrowContextButtonContainer}  >
+                
+                <div className={styles.arrowContextButtonContainer}  >
                 <div className={styles.xboxHomeLogo} onClick={()=>{showGuideSettings()}}><span className={styles.ellipseGlow}></span></div>
                 <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
                 <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
@@ -217,6 +225,7 @@ const Xbox = (props) => {
 
             {/* Provides a mask to prevent overflow from the page content */}
             <div className={styles.bladeContainerMask}>
+
                 <div className={styles.mainContainer}>
 
                     {/* Safe Viewing area */}
@@ -260,7 +269,7 @@ const Xbox = (props) => {
 
 
                         {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
-                        <MarketplacePage slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
+                        <MarketplacePage  handleFullScreen={handleFullScreen} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
                         <XboxlivePage    foreignExtendGamerProfile={foreignExtendGamerProfile} foreignExtendCommunityPage={foreignExtendCommunityPage}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={bladeContainerRef['gamesSubPageExit']} gamesSubPageAnimation={bladeContainerRef['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} mediaSubPageExit={bladeContainerRef['mediaSubPageExit']} mediaSubPageAnimation={bladeContainerRef['mediaSubPageAnimation']} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
@@ -289,8 +298,10 @@ const Xbox = (props) => {
                         
                 </div>
 
-
             </div>
+            
+
+            
 
         </div>
     )

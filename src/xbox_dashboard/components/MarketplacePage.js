@@ -49,7 +49,7 @@ import {
 
 const MarketplacePage = (props) => {
 
-    const { slideBladesAway, slideBladesBack } = props;
+    const { slideBladesAway, slideBladesBack} = props;
 
     const dispatch = useDispatch();
 
@@ -242,7 +242,7 @@ const MarketplacePage = (props) => {
 
 
             <div className={`${(navigationContext == 'main_menu_marketplace') ? pageGridStyles.marketplaceMainContent: transitionStyles.removeDisplay}`}>
-                <div className={` ${bladeStyles.dashboardWhiteUnderlay}  ${current_context_index === 0 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}>
+                <div className={` ${bladeStyles.dashboardWhiteUnderlay}  ${current_context_index === 0 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : null }`}>
                 </div> 
 
                 <div id={pageGridStyles["marketplaceGrid"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 0 ? transitionStyles.makeTransparent : ""}`}>

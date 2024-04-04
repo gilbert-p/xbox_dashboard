@@ -2,10 +2,13 @@
 
 .safeBorder {
     position: absolute;
-    width: 100vw;
-    height: calc(var(--safe_border_height));
+    width: 100%;
+    height: auto;
     top: 50%;
     transform: translateY(-50%);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .appContainer {
@@ -18,13 +21,13 @@
     transform: translate(-50%,-50%) scale(calc(var(--scaling)));
 }
 
-/*TODO: Create gsap timeline to shift the centered content everytime you shift to a new tab */
 .xboxComponent {
     position: absolute;
     display: inline-block;
     width: inherit;
     width: inherit;
     height: inherit;
+    /* background-color: red; */
 }
 
 .mainContainer {
@@ -385,7 +388,7 @@
     border-radius: 65px;
     background-color: rgba(0, 0, 0, 0.744);
     padding-top: 10px;
-    z-index: 9999;
+    z-index: 100;
     opacity: 0.8;
     transition: opacity 0.3s ease-in-out;
 
@@ -439,7 +442,6 @@
 }
 
 .rightArrow {
-    z-index: 10000;
     order: 3;
     width: 100%;
     max-width: 40px;
@@ -458,8 +460,8 @@
     .appContainer {
         transform: translate(-51%,-50%) scale(calc(var(--scaling)));
     }
-    .bladeMask {
+    /* .bladeMask {
         overflow: hidden;
-    }
+    } */
 
 }

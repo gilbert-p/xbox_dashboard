@@ -1,41 +1,87 @@
 import React, { useLayoutEffect, useEffect, useState, useRef } from 'react';
 import XboxDashboard from "./xbox_dashboard/Xbox";
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import dashboard_style from './dashboard_styles/Dashboard.module.css';
+import mobileStyles from './dashboard_styles/mobilePage.module.css';
 
 import { debounce } from 'lodash';
-import { gsap } from 'gsap';
+import { updateMobileStatus, selectMobileDeviceStatus }
+from './redux_slices/xboxSlice';
+
+import transitionStyles from './dashboard_styles/TransitionStyles.module.css';
+
 
 function App() {
+  
 
   const [screenOverlay, setScreenOverlay] = useState(null);
-  const [isMobileView, setMobileView] = useState(null);
+  const [isMobileDeivce, setIsMobileDevice] = useState(null);
 
   const xboxBladeContainerRef = useRef(null);
 
-  /*
-  useEffect(()=> {
-    const makeFullscreen = () => {
-      document.querySelector('div').requestFullscreen().then(()=>{
-        console.log("Fullscreen enabled");
-      },()=>{console.warn("Fullscreen not enabled")});
+  const fullscreenRef = useRef(null);
+
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const isFullscreenActive = useSelector(selectMobileDeviceStatus);
+
+  const dispatch = useDispatch();
+
+
+  const detectIfMobile = () => {
+    const toMatch = [
+      /Android/i,
+      /webOS/i,
+      /iPhone/i,
+      /iPad/i,
+      /iPod/i,
+      /BlackBerry/i,
+      /Windows Phone/i
+    ];
+
+    return toMatch.some((toMatchItem) => {
+      dispatch(updateMobileStatus(navigator.userAgent.match(toMatchItem)));
+      return navigator.userAgent.match(toMatchItem);
+    });
+  };
+  
+
+  const handleFullscreenToggle = () => {
+    if (!isFullscreen) {
+      if (fullscreenRef.current) {
+        if (fullscreenRef.current.requestFullscreen) {
+          fullscreenRef.current.requestFullscreen();
+        } else if (fullscreenRef.current.webkitRequestFullscreen) {
+          fullscreenRef.current.webkitRequestFullscreen(); // Safari
+        }
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen(); // Safari
+      }
     }
-    makeFullscreen();
-    window.screen.orientation.addEventListener("change", makeFullscreen);
-  });
-  */
+
+    setIsFullscreen(!isFullscreen);
+  };
+
 
   useEffect(()=>{
     const checkDeviceOrientation = () => {
 
       let orientationType = window.screen.orientation.type;
-      console.log(orientationType);
+
+      detectIfMobile();
 
       if(orientationType === "portrait-primary") {
         setScreenOverlay(true);
       }
       else {
         getUpdatedSize(window.innerWidth, window.innerHeight);
+        // handleFullscreenToggle();
         setScreenOverlay(false);
       }
     }
@@ -49,59 +95,36 @@ function App() {
   }, []);
 
   const getUpdatedSize = (windowWidth, windowHeight) => {
-    let origX = 1190;
-    let origY = 765;
-
-
-
-    let sizeReduction = 1;
-
-    if(windowWidth > 765){
-      
-      if(windowHeight < origY) {
-        sizeReduction = (windowHeight - 75) / origY;
-        console.log("Sized Reduced based on height", sizeReduction);
-        document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
-      }
-      else if(windowWidth < origX) {
-        
-        sizeReduction = (windowWidth - 90) / origX;
-        document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
-        console.log("Sized Reduced based on width", windowWidth, sizeReduction);
-      }
-    }
-
-    else if(windowWidth - 170 < 765) {
-      // if(windowHeight < origY) {
-      //   sizeReduction = (windowHeight - 75) / origY;
-      //   console.log("Sized Reduced based on height", sizeReduction);
-      //   document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
-      // }
-      // else if(windowWidth < origX) {
-        
-
-        sizeReduction = (windowWidth -  150) / origX;
-        document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
-        console.log("Sized Reduced based on small width", windowWidth, sizeReduction);
-      // }
-    }
-
-
-
+    const origX = 1190;
+    const origY = 765;
   
-
-  }
+    let sizeReduction = 1;
+    let smallerDimension = '';
+  
+    const minDimension = Math.min(windowWidth, windowHeight);
+    smallerDimension = minDimension === windowHeight ? 'height' : 'width';
+  
+    if (minDimension < 765) {
+      if (minDimension === windowHeight) {
+        sizeReduction = Math.max(0, (windowHeight - 65) / origY);
+        console.log("Size reduced based on height", sizeReduction);
+      } else {
+        sizeReduction = Math.max(0, (windowWidth - 90) / origX);
+        console.log("Size reduced based on width", sizeReduction);
+      }
+    }
+    //  else {
+    //   sizeReduction = Math.max(0, (minDimension) / origX);
+    //   console.log("Size reduced based on smaller dimension", sizeReduction);
+    // }
+  
+    document.documentElement.style.setProperty('--scaling', `${sizeReduction}`);
+  };
 
   //Gets width and height of content container
   useEffect(()=> {
     const updateContainerSize = () => {
         let sizingProperties = {};
-
-        let current_width = window.innerWidth || 0;
-        console.log("current window width", current_width);
-
-        
-
 
             sizingProperties.width = xboxBladeContainerRef.current.offsetWidth;
             sizingProperties.height = xboxBladeContainerRef.current.offsetHeight; 
@@ -110,8 +133,6 @@ function App() {
             sizingProperties.windowHeight = window.innerHeight;
 
             getUpdatedSize(window.innerWidth, window.innerHeight);
-
-
 
     }
 
@@ -122,19 +143,39 @@ function App() {
         window.removeEventListener("resize", delayedResize);
     }
 
-}, [window.innerWidth]);
+}, [window.innerWidth, window.innerHeight]);
 
+const MobileViewPrompt = () => {
+  return (
+    <div className={mobileStyles.mobileViewContainer}>
 
+    </div>
+  );
+}
 
 
   return (
-    
-    <div className={dashboard_style.safeBorder}>
-            <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef} >
-      <XboxDashboard/> 
+    <>
+    {screenOverlay ? 
+    <MobileViewPrompt/>
+    :
+    <div ref={fullscreenRef} className={dashboard_style.safeBorder}>
+      <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef} >
+        <XboxDashboard handleFullScreen={handleFullscreenToggle}/> 
+        <div className={!isFullscreen ? mobileStyles.enableFullScreenPrompt: transitionStyles.instantTransparent}>
+                    <div className={mobileStyles.fullscreenButtonContainer}>
+                        <p>Click to Enable Fullscreen</p>
+                        <button id={mobileStyles['fullscreenButton']} onClick={()=>{handleFullscreenToggle();}}>
+                            Enable
+                        </button>
+                    </div>
+                </div>
+      </div>
+    </div>
+    }
 
-    </div>
-    </div>
+
+    </>
 
   );
 }

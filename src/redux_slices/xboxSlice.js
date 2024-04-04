@@ -3,6 +3,8 @@ import { useTransitionBlade } from '../api_features/useTransitionBlade';
 
 
 let initialState = {
+    is_mobile_device: null,
+
     current_context: "marketplace",
     context_index: 0,
     last_index_called: 0,
@@ -37,6 +39,10 @@ export const xboxSlice = createSlice({
     name: 'dashboard',
     initialState,
     reducers: {
+      updateMobileStatus: (state, action) => {
+        state.is_mobile_device = action.payload;
+      },
+
       navigateTo: (state, action) => {
 
         state.current_context = action.payload;
@@ -160,7 +166,10 @@ export const {
    setBladeAnimationRef, 
    updateGuideMenuState,
    updateDiscTrayState,
+   updateMobileStatus,
    } = xboxSlice.actions;
+
+export const selectMobileDeviceStatus = (state) => state.dashboard.is_mobile_device;
 
 export const selectCurrentContext = (state) => state.dashboard.current_context;
 export const selectContextIndex = (state) => state.dashboard.context_index;
