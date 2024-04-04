@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/xbox_dashboard/static/css/main.55dc01ea.css",
-    "main.js": "/xbox_dashboard/static/js/main.466466d2.js",
+    "main.js": "/xbox_dashboard/static/js/main.15e4afac.js",
     "static/js/845.bdb3e3be.chunk.js": "/xbox_dashboard/static/js/845.bdb3e3be.chunk.js",
     "reactPlayerYouTube.js": "/xbox_dashboard/static/js/reactPlayerYouTube.edcbc49c.chunk.js",
     "reactPlayerSoundCloud.js": "/xbox_dashboard/static/js/reactPlayerSoundCloud.02d0935d.chunk.js",
@@ -98,7 +98,7 @@
     "static/media/xbox_home_logo.svg": "/xbox_dashboard/static/media/xbox_home_logo.4e5d9899771c920862b7.svg",
     "index.html": "/xbox_dashboard/index.html",
     "main.55dc01ea.css.map": "/xbox_dashboard/static/css/main.55dc01ea.css.map",
-    "main.466466d2.js.map": "/xbox_dashboard/static/js/main.466466d2.js.map",
+    "main.15e4afac.js.map": "/xbox_dashboard/static/js/main.15e4afac.js.map",
     "845.bdb3e3be.chunk.js.map": "/xbox_dashboard/static/js/845.bdb3e3be.chunk.js.map",
     "reactPlayerYouTube.edcbc49c.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerYouTube.edcbc49c.chunk.js.map",
     "reactPlayerSoundCloud.02d0935d.chunk.js.map": "/xbox_dashboard/static/js/reactPlayerSoundCloud.02d0935d.chunk.js.map",
@@ -117,6 +117,6 @@
   },
   "entrypoints": [
     "static/css/main.55dc01ea.css",
-    "static/js/main.466466d2.js"
+    "static/js/main.15e4afac.js"
   ]
 }
