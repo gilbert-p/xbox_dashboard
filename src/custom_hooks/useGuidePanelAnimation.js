@@ -133,25 +133,8 @@ export default function useGuidePanelAnimation() {
         .to(guideSelectThemeRef.current, {opacity: 1, display: "initial", duration: 0.3})
         .pause();
 
-
-
-
-        
-
         }
         initializeTimeline();
-
-
-        const loadTimelineIntoMemory = () => {
-            revealGuideMenu.current.pause();
-        }
-
-        const delayMilliseconds = 300;
-        const timeoutId = setTimeout(loadTimelineIntoMemory, delayMilliseconds);
-
-        return () => {
-            clearTimeout(timeoutId);
-        }
 
     },[]);
 
@@ -273,19 +256,14 @@ export default function useGuidePanelAnimation() {
             extendRevealPanel.current.play();
             guideSettingsAnimate.current.play();
 
-            console.log("extendRevealContent called");
-            console.log(extended_state);
-
             switch(extended_state) {
                 case 'foreign_gamer_profile':
                     dispatch(updateShowBlades(false));
-                    console.log("reveal foreign gamer profile");
                     showGamerProfile();
 
                     break;
                 case 'foreign_community_profile':
                     dispatch(updateShowBlades(false));
-                    console.log("reveal foreign community profile");
                     showCommunityPage();
                     break;
                 case 'default':
@@ -379,7 +357,7 @@ export default function useGuidePanelAnimation() {
                     case 'theme_select':
                         dispatch(updateGuideActiveState('guide_setting_main'));
                         showThemeMenu();
-                        guideSettingsAnimate.reverse();
+                        guideSettingsAnimate.current.reverse();
                         break;
                     case 'extended_gamer_profile':
                         extendGuideMenu('extended_gamer_profile');
@@ -414,22 +392,24 @@ export default function useGuidePanelAnimation() {
     }
     
 
-    return {revealGuideMenu, 
-            extendMenu,
-            revealAboutDashboard, 
-            showGuideSettings,
-            extendGuideMenu,
-            closeFullMenu,
-            extendRevealContent,
-            revealThemeSelection,
-            backButtonStateSelection,
-            guideSettingsAnimate, 
-            guideMenuRef, 
-            guidePanelRef,
-            guideSettingsRef,
-            aboutDashboardPageRef,
-            gamerProfilePageRef,
-            showThemeSelection,
-            guideSelectThemeRef,
-            communityDashboardPageRef}
+    return {
+        revealGuideMenu, 
+        extendMenu,
+        revealAboutDashboard, 
+        showGuideSettings,
+        extendGuideMenu,
+        closeFullMenu,
+        extendRevealContent,
+        revealThemeSelection,
+        backButtonStateSelection,
+        guideSettingsAnimate, 
+        guideMenuRef, 
+        guidePanelRef,
+        guideSettingsRef,
+        aboutDashboardPageRef,
+        gamerProfilePageRef,
+        showThemeSelection,
+        guideSelectThemeRef,
+        communityDashboardPageRef
+        };
 };

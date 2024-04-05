@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
 import mobileStyles from '../dashboard_styles/mobilePage.module.css';
@@ -10,7 +10,9 @@ import useGuidePanelAnimation from '../custom_hooks/useGuidePanelAnimation';
 import { selectContextIndex,
          isTrayDisplayed,
          selectMobileDeviceStatus,
-         updateMobileStatus,}
+         updateMobileStatus,
+         selectDashboardAnimationStatus,
+        }
 from '../redux_slices/xboxSlice';
 
 import { updateGuideActiveState,
@@ -37,14 +39,18 @@ import useAudioSound from "../custom_hooks/useAudioSound";
 const Xbox = (props) => {
 
     const { handleFullScreen } = props;
+    
+    const [isDashAnimationReady, setDashAnimationStatus] = useState(null);
+    const [bladeContainerRef, setDashboardState] = useState(null);
 
     const dispatch = useDispatch();
 
     const isMobileDevice = useSelector(selectMobileDeviceStatus);
+    const isDashboardAnimationReady = true;
 
-    const bladeContainerRef= useDashboardAnimation();
-    const guidePanelAnimation = useGuidePanelAnimation();
     
+    const guidePanelAnimation = useGuidePanelAnimation();
+    const dashboardAnimationState = useDashboardAnimation();
     
     //Dashboard state variables
     const current_context_index = useSelector(selectContextIndex);
@@ -75,46 +81,46 @@ const Xbox = (props) => {
     const utilitySFX = useAudioSound(utility_sound_sfx, utilitySfxSprite);
 
 
-    const shiftBladeLeft = () => {
+    function shiftBladeLeft() {
         switch(current_context_index) {
             case 1 :
                 bladeSFX.current['play']({id: 'xbl_shift'});
-                bladeContainerRef.shiftLeft();
+                dashboardAnimationState.shiftLeft();
                 break;
             case 2:
                 bladeSFX.current['play']({id: 'xbl_shift'});
-                bladeContainerRef.shiftLeft();
+                dashboardAnimationState.shiftLeft();
                 break;
             case 3:
                 bladeSFX.current['play']({id: 'games_shift'});
-                bladeContainerRef.shiftLeft();
+                dashboardAnimationState.shiftLeft();
                 break;
             case 4:
                 bladeSFX.current['play']({id: 'media_shift'});
-                bladeContainerRef.shiftLeft();
+                dashboardAnimationState.shiftLeft();
                 break;
             case 'default': break;
         }
     };
 
 
-    const shiftBladeRight = () => {
+    function shiftBladeRight() {
         switch(current_context_index) {
             case 0 :
                 bladeSFX.current['play']({id: 'xbl_shift'});
-                bladeContainerRef.shiftRight();
+                dashboardAnimationState.shiftRight();
                 break;
             case 1:
                 bladeSFX.current['play']({id: 'games_shift'});
-                bladeContainerRef.shiftRight();
+                dashboardAnimationState.shiftRight();
                 break;
             case 2:
                 bladeSFX.current['play']({id: 'media_shift'});
-                bladeContainerRef.shiftRight();
+                dashboardAnimationState.shiftRight();
                 break;
             case 3:
                 bladeSFX.current['play']({id: 'system_shift'});
-                bladeContainerRef.shiftRight();
+                dashboardAnimationState.shiftRight();
                 break;
             case 'default': break;
         }
@@ -184,13 +190,22 @@ const Xbox = (props) => {
 
     function slideBladesAway () {
 
-        bladeContainerRef.slideBladesOut();
+        dashboardAnimationState.slideBladesOut();
     }
 
     function slideBladesBack () {
-        bladeContainerRef.slideBladesBack();
+        dashboardAnimationState.slideBladesBack();
     }
     
+
+    // useEffect(()=>{
+    //     console.log("Is Dashboard Animation Ready");
+    //     console.log(isDashboardAnimationReady);
+
+    //     if(isDashAnimationReady){
+    //         setDashAnimationStatus(true);
+    //     }
+    // }, [isDashboardAnimationReady]);
       
 
     return (
@@ -209,18 +224,8 @@ const Xbox = (props) => {
 
             {/* Renders the blade components */}
             <div className={styles.bladeMask}>
-            {<NavBladesContainer bladeContainerRef={bladeContainerRef['mountRef']} 
-                                 centerBoxAnimateRef={bladeContainerRef['centerBlockExpandRef']}
-                                 dashboardUnderlayRef={bladeContainerRef['dashboardUnderlayRef']}
-                                 leftBladeGroupRef={bladeContainerRef['leftBladeGroupRef']}
-                                 rightBladeGroupRef={bladeContainerRef['rightBladeGroupRef']}
-                                 l_marketplaceBladeInactiveRef={bladeContainerRef['l_marketplaceBladeInactiveRef']}
-                                 l_xboxliveBladeInactiveRef={bladeContainerRef['l_xboxliveBladeInactiveRef']}
-                                 l_gamesBladeInactiveRef={bladeContainerRef['l_gamesBladeInactiveRef']}
-                                 l_mediaBladeActiveRef={bladeContainerRef['l_mediaBladeActiveRef']}
-                                 l_gamesBladeActiveRef={bladeContainerRef['l_gamesBladeActiveRef']}
-                                 r_mediaBladeInactiveRef={bladeContainerRef['r_mediaBladeInactiveRef']}
-                                 r_systemBladeInactiveRef={bladeContainerRef['r_systemBladeInactiveRef']} />} 
+
+                <NavBladesContainer dashboardAnimationState={dashboardAnimationState}/>
             </div>
 
             {/* Provides a mask to prevent overflow from the page content */}
@@ -269,10 +274,10 @@ const Xbox = (props) => {
 
 
                         {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
-                        <MarketplacePage  handleFullScreen={handleFullScreen} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
+                        <MarketplacePage slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
                         <XboxlivePage    foreignExtendGamerProfile={foreignExtendGamerProfile} foreignExtendCommunityPage={foreignExtendCommunityPage}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
-                        <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={bladeContainerRef['gamesSubPageExit']} gamesSubPageAnimation={bladeContainerRef['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
-                        <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} mediaSubPageExit={bladeContainerRef['mediaSubPageExit']} mediaSubPageAnimation={bladeContainerRef['mediaSubPageAnimation']} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={dashboardAnimationState['gamesSubPageExit']} gamesSubPageAnimation={dashboardAnimationState['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                        <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} mediaSubPageExit={dashboardAnimationState['mediaSubPageExit']} mediaSubPageAnimation={dashboardAnimationState['mediaSubPageAnimation']} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
                         <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
 
                         {/* Buttons, System Tray */}

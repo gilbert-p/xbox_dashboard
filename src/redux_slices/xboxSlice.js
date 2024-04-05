@@ -24,6 +24,8 @@ let initialState = {
 
     is_guide_menu_open: false,
 
+    is_dash_animation_ready: false,
+
 }
 
 export const bladeTransitionAsync = createAsyncThunk(
@@ -146,6 +148,9 @@ export const xboxSlice = createSlice({
       },
       updateDiscTrayState: (state, action) => {
         state.disc_tray = action.payload;
+      },
+      updateDashboardAnimationStatus: (state, action) => {
+        state.is_dash_animation_ready = action.payload;
       }
     },
     extraReducers: (builder) => {
@@ -167,6 +172,7 @@ export const {
    updateGuideMenuState,
    updateDiscTrayState,
    updateMobileStatus,
+   updateDashboardAnimationStatus,
    } = xboxSlice.actions;
 
 export const selectMobileDeviceStatus = (state) => state.dashboard.is_mobile_device;
@@ -188,5 +194,6 @@ export const selectLastIndexCalled = (state) => state.dashboard.last_index_calle
 
 export const isGuideOpen = (state) => state.dashboard.is_guide_menu_open;
 
+export const selectDashboardAnimationStatus = (state) => state.dashboard.is_dash_animation_ready;
 
 export default xboxSlice.reducer;

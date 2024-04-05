@@ -17,8 +17,8 @@ import {
 
 const NavBladesContainer = (props) => {
 
-    const { bladeContainerRef, 
-            centerBoxAnimateRef, 
+    const { mountRef, 
+            centerBlockExpandRef, 
             leftBladeGroupRef,
             rightBladeGroupRef,
             l_marketplaceBladeInactiveRef,
@@ -29,7 +29,8 @@ const NavBladesContainer = (props) => {
             l_mediaBladeActiveRef,
             
             r_mediaBladeInactiveRef,
-            r_systemBladeInactiveRef, } = props;
+            r_systemBladeInactiveRef, } = props['dashboardAnimationState'];
+
     
     const dispatch = useDispatch();
 
@@ -66,11 +67,11 @@ const NavBladesContainer = (props) => {
 
         <div className={bladeStyles.animateTransparentOpeningContainer}>
 
-            <div ref={centerBoxAnimateRef} className={bladeStyles.centerBlockExpand}></div>
+            <div ref={centerBlockExpandRef} className={bladeStyles.centerBlockExpand}></div>
 
         </div>
 
-            <div className={`${bladeStyles.bladeContainer}  ${show_blade_state ? '' : transitionStyles.instantTransparent}`} ref={bladeContainerRef}>
+            <div className={`${bladeStyles.bladeContainer}  ${show_blade_state ? '' : transitionStyles.instantTransparent}`} ref={mountRef}>
                 <div className={bladeStyles.centeredContent}>
 
                     <div className={bladeStyles.leftGroup} ref={leftBladeGroupRef}>
