@@ -11,7 +11,6 @@ import { selectContextIndex,
          isTrayDisplayed,
          selectMobileDeviceStatus,
          updateMobileStatus,
-         selectDashboardAnimationStatus,
         }
 from '../redux_slices/xboxSlice';
 
@@ -40,13 +39,11 @@ const Xbox = (props) => {
 
     const { handleFullScreen } = props;
     
-    const [isDashAnimationReady, setDashAnimationStatus] = useState(null);
-    const [bladeContainerRef, setDashboardState] = useState(null);
 
     const dispatch = useDispatch();
 
     const isMobileDevice = useSelector(selectMobileDeviceStatus);
-    const isDashboardAnimationReady = true;
+
 
     
     const guidePanelAnimation = useGuidePanelAnimation();
@@ -197,15 +194,6 @@ const Xbox = (props) => {
         dashboardAnimationState.slideBladesBack();
     }
     
-
-    // useEffect(()=>{
-    //     console.log("Is Dashboard Animation Ready");
-    //     console.log(isDashboardAnimationReady);
-
-    //     if(isDashAnimationReady){
-    //         setDashAnimationStatus(true);
-    //     }
-    // }, [isDashboardAnimationReady]);
       
 
     return (

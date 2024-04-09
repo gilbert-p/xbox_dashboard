@@ -1,13 +1,106 @@
 .mobileViewContainer {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    background-color: lightskyblue;
+    /* background-color: lightskyblue; */
+    background: rgb(57, 57, 57);
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    pointer-events: none;
 }
+
+.animatedBackground {
+    position: absolute;
+    left:-180%;
+    top: -50%;
+    width: 1300px;
+    height: 1300px;
+    background: url('../assets/images/circles_radiating_design.png');
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.6;
+    transform-origin: 50% 50%;
+    animation: rotateCircles 45s linear infinite forwards;
+    /* background-size: cover; */
+}
+
+.welcomeMessage {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    /* place-content: center; */
+    /* place-content: center; */
+    flex-direction: column;
+    /* outline: 2px solid red; */
+    z-index: 1;
+
+    >h2 {
+        position: relative;
+        width: 55%;
+        display: inline-block;
+        font-size: 2.8em;
+        color: white;
+        left: 50%;
+        transform: translateX(-50%);
+
+    }
+}
+
+.accentContainer {
+    display: flex;
+    justify-content: space-between;
+    width: inherit;
+    height: 80px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+}
+
+.welcomeAccentLeft {
+    width: 120px;
+    height: 50px;
+    background: url('../assets/images/welcome_accent_left.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.welcomeAccentRight {
+    width: 120px;
+    height: 50px;
+    background: url('../assets/images/welcome_accent_right.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.xboxWelcome {
+    position: relative;
+    left: 50%;
+    top: -30%;
+    transform: translateX(-50%);
+    width: 75px;
+    height: 75px;
+    background: url('../assets/images/xbox_welcome_logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+
+
+
+
+
+
+
 
 .enableFullScreenPrompt {
     position: absolute;
-    width: inherit;
+    width: 1200px;
     height: inherit;
     background: radial-gradient(ellipse, rgb(125, 125, 125) 0%, rgba(68,68,68,1) 50%);
     /* background-position: 50px; */
@@ -70,3 +163,13 @@
 }
 
 
+
+@keyframes rotateCircles { 
+from {
+    transform: rotate(0deg);
+}
+to {
+    transform: rotate(360deg);
+}
+
+}

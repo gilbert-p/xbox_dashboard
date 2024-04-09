@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback , useLayoutEffect  } from 'rea
 import { useSelector, useDispatch } from 'react-redux';
 import { debounce } from 'lodash';
 import { gsap } from 'gsap';
-import { navigateTo, selectContextIndex, selectTransitionState, bladeTransitionAsync, updateDashboardAnimationStatus } from '../redux_slices/xboxSlice';
+import { navigateTo, selectContextIndex, selectTransitionState, bladeTransitionAsync, } from '../redux_slices/xboxSlice';
 import { updateNavigateContext } from "../redux_slices/menuSlice";
 
 export default function useDashboardBladeAnimation() {
@@ -131,7 +131,6 @@ export default function useDashboardBladeAnimation() {
                             .pause();
   
   
-      dispatch(updateDashboardAnimationStatus(true));
     };
 
       initializeTimeline();

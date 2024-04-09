@@ -15,8 +15,9 @@ import transitionStyles from './dashboard_styles/TransitionStyles.module.css';
 function App() {
   
 
-  const [screenOverlay, setScreenOverlay] = useState(null);
+  const [screenOverlay, setScreenOverlay] = useState(false);
   const [isMobileDeivce, setIsMobileDevice] = useState(null);
+  const [fullScreenMobilePrompt, setFullscreenMobilePrompt] = useState(null);
 
   const xboxBladeContainerRef = useRef(null);
 
@@ -74,7 +75,12 @@ function App() {
 
       let orientationType = window.screen.orientation.type;
 
-      detectIfMobile();
+      let isMobileDevice = detectIfMobile();
+
+      if(isMobileDeivce) {
+        setFullscreenMobilePrompt(true);
+      }
+
 
       if(orientationType === "portrait-primary") {
         setScreenOverlay(true);
@@ -148,6 +154,16 @@ function App() {
 const MobileViewPrompt = () => {
   return (
     <div className={mobileStyles.mobileViewContainer}>
+      <div className={mobileStyles.animatedBackground}></div>
+      <div className={mobileStyles.welcomeMessage}>
+        <h2>WELCOME</h2>
+        <div className={mobileStyles.accentContainer}>
+          <div className={mobileStyles.welcomeAccentLeft}></div>
+          <div className={mobileStyles.welcomeAccentRight}></div>
+        </div>
+        <div className={mobileStyles.xboxWelcome}></div>
+
+      </div>
 
     </div>
   );
@@ -162,14 +178,21 @@ const MobileViewPrompt = () => {
     <div ref={fullscreenRef} className={dashboard_style.safeBorder}>
       <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef} >
         <XboxDashboard handleFullScreen={handleFullscreenToggle}/> 
-        <div className={!isFullscreen ? mobileStyles.enableFullScreenPrompt: transitionStyles.instantTransparent}>
-                    <div className={mobileStyles.fullscreenButtonContainer}>
-                        <p>Click to Enable Fullscreen</p>
-                        <button id={mobileStyles['fullscreenButton']} onClick={()=>{handleFullscreenToggle();}}>
-                            Enable
-                        </button>
-                    </div>
-                </div>
+
+          {isFullscreenActive ? 
+            (        <div className={!isFullscreen ? mobileStyles.enableFullScreenPrompt: transitionStyles.instantTransparent}>
+              <div className={mobileStyles.fullscreenButtonContainer}>
+                  <p>Click to Enable Fullscreen</p>
+                  <button id={mobileStyles['fullscreenButton']} onClick={()=>{handleFullscreenToggle();}}>
+                      Enable
+                  </button>
+              </div>
+          </div>
+          )
+          :
+          ''
+          }
+
       </div>
     </div>
     }
