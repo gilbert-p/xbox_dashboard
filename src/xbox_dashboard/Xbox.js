@@ -36,8 +36,6 @@ import useAudioSound from "../custom_hooks/useAudioSound";
 
 
 const Xbox = (props) => {
-
-    const { handleFullScreen } = props;
     
 
     const dispatch = useDispatch();

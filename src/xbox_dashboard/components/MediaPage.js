@@ -392,6 +392,7 @@ const XboxlivePage = (props) => {
                             ref={playerRef}
                             url={windowsMediaVisual}
                             controls={true}
+                            stopOnUnmount={true}
                             width="100%"
                             height="350px"
                             muted={true}

@@ -3,30 +3,57 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
-    /* background-color: lightskyblue; */
-    background: rgb(57, 57, 57);
-    overflow: hidden;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
+    height: 100vh;
+    overflow-y: visible;
     pointer-events: none;
 }
 
 .animatedBackground {
     position: absolute;
-    left:-180%;
-    top: -50%;
-    width: 1300px;
-    height: 1300px;
-    background: url('../assets/images/circles_radiating_design.png');
+    left:0;
+    top:0;
+    width: 100vw;
+    height: 100vh;
+    /* background: url('../assets/images/circles_radiating_design.png'); */
     background-position: 0px 0px;
     background-repeat: no-repeat;
     background-size: contain;
     opacity: 0.6;
     transform-origin: 50% 50%;
-    animation: rotateCircles 45s linear infinite forwards;
+    /* animation: rotateCircles 45s linear infinite forwards; */
     /* background-size: cover; */
+    z-index: -1;
+}
+
+.reactPlayerWrapper {
+    position: absolute;
+}
+
+.reactPlayer {
+    position: fixed;
+    z-index: -1;
+    width: inherit;
+    height: 100vh !important;
+
+    > video {
+        height: 100vh !important;
+        object-fit: cover;
+        opacity: 0.7;
+    }
+
+}
+
+.mobileContent {
+    position: absolute;
+    width: inherit;
+    height: auto;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    z-index: 100;
 }
 
 .welcomeMessage {
@@ -92,10 +119,206 @@
 
 
 
+.videoPlayerIntro {
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: auto;
+    margin-bottom: 20px;
+
+    > h3 {
+        font-size: var(--screen-heading-size);
+        color: white;
+        margin: 0 auto;
+        margin-bottom: 10px;
+    }
+}
+
+.mobileInstructions {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 5px;
+        background-color: white;
+    }
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 5px;
+        top: 129%;
+        background-color: white;
+    }
 
 
+     h3 {
+        font-size:var(--screen-heading-size);
+        margin-bottom: 20px;
+        margin-top: 40px;
 
 
+    }
+    p {
+        margin-bottom: 30px;
+        margin-top: 20px;
+        font-size: var(--text-link-size);
+        text-align: center;
+    }
+
+    > img {
+        width: auto;
+        height: auto;
+    }
+}
+
+.aboutSection {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
+    width: inherit;
+    margin-top: 70px;
+    
+    > h2 {
+        margin-bottom: 20px;
+    }
+
+    > p {
+        margin-bottom: 20px;
+        line-height: 1.2em;
+        font-size: var(--text-body-size);
+    }
+}
+
+.imageParallaxContainer {
+    width: inherit;
+    max-height: 350px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    
+
+    > img {
+        width: 130%;
+        height: auto;
+        animation: parallaxImgScroll 15s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes parallaxImgScroll {
+    from {
+        transform: translate(0%, -1%);
+    }
+    to {
+        transform: translate(-22%, -25%);
+    }
+}
+
+.glowAnimated {
+    position: relative;
+    width: inherit;
+    max-height: 350px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    
+
+    > img {
+        width: 135%;
+        height: 100%;
+        /* animation: parallaxImgScroll 15s ease-out infinite alternate; */
+    }
+}
+
+@keyframes imageTransparentGlow {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
+#xbox_logo_glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: imageTransparentGlow 6s ease-out infinite alternate;
+}
+
+.toolsList {
+    ul {
+        position: relative;
+        width: inherit;
+        height: auto;
+        left: -10px;
+    }
+
+    li {
+        font-size: calc(var(--text-link-size));
+        margin-left: 20px;
+    }
+}
+
+.linkSection {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: inherit;
+    height: 500px;
+    > h2 {
+        color: var(--white-text);
+        margin: 0 auto;
+    }
+
+    #link_1 {
+        background: url("../assets/images/rowland_brown_website_gamecase.png");
+        background-repeat: no-repeat;
+    }
+    
+    #link_2 {
+        background: url("../assets/images/rowland_brown_behance_gamecase.png");
+        background-repeat: no-repeat;
+    }
+    
+    #link_3 {
+        background: url("../assets/images/xbox_360_styleguide_gamecase.png");
+        background-repeat: no-repeat;
+    }
+    
+    .gamecaseList {
+        height: inherit;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    
+    .gameCaseLisItem {
+        cursor: pointer;
+        width: 90px;
+        height: 132px;
+        margin-left: 35px;
+    
+    }
+    
+    .gamecaseAnchorTag {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        width: 90px;
+        height: 132px;
+        top: 35px;
+        left: 5px;
+        font-size: 20px;
+        color: var(--white-text);
+    }
+}
 
 
 .enableFullScreenPrompt {
