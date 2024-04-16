@@ -5,7 +5,7 @@
     width: 100%;
     height: 100vh;
     overflow-y: visible;
-    pointer-events: none;
+    text-align: center;
 }
 
 .animatedBackground {
@@ -25,12 +25,25 @@
     z-index: -1;
 }
 
-.reactPlayerWrapper {
+.videoPlayerContainer {
+    position: fixed;
+    width: calc(100vw - 40px);
+    height: inherit;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.videoScreenOverlay {
     position: absolute;
+    background-color: rgb(58, 58, 58);
+    width: inherit;
+    height: inherit;
+    z-index: 1;
+    opacity: 0.5;
 }
 
 .reactPlayer {
-    position: fixed;
+    position: absolute;
     z-index: -1;
     width: inherit;
     height: 100vh !important;
@@ -40,6 +53,7 @@
         object-fit: cover;
         opacity: 0.7;
     }
+
 
 }
 
@@ -140,22 +154,7 @@
     color: white;
     align-items: center;
 
-    &:after {
-        content: "";
-        position: absolute;
-        width: 180px;
-        height: 5px;
-        background-color: white;
-    }
 
-    &:before {
-        content: "";
-        position: absolute;
-        width: 180px;
-        height: 5px;
-        top: 129%;
-        background-color: white;
-    }
 
 
      h3 {
@@ -176,6 +175,14 @@
         width: auto;
         height: auto;
     }
+}
+
+.borderSeparatorBottom {
+    width: 180px;
+    height: 5px;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 40px;
 }
 
 .aboutSection {
@@ -261,7 +268,7 @@
     }
 
     li {
-        font-size: calc(var(--text-link-size));
+        font-size: 1.5em;
         margin-left: 20px;
     }
 }
@@ -272,52 +279,54 @@
     flex-direction: column;
     width: inherit;
     height: 500px;
+    margin-top: 20px;
     > h2 {
         color: var(--white-text);
         margin: 0 auto;
     }
 
-    #link_1 {
-        background: url("../assets/images/rowland_brown_website_gamecase.png");
-        background-repeat: no-repeat;
-    }
-    
-    #link_2 {
-        background: url("../assets/images/rowland_brown_behance_gamecase.png");
-        background-repeat: no-repeat;
-    }
-    
-    #link_3 {
-        background: url("../assets/images/xbox_360_styleguide_gamecase.png");
-        background-repeat: no-repeat;
-    }
-    
-    .gamecaseList {
-        height: inherit;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
-    
-    .gameCaseLisItem {
-        cursor: pointer;
-        width: 90px;
-        height: 132px;
-        margin-left: 35px;
-    
-    }
-    
-    .gamecaseAnchorTag {
-        position: relative;
-        display: inline-block;
-        text-decoration: none;
-        width: 90px;
-        height: 132px;
-        top: 35px;
-        left: 5px;
-        font-size: 20px;
-        color: var(--white-text);
-    }
+
+}
+
+#link_1 {
+    background: url("../assets/images/rowland_brown_website_gamecase.png");
+    background-repeat: no-repeat;
+}
+
+#link_2 {
+    background: url("../assets/images/rowland_brown_behance_gamecase.png");
+    background-repeat: no-repeat;
+}
+
+#link_3 {
+    background: url("../assets/images/xbox_360_styleguide_gamecase.png");
+    background-repeat: no-repeat;
+}
+
+.gamecaseList {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.gameCaseLisItem {
+    cursor: pointer;
+    width: 90px;
+    height: 132px;
+    margin-left: 35px;
+}
+
+.gamecaseAnchorTag {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    width: 90px;
+    height: 132px;
+    top: 35px;
+    left: 5px;
+    font-size: 1.2em;
+    color: var(--white-text);
 }
 
 

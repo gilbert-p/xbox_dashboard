@@ -174,6 +174,9 @@ const MobileViewPrompt = () => {
 
 
     <div className={mobileStyles.mobileViewContainer}>
+      <div className={mobileStyles.videoPlayerContainer}>
+
+      <div className={mobileStyles.videoScreenOverlay}></div>
       <ReactPlayer
       className={mobileStyles.reactPlayer}
       ref={dashboardIntroMediaRef}
@@ -186,6 +189,8 @@ const MobileViewPrompt = () => {
       loop={true}
       muted={true}
       />
+      </div>
+
 
 
 
@@ -213,6 +218,7 @@ const MobileViewPrompt = () => {
                         loop={true}
                         muted={true}
   />
+    <div className={mobileStyles.borderSeparatorBottom}></div>
 </div>
 
 <section className={mobileStyles.mobileInstructions}>
@@ -224,6 +230,7 @@ const MobileViewPrompt = () => {
   <p>Accept Fullscreen Prompt Upon Rotating</p>
 
   <img src={enableFullscreenImg} alt="Rotate Phone Icon" />
+  <div className={mobileStyles.borderSeparatorBottom}></div>
 </section>
 
 <section className={mobileStyles.aboutSection}>
@@ -244,6 +251,7 @@ const MobileViewPrompt = () => {
     today’s landscape - this dashboard still holds as one of the more notable
     gaming dashboard designs of the mid-2000s.
   </p>
+  <div className={mobileStyles.borderSeparatorBottom}></div>
 </section>
 
 <section className={mobileStyles.aboutSection}>
@@ -259,6 +267,7 @@ const MobileViewPrompt = () => {
   <p>
   This cohesive approach is designed to instill a feeling of tranquility in the user experience. The elegantly curved blades not only mirror the aesthetics of the console but also establish a symbiotic connection between the hardware and software, reinforcing the bond between the two facets of the gaming experience.
   </p>
+  <div className={mobileStyles.borderSeparatorBottom}></div>
 </section>
 
 <section className={mobileStyles.aboutSection}>
@@ -273,6 +282,7 @@ const MobileViewPrompt = () => {
     <li>Figma</li>
     <li>Xbox 360 Style Guide</li>
   </ul>
+  <div className={mobileStyles.borderSeparatorBottom}></div>
 </section>
 
 <section className={mobileStyles.linkSection}>
@@ -294,6 +304,7 @@ const MobileViewPrompt = () => {
         </a>
     </li>
   </ul>
+
 </section>
 </div>
 
