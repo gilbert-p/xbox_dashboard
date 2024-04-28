@@ -28,14 +28,15 @@ router.get('/xboxlive/community', (req, res) =>{
 router.get('/marketplace/games', (req, res) => {
   const sql = 'SELECT * FROM spotlight_content';
 
-  db.query(sql, (err, results) => {
-    if (err) {
-        console.error('Error fetching data:', err);
-        res.status(500).send('Error fetching data');
-    } else {
-        res.json(results);
-    }
-});
+//   db.query(sql, (err, results) => {
+//     if (err) {
+//         console.error('Error fetching data:', err);
+//         res.status(500).send('Error fetching data');
+//     } else {
+//         res.json(results);
+//     }
+// });
+  res.send("HELLO WORLD");
 });
 
 
