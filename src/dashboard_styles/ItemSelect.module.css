@@ -496,13 +496,14 @@
             flex-direction: row;
             align-items: center;
             justify-content: flex-start;
-            width: 300px;
+            width: 450px;
             height: inherit;
             margin-left: 380px;
 
             > p {
                 text-overflow: ellipsis;
                 text-wrap: nowrap;
+                overflow: hidden;
                 left: -50px;
             }
 

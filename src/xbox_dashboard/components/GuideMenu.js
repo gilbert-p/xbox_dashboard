@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import guideMenuStyles from '../../dashboard_styles/GuideMenu.module.css';
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
@@ -7,6 +7,8 @@ import itemSelectStyles from "../../dashboard_styles/ItemSelect.module.css";
 import profileCardStyles from "../../dashboard_styles/ProfileCard.module.css";
 import useCurrentTime from '../../custom_hooks/useCurrentTime';
 import energyCircles from '../../dashboard_styles/EnergyCirclesAnimation.module.css';
+
+import useFetchDatabase from '../../custom_hooks/useFetchDatabase';
 
 
 import {
@@ -58,25 +60,25 @@ import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 const GuideMenu = (props) => {
 
+    const { data: xboxlive_content, loading, error } = useFetchDatabase('http://localhost:8080/xboxlive/community');
+
+    const [xboxliveData, setXboxliveData] = useState(null);
+
     const { guidePanelRef, 
-            guideMenuRef,
-            guideSelectThemeRef, 
-            guideSettingsRef, 
-            aboutDashboardPageRef,
-            gamerProfilePageRef, 
-            extendGuideMenu, 
-            revealThemeSelection,
-            backButtonStateSelection,
-            communityDashboardPageRef,
-          } = props['guideAnimationRef'];
+        guideMenuRef,
+        guideSelectThemeRef, 
+        guideSettingsRef, 
+        aboutDashboardPageRef,
+        gamerProfilePageRef, 
+        extendGuideMenu, 
+        revealThemeSelection,
+        backButtonStateSelection,
+        communityDashboardPageRef,
+      } = props['guideAnimationRef'];
 
 
 
     const dispatch = useDispatch();
-
-    
-    // const guidePanelAnimation = useGuidePanelAnimation();
-
     const guideMenuIndex = useSelector(selectGuideMenuIndex);
     const guideMenuLinkStackIndex = useSelector(selectGuideMenuLinkStackIndex);
     const isGuideMenuHighlightActive = useSelector(selectGuideMenuHighlightState);
@@ -95,6 +97,45 @@ const GuideMenu = (props) => {
     const isThemeSelectHighlightActive = useSelector(selectThemeHighlightState);
 
     const communityCategory = useSelector(selectCommunityCategory);
+
+    useEffect(() => {
+        const content = {
+          messages: [],
+          friends: [],
+          players: [],
+        };
+      
+        const organizeXboxliveContent = (data) => {
+          if (!data) {
+            return;
+          }
+      
+          data.forEach(item => {
+            switch (item.category) {
+              case 'messages':
+                content.messages.push({ id: item.id, category: item.category, gamertag: item.gamertag, message: item.message, });
+                break;
+              case 'friends':
+                content.friends.push({ id: item.id, category: item.category, gamertag: item.gamertag, game_status: item.game_status });
+                break;
+              case 'players':
+                content.players.push({ id: item.id, category: item.category, gamertag: item.gamertag, game_status: item.game_status, last_met: item.last_met });
+                break;
+              default:
+                break;
+            }
+          });
+          setXboxliveData(content);
+        }
+      
+        if (!loading && xboxlive_content) {
+            organizeXboxliveContent(xboxlive_content);
+        }
+      
+      }, [loading, xboxlive_content]); 
+
+
+
 
 
     const musicSprite = {
@@ -182,6 +223,79 @@ const GuideMenu = (props) => {
           );
     };
 
+    const RenderMessages = () => {
+        if (!xboxliveData) {
+            return <></>;
+        }
+    
+        return xboxliveData['messages'].map(messageItem => (
+            <div id={messageItem.id} className={itemSelectStyles.groupContainer}>
+                <p>{messageItem.gamertag}</p>
+                <div className={itemSelectStyles.communityMessageContent}>
+                    <div className={itemSelectStyles.messageSelectIcon}></div>
+                    <p>{messageItem.message}</p>
+                </div>
+            </div>
+        ));
+    };
+
+    const RenderFriends = () => {
+        if (!xboxliveData) {
+            return <></>;
+        }
+    
+        return xboxliveData['friends'].map(friendItem => (
+            <div id={friendItem.id} className={itemSelectStyles.groupContainer}>
+                <div className={itemSelectStyles.flexInnerContainer}>
+                    <div className={itemSelectStyles.gamerProfileIcon}></div>
+                    <p className={itemSelectStyles.gamerTag}>{friendItem.gamertag} </p>
+                </div>
+                <div className={itemSelectStyles.flexInnerContainer}>
+                    <div className={itemSelectStyles.friendOnlineIcon}></div>
+                    <p className={itemSelectStyles.friendStatus}>{friendItem.game_status}</p>
+                </div>
+            </div>
+        ));
+    };
+
+    const RenderPlayers = () => {
+        if (!xboxliveData) {
+            return <></>;
+        }
+    
+        return xboxliveData['players'].map(playerItem => (
+            <div className={itemSelectStyles.playerGroupContainer}>
+                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                    <div className={itemSelectStyles.recentPlayerIcon}></div>
+                    <div className={itemSelectStyles.recentPlayerNameRepList}>
+                        <p className={itemSelectStyles.recentPlayerTitle}>
+                            {playerItem.gamertag}
+                        </p>
+                        <div className={itemSelectStyles.recentPlayerRepStars}>
+                            <div className={itemSelectStyles.starIcon}></div>
+                            <div className={itemSelectStyles.starIcon}></div>
+                            <div className={itemSelectStyles.starIcon}></div>
+                            <div className={itemSelectStyles.starIcon}></div>
+                            <div className={itemSelectStyles.starIconInactive}></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={itemSelectStyles.playerFlexInnerContainer}>
+                    <div className={itemSelectStyles.playerControllerIcon}></div>
+                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
+                        <p className={itemSelectStyles.recentPlayerTitle}>
+                            {playerItem.game_status}
+                        </p>
+                        <p>{playerItem.last_met}</p>
+                    </div>
+
+                </div>
+                                
+            </div>
+        ));
+    };
+
     return (
         <>
         {/* Guide Menu that is opened/closed by home button */}
@@ -226,36 +340,24 @@ const GuideMenu = (props) => {
                                     <div className={guideMenuStyles.buttonGroup}>
                                         <button className={guideMenuStyles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(0));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
-
-
                                             <a href="https://github.com/gilbert-p/xbox_dashboard" target="_blank" rel="noopener noreferrer">
                                                 <span id={guideMenuStyles["skewButton_1"]} className={`${guideMenuStyles.buttonIcon} ${iconLibrary.github_logo}`}></span>
                                                 <span className={`${isLinkStackHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
                                             </a>
-
-                                           
                                         </button>
                                         <button className={guideMenuStyles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(1));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
-
-
                                             <a href="https://gilbert-p.github.io/" target="_blank" rel="noopener noreferrer">
                                                 <span id={guideMenuStyles["skewButton_2"]} className={`${guideMenuStyles.buttonIcon} ${iconLibrary.react_logo}`}></span>
                                                 <span className={`${isLinkStackHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
                                             </a>
-
-
                                         </button>
                                         <button className={guideMenuStyles.skewmorphButton} onClick={()=>{utilitySound.current.playButtonSound()}}
                                         onMouseEnter={()=>{dispatch(navigateGuideMenuLinkStack(2));}} onMouseLeave={()=>{dispatch(updateLinkStackHighlight(false))}}>
-
-
                                             <a href="https://github.com/gilbert-p/xbox_dashboard" target="_blank" rel="noopener noreferrer">
                                                 <span id={guideMenuStyles["skewButton_2"]} className={`${guideMenuStyles.buttonIcon} ${iconLibrary.react_logo}`}></span>
                                                 <span className={`${isLinkStackHighlightActive && guideMenuStyles.skewmorphButtonHighlight} ${guideMenuLinkStackIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
                                             </a>
-
-
                                         </button>
                                     </div>
                                 </div>
@@ -273,9 +375,7 @@ const GuideMenu = (props) => {
                                         </div>
                                         <div className={itemSelectStyles.listItem} onClick={()=>{revealThemeSelection(); dispatch(updateShowThemeSelect('true')); dispatch(updateGuideActiveState('theme_select')); utilitySound.current.playButtonSound() }}
                                          onMouseEnter={()=>{dispatch(navigateGuideMenu(1));}} onMouseLeave={()=>{dispatch(updateGuideMenuHighlight(false))}}>
-                                            {/* <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span> */}
                                             <p>
-
                                                 Dashboard Settings
                                             </p>
                                             <span className={`${isGuideMenuHighlightActive && itemSelectStyles.listItemHighlight} ${guideMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -302,16 +402,13 @@ const GuideMenu = (props) => {
                                         <button id={guideMenuStyles["arrowSelectionButton"]} className={guideMenuStyles.skewmorphButton} 
                                             onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(3));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
                                             <span className={guideMenuStyles.arrowPoint}></span>
-                                            {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 3 ? transitionStyles.removeDisplay : ""}`}></span> */}
                                         </button>
                                         <button id={guideMenuStyles["soundAdjustButton"]} className={guideMenuStyles.skewmorphButton} 
                                         onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(4));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                                            {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 4 ? transitionStyles.removeDisplay : ""}`}></span> */}
                                         </button>
                                     </div>
                                     <div className={guideMenuStyles.musicPlayerSongTitleContainer}
                                         onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(5));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                                        {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.backgroundHighlightGlow} ${guideMusicPlayerIndex !== 5 ? transitionStyles.removeDisplay : ""}`}></span> */}
                                         <p className={guideMenuStyles.guideMusicPlayerTitle}>{`${isSongPlaying ? currentSongTitle : 'Select Music'}`}</p>
                                     </div>
                                 </div>
@@ -321,10 +418,6 @@ const GuideMenu = (props) => {
                                         <div className={guideMenuStyles.xboxGuideLogo}></div>
                                     </div>
                                 </div>
-
-
-
-
                 </div>
 
                 <div className={guideMenuStyles.guideSelectThemeContainer} ref={guideSelectThemeRef}>
@@ -356,7 +449,6 @@ const GuideMenu = (props) => {
                         </div>
                     </div>
                 </div>
-
 
 
                 {/* Extensible Content from Guide Menu */}
@@ -419,7 +511,6 @@ const GuideMenu = (props) => {
                     </div>
 
                     <div className={guideMenuStyles.gamerProfileContent}>
-
 
                         <div className={guideMenuStyles.backgroundOverlay}></div>
 
@@ -507,8 +598,6 @@ const GuideMenu = (props) => {
 
 
                 <div className={guideMenuStyles.communitySectionContainer} ref={communityDashboardPageRef}>
-                {/* <div className={styles.backgroundOverlay}></div> */}
-
 
                     <h2 className={guideMenuStyles.aboutDashboardTitle}>
                         Community
@@ -521,353 +610,25 @@ const GuideMenu = (props) => {
                     </div>
 
                     <div id={guideMenuStyles[guideMenuStyles.communityMessageSection]} className={`${communityCategory === "messages" ? guideMenuStyles.communitySectionContent: transitionStyles.removeDisplay}`}>
-                        
                         <div className={itemSelectStyles.communityPageItemContainer}>
-                        <div className={itemSelectStyles.groupContainer}>
-                            <p>Create New</p>
-                        </div>
                             <div className={itemSelectStyles.groupContainer}>
-                                <p>Cortana</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p>Where is the Chief at? </p>
-                                </div>
+                                <p>Create New</p>
                             </div>
-                            <div className={itemSelectStyles.groupContainer}>
-                                <p>Bill Gates Clone</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p> Welcome to the Xbox Experience.</p>
-                                </div>
-                            </div>
-                            <div className={itemSelectStyles.groupContainer}>
-                                <p>John-117</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p>Need backup in the Warthog, ASAP!</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <p>Lara Croft</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p>Exploring ancient tombs, anyone joining?</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <p>Commander Shepard</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p>Reapers inbound! Calling all N7 operatives!</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <p>Marcus Fenix</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p>Locust Horde spotted, grab your Lancers!</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <p>Ezio Auditore</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p>Assassins, assemble in the shadows.</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <p>Alan Wake</p>
-                                <div className={itemSelectStyles.communityMessageContent}>
-                                    <div className={itemSelectStyles.messageSelectIcon}></div>
-                                    <p>Darkness is closing in, need a flashlight!</p>
-                                </div>
-                            </div>
+                            <RenderMessages/>
                         </div>
 
                     </div>
 
                     <div className={`${communityCategory === "friends" ? guideMenuStyles.communitySectionContent: transitionStyles.removeDisplay}`}>
-                        
                         <div className={itemSelectStyles.communityPageItemContainer}>
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>MartyTheElder </p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Halo 3</p>
-                                </div>
-                            </div>
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>LunaTheGamer</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Halo 3: ODST</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>ShadowPlayerX</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Assassin's Creed</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>EpicGamer23</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Call of Duty: Modern Warfare 2</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>TechNinja76</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Left 4 Dead</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>StealthGaming</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Fallout 3</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>NovaPlayer99</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Gears of War 2</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>SkywalkerGamer</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>Batman: Arkham Asylum</p>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.groupContainer}>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.gamerProfileIcon}></div>
-                                    <p className={itemSelectStyles.gamerTag}>QuantumPlayer</p>
-                                </div>
-                                <div className={itemSelectStyles.flexInnerContainer}>
-                                    <div className={itemSelectStyles.friendOnlineIcon}></div>
-                                    <p className={itemSelectStyles.friendStatus}>BioShock 2</p>
-                                </div>
-                            </div>
-                            
+                            <RenderFriends/>                           
                         </div>
-
                     </div>
 
                     <div className={`${communityCategory === "players" ? guideMenuStyles.communitySectionContent: transitionStyles.removeDisplay}`}>
-                        
                         <div className={itemSelectStyles.communityPageItemContainer}>
-                            <div className={itemSelectStyles.playerGroupContainer}>
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
-                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            SultanOfSpuzz21
-                                        </p>
-                                        <div className={itemSelectStyles.recentPlayerRepStars}>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIconInactive}></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.playerControllerIcon}></div>
-                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            Call of Duty 4
-                                        </p>
-                                        <p>Last met yesterday.</p>
-                                    </div>
-
-                                </div>
-                                
-                            </div>
-                            <div className={itemSelectStyles.playerGroupContainer}>
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
-                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            SultanOfSpuzz21
-                                        </p>
-                                        <div className={itemSelectStyles.recentPlayerRepStars}>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIconInactive}></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.playerControllerIcon}></div>
-                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            Call of Duty 4
-                                        </p>
-                                        <p>Last met yesterday.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.playerGroupContainer}>
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
-                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            PixelWarrior99
-                                        </p>
-                                        <div className={itemSelectStyles.recentPlayerRepStars}>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIconInactive}></div>
-                                            <div className={itemSelectStyles.starIconInactive}></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.playerControllerIcon}></div>
-                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            Call of Duty MW2
-                                        </p>
-                                        <p>Online</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className={itemSelectStyles.playerGroupContainer}>
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
-                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            GhostReaper9000
-                                        </p>
-                                        <div className={itemSelectStyles.recentPlayerRepStars}>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.playerControllerIcon}></div>
-                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            Gears of War 2
-                                        </p>
-                                        <p>Last met yesterday.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={itemSelectStyles.playerGroupContainer}>
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
-                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                        ShadowStrikerX
-                                        </p>
-                                        <div className={itemSelectStyles.recentPlayerRepStars}>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.playerControllerIcon}></div>
-                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            Feeding Frenzy
-                                        </p>
-                                        <p>Last met yesterday.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={itemSelectStyles.playerGroupContainer}>
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.recentPlayerIcon}></div>
-                                    <div className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                        ShadowStrikerX
-                                        </p>
-                                        <div className={itemSelectStyles.recentPlayerRepStars}>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                            <div className={itemSelectStyles.starIcon}></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className={itemSelectStyles.playerFlexInnerContainer}>
-                                    <div className={itemSelectStyles.playerControllerIcon}></div>
-                                    <div id={itemSelectStyles['playerRecentDetails']} className={itemSelectStyles.recentPlayerNameRepList}>
-                                        <p className={itemSelectStyles.recentPlayerTitle}>
-                                            Geometry Wars
-                                        </p>
-                                        <p>Last met yesterday.</p>
-                                    </div>
-                                </div>
-                            </div>
-
+                            <RenderPlayers/>
                         </div>
-
                     </div>
 
                     <nav className={guideMenuStyles.communityNavButtons}>

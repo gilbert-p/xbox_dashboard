@@ -8,21 +8,27 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "concurrently": "^8.2.2",
+    "express": "^4.19.2",
     "gsap": "^3.9.1",
     "json5": "^2.2.3",
     "lodash-es": "^4.17.21",
+    "mysql": "^2.18.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-player": "^2.15.1",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
     "react-swipeable": "^6.2.0",
+    "serverless-http": "^3.2.0",
     "use-sound": "^4.0.1"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
+    "start": "concurrently \"npm run start:xbox_dashboard\" \"nodemon server\" ",
+    "start:xbox_dashboard": "react-scripts start",
+    "start:server": "cd server && node index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -43,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "nodemon": "^3.1.0"
   }
 }
