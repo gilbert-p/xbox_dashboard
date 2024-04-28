@@ -3,7 +3,7 @@ const app = express();
 const router = express.Router();
 const cors = require('cors');
 
-const db = require('./database/db');
+const db = require('../database/db');
 
 
 app.use(cors());
