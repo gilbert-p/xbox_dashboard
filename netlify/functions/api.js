@@ -40,3 +40,5 @@ router.get('/marketplace/games', (req, res) => {
 
 
 app.use("/api", router);
+
+export const handler = serverless(app);
