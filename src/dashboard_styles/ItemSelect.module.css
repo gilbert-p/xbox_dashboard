@@ -799,3 +799,34 @@
         background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 50%, rgba(255, 255, 255, 0) 100%);
     }
 }
+
+.loadingContainer {
+    width: inherit;
+    height: 300px;
+}
+
+.loadingOverlay {
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(58deg, rgba(139,139,139,1) 10%, rgba(68,68,68,1) 25%); */
+    background-size: 400% 400%;
+
+}
+
+.animatedGradient {
+    position: relative;
+    background: linear-gradient(to right, #eeeeee00 0%, #cbcbcb 25%, #eeeeee00 50%);
+    background-size: 800px 100px;
+    /* background-color: #f6f7f8;  */
+    background-repeat:no-repeat;
+    /* height: 300px; */
+    width: inherit;
+    animation: slideGradient 1s linear infinite forwards;
+    pointer-events: none;
+}
+
+@keyframes slideGradient {
+    0% { background-position: -500% 0%; }
+    /* 50% { background-position: 2000% 50%; } */
+    100% { background-position: 1111% 0%; }
+}

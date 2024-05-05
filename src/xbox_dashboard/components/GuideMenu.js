@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import guideMenuStyles from '../../dashboard_styles/GuideMenu.module.css';
 import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css';
@@ -9,6 +9,7 @@ import useCurrentTime from '../../custom_hooks/useCurrentTime';
 import energyCircles from '../../dashboard_styles/EnergyCirclesAnimation.module.css';
 
 import useFetchDatabase from '../../custom_hooks/useFetchDatabase';
+import useDelayedFetchDatabase from '../../custom_hooks/useDelayedFetchDatabase';
 
 
 import {
@@ -60,7 +61,9 @@ import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 const GuideMenu = (props) => {
 
-    const { data: xboxlive_content, loading, error } = useFetchDatabase('http://localhost:8080/xboxlive/community');
+    // const { data: xboxlive_content, loading, error } = useFetchDatabase('https://xb-dashboard-server.netlify.app/api/xboxlive/community');
+
+    const { data: xboxlive_content, loading, error } = useDelayedFetchDatabase('http://localhost:8080/xboxlive/community', 5000);
 
     const [xboxliveData, setXboxliveData] = useState(null);
 
@@ -223,9 +226,22 @@ const GuideMenu = (props) => {
           );
     };
 
+    function RenderRowItemSkeleton({children, count}) {
+        const skeletonItems = Array.from({ length: count }, (_, index) => (
+            <Fragment key={index}>
+                {children}
+            </Fragment>
+          ));
+        
+          return <>{skeletonItems}</>;
+    }
+
     const RenderMessages = () => {
         if (!xboxliveData) {
-            return <></>;
+            return (<RenderRowItemSkeleton count={8}>
+                        <div  className={`${itemSelectStyles.groupContainer} ${itemSelectStyles.animatedGradient}`}></div>
+                   </RenderRowItemSkeleton>
+                    );
         }
     
         return xboxliveData['messages'].map(messageItem => (
@@ -241,7 +257,11 @@ const GuideMenu = (props) => {
 
     const RenderFriends = () => {
         if (!xboxliveData) {
-            return <></>;
+            return (<RenderRowItemSkeleton count={9}>
+                        <div  className={`${itemSelectStyles.groupContainer} ${itemSelectStyles.animatedGradient}`}></div>
+                    </RenderRowItemSkeleton>
+                    );
+
         }
     
         return xboxliveData['friends'].map(friendItem => (
@@ -260,7 +280,10 @@ const GuideMenu = (props) => {
 
     const RenderPlayers = () => {
         if (!xboxliveData) {
-            return <></>;
+            return (<RenderRowItemSkeleton count={6}>
+                        <div  className={`${itemSelectStyles.playerGroupContainer} ${itemSelectStyles.animatedGradient}`}></div>
+                    </RenderRowItemSkeleton>
+            );
         }
     
         return xboxliveData['players'].map(playerItem => (
@@ -295,6 +318,8 @@ const GuideMenu = (props) => {
             </div>
         ));
     };
+
+
 
     return (
         <>

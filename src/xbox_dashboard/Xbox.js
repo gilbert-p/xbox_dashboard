@@ -15,7 +15,9 @@ import { selectContextIndex,
 from '../redux_slices/xboxSlice';
 
 import { updateGuideActiveState,
-         updateNavigateContext,} 
+         updateNavigateContext,
+         selectNavigationContext,
+        } 
 from '../redux_slices/menuSlice';
 
 
@@ -50,6 +52,7 @@ const Xbox = (props) => {
     //Dashboard state variables
     const current_context_index = useSelector(selectContextIndex);
     const display_tray = useSelector(isTrayDisplayed);
+    const navigationContext = useSelector(selectNavigationContext);
 
 
     //Refs for animating elements
@@ -75,8 +78,17 @@ const Xbox = (props) => {
 
     const utilitySFX = useAudioSound(utility_sound_sfx, utilitySfxSprite);
 
+    function contextShiftBoundary(navigate_context) {
+        const regexPattern = /main_menu/i;
+        return regexPattern.test(navigate_context);
+    }
+
 
     function shiftBladeLeft() {
+        if(!contextShiftBoundary(navigationContext)){
+            return;
+        }
+
         switch(current_context_index) {
             case 1 :
                 bladeSFX.current['play']({id: 'xbl_shift'});
@@ -100,6 +112,11 @@ const Xbox = (props) => {
 
 
     function shiftBladeRight() {
+        if(!contextShiftBoundary(navigationContext)){
+            console.log(navigationContext);
+            return;
+        }
+
         switch(current_context_index) {
             case 0 :
                 bladeSFX.current['play']({id: 'xbl_shift'});

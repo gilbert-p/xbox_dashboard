@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
@@ -11,6 +11,7 @@ import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 import useFetchDatabase from '../../custom_hooks/useFetchDatabase';
+import useDelayedFetchDatabase from '../../custom_hooks/useDelayedFetchDatabase';
 
 
 //Temp spotlight images
@@ -54,9 +55,11 @@ import {
 
 const MarketplacePage = (props) => {
 
-  const { data: spotlightInfo, loading, error } = useFetchDatabase('http://localhost:8080/marketplace/games');
+  // const { data: spotlightInfo, loading, error } = useFetchDatabase('https://xb-dashboard-server.netlify.app/api/marketplace/games');
+  const { data: spotlightInfo, loading, error } = useDelayedFetchDatabase('http://localhost:8080/marketplace/games', 8000);
 
-  // console.log(data);
+  console.log("marketplace data");
+  console.log(spotlightInfo);
 
 
 // Define a state to store the fetched data
@@ -151,6 +154,118 @@ useEffect(() => {
       themes: [haloThemepackThumbnail, massEffectLaunchThumbnail, assassinsCreedCover, bombermanLiveCover],
       featured: [deadRisingCover, digitalph33rGuideThumbnail, massEffectLaunchThumbnail,assassinsCreedCover]
     };
+
+    function RenderRowItemSkeleton({children, count}) {
+      const skeletonItems = Array.from({ length: count }, (_, index) => (
+          <Fragment key={index}>
+              {children}
+          </Fragment>
+        ));
+      
+        return <>{skeletonItems}</>;
+    
+    
+      }
+
+
+    function RenderSpotlightRowItem() {
+      if (!spotlightData) {
+        return (
+          <RenderRowItemSkeleton count={4}>
+            <div className={`${itemSelectStyles.listItem} ${itemSelectStyles.animatedGradient}`}>
+            <div className={itemSelectStyles.listItemBorder}></div>
+            </div>
+          </RenderRowItemSkeleton>
+        );
+      }
+    
+      return spotlightData[spotlightCategoryTitle].map((category, index) => {
+        switch (spotlightCategoryTitle) {
+          case 'games':
+            return (
+              <div key={category.id} className={itemSelectStyles.listItem} onClick={() => { utilitySound.current.playButtonSound() }} onMouseEnter={() => { dispatch(navigateMarketplaceSpotlightMenu(index)); dispatch(updateSelectionHighlight(true)); }}>
+                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== index ? transitionStyles.makeTransparent : ""}`}></span>
+                <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][index]} alt="Halo 3 Cover Art Boxshot" />
+                <div className={itemSelectStyles.titleInfoStack}>
+                  <p className={itemSelectStyles.spotlightTitle}>
+                    {spotlightData ? spotlightData[spotlightCategoryTitle][index].title : null}
+                  </p>
+                  <p className={itemSelectStyles.listItemSubText}>
+                      {spotlightData ? spotlightData[spotlightCategoryTitle][index].subtitle: null}
+                  </p>
+                </div>
+                <div className={itemSelectStyles.listItemBorder}></div>
+              </div>
+            );
+          case 'demos':
+            return (
+              <div key={category.id} className={itemSelectStyles.listItem} onClick={() => { utilitySound.current.playButtonSound() }} onMouseEnter={() => { dispatch(navigateMarketplaceSpotlightMenu(index)); dispatch(updateSelectionHighlight(true)); }}>
+                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== index ? transitionStyles.makeTransparent : ""}`}></span>
+                <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][index]} alt="Halo 3 Cover Art Boxshot" />
+                <div className={itemSelectStyles.titleInfoStack}>
+                  <p className={itemSelectStyles.spotlightTitle}>
+                    {spotlightData ? spotlightData[spotlightCategoryTitle][index].title : null}
+                  </p>
+                  <p className={itemSelectStyles.listItemSubText}>
+                      {spotlightData ? spotlightData[spotlightCategoryTitle][index].subtitle: null}
+                  </p>
+                </div>
+                <div className={itemSelectStyles.listItemBorder}></div>
+              </div>
+            );
+          case 'videos':
+            return (
+              <div key={category.id} className={itemSelectStyles.listItem} onClick={() => { utilitySound.current.playButtonSound() }} onMouseEnter={() => { dispatch(navigateMarketplaceSpotlightMenu(index)); dispatch(updateSelectionHighlight(true)); }}>
+                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== index ? transitionStyles.makeTransparent : ""}`}></span>
+                <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][index]} alt="Halo 3 Cover Art Boxshot" />
+                <div className={itemSelectStyles.titleInfoStack}>
+                  <p className={itemSelectStyles.spotlightTitle}>
+                    {spotlightData ? spotlightData[spotlightCategoryTitle][index].title : null}
+                  </p>
+                  <p className={itemSelectStyles.listItemSubText}>
+                      {spotlightData ? spotlightData[spotlightCategoryTitle][index].subtitle: null}
+                  </p>
+                </div>
+                <div className={itemSelectStyles.listItemBorder}></div>
+              </div>
+            );
+          case 'themes':
+            return (
+              <div key={category.id} className={itemSelectStyles.listItem} onClick={() => { utilitySound.current.playButtonSound() }} onMouseEnter={() => { dispatch(navigateMarketplaceSpotlightMenu(index)); dispatch(updateSelectionHighlight(true)); }}>
+                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== index ? transitionStyles.makeTransparent : ""}`}></span>
+                <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][index]} alt="Halo 3 Cover Art Boxshot" />
+                <div className={itemSelectStyles.titleInfoStack}>
+                  <p className={itemSelectStyles.spotlightTitle}>
+                    {spotlightData ? spotlightData[spotlightCategoryTitle][index].title : null}
+                  </p>
+                  <p className={itemSelectStyles.listItemSubText}>
+                      {spotlightData ? spotlightData[spotlightCategoryTitle][index].subtitle: null}
+                  </p>
+                </div>
+                <div className={itemSelectStyles.listItemBorder}></div>
+              </div>
+            );
+          case 'featured':
+            return (
+              <div key={category.id} className={itemSelectStyles.listItem} onClick={() => { utilitySound.current.playButtonSound() }} onMouseEnter={() => { dispatch(navigateMarketplaceSpotlightMenu(index)); dispatch(updateSelectionHighlight(true)); }}>
+                <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== index ? transitionStyles.makeTransparent : ""}`}></span>
+                <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][index]} alt="Halo 3 Cover Art Boxshot" />
+                <div className={itemSelectStyles.titleInfoStack}>
+                  <p className={itemSelectStyles.spotlightTitle}>
+                    {spotlightData ? spotlightData[spotlightCategoryTitle][index].title : null}
+                  </p>
+                  <p className={itemSelectStyles.listItemSubText}>
+                      {spotlightData ? spotlightData[spotlightCategoryTitle][index].subtitle: null}
+                  </p>
+                </div>
+                <div className={itemSelectStyles.listItemBorder}></div>
+              </div>
+            );
+          default:
+            return null; // Handle unknown category
+        }
+      });
+    }
 
   return (
      <>
@@ -269,67 +384,7 @@ useEffect(() => {
                               </div>
                           </div>
                           <div id={itemSelectStyles[`marketplaceSpotlightInnerList`]} className={itemSelectStyles.innerListContainer} > 
-                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
-                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    
-                                    <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][0]} alt="Halo 3 Cover Art Boxshot" />
-                                    <div className={itemSelectStyles.titleInfoStack}>
-                                      <p className={itemSelectStyles.spotlightTitle}>
-                                        {spotlightData ? spotlightData[spotlightCategoryTitle]['0'].title : null}
-                                      </p>
-                                      <p className={itemSelectStyles.listItemSubText}>
-                                          {spotlightData ? spotlightData[spotlightCategoryTitle]['0'].subtitle: null}
-                                      </p>
-                                    </div>
-                                  <div className={itemSelectStyles.listItemBorder}></div>
-                              </div>
-                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
-                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    
-                                    <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][1]} alt="Halo 3 Cover Art Boxshot" />
-                                    <div className={itemSelectStyles.titleInfoStack}>
-                                      <p className={itemSelectStyles.spotlightTitle}>
-                                        {spotlightData ? spotlightData[spotlightCategoryTitle]['1'].title : null}
-                                      </p>
-                                      <p className={itemSelectStyles.listItemSubText}>
-                                          {spotlightData ? spotlightData[spotlightCategoryTitle]['1'].subtitle: null}
-                                      </p>
-                                    </div>
-                                  <div className={itemSelectStyles.listItemBorder}></div>
-                              </div>
-                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
-                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    
-                                    <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][2]} alt="Halo 3 Cover Art Boxshot" />
-                                    <div className={itemSelectStyles.titleInfoStack}>
-                                      <p className={itemSelectStyles.spotlightTitle}>
-                                        {spotlightData ? spotlightData[spotlightCategoryTitle]['2'].title : null}
-                                      </p>
-                                      <p className={itemSelectStyles.listItemSubText}>
-                                          {spotlightData ? spotlightData[spotlightCategoryTitle]['2'].subtitle: null}
-                                      </p>
-                                    </div>
-                                  <div className={itemSelectStyles.listItemBorder}></div>
-                              </div>
-                              <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                  onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
-                                  <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
-                                    
-                                    <img className={itemSelectStyles.spotlightIcon} src={spotlightImageList[spotlightCategoryTitle][3]} alt="Halo 3 Cover Art Boxshot" />
-                                    <div className={itemSelectStyles.titleInfoStack}>
-                                      <p className={itemSelectStyles.spotlightTitle}>
-                                        {spotlightData ? spotlightData[spotlightCategoryTitle]['3'].title : null}
-                                      </p>
-                                      <p className={itemSelectStyles.listItemSubText}>
-                                          {spotlightData ? spotlightData[spotlightCategoryTitle]['3'].subtitle: null}
-                                      </p>
-                                    </div>
-                                  <div className={itemSelectStyles.listItemBorder}></div>
-                              </div>
-
+                              <RenderSpotlightRowItem/>
                           </div>
                       </div>
                     </div>
