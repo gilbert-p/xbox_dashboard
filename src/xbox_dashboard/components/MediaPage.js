@@ -391,10 +391,12 @@ const XboxlivePage = (props) => {
                           <ReactPlayer
                             ref={playerRef}
                             url={windowsMediaVisual}
-                            controls={true}
                             stopOnUnmount={true}
+                            controls={false}
+                            playing={true}
                             width="100%"
-                            height="350px"
+                            height="auto"
+                            loop={true}
                             muted={true}
                           />
 
