@@ -1,22 +1,24 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+#See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+#dependencies
 /node_modules
-/server
 /.pnp
 .pnp.js
 
 #variables
 .env
 
-# testing
+#testing
 /coverage
 
-# production
+#production
 /build
 
+#local server
+.server
 
-# misc
+
+#misc
 .DS_Store
 .env.local
 .env.development.local
@@ -27,5 +29,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Local Netlify folder
+#Local Netlify folder
 .netlify
