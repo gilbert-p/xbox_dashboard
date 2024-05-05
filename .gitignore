@@ -15,7 +15,7 @@
 /build
 
 #local server
-/server/
+/server
 
 
 #misc
@@ -31,4 +31,4 @@ yarn-error.log*
 
 #Local Netlify folder
 .netlify
-netlify/
+/netlify
