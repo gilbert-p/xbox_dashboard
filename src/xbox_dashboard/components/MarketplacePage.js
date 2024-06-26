@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, Fragment } from 'react';
+import { createSelector } from 'reselect';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
@@ -14,7 +15,9 @@ import useFetchDatabase from '../../custom_hooks/useFetchDatabase';
 import useDelayedFetchDatabase from '../../custom_hooks/useDelayedFetchDatabase';
 
 
-//Temp spotlight images
+
+
+
 import halo3Cover from '../../assets/temp_media/halo_3_boxshot.jpg';
 import gtaIVCover from '../../assets/temp_media/gtaiv_cover.png';
 import eaSkateCover from '../../assets/temp_media/easkate_cover.png';
@@ -55,59 +58,26 @@ import {
 
 const MarketplacePage = (props) => {
 
-  // const { data: spotlightInfo, loading, error } = useFetchDatabase('https://xb-dashboard-server.netlify.app/api/marketplace/games');
-  const { data: spotlightInfo, loading, error } = useDelayedFetchDatabase('http://localhost:8080/marketplace/games', 8000);
+    const marketplaceDatabase = process.env.REACT_APP_DATABASE_MARKETPLACE;
 
-  console.log("marketplace data");
-  console.log(spotlightInfo);
+  // const { data: spotlightInfo, loading, error } = useFetchDatabase(`${marketplaceDatabase}`);
+  // const { data: spotlightInfo, loading, error } = useDelayedFetchDatabase('http://localhost:8080/marketplace/games', 1000);
+  // const { data: spotlightInfo, loading, error } = useDelayedFetchDatabase('', 1000);
+  
+
+    const { mockDbData } = props;   
 
 
 // Define a state to store the fetched data
-const [spotlightData, setSpotlightData] = useState(null);
+    const [spotlightData, setSpotlightData] = useState(null);
 
-useEffect(() => {
-  const spotlightObj = {
-    games: [],
-    demos: [],
-    videos: [],
-    themes: [],
-    featured: [],
-  };
+    useEffect(() => {
 
-  const organizeSpotlightContent = (data) => {
-    if (!data) {
-      return;
+    if (mockDbData) {
+        setSpotlightData(mockDbData);
     }
 
-    data.forEach(item => {
-      switch (item.category) {
-        case 'games':
-          spotlightObj.games.push({ id: item.id, title: item.title, subtitle: item.subtitle, description: item.description });
-          break;
-        case 'demos':
-          spotlightObj.demos.push({ id: item.id, title: item.title, subtitle: item.subtitle, description: item.description });
-          break;
-        case 'videos':
-          spotlightObj.videos.push({ id: item.id, title: item.title, subtitle: item.subtitle, description: item.description });
-          break;
-        case 'themes':
-          spotlightObj.themes.push({ id: item.id, title: item.title, subtitle: item.subtitle, description: item.description });
-          break;
-        case 'featured':
-          spotlightObj.featured.push({ id: item.id, title: item.title, subtitle: item.subtitle, description: item.description });
-          break;
-        default:
-          break;
-      }
-    });
-    setSpotlightData(spotlightObj);
-  }
-
-  if (!loading && spotlightInfo) {
-    organizeSpotlightContent(spotlightInfo);
-  }
-
-}, [loading, spotlightInfo]); 
+    }, [mockDbData]); 
 
 
 
@@ -165,7 +135,7 @@ useEffect(() => {
         return <>{skeletonItems}</>;
     
     
-      }
+    }
 
 
     function RenderSpotlightRowItem() {
@@ -262,7 +232,7 @@ useEffect(() => {
               </div>
             );
           default:
-            return null; // Handle unknown category
+            return null;
         }
       });
     }
@@ -307,8 +277,7 @@ useEffect(() => {
                         <div className={marketplaceStyles.imageHeaderContainer}></div>
                         <div id={itemSelectStyles["marketSelectList"]} className={`${itemSelectStyles.selectItemListContainer}`} >
                             <div className={itemSelectStyles.innerListContainer} >
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                    onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}>
                                     <span className={`${itemSelectStyles.listIcon} ${iconLibrary.card_icon}`}></span>
                                     <p>
                                         <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -317,7 +286,7 @@ useEffect(() => {
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
                                 <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                    onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                    >
                                     <span className={`${itemSelectStyles.listIcon} ${iconLibrary.download_icon}`}></span>
                                     <p>
                                         <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
@@ -326,7 +295,7 @@ useEffect(() => {
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
                                 <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
-                                        onMouseEnter={()=>{dispatch(navigateMarketplaceMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
+                                        >
                                     <span className={`${itemSelectStyles.listIcon} ${iconLibrary.crown_icon}`}></span>
                                     <p>
                                         <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${marketplaceMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>

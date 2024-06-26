@@ -23,8 +23,6 @@ let initialState = {
     is_transitioning: null,
 
     is_guide_menu_open: false,
-
-
 }
 
 export const bladeTransitionAsync = createAsyncThunk(

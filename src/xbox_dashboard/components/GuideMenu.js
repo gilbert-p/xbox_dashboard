@@ -61,23 +61,29 @@ import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 const GuideMenu = (props) => {
 
-    // const { data: xboxlive_content, loading, error } = useFetchDatabase('https://xb-dashboard-server.netlify.app/api/xboxlive/community');
+    // const xboxliveDatabase = process.env.REACT_APP_DATABASE_XBOXLIVE;
 
-    const { data: xboxlive_content, loading, error } = useDelayedFetchDatabase('http://localhost:8080/xboxlive/community', 5000);
+    // const { data: xboxlive_content, loading, error } = useFetchDatabase(`${xboxliveDatabase}`);
+    // const { data: xboxlive_content, loading, error } = useDelayedFetchDatabase('http://localhost:8080/xboxlive/community', 1000);
+    // const { data: xboxlive_content, loading, error } = useDelayedFetchDatabase('', 1000);
+
+    const { mockDbData } = props;
+
+    
 
     const [xboxliveData, setXboxliveData] = useState(null);
 
     const { guidePanelRef, 
-        guideMenuRef,
-        guideSelectThemeRef, 
-        guideSettingsRef, 
-        aboutDashboardPageRef,
-        gamerProfilePageRef, 
-        extendGuideMenu, 
-        revealThemeSelection,
-        backButtonStateSelection,
-        communityDashboardPageRef,
-      } = props['guideAnimationRef'];
+            guideMenuRef,
+            guideSelectThemeRef, 
+            guideSettingsRef, 
+            aboutDashboardPageRef,
+            gamerProfilePageRef, 
+            extendGuideMenu, 
+            revealThemeSelection,
+            backButtonStateSelection,
+            communityDashboardPageRef,
+        } = props['guideAnimationRef'];
 
 
 
@@ -101,41 +107,22 @@ const GuideMenu = (props) => {
 
     const communityCategory = useSelector(selectCommunityCategory);
 
+    function getMessageData(data) {
+        let filteredData = null;
+        if (data) {
+            filteredData = data.filter((el) => el.message !== undefined && el.message !== null);
+        }
+
+        return filteredData;
+    }
+
     useEffect(() => {
-        const content = {
-          messages: [],
-          friends: [],
-          players: [],
-        };
-      
-        const organizeXboxliveContent = (data) => {
-          if (!data) {
-            return;
-          }
-      
-          data.forEach(item => {
-            switch (item.category) {
-              case 'messages':
-                content.messages.push({ id: item.id, category: item.category, gamertag: item.gamertag, message: item.message, });
-                break;
-              case 'friends':
-                content.friends.push({ id: item.id, category: item.category, gamertag: item.gamertag, game_status: item.game_status });
-                break;
-              case 'players':
-                content.players.push({ id: item.id, category: item.category, gamertag: item.gamertag, game_status: item.game_status, last_met: item.last_met });
-                break;
-              default:
-                break;
-            }
-          });
-          setXboxliveData(content);
+
+        if (mockDbData) {
+            setXboxliveData(mockDbData);
         }
       
-        if (!loading && xboxlive_content) {
-            organizeXboxliveContent(xboxlive_content);
-        }
-      
-      }, [loading, xboxlive_content]); 
+      }, [mockDbData]); 
 
 
 
@@ -225,6 +212,9 @@ const GuideMenu = (props) => {
             </>
           );
     };
+    
+
+
 
     function RenderRowItemSkeleton({children, count}) {
         const skeletonItems = Array.from({ length: count }, (_, index) => (
@@ -245,7 +235,7 @@ const GuideMenu = (props) => {
         }
     
         return xboxliveData['messages'].map(messageItem => (
-            <div id={messageItem.id} className={itemSelectStyles.groupContainer}>
+            <div key={messageItem.id} className={itemSelectStyles.groupContainer}>
                 <p>{messageItem.gamertag}</p>
                 <div className={itemSelectStyles.communityMessageContent}>
                     <div className={itemSelectStyles.messageSelectIcon}></div>
@@ -265,7 +255,7 @@ const GuideMenu = (props) => {
         }
     
         return xboxliveData['friends'].map(friendItem => (
-            <div id={friendItem.id} className={itemSelectStyles.groupContainer}>
+            <div key={friendItem.id} className={itemSelectStyles.groupContainer}>
                 <div className={itemSelectStyles.flexInnerContainer}>
                     <div className={itemSelectStyles.gamerProfileIcon}></div>
                     <p className={itemSelectStyles.gamerTag}>{friendItem.gamertag} </p>
@@ -287,7 +277,7 @@ const GuideMenu = (props) => {
         }
     
         return xboxliveData['players'].map(playerItem => (
-            <div className={itemSelectStyles.playerGroupContainer}>
+            <div key={playerItem.id} className={itemSelectStyles.playerGroupContainer}>
                 <div className={itemSelectStyles.playerFlexInnerContainer}>
                     <div className={itemSelectStyles.recentPlayerIcon}></div>
                     <div className={itemSelectStyles.recentPlayerNameRepList}>

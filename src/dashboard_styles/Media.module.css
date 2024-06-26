@@ -10,3 +10,119 @@
     flex-direction: column;
     text-align: left;
 }
+
+
+.displayContainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0px;
+    height: 0px;
+    background-color: #000000;
+    border-radius: 7px;
+    animation: growBox 0.4s ease forwards;
+    z-index: 2;
+}
+
+.displaySlideshowContainer {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background-color: #000000;
+    border-radius: 7px;
+    /* animation: growBox 0.4s ease forwards; */
+    z-index: 2;
+}
+
+.slideshowContent {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    border-radius: 7px;
+    outline: 2px solid white;
+    box-shadow: 0px 0px 10px #ffffff;
+}
+  
+.growBox {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    border-radius: 7px;
+    outline: 2px solid white;
+    box-shadow: 0px 0px 10px #ffffff;
+    opacity: 0;
+    animation: showOutline 0.4s linear 0.3s forwards;
+}
+
+.mediaPictureImg {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    background-size: contain;
+    object-fit:contain;
+    z-index: -1;
+}
+
+.closeButtonContainer {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+    left: calc(100% - 75px);
+    top: 0px;
+    opacity: 0.75;
+    cursor: pointer;
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 3px;
+        background-color: black;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 70%;
+        height: 3px;
+        background-color: black;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+    }
+}
+
+  
+  @keyframes showOutline {
+    0% {
+      opacity: 0;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes growBox {
+    from {
+      height: 0px;
+      width: 0px;
+    }
+    to {
+      height: 500px;
+      width: 500px;
+    }
+  }
+  

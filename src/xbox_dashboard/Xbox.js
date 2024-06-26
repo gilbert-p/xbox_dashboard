@@ -42,9 +42,8 @@ const Xbox = (props) => {
 
     const dispatch = useDispatch();
 
-    const isMobileDevice = useSelector(selectMobileDeviceStatus);
-
-
+    const { mockDbData } = props;
+    
     
     const guidePanelAnimation = useGuidePanelAnimation();
     const dashboardAnimationState = useDashboardAnimation();
@@ -208,8 +207,27 @@ const Xbox = (props) => {
     function slideBladesBack () {
         dashboardAnimationState.slideBladesBack();
     }
+
+
+    function LoadPageContext() {
+        switch(current_context_index) {
+            case 0: return <MarketplacePage mockDbData={mockDbData} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>;
+        
+            case 1: return <XboxlivePage    foreignExtendGamerProfile={foreignExtendGamerProfile} foreignExtendCommunityPage={foreignExtendCommunityPage}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>;
+        
+            case 2: return <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={dashboardAnimationState['gamesSubPageExit']} gamesSubPageAnimation={dashboardAnimationState['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>;
+        
+            case 3: return <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} mediaSubPageExit={dashboardAnimationState['mediaSubPageExit']} mediaSubPageAnimation={dashboardAnimationState['mediaSubPageAnimation']} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>;
+        
+            case 4: return <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>;
+        
+            case 'default': break;
+        }
+    }
+
+
     
-      
+
 
     return (
         <div className={styles.xboxComponent}>
@@ -222,7 +240,7 @@ const Xbox = (props) => {
                 {/* onClick={()=>{foreignExtendGamerProfile()}} */}
             </div>
 
-            <GuideMenu guideAnimationRef={guidePanelAnimation} />
+            <GuideMenu mockDbData={mockDbData} guideAnimationRef={guidePanelAnimation} />
          
 
             {/* Renders the blade components */}
@@ -276,29 +294,23 @@ const Xbox = (props) => {
                     </div>
 
 
-                        {/* <div className={styles.dashboardWhiteUnderlay}></div> */}
-                        <MarketplacePage slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
-                        <XboxlivePage    foreignExtendGamerProfile={foreignExtendGamerProfile} foreignExtendCommunityPage={foreignExtendCommunityPage}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
-                        <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={dashboardAnimationState['gamesSubPageExit']} gamesSubPageAnimation={dashboardAnimationState['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
-                        <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} mediaSubPageExit={dashboardAnimationState['mediaSubPageExit']} mediaSubPageAnimation={dashboardAnimationState['mediaSubPageAnimation']} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
-                        <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                    {/* <MarketplacePage slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} guideAnimationRef={guidePanelAnimation}/>
+                    <XboxlivePage    foreignExtendGamerProfile={foreignExtendGamerProfile} foreignExtendCommunityPage={foreignExtendCommunityPage}   current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                    <GamesPage       foreignExtendGamerProfile={foreignExtendGamerProfile} gamesSubPageExit={dashboardAnimationState['gamesSubPageExit']} gamesSubPageAnimation={dashboardAnimationState['gamesSubPageAnimation']} slideBladesAway={slideBladesAway} slideBladesBack={slideBladesBack} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                    <MediaPage       foreignExtendGamerProfile={foreignExtendGamerProfile} mediaSubPageExit={dashboardAnimationState['mediaSubPageExit']} mediaSubPageAnimation={dashboardAnimationState['mediaSubPageAnimation']} current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/>
+                    <SystemPage      current_context_index={current_context_index}    guideAnimationRef={guidePanelAnimation}/> */}
+                    <LoadPageContext/>
 
-                        {/* Buttons, System Tray */}
-                        <div className={styles.staticContent}>
-
-                            
-
-                            {/* <div className={styles.leftEdge}></div>
-                            <div className={styles.rightEdge}></div> */}
-
-                            <div className={`${styles.systemTrayContainer} ${!display_tray ? transitionStyles.makeTransparent : undefined}`}>
-                                <div className={styles.trayEllipse}></div>
-                                <div className={styles.trayRect}></div>
-                                <div className={styles.trayTriangleButton}></div>
-                                <div className={styles.trayRectButton}></div>
-                                <p>Play Halo 3</p>
-                            </div>
+                    {/* Buttons, System Tray */}
+                    <div className={styles.staticContent}>
+                        <div className={`${styles.systemTrayContainer} ${!display_tray ? transitionStyles.makeTransparent : undefined}`}>
+                            <div className={styles.trayEllipse}></div>
+                            <div className={styles.trayRect}></div>
+                            <div className={styles.trayTriangleButton}></div>
+                            <div className={styles.trayRectButton}></div>
+                            <p>Play Halo 3</p>
                         </div>
+                    </div>
                     </div>
                         <section className={styles.gamesContainer}>
 
