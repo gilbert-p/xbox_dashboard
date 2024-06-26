@@ -8,10 +8,6 @@ import profileCardStyles from "../../dashboard_styles/ProfileCard.module.css";
 import useCurrentTime from '../../custom_hooks/useCurrentTime';
 import energyCircles from '../../dashboard_styles/EnergyCirclesAnimation.module.css';
 
-import useFetchDatabase from '../../custom_hooks/useFetchDatabase';
-import useDelayedFetchDatabase from '../../custom_hooks/useDelayedFetchDatabase';
-
-
 import {
     updateGuideMenuHighlight,
 
@@ -60,12 +56,6 @@ import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 
 const GuideMenu = (props) => {
-
-    // const xboxliveDatabase = process.env.REACT_APP_DATABASE_XBOXLIVE;
-
-    // const { data: xboxlive_content, loading, error } = useFetchDatabase(`${xboxliveDatabase}`);
-    // const { data: xboxlive_content, loading, error } = useDelayedFetchDatabase('http://localhost:8080/xboxlive/community', 1000);
-    // const { data: xboxlive_content, loading, error } = useDelayedFetchDatabase('', 1000);
 
     const { mockDbData } = props;
 

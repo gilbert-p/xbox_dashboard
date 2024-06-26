@@ -59,15 +59,8 @@ const MarketplacePage = (props) => {
 
     const marketplaceDatabase = process.env.REACT_APP_DATABASE_MARKETPLACE;
 
-  // const { data: spotlightInfo, loading, error } = useFetchDatabase(`${marketplaceDatabase}`);
-  // const { data: spotlightInfo, loading, error } = useDelayedFetchDatabase('http://localhost:8080/marketplace/games', 1000);
-  // const { data: spotlightInfo, loading, error } = useDelayedFetchDatabase('', 1000);
-  
-
     const { mockDbData } = props;   
 
-
-// Define a state to store the fetched data
     const [spotlightData, setSpotlightData] = useState(null);
 
     useEffect(() => {
