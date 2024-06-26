@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, Fragment } from 'react';
-import { createSelector } from 'reselect';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
 import pageGridStyles from '../../dashboard_styles/PageGrid.module.css';
