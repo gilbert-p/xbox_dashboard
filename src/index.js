@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import AppDashboard from './AppDashboard';
 import { store } from './app_store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <AppDashboard />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,13 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import MockDashboardDB from '../mock_data/MockDashboardDBEndpoint';
 
-const useFetchMockDatabase = (delayTime = 1000, portraitScreen) => {
+const useFetchMockDatabase = (delayTime = 1000) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
-    if (portraitScreen) return;
 
     let isMounted = true;
     const timer = setTimeout(async () => {
@@ -34,7 +33,7 @@ const useFetchMockDatabase = (delayTime = 1000, portraitScreen) => {
       clearTimeout(timer);
       isMounted = false;
     };
-  }, [delayTime, portraitScreen]);
+  }, [delayTime]);
 
   useEffect(() => {
     const cleanup = fetchData();

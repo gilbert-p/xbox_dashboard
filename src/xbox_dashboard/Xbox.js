@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
-import mobileStyles from '../dashboard_styles/mobilePage.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
 import backgroundAnimation from "../dashboard_styles/BackgroundPulse.module.css";
 import useDashboardAnimation from '../custom_hooks/useDashboardBladeAnimation';
@@ -9,8 +8,6 @@ import useGuidePanelAnimation from '../custom_hooks/useGuidePanelAnimation';
 
 import { selectContextIndex,
          isTrayDisplayed,
-         selectMobileDeviceStatus,
-         updateMobileStatus,
         }
 from '../redux_slices/xboxSlice';
 

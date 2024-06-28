@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { updateMobileStatus } from '../redux_slices/xboxSlice';
 import debounce from 'lodash.debounce';
 
 const useCheckDeviceOrientation = () => {
@@ -9,7 +10,7 @@ const useCheckDeviceOrientation = () => {
   const fullscreenRef = useRef(null);
   const dispatch = useDispatch();
 
-  const detectIfMobile = useCallback(() => {
+  const detectIfMobile = () => {
     const toMatch = [
       /Android/i,
       /webOS/i,
@@ -20,17 +21,30 @@ const useCheckDeviceOrientation = () => {
       /Windows Phone/i
     ];
 
-    return toMatch.some((toMatchItem) => navigator.userAgent.match(toMatchItem));
-  }, []);
 
-  const handleFullscreenToggle = useCallback(() => {
-    if (!isFullscreen) {
-      if (fullscreenRef.current) {
-        if (fullscreenRef.current.requestFullscreen) {
-          fullscreenRef.current.requestFullscreen();
-        } else if (fullscreenRef.current.webkitRequestFullscreen) {
-          fullscreenRef.current.webkitRequestFullscreen(); // Safari
-        }
+
+    let userAgentString = navigator.userAgent;
+    let matchedDevice = null;
+
+    toMatch.some((toMatchItem) => {
+      let match = userAgentString.match(toMatchItem);
+      if (match) {
+        matchedDevice = match[0];
+        console.log(match[0]);
+        return true; 
+      }
+      return false;
+    });
+
+    return matchedDevice;
+  };
+
+  const handleFullscreenToggle = () => {
+    if (!isFullscreen && fullscreenRef.current) {
+      if (fullscreenRef.current.requestFullscreen) {
+        fullscreenRef.current.requestFullscreen();
+      } else if (fullscreenRef.current.webkitRequestFullscreen) {
+        fullscreenRef.current.webkitRequestFullscreen(); // Safari
       }
     } else {
       if (document.exitFullscreen) {
@@ -40,8 +54,8 @@ const useCheckDeviceOrientation = () => {
       }
     }
 
-    setIsFullscreen(prevIsFullscreen => !prevIsFullscreen);
-  }, [isFullscreen]);
+    setIsFullscreen(!isFullscreen);
+  };
 
   const getUpdatedSize = useCallback((windowWidth, windowHeight) => {
     const origX = 1190;
@@ -65,15 +79,18 @@ const useCheckDeviceOrientation = () => {
   useEffect(() => {
     const checkDeviceOrientation = () => {
       const orientationType = window.screen.orientation.type;
-      const isMobileDevice = detectIfMobile();
+      const mobileID = detectIfMobile();
 
-      if (isMobileDevice) {
+      if (mobileID) {
         setFullscreenMobilePrompt(true);
+        dispatch(updateMobileStatus(mobileID));
       }
 
       if (orientationType === "portrait-primary") {
+
         setScreenOverlay(true);
         setFullscreenMobilePrompt(true);
+
       } else {
         getUpdatedSize(window.innerWidth, window.innerHeight);
         setScreenOverlay(false);

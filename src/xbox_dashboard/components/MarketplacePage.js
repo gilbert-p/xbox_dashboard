@@ -7,14 +7,7 @@ import transitionStyles from '../../dashboard_styles/TransitionStyles.module.css
 import itemSelectStyles from '../../dashboard_styles/ItemSelect.module.css';
 import marketplaceStyles from '../../dashboard_styles/Marketplace.module.css';
 import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
-
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
-
-import useFetchDatabase from '../../custom_hooks/useFetchDatabase';
-import useDelayedFetchDatabase from '../../custom_hooks/useDelayedFetchDatabase';
-
-
-
 
 
 import halo3Cover from '../../assets/temp_media/halo_3_boxshot.jpg';
@@ -41,7 +34,6 @@ import {
   updateSelectionHighlight,
   selectHighlightState,
   selectMarketplaceMenuIndex,
-  navigateMarketplaceMenu,
   navigateMarketplaceSpotlightMenu,
   selectMarketplaceSpotlightMenuIndex,
   selectMarketplaceSpotlightCategoryTitle,
