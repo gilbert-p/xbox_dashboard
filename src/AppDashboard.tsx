@@ -4,12 +4,12 @@ import useDelayedFetchDatabase from './custom_hooks/useDelayedFetchDatabase';
 
 import DeviceSetup from './DeviceSetup';
 
+import { OrganizedData, DashboardDataItem } from './ts_types/apiDataTypes';
 
-
-function AppDashboard() {
+const AppDashboard: React.FC<any> = () => {
     
 
-    const [mockDbData, setMockDbData] = useState(null);
+    const [mockDbData, setMockDbData] = useState<OrganizedData | null>(null);
 
     // const { data: serverData } = useDelayedFetchDatabase('https://xb-dashboard-server.netlify.app/api/dashboard_db', 0);
     const { data: mockResponse } = useFetchMockDatabase(1000);
@@ -21,7 +21,7 @@ function AppDashboard() {
         }
       }, [mockResponse]);
 
-    function organizeByCategory(data) {
+    function organizeByCategory(data: DashboardDataItem[]): OrganizedData {
         return data.reduce((acc, item) => {
             const { category } = item;
             if (!acc[category]) {
@@ -29,7 +29,7 @@ function AppDashboard() {
             }
             acc[category].push(item);
             return acc;
-        }, {});
+        }, {} as OrganizedData);
       }
 
 

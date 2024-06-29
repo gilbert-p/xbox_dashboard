@@ -38,7 +38,7 @@ const useFetchMockDatabase = (delayTime = 1000) => {
   useEffect(() => {
     const cleanup = fetchData();
     return cleanup;
-  }, [fetchData]);
+  }, []);
 
   return { data, loading, error };
 };
