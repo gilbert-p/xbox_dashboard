@@ -41,7 +41,11 @@ interface CustomCSSProperties extends CSSProperties {
   '--ring-index'?: number;
 }
 
-const Xbox: React.FC<OrganizedData> = ({ mockDbData }) => {
+interface XboxDataProps {
+  mockDbData: OrganizedData;
+}
+
+const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
     const dispatch = useDispatch();
   
     const guidePanelAnimation = useGuidePanelAnimation();

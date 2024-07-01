@@ -1,16 +1,24 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, RefObject } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateMobileStatus } from '../redux_slices/xboxSlice';
 import debounce from 'lodash.debounce';
 
+interface FullscreenDivElement extends HTMLDivElement {
+  webkitRequestFullscreen?: () => Promise<void>;
+}
+
+interface FullscreenDocument extends Document {
+  webkitExitFullscreen?: () => Promise<void>;
+}
+
 const useCheckDeviceOrientation = () => {
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [screenOverlay, setScreenOverlay] = useState(false);
-  const [fullscreenMobilePrompt, setFullscreenMobilePrompt] = useState(true);
-  const fullscreenRef = useRef(null);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [screenOverlay, setScreenOverlay] = useState<boolean>(false);
+  const [fullscreenMobilePrompt, setFullscreenMobilePrompt] = useState<boolean>(true);
+  const fullscreenRef = useRef<FullscreenDivElement | null>(null);
   const dispatch = useDispatch();
 
-  const detectIfMobile = () => {
+  const detectIfMobile = (): string | null => {
     const toMatch = [
       /Android/i,
       /webOS/i,
@@ -21,17 +29,15 @@ const useCheckDeviceOrientation = () => {
       /Windows Phone/i
     ];
 
-
-
-    let userAgentString = navigator.userAgent;
-    let matchedDevice = null;
+    const userAgentString = navigator.userAgent;
+    let matchedDevice: string | null = null;
 
     toMatch.some((toMatchItem) => {
-      let match = userAgentString.match(toMatchItem);
+      const match = userAgentString.match(toMatchItem);
       if (match) {
         matchedDevice = match[0];
         console.log(match[0]);
-        return true; 
+        return true;
       }
       return false;
     });
@@ -43,21 +49,22 @@ const useCheckDeviceOrientation = () => {
     if (!isFullscreen && fullscreenRef.current) {
       if (fullscreenRef.current.requestFullscreen) {
         fullscreenRef.current.requestFullscreen();
-      } else if (fullscreenRef.current.webkitRequestFullscreen) {
-        fullscreenRef.current.webkitRequestFullscreen(); // Safari
+      } else if (fullscreenRef.current?.webkitRequestFullscreen) {
+        fullscreenRef.current?.webkitRequestFullscreen(); // Safari
       }
     } else {
+      const doc = document as FullscreenDocument;
       if (document.exitFullscreen) {
         document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen(); // Safari
+      } else if (doc.webkitExitFullscreen) {
+        doc.webkitExitFullscreen(); // Safari
       }
     }
 
     setIsFullscreen(!isFullscreen);
   };
 
-  const getUpdatedSize = useCallback((windowWidth, windowHeight) => {
+  const getUpdatedSize = useCallback((windowWidth: number, windowHeight: number) => {
     const origX = 1190;
     const origY = 765;
 
@@ -87,10 +94,8 @@ const useCheckDeviceOrientation = () => {
       }
 
       if (orientationType === "portrait-primary") {
-
         setScreenOverlay(true);
         setFullscreenMobilePrompt(true);
-
       } else {
         getUpdatedSize(window.innerWidth, window.innerHeight);
         setScreenOverlay(false);
@@ -103,7 +108,7 @@ const useCheckDeviceOrientation = () => {
     return () => {
       window.screen.orientation.removeEventListener("change", checkDeviceOrientation);
     };
-  }, [detectIfMobile, getUpdatedSize]);
+  }, [dispatch, getUpdatedSize]);
 
   useEffect(() => {
     const updateContainerSize = () => {

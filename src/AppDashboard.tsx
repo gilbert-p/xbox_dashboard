@@ -12,7 +12,7 @@ const AppDashboard: React.FC<any> = () => {
     const [mockDbData, setMockDbData] = useState<OrganizedData | null>(null);
 
     // const { data: serverData } = useDelayedFetchDatabase('https://xb-dashboard-server.netlify.app/api/dashboard_db', 0);
-    const { data: mockResponse } = useFetchMockDatabase(1000);
+    const { data: mockResponse }  = useFetchMockDatabase(1000);
 
     useEffect(() => {
         if (mockResponse) {

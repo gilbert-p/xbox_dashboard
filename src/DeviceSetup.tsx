@@ -9,11 +9,11 @@ import checkDeviceOrientation from './custom_hooks/useCheckDeviceOrientation';
 import { OrganizedData, DashboardDataItem } from './ts_types/apiDataTypes';
 
 
-// interface DeviceSetupProps {
-//   mockDbData: OrganizedData;
-// }
+interface DeviceSetupProps {
+  mockDbData: OrganizedData;
+}
 
-const DeviceSetup: React.FC<OrganizedData> = ({ mockDbData }) => {
+const DeviceSetup: React.FC<DeviceSetupProps> = ({ mockDbData }) => {
   const xboxBladeContainerRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   const {
@@ -24,6 +24,8 @@ const DeviceSetup: React.FC<OrganizedData> = ({ mockDbData }) => {
     fullscreenRef
   } = checkDeviceOrientation();
 
+  // console.log()
+
   return (
     <>
       {screenOverlay ? (
@@ -32,7 +34,7 @@ const DeviceSetup: React.FC<OrganizedData> = ({ mockDbData }) => {
         <div ref={fullscreenRef} className={dashboard_style.safeBorder}>
           <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef}>
             <XboxDashboard mockDbData={mockDbData} />
-            {isFullscreen ? (
+            {!isFullscreen ? (
               <div className={!isFullscreen ? mobileStyles.enableFullScreenPrompt : transitionStyles.instantTransparent}>
                 <div className={mobileStyles.fullscreenButtonContainer}>
                   <p>Click to Enable Fullscreen</p>
