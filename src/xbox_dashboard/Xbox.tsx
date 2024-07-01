@@ -32,7 +32,7 @@ import utility_sound_sfx from "../assets/audio/utility_sfx.mp3";
 
 import useAudioSound from "../custom_hooks/useAudioSound";
 
-import {OrganizedData } from 'src/ts_types/apiDataTypes';
+import { OrganizedData } from 'src/ts_types/apiDataTypes';
 
 
 

@@ -4,9 +4,7 @@
   
     "compilerOptions": {
       "lib": ["dom", "dom.iterable", "esnext"],
-      "typeRoots": [
-        "./src/declarations.d.ts"
-      ],
+      "typeRoots": ["./custom_types", "node_modules/@types"],
       "module": "esnext",
       "moduleResolution": "bundler",
       "target": "es2015",
@@ -29,8 +27,10 @@
         "src/**/*.tsx",
         "src/**/*.js",
         "src/**/*.d.ts",
+        "custom-types/index.d.ts",
+        "node_modules/use-sound/dist/index.d.ts",
+        "node_modules/use-sound/dist/types.d.ts",
         "node_modules/react-scripts/lib/react-app.d.ts",
-        "src/declarations.d.ts",
       ],
   }
   

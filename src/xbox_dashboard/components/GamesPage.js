@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
@@ -26,6 +25,7 @@ import {
 } from '../../redux_slices/menuSlice';
 
 import { updateDiscTrayState } from '../../redux_slices/xboxSlice';
+import { MenuSliceTypes } from '../../custom_types/xboxSliceTypes';
 
 
 const GamesPage = (props) => {
@@ -184,7 +184,6 @@ const GamesPage = (props) => {
                 subtitle: "Theme",
                 description: "Embrace the spirit of the Assassin's Creed Brotherhood with this featured theme. Customize your Xbox 360 with dynamic backgrounds, unique icons, and music that echoes the rooftops of historic cities. Embark on a stealthy and adventurous journey as you embody the creed and showcase your love for the Assassin's Creed series.",
               }
-              // Add more featured items as needed
             ]
           }
       };

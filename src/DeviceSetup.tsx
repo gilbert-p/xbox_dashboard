@@ -6,14 +6,14 @@ import mobileStyles from './dashboard_styles/mobilePage.module.css';
 import transitionStyles from './dashboard_styles/TransitionStyles.module.css';
 import checkDeviceOrientation from './custom_hooks/useCheckDeviceOrientation';
 
-import { OrganizedData } from './ts_types/apiDataTypes';
+import { OrganizedData, DashboardDataItem } from './ts_types/apiDataTypes';
 
 
-interface DeviceSetupProps {
-  mockDbData: OrganizedData;
-}
+// interface DeviceSetupProps {
+//   mockDbData: OrganizedData;
+// }
 
-const DeviceSetup: React.FC<DeviceSetupProps> = ({ mockDbData }) => {
+const DeviceSetup: React.FC<OrganizedData> = ({ mockDbData }) => {
   const xboxBladeContainerRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   const {
