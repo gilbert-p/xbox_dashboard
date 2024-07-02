@@ -5,48 +5,46 @@ import { gsap } from 'gsap';
 import { navigateTo, selectContextIndex, selectTransitionState, bladeTransitionAsync, } from '../redux_slices/xboxSlice';
 import { updateNavigateContext } from "../redux_slices/menuSlice";
 
-export default function useDashboardBladeAnimation() {
+import { RootState, AppDispatch } from '../app_store/store';
+import { DashboardBladeAnimation, RefElement, GsapTimeline } from '../custom_types/utilityTypes';
+
+export default function useDashboardBladeAnimation(): DashboardBladeAnimation {
   // Refs
-  const mountRef = useRef(null);
-  const shiftRightTransition = useRef(null);
-  const shiftRightXboxLive = useRef(null);
-  const shiftRightGames = useRef(null);
-  const shiftRightMedia = useRef(null);
-  const shiftRightSystem = useRef(null);
-
-  const shiftLeftTransition = useRef(null);
-  const initializeRef = useRef(null);
-
-  const centerBlockExpandRef = useRef(null);
-  const centerBlockExpandAnimate = useRef(null);
-
-
-  const leftBladeGroupRef = useRef(null);
-  const rightBladeGroupRef = useRef(null);
-  const slideAwayAnimate = useRef(null);
-
-  const gamesTabAnimate = useRef(null);
-  const mediaTabAnimate = useRef(null);
-
-
-  const l_gamesBladeActiveRef = useRef(null);
-  const l_mediaBladeActiveRef = useRef(null);
-
-  const l_marketplaceBladeInactiveRef = useRef(null);
-  const l_xboxliveBladeInactiveRef = useRef(null);
-  const l_gamesBladeInactiveRef = useRef(null);
-  const r_mediaBladeInactiveRef = useRef(null);
-  const r_systemBladeInactiveRef = useRef(null);
+  const mountRef = useRef<RefElement>(null);
+  const shiftRightTransition = useRef<GsapTimeline>(null);
+  const shiftRightXboxLive = useRef<GsapTimeline>(null);
+  const shiftRightGames = useRef<GsapTimeline>(null);
+  const shiftRightMedia = useRef<GsapTimeline>(null);
+  const shiftRightSystem = useRef<GsapTimeline>(null);
+  
+  const shiftLeftTransition = useRef<GsapTimeline>(null);
+  const initializeRef = useRef<GsapTimeline>(null);
+  
+  const centerBlockExpandRef = useRef<RefElement>(null);
+  const centerBlockExpandAnimate = useRef<GsapTimeline>(null);
+  
+  const leftBladeGroupRef = useRef<RefElement>(null);
+  const rightBladeGroupRef = useRef<RefElement>(null);
+  const slideAwayAnimate = useRef<GsapTimeline>(null);
+  
+  const gamesTabAnimate = useRef<GsapTimeline>(null);
+  const mediaTabAnimate = useRef<GsapTimeline>(null);
+  
+  const l_gamesBladeActiveRef = useRef<RefElement>(null);
+  const l_mediaBladeActiveRef = useRef<RefElement>(null);
+  
+  const l_marketplaceBladeInactiveRef = useRef<RefElement>(null);
+  const l_xboxliveBladeInactiveRef = useRef<RefElement>(null);
+  const l_gamesBladeInactiveRef = useRef<RefElement>(null);
+  const r_mediaBladeInactiveRef = useRef<RefElement>(null);
+  const r_systemBladeInactiveRef = useRef<RefElement>(null);
 
 
   
 
   // Redux state
-  const current_context_index = useSelector(selectContextIndex) || 0;
-
-  const is_transitioning = useSelector(selectTransitionState);
-
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
+  const current_context_index = useSelector((state: RootState) => selectContextIndex(state));
 
   // State
   const [isInitialized, setIsInitialized] = useState(true);
@@ -64,7 +62,6 @@ export default function useDashboardBladeAnimation() {
 
 
   useLayoutEffect(()=>{
-    // console.log(is_transitioning);
 
     const initializeTimeline = () => {
       // GSAP Timelines
@@ -146,32 +143,30 @@ export default function useDashboardBladeAnimation() {
 
       switch(current_context_index) {
         case 0:  
-              shiftRightTransition.current.play();
+              shiftRightTransition.current?.play();
                break;
 
         case 1: 
-              shiftRightXboxLive.current.play();
+              shiftRightXboxLive.current?.play();
               break;
 
         case 2: 
-              shiftRightGames.current.play();
+              shiftRightGames.current?.play();
               break;
 
         case 3: 
-              shiftRightMedia.current.play();
+              shiftRightMedia.current?.play();
               break;
 
         case 4: 
-              shiftRightSystem.current.play();
+              shiftRightSystem.current?.play();
               break;
 
-        case 'default': 
+        default: 
               break;
       }
 
-      dispatch(bladeTransitionAsync());
-
-      centerBlockExpandAnimate.current.play();
+      centerBlockExpandAnimate.current?.play();
 
       dispatch(updateNavigateContext(mainMenuMap[current_context_index + 1]));
 
@@ -191,28 +186,26 @@ export default function useDashboardBladeAnimation() {
       switch(current_context_index) {
 
         case 1: 
-              shiftRightTransition.current.reverse();
+              shiftRightTransition.current?.reverse();
               break;
 
         case 2: 
-              shiftRightXboxLive.current.reverse();
+              shiftRightXboxLive.current?.reverse();
               break;
 
         case 3: 
-              shiftRightGames.current.reverse();
+              shiftRightGames.current?.reverse();
               break;
 
         case 4: 
-              shiftRightMedia.current.reverse();
+              shiftRightMedia.current?.reverse();
               break;
 
-        case 'default': 
+        default: 
               break;
       }
 
-      dispatch(bladeTransitionAsync());
-
-      centerBlockExpandAnimate.current.play();
+      centerBlockExpandAnimate.current?.play();
 
       dispatch(updateNavigateContext(mainMenuMap[current_context_index - 1]));
 
@@ -224,57 +217,50 @@ export default function useDashboardBladeAnimation() {
   };
 
   const slideBladesOut = () => {
-      slideAwayAnimate.current.play();
-      centerBlockExpandAnimate.current.play();
+      slideAwayAnimate.current?.play();
+      centerBlockExpandAnimate.current?.play();
   }
 
   const slideBladesBack = () => {
-    slideAwayAnimate.current.reverse();
-    // slideBackAnimate.current.play();
+    slideAwayAnimate.current?.reverse();
   }
 
   const gamesSubPageAnimation = () => {
-    gamesTabAnimate.current.play();
+    gamesTabAnimate.current?.play();
   }
   const gamesSubPageExit = () => {
-    // gamesTabReverse.current.play();
-    gamesTabAnimate.current.reverse();
+    gamesTabAnimate.current?.reverse();
   }
 
   const mediaSubPageAnimation = () => {
-    mediaTabAnimate.current.play();
+    mediaTabAnimate.current?.play();
   }
 
   const mediaSubPageExit = () => {
-    // mediaTabReverse.current.play();
-    mediaTabAnimate.current.reverse();
+    mediaTabAnimate.current?.reverse();
   }
 
   // Keyboard event listeners
   useLayoutEffect(() => {
-    const navigateUsingKeys = (e) => {
-      if (e !== undefined) {
-        switch (e.key) {
-          case 'ArrowUp':
-            break;
-          case 'ArrowRight':
-            shiftRight();
-            break;
-          case 'ArrowDown':
-            break;
-          case 'ArrowLeft':
-            shiftLeft();
-            break;
-          default:
-            break;
-        }
+    const navigateUsingKeys = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case 'ArrowUp':
+          break;
+        case 'ArrowRight':
+          shiftRight();
+          break;
+        case 'ArrowDown':
+          break;
+        case 'ArrowLeft':
+          shiftLeft();
+          break;
+        default:
+          break;
       }
     };
-
-    navigateUsingKeys();
-
+  
     window.addEventListener('keydown', navigateUsingKeys);
-
+  
     return () => {
       window.removeEventListener('keydown', navigateUsingKeys);
     };
@@ -283,19 +269,27 @@ export default function useDashboardBladeAnimation() {
 
 
   return {
-    mountRef, 
-    centerBlockExpandRef, 
+    initializeRef,
+    shiftLeftTransition,
+    shiftRightTransition,
+    shiftRightXboxLive,
+    shiftRightGames,
+    shiftRightMedia,
+    shiftRightSystem,
+    centerBlockExpandAnimate ,
+    slideAwayAnimate,
+    gamesTabAnimate,
+    mediaTabAnimate,
 
+    mountRef,
+    centerBlockExpandRef,
     leftBladeGroupRef,
     rightBladeGroupRef,
-
+    l_gamesBladeActiveRef,
+    l_mediaBladeActiveRef,
     l_marketplaceBladeInactiveRef,
     l_xboxliveBladeInactiveRef,
     l_gamesBladeInactiveRef,
-    
-    l_mediaBladeActiveRef,
-    l_gamesBladeActiveRef,
-
     r_mediaBladeInactiveRef,
     r_systemBladeInactiveRef,
 

@@ -1,7 +1,7 @@
 import { useRef, useLayoutEffect, useEffect, MutableRefObject } from 'react';
 import { gsap } from 'gsap';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../app_store/store'; // Adjust the path
+import { RootState, AppDispatch } from '../app_store/store';
 import { 
   selectGuideActiveState,
   updateGuideActiveState,
@@ -11,29 +11,32 @@ import {
 } from '../redux_slices/menuSlice';
 import { selectContextIndex } from '../redux_slices/xboxSlice';
 
-export default function useGuidePanelAnimation() {
-    const revealGuideMenu = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
-    const extendMenu = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
-    const closeExtendedMenu = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
-    const guideSettingsAnimate = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
+import { GsapTimeline, RefElement, GuidePanelAnimation } from '../custom_types/utilityTypes';
 
-    const guideMenuRef = useRef<HTMLDivElement | null>(null) as { current: HTMLDivElement | null };
-    const guidePanelRef = useRef<HTMLDivElement | null>(null) as { current: HTMLDivElement | null };
-    const guideSettingsRef = useRef<HTMLDivElement | null>(null) as { current: HTMLDivElement | null };
 
-    const revealAboutDashboard = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
-    const aboutDashboardPageRef = useRef<HTMLDivElement | null>(null) as { current: HTMLDivElement | null };
+export default function useGuidePanelAnimation(): GuidePanelAnimation  {
+  const revealGuideMenu = useRef<GsapTimeline>(null);
+  const extendMenu = useRef<GsapTimeline>(null);
+  const closeExtendedMenu = useRef<GsapTimeline>(null);
+  const guideSettingsAnimate = useRef<GsapTimeline>(null);
 
-    const revealGamerProfilePage = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
-    const gamerProfilePageRef = useRef<HTMLDivElement | null>(null) as { current: HTMLDivElement | null };
+  const revealAboutDashboard = useRef<GsapTimeline>(null);
+  const revealGamerProfilePage = useRef<GsapTimeline>(null);
+  const revealCommunityPage = useRef<GsapTimeline>(null);
+  const showThemeSelection = useRef<GsapTimeline>(null);
+  const extendRevealPanel = useRef<GsapTimeline>(null);
 
-    const revealCommunityPage = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
-    const communityDashboardPageRef = useRef<HTMLDivElement | null>(null) as { current: HTMLDivElement | null };
+  const guideMenuRef = useRef<RefElement>(null);
+  const guidePanelRef = useRef<RefElement>(null);
+  const guideSettingsRef = useRef<RefElement>(null);
+  const aboutDashboardPageRef = useRef<RefElement>(null);
+  const gamerProfilePageRef = useRef<RefElement>(null);
+  const communityDashboardPageRef = useRef<RefElement>(null);
+  const guideSelectThemeRef = useRef<RefElement>(null);
+  
 
-    const guideSelectThemeRef = useRef<HTMLDivElement | null>(null) as { current: HTMLDivElement | null };
-    const showThemeSelection = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
+  
 
-    const extendRevealPanel = useRef<gsap.core.Timeline | null>(null) as { current: gsap.core.Timeline | null };
 
     const dispatch: AppDispatch = useDispatch();
     const guideActiveState = useSelector((state: RootState) => selectGuideActiveState(state));
@@ -383,23 +386,23 @@ export default function useGuidePanelAnimation() {
 
 
     return {
-        revealGuideMenu, 
-        extendMenu,
-        revealAboutDashboard, 
-        showGuideSettings,
-        extendGuideMenu,
-        closeFullMenu,
-        extendRevealContent,
-        revealThemeSelection,
-        backButtonStateSelection,
-        guideSettingsAnimate, 
-        guideMenuRef, 
-        guidePanelRef,
-        guideSettingsRef,
-        aboutDashboardPageRef,
-        gamerProfilePageRef,
-        showThemeSelection,
-        guideSelectThemeRef,
-        communityDashboardPageRef
+      revealGuideMenu,
+      extendMenu,
+      revealAboutDashboard,
+      guideSettingsAnimate,
+      showThemeSelection,
+      guideMenuRef,
+      guidePanelRef,
+      guideSettingsRef,
+      aboutDashboardPageRef,
+      gamerProfilePageRef,
+      guideSelectThemeRef,
+      communityDashboardPageRef,
+      showGuideSettings,
+      extendGuideMenu,
+      closeFullMenu,
+      extendRevealContent,
+      revealThemeSelection,
+      backButtonStateSelection,
         };
 };

@@ -24,8 +24,6 @@ const DeviceSetup: React.FC<DeviceSetupProps> = ({ mockDbData }) => {
     fullscreenRef
   } = checkDeviceOrientation();
 
-  // console.log()
-
   return (
     <>
       {screenOverlay ? (

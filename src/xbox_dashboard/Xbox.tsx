@@ -33,6 +33,7 @@ import utility_sound_sfx from "../assets/audio/utility_sfx.mp3";
 import useAudioSound from "../custom_hooks/useAudioSound";
 
 import { OrganizedData } from 'src/ts_types/apiDataTypes';
+import { GuidePanelAnimation } from '../custom_types/utilityTypes';
 
 
 
@@ -48,7 +49,7 @@ interface XboxDataProps {
 const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
     const dispatch = useDispatch();
   
-    const guidePanelAnimation = useGuidePanelAnimation();
+    const guidePanelAnimation: GuidePanelAnimation  = useGuidePanelAnimation();
     const dashboardAnimationState = useDashboardAnimation();
   
     const current_context_index = useSelector(selectContextIndex);
@@ -104,7 +105,6 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
   
     function shiftBladeRight() {
       if (!contextShiftBoundary(navigationContext)) {
-        console.log(navigationContext);
         return;
       }
   
