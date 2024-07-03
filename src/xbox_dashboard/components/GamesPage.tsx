@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
@@ -27,22 +26,30 @@ import {
 
 import { updateDiscTrayState } from '../../redux_slices/xboxSlice';
 
+import { GamesPageProps, CustomRootVars } from '../../custom_types/utilityTypes';
 
-const GamesPage = (props) => {
+
+
+const GamesPage: React.FC<GamesPageProps> = (props) => {
+
+    const { foreignExtendGamerProfile, 
+            gamesSubPageExit, 
+            gamesSubPageAnimation, 
+            current_context_index } = props;
 
     const dispatch = useDispatch();
-    const navigationContext = useSelector(selectNavigationContext);
 
     const utilitySound = useUtilitySfx();
 
 
     //Menu state variables
+    const navigationContext = useSelector(selectNavigationContext);
     const isHighlightActive = useSelector(selectHighlightState);
     const gamesMenuIndex = useSelector(selectGamesMenuIndex);
+    
 
-    const {current_context_index, gamesSubPageAnimation, gamesSubPageExit, foreignExtendGamerProfile, } = props;
 
-    const listItemHighlight = (current_menu_index, target_index) => {
+    const listItemHighlight = (current_menu_index: number|null , target_index: number) => {
         
         let highlight_state = false;
 
@@ -57,9 +64,9 @@ const GamesPage = (props) => {
     };
     
 
-        //Spotlight nav
-        const spotlightMenuIndex = useSelector(selectMarketplaceSpotlightMenuIndex);
-        const spotlightCategoryTitle = useSelector(selectMarketplaceSpotlightCategoryTitle) || "games";
+    //Spotlight nav
+    const spotlightMenuIndex = useSelector(selectMarketplaceSpotlightMenuIndex);
+    const spotlightCategoryTitle = useSelector(selectMarketplaceSpotlightCategoryTitle) || "games";
 
     const spotlightContent = {
         games: {
@@ -184,7 +191,6 @@ const GamesPage = (props) => {
                 subtitle: "Theme",
                 description: "Embrace the spirit of the Assassin's Creed Brotherhood with this featured theme. Customize your Xbox 360 with dynamic backgrounds, unique icons, and music that echoes the rooftops of historic cities. Embark on a stealthy and adventurous journey as you embody the creed and showcase your love for the Assassin's Creed series.",
               }
-              // Add more featured items as needed
             ]
           }
       };
@@ -193,7 +199,7 @@ const GamesPage = (props) => {
   return (
      <>
 
-        <div id={gamesStyles["gamesContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 2 ? 1 : -1}`}}>
+        <div id={gamesStyles["gamesContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 2 ? 1 : -1}`} as CustomRootVars}>
 
 
             <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 2 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
@@ -201,7 +207,7 @@ const GamesPage = (props) => {
 
             <div id={gamesStyles["games"]} className={`${pageGridStyles.mainGridContent} ${navigationContext == "main_menu_games" ? '' : transitionStyles.removeDisplay}`}>
                 <div className={pageGridStyles.leftContent}>
-                    <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile(); utilitySound.current.playButtonSound()}}>
+                    <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile(); utilitySound.current?.playButtonSound()}}>
                         <p>Epoxi117</p>
                         <div className={profileCardStyles.profileImgContainer}>
                             <div className={profileCardStyles.profileIcon}></div>
@@ -237,7 +243,7 @@ const GamesPage = (props) => {
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >
-                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_played_games')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_played_games')); dispatch(updateDiscTrayState(false)); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateGamesMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.controller_icon}`}></span>
                                 <p>
@@ -247,7 +253,7 @@ const GamesPage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_arcade')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_arcade')); dispatch(updateDiscTrayState(false)); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateGamesMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.joystick_icon}`}></span>
                                 <p>
@@ -257,7 +263,7 @@ const GamesPage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_demos')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_demos')); dispatch(updateDiscTrayState(false)); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateGamesMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.demos_icon}`}></span>
                                 <p>
@@ -267,7 +273,7 @@ const GamesPage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${gamesMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_trailers')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{gamesSubPageAnimation(); dispatch(updateNavigateContext('games_trailers')); dispatch(updateDiscTrayState(false)); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateGamesMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.film_icon}`}></span>
                                 <p>
@@ -308,7 +314,7 @@ const GamesPage = (props) => {
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
                                 </div>
-                                <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                <div className={isHighlightActive ? itemSelectStyles.boxInsetHighlightMaskBottom : ''}>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
@@ -316,7 +322,7 @@ const GamesPage = (props) => {
                                 </div>
                             </div>
                             <div  className={itemSelectStyles.innerListContainer} > 
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <p>
@@ -325,7 +331,7 @@ const GamesPage = (props) => {
                                     
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                             
@@ -335,7 +341,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -345,7 +351,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -363,12 +369,12 @@ const GamesPage = (props) => {
                     <div className={pageGridStyles.gamesDescriptionBox}>
                         <div className={pageGridStyles.gamesdDescriptionTitleContainer}>
                           <h3 className={pageGridStyles.gamesDescriptionTitle}>
-                          {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
+                          {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
                           </h3>
                         </div>
                         <div className={pageGridStyles.gamesDescriptionContent}>
                             <p>
-                            {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
+                            {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
                             </p>
                         </div>
                     </div>
@@ -376,7 +382,7 @@ const GamesPage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.gamesSubNavButton}>
-                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current?.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>
                         </div>
@@ -397,7 +403,7 @@ const GamesPage = (props) => {
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
                                 </div>
-                                <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                <div className={isHighlightActive ? itemSelectStyles.boxInsetHighlightMaskBottom : ''}>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
@@ -405,7 +411,7 @@ const GamesPage = (props) => {
                                 </div>
                             </div>
                             <div  className={itemSelectStyles.innerListContainer} > 
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <p>
@@ -414,7 +420,7 @@ const GamesPage = (props) => {
                                     
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                             
@@ -424,7 +430,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -434,7 +440,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -452,12 +458,12 @@ const GamesPage = (props) => {
                     <div className={pageGridStyles.gamesDescriptionBox}>
                         <div className={pageGridStyles.gamesdDescriptionTitleContainer}>
                           <h3 className={pageGridStyles.gamesDescriptionTitle}>
-                          {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
+                          {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
                           </h3>
                         </div>
                         <div className={pageGridStyles.gamesDescriptionContent}>
                             <p>
-                            {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
+                            {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
                             </p>
                         </div>
                     </div>
@@ -465,7 +471,7 @@ const GamesPage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.gamesSubNavButton}>
-                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current?.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>
                         </div>
@@ -486,7 +492,7 @@ const GamesPage = (props) => {
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
                                 </div>
-                                <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                <div className={isHighlightActive ? itemSelectStyles.boxInsetHighlightMaskBottom : ''} >
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
@@ -494,7 +500,7 @@ const GamesPage = (props) => {
                                 </div>
                             </div>
                             <div  className={itemSelectStyles.innerListContainer} > 
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <p>
@@ -503,7 +509,7 @@ const GamesPage = (props) => {
                                     
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                             
@@ -513,7 +519,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -523,7 +529,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -541,12 +547,12 @@ const GamesPage = (props) => {
                     <div className={pageGridStyles.gamesDescriptionBox}>
                         <div className={pageGridStyles.gamesdDescriptionTitleContainer}>
                           <h3 className={pageGridStyles.gamesDescriptionTitle}>
-                          {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
+                          {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
                           </h3>
                         </div>
                         <div className={pageGridStyles.gamesDescriptionContent}>
                             <p>
-                            {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
+                            {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
                             </p>
                         </div>
                     </div>
@@ -554,7 +560,7 @@ const GamesPage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.gamesSubNavButton}>
-                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current?.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>
                         </div>
@@ -575,7 +581,7 @@ const GamesPage = (props) => {
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
                                 </div>
-                                <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                <div className={isHighlightActive ? itemSelectStyles.boxInsetHighlightMaskBottom : ''}>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
@@ -583,7 +589,7 @@ const GamesPage = (props) => {
                                 </div>
                             </div>
                             <div  className={itemSelectStyles.innerListContainer} > 
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <p>
@@ -592,7 +598,7 @@ const GamesPage = (props) => {
                                     
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                             
@@ -602,7 +608,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -612,7 +618,7 @@ const GamesPage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -630,12 +636,12 @@ const GamesPage = (props) => {
                     <div className={pageGridStyles.gamesDescriptionBox}>
                         <div className={pageGridStyles.gamesdDescriptionTitleContainer}>
                           <h3 className={pageGridStyles.gamesDescriptionTitle}>
-                          {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
+                          {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
                           </h3>
                         </div>
                         <div className={pageGridStyles.gamesDescriptionContent}>
                             <p>
-                            {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
+                            {spotlightMenuIndex !== null && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
                             </p>
                         </div>
                     </div>
@@ -643,7 +649,7 @@ const GamesPage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.gamesSubNavButton}>
-                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{gamesSubPageExit(); dispatch(updateNavigateContext('main_menu_games')); dispatch(updateDiscTrayState(true)); utilitySound.current?.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>
                         </div>

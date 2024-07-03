@@ -15,7 +15,9 @@ import {
     selectThemeSelection,
     } from '../../redux_slices/menuSlice';
 
-const NavBladesContainer = (props) => {
+import { NavBladesContainerProps } from 'src/custom_types/utilityTypes';
+
+const NavBladesContainer: React.FC<NavBladesContainerProps> = (props) => {
 
     const { mountRef, 
             centerBlockExpandRef, 
@@ -31,10 +33,6 @@ const NavBladesContainer = (props) => {
             r_mediaBladeInactiveRef,
             r_systemBladeInactiveRef, } = props['dashboardAnimationState'];
 
-    
-    const dispatch = useDispatch();
-
-
     //Dashboard state variables
     const current_context_index = useSelector(selectContextIndex) || 0;
 
@@ -45,20 +43,10 @@ const NavBladesContainer = (props) => {
     const is_transitioning = useSelector(selectTransitionState);
 
     // dispatch(setBladeAnimationRef(bladeContainerRef));
-    const bladeRef = useRef(null);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const debounceBladeResize = useCallback(
-        debounce((fn) => {
-            dispatch(fn);
-            }, 1000),
-            []
-    );
+    const bladeRef = useRef<HTMLDivElement | null>(null);
 
 
-    useEffect(()=>{
-        // console.log("transition", is_transitioning);
-    }, [is_transitioning]);
+
 
 
   return <>

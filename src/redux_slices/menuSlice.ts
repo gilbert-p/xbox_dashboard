@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-let initialState = {
+import { MenuSliceTypes } from '../custom_types/reduxSliceTypes';
+
+let initialState: MenuSliceTypes = {
     show_selection_highlight: false,
     system_menu_index: 0,
     media_menu_index: null,
@@ -166,9 +168,7 @@ export const menuSlice = createSlice({
     }
 });
 
-export const { 
-               updateShowBlades,
-
+export const { updateShowBlades,
                updateSelectionHighlight,
                navigateSystemMenu, 
                navigateMediaMenu, 
@@ -180,82 +180,74 @@ export const {
                updateMarketplaceSpotlightCategory,
 
                navigateCommunityCategory,
-
-               
                navigateGuideMenuLinkStack,
                navigateGuideMenu,
                updateGuideActiveState,
                updateGuideMenuHighlight,
                updateLinkStackHighlight,
             
-
                updateGuideMusicPlayerHighlight,
                navigateGuideMusicPlayer,
-
 
                playMusic,
                navigateSongIndex,
                updateSelectedSong,
                updateMusicListSize,
 
-
                updateShowThemeSelect,
                updateSelectedTheme,
                navigateThemeSelectIndex,
                updateThemeSelectHighlight,
-
                updateExternalPanelNavigate,
-
                updateSubMenuNavigate,
-
                updateNavigateContext,
 
             } = menuSlice.actions;
 
-export const selectShowBladeState = (state) => state.menu.show_blades;
+export const selectShowBladeState = (state: { menu: MenuSliceTypes}) => state.menu.show_blades;
 
-export const selectHighlightState = (state) => state.menu.show_selection_highlight;
-export const selectSystemMainMenuIndex = (state) => state.menu.system_menu_index;
-export const selectMediaMenuIndex = (state) => state.menu.media_menu_index;
-export const selectGamesMenuIndex = (state) => state.menu.games_menu_index;
-export const selectXboxliveMenuIndex = (state) => state.menu.xboxlive_menu_index;
+export const selectHighlightState = (state:{ menu: MenuSliceTypes}) => state.menu.show_selection_highlight;
+export const selectSystemMainMenuIndex = (state:{ menu: MenuSliceTypes}) => state.menu.system_menu_index;
+export const selectMediaMenuIndex = (state:{ menu: MenuSliceTypes}) => state.menu.media_menu_index;
+export const selectGamesMenuIndex = (state:{ menu: MenuSliceTypes}) => state.menu.games_menu_index;
+export const selectXboxliveMenuIndex = (state:{ menu: MenuSliceTypes}) => state.menu.xboxlive_menu_index;
 
-export const selectMarketplaceMenuIndex = (state) => state.menu.marketplace_menu_index;
-export const selectMarketplaceSpotlightMenuIndex = (state) => state.menu.marketplace_spotlight_index;
-export const selectMarketplaceSpotlightCategoryTitle = (state) => state.menu.marketplace_spotlight_category;
+export const selectMarketplaceMenuIndex = (state:{ menu: MenuSliceTypes}) => state.menu.marketplace_menu_index;
+export const selectMarketplaceSpotlightMenuIndex = (state:{ menu: MenuSliceTypes}) => state.menu.marketplace_spotlight_index;
+export const selectMarketplaceSpotlightCategoryTitle = (state:{ menu: MenuSliceTypes}) => state.menu.marketplace_spotlight_category;
 
-export const selectCommunityCategory = (state) => state.menu.community_category;
-
-
-export const selectGuideActiveState = (state) => state.menu.guide_menu_active_state;
-export const selectGuideMenuLinkStackIndex = (state) => state.menu.guide_menu_link_stack_index;
-export const selectGuideMenuLinkStackHighlight = (state) => state.menu.guide_menu_link_stack_highlight;
-export const selectGuideMenuIndex = (state) => state.menu.guide_menu_index;
-export const selectGuideMenuHighlightState = (state) => state.menu.guide_menu_highlight;
+export const selectCommunityCategory = (state:{ menu: MenuSliceTypes}) => state.menu.community_category;
 
 
-export const selectGuideMusicPlayerIndex = (state) => state.menu.guide_music_player_index;
-export const selectGuideMusicPlayerHighlight = (state) => state.menu.guide_music_player_highlight;
+export const selectGuideActiveState = (state:{ menu: MenuSliceTypes}) => state.menu.guide_menu_active_state;
+export const selectGuideMenuLinkStackIndex = (state:{ menu: MenuSliceTypes}) => state.menu.guide_menu_link_stack_index;
+export const selectGuideMenuLinkStackHighlight = (state:{ menu: MenuSliceTypes}) => state.menu.guide_menu_link_stack_highlight;
+export const selectGuideMenuIndex = (state:{ menu: MenuSliceTypes}) => state.menu.guide_menu_index;
+export const selectGuideMenuHighlightState = (state:{ menu: MenuSliceTypes}) => state.menu.guide_menu_highlight;
 
 
-export const selectMusicState = (state) => state.menu.is_song_playing;
-export const selectSongIndex = (state) => state.menu.song_index;
-export const selectCurrentSong = (state) => state.menu.current_selected_song;
-export const selectMusiclistSize = (state) => state.menu.music_list_size;
+export const selectGuideMusicPlayerIndex = (state:{ menu: MenuSliceTypes}) => state.menu.guide_music_player_index;
+export const selectGuideMusicPlayerHighlight = (state:{ menu: MenuSliceTypes}) => state.menu.guide_music_player_highlight;
 
 
-export const selectShowThemeSelect = (state) => state.menu.show_theme_select;
-export const selectThemeSelection = (state) => state.menu.selected_theme;
-export const selectThemeIndex = (state) => state.menu.theme_select_index;
-export const selectThemeHighlightState = (state) => state.menu.theme_select_highlight;
-
-export const selectExternalNavigationState = (state) => state.menu.external_panel_navigate;
+export const selectMusicState = (state:{ menu: MenuSliceTypes}) => state.menu.is_song_playing;
+export const selectSongIndex = (state:{ menu: MenuSliceTypes}) => state.menu.song_index;
+export const selectCurrentSong = (state:{ menu: MenuSliceTypes}) => state.menu.current_selected_song;
+export const selectMusiclistSize = (state:{ menu: MenuSliceTypes}) => state.menu.music_list_size;
 
 
-export const selectSubMenuNavActive = (state) => state.menu.sub_menu_navigate;
+export const selectShowThemeSelect = (state:{ menu: MenuSliceTypes}) => state.menu.show_theme_select;
+export const selectThemeSelection = (state:{ menu: MenuSliceTypes}) => state.menu.selected_theme;
+export const selectThemeIndex = (state:{ menu: MenuSliceTypes}) => state.menu.theme_select_index;
+export const selectThemeHighlightState = (state:{ menu: MenuSliceTypes}) => state.menu.theme_select_highlight;
+
+export const selectExternalNavigationState = (state:{ menu: MenuSliceTypes}) => state.menu.external_panel_navigate;
 
 
-export const selectNavigationContext = (state) => state.menu.navigate_context;
+export const selectSubMenuNavActive = (state:{ menu: MenuSliceTypes}) => state.menu.sub_menu_navigate;
+
+
+export const selectNavigationContext = (state:{ menu: MenuSliceTypes}) => state.menu.navigate_context;
 
 
 

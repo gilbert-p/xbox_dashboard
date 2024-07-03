@@ -50,8 +50,15 @@ import {
  } from '../../redux_slices/menuSlice';
  import { updateDiscTrayState } from '../../redux_slices/xboxSlice';
 
+ import { CustomRootVars, MediaPageProps } from 'src/custom_types/utilityTypes';
 
-const XboxlivePage = (props) => {
+
+const MediaPage: React.FC<MediaPageProps> = (props) => {
+
+  const { current_context_index,
+    foreignExtendGamerProfile,
+    mediaSubPageAnimation,
+    mediaSubPageExit } = props;
 
   const [displayImage, setDisplayImage] = useState(false);
   const [imageViewIndex, setImageViewIndex] = useState(0);
@@ -81,12 +88,7 @@ const XboxlivePage = (props) => {
   const isSongPlaying = useSelector(selectMusicState);
   const currentSongTitle = useSelector(selectCurrentSong);
 
-  const { current_context_index,
-          foreignExtendGamerProfile,
-          mediaSubPageAnimation,
-          mediaSubPageExit, } = props;
-
-  const listItemHighlight = (current_menu_index, target_index) => {
+  const listItemHighlight = (current_menu_index: number|null, target_index:number) => {
       
       let highlight_state = false;
 
@@ -100,12 +102,6 @@ const XboxlivePage = (props) => {
       }
   };
 
-  const playSong = () => {
-    if (playerRef.current) {
-      playerRef.current.seekTo(10, "seconds");
-    }
-  };
-
   const playNextSong = async () => {
 
 
@@ -115,13 +111,14 @@ const XboxlivePage = (props) => {
 
   };
 
-  const revealUnderlayMedia = (state) => {
+  type mediaDisplayState = 'main_menu_media' | 'media_videos';
+  const revealUnderlayMedia = (state: mediaDisplayState): true|false => {
     switch(state) {
       case 'main_menu_media':
         return true; 
       case 'media_videos':
         return true;
-      case 'default': return false;
+      default: return false;
     }
   }
 
@@ -152,7 +149,6 @@ const XboxlivePage = (props) => {
             subtitle: "Game",
             description: "In the midst of a zombie apocalypse, photojournalist Frank West finds himself trapped in a shopping mall with hordes of the undead. As chaos ensues, Frank must uncover the truth behind the outbreak and survive the relentless onslaught of zombies. Armed with an array of improvised weapons, Frank battles his way through the mall's stores and corridors, confronting not only the undead but also deranged survivors. Time is ticking, and every decision counts. Will Frank uncover the dark secrets behind the outbreak, or become another victim in a world gone mad? Survival is not just a goal; it's the only option.",
           }
-          // Add more games as needed
         ]
       },
       demos: {
@@ -177,7 +173,6 @@ const XboxlivePage = (props) => {
               subtitle: "Demo",
               description: "Descend into the underwater city of Rapture, a dystopian paradise gone awry. In Bioshock, you'll unravel the mysteries of this submerged world while battling mutated enemies and uncovering the dark history of Rapture. The demo introduces you to the atmospheric storytelling, unique setting, and immersive gameplay that define the Bioshock experience. Immerse yourself in a narrative-driven journey filled with moral choices and unexpected twists."
             }
-            // Add more demos as needed
           ]
         },
         videos: {
@@ -202,7 +197,6 @@ const XboxlivePage = (props) => {
               subtitle: "Video",
               description: "Prepare for an intergalactic adventure with the launch trailer for Mass Effect. Immerse yourself in the epic sci-fi universe created by BioWare. Witness stunning visuals, captivating storytelling, and the promise of a role-playing experience unlike any other. The Mass Effect launch trailer sets the stage for a journey that will shape the fate of the galaxy."
             }
-            // Add more videos as needed
           ]
         },
         themes: {
@@ -227,7 +221,6 @@ const XboxlivePage = (props) => {
               subtitle: "Theme",
               description: "Add a touch of explosive fun to your Xbox 360 with this Bomberman LIVE theme. Colorful graphics, playful icons, and lively music capture the excitement of the classic Bomberman experience. Whether you're a fan of multiplayer mayhem or solo bomb-dropping, this theme celebrates the timeless appeal of Bomberman."
             }
-            // Add more themes as needed
           ]
         },
         featured: {
@@ -252,7 +245,6 @@ const XboxlivePage = (props) => {
               subtitle: "Theme",
               description: "Embrace the spirit of the Assassin's Creed Brotherhood with this featured theme. Customize your Xbox 360 with dynamic backgrounds, unique icons, and music that echoes the rooftops of historic cities. Embark on a stealthy and adventurous journey as you embody the creed and showcase your love for the Assassin's Creed series.",
             }
-            // Add more featured items as needed
           ]
         }
     };
@@ -277,7 +269,7 @@ const XboxlivePage = (props) => {
     useEffect(() => {
       const interval = setTimeout(() => {
         setImageViewIndex((imageViewIndex + 1) % imageArray.length);
-      }, 3000); // Change image every 3 seconds
+      }, 3000);
   
       return () => clearInterval(interval);
     }, []);
@@ -306,15 +298,15 @@ const XboxlivePage = (props) => {
 
   return (
      <>
-        <div id={mediaStyles["mediaContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 3 ? 1 : -1}`}}>
+        <div id={mediaStyles["mediaContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 3 ? 1 : -1}`} as CustomRootVars}>
 
 
-            <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${revealUnderlayMedia(navigationContext) ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
+            <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${revealUnderlayMedia(navigationContext as mediaDisplayState) ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
 
 
             <div id={mediaStyles["media"]} className={`${pageGridStyles.mainGridContent} ${navigationContext == "main_menu_media" ? '' : transitionStyles.removeDisplay}`}>
                 <div className={pageGridStyles.leftContent}>
-                    <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile(); utilitySound.current.playButtonSound()}}>
+                    <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile(); utilitySound.current?.playButtonSound()}}>
                         <p>Epoxi117</p>
                         <div className={profileCardStyles.profileImgContainer}>
                             <div className={profileCardStyles.profileIcon}></div>
@@ -350,7 +342,7 @@ const XboxlivePage = (props) => {
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >
-                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_music_player')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_music_player')); dispatch(updateDiscTrayState(false)); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMediaMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.music_icon}`}></span>
                                 <p>
@@ -360,7 +352,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_pictures')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_pictures')); dispatch(updateDiscTrayState(false)); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMediaMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.camera_icon}`}></span>
                                 <p>
@@ -370,7 +362,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${mediaMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_videos')); dispatch(updateDiscTrayState(false)); utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{mediaSubPageAnimation(); dispatch(updateNavigateContext('media_videos')); dispatch(updateDiscTrayState(false)); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMediaMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.film_icon}`}></span>
                                 <p>
@@ -406,16 +398,16 @@ const XboxlivePage = (props) => {
                   <div className={pageGridStyles.musicPlayerControls}>
                     <div className={musicPlayerStyles.guideMusicPlayer}>
                         <div className={musicPlayerStyles.musicPlayerActionButtonContainer}>
-                            <button id={musicPlayerStyles["playButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playSong(); utilitySound.current.playButtonSound()}}
+                            <button id={musicPlayerStyles["playButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(0));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
                                 <span className={!isSongPlaying ? musicPlayerStyles.guidePlayIcon : musicPlayerStyles.guidePauseIcon }></span>
                                 <span className={`${isGuideMusicPlayerHighlightActive && musicPlayerStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 0 ? transitionStyles.removeDisplay : ""}`}></span>
                             </button>
-                            <button id={musicPlayerStyles["previousSelectionButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playPrevSong(); utilitySound.current.playButtonSound()}}
+                            <button id={musicPlayerStyles["previousSelectionButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playPrevSong(); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(1));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
                                 <span className={`${isGuideMusicPlayerHighlightActive && musicPlayerStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 1 ? transitionStyles.removeDisplay : ""}`}></span>
                             </button>
-                            <button id={musicPlayerStyles["nextSelectionButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playNextSong(); utilitySound.current.playButtonSound()}}
+                            <button id={musicPlayerStyles["nextSelectionButton"]} className={musicPlayerStyles.skewmorphButton} onClick={()=>{playNextSong(); utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(2));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
                                 <span className={`${isGuideMusicPlayerHighlightActive && musicPlayerStyles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 2 ? transitionStyles.removeDisplay : ""}`}></span>
                             </button>
@@ -464,14 +456,14 @@ const XboxlivePage = (props) => {
                     <h3> Current Playlist </h3>
                     <div className={`${itemSelectStyles.gamesPlayedListContainer} ${itemSelectStyles.musicPlayerSelectItemList}`}>
                         <div  className={itemSelectStyles.innerListContainer} > 
-                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
                                 <p>
                                     {spotlightContent[spotlightCategoryTitle].listItems['0'].title}
                                 </p>
                                 
                             </div>
-                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
                                 <p>
                                         
@@ -481,7 +473,7 @@ const XboxlivePage = (props) => {
                                 
                                 
                             </div>
-                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
                                 <p>
                                     
@@ -491,7 +483,7 @@ const XboxlivePage = (props) => {
                                 
                                 
                             </div>
-                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.roundListItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
                                 <p>
                                     
@@ -511,7 +503,7 @@ const XboxlivePage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.gamesSubNavButton}>
-                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current?.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>
                         </div>
@@ -590,7 +582,7 @@ const XboxlivePage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.gamesSubNavButton}>
-                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current?.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>
                         </div>
@@ -611,7 +603,7 @@ const XboxlivePage = (props) => {
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(spotlightMenuIndex, 3)}`}></div>
                                 </div>
-                                <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                                <div className={isHighlightActive ? itemSelectStyles.boxInsetHighlightMaskBottom: ''}>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 0)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 1)}`}></div>
                                     <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(spotlightMenuIndex, 2)}`}></div>
@@ -619,7 +611,7 @@ const XboxlivePage = (props) => {
                                 </div>
                             </div>
                             <div  className={itemSelectStyles.innerListContainer} > 
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(0));dispatch(updateSelectionHighlight(true));}} >
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <p>
@@ -628,7 +620,7 @@ const XboxlivePage = (props) => {
                                     
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(1));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                             
@@ -638,7 +630,7 @@ const XboxlivePage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(2));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -648,7 +640,7 @@ const XboxlivePage = (props) => {
                                     <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${spotlightMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                     <div className={itemSelectStyles.listItemBorder}></div>
                                 </div>
-                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                                <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                     onMouseEnter={()=>{dispatch(navigateMarketplaceSpotlightMenu(3));dispatch(updateSelectionHighlight(true));}} >
                                     <p>
                                         
@@ -666,12 +658,12 @@ const XboxlivePage = (props) => {
                     <div className={pageGridStyles.gamesDescriptionBox}>
                         <div className={pageGridStyles.gamesdDescriptionTitleContainer}>
                           <h3 className={pageGridStyles.gamesDescriptionTitle}>
-                          {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
+                          {spotlightMenuIndex && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].title}
                           </h3>
                         </div>
                         <div className={pageGridStyles.gamesDescriptionContent}>
                             <p>
-                            {spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
+                            {spotlightMenuIndex && spotlightContent[spotlightCategoryTitle].listItems[spotlightMenuIndex].description}
                             </p>
                         </div>
                     </div>
@@ -679,7 +671,7 @@ const XboxlivePage = (props) => {
 
                 </div>
                 <div className={pageGridStyles.mediaSubNavButton}>
-                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current.playButtonSound()}}>
+                        <div className={pageGridStyles.subMenuBackButtonContainer} onClick={()=>{mediaSubPageExit(); dispatch(updateNavigateContext('main_menu_media')); dispatch(updateDiscTrayState(true)); utilitySound.current?.playButtonSound()}}>
                             <p>Back</p>
                             <div className={pageGridStyles.bControllerImg}></div>
                         </div>
@@ -691,4 +683,4 @@ const XboxlivePage = (props) => {
   </>);
 };
 
-export default XboxlivePage;
+export default MediaPage;
