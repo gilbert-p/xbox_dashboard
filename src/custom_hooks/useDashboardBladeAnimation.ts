@@ -216,27 +216,27 @@ export default function useDashboardBladeAnimation(): DashboardBladeAnimation {
 
   };
 
-  const slideBladesOut = () => {
+  const slideBladesOut = (): void => {
       slideAwayAnimate.current?.play();
       centerBlockExpandAnimate.current?.play();
   }
 
-  const slideBladesBack = () => {
+  const slideBladesBack = (): void => {
     slideAwayAnimate.current?.reverse();
   }
 
-  const gamesSubPageAnimation = () => {
+  const gamesSubPageAnimation = (): void => {
     gamesTabAnimate.current?.play();
   }
-  const gamesSubPageExit = () => {
+  const gamesSubPageExit = (): void => {
     gamesTabAnimate.current?.reverse();
   }
 
-  const mediaSubPageAnimation = () => {
+  const mediaSubPageAnimation = (): void => {
     mediaTabAnimate.current?.play();
   }
 
-  const mediaSubPageExit = () => {
+  const mediaSubPageExit = (): void => {
     mediaTabAnimate.current?.reverse();
   }
 

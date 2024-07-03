@@ -1,4 +1,4 @@
-import React, { CSSProperties, useRef } from 'react';
+import { useRef, CSSProperties } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../dashboard_styles/Dashboard.module.css';
 import transitionStyles from '../dashboard_styles/TransitionStyles.module.css';
@@ -32,25 +32,16 @@ import utility_sound_sfx from "../assets/audio/utility_sfx.mp3";
 
 import useAudioSound from "../custom_hooks/useAudioSound";
 
-import { OrganizedData } from 'src/ts_types/apiDataTypes';
-import { GuidePanelAnimation } from '../custom_types/utilityTypes';
+// import { OrganizedData } from 'src/ts_types/apiDataTypes';
+import { GuidePanelAnimation, DashboardBladeAnimation, ApiDataReference, CustomRootVars } from '../custom_types/utilityTypes';
 
 
 
-
-interface CustomCSSProperties extends CSSProperties {
-  '--ring-index'?: number;
-}
-
-interface XboxDataProps {
-  mockDbData: OrganizedData;
-}
-
-const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
+const Xbox: React.FC<ApiDataReference> = ({ mockDbData }) => {
     const dispatch = useDispatch();
   
     const guidePanelAnimation: GuidePanelAnimation  = useGuidePanelAnimation();
-    const dashboardAnimationState = useDashboardAnimation();
+    const dashboardAnimationState: DashboardBladeAnimation = useDashboardAnimation();
   
     const current_context_index = useSelector(selectContextIndex);
     const display_tray = useSelector(isTrayDisplayed);
@@ -79,7 +70,7 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
       return regexPattern.test(navigate_context);
     }
   
-    function shiftBladeLeft() {
+    function shiftBladeLeft(): void {
       if (!contextShiftBoundary(navigationContext)) {
         return;
       }
@@ -103,7 +94,7 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
       }
     }
   
-    function shiftBladeRight() {
+    function shiftBladeRight(): void {
       if (!contextShiftBoundary(navigationContext)) {
         return;
       }
@@ -130,13 +121,13 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
       }
     }
   
-    const openGuideSfx = async () => {
-      const playButtonSfx = async () => {
+    const openGuideSfx = async (): Promise<void> => {
+      const playButtonSfx = async (): Promise<void> => {
         utilitySFX.current?.play({ id: 'std_button_press' });
         await new Promise((resolve) => setTimeout(resolve, 50));
       };
   
-      const playGuideOpenSfx = async () => {
+      const playGuideOpenSfx = async (): Promise<void> => {
         utilitySFX.current?.play({ id: 'open_guide_sfx' });
         await new Promise((resolve) => setTimeout(resolve, 0));
       };
@@ -145,12 +136,12 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
       await playGuideOpenSfx();
     };
   
-    const showGuideSettings = () => {
+    const showGuideSettings = (): void => {
       openGuideSfx();
       guidePanelAnimation.showGuideSettings();
     };
   
-    const selectBackgroundAnimation = () => {
+    const selectBackgroundAnimation = (): string => {
       let backgroundPulseType = '';
       switch (current_context_index) {
         case 0:
@@ -174,7 +165,7 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
       return backgroundPulseType;
     };
   
-    const selectBackgroundDrop = () => {
+    const selectBackgroundDrop = (): string => {
       let backgroundDrop = '';
       switch (current_context_index) {
         case 1:
@@ -195,27 +186,29 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
       return backgroundDrop;
     };
   
-    const foreignExtendGamerProfile = () => {
+    const foreignExtendGamerProfile = (): void => {
       dispatch(updateNavigateContext('foreign_extension'));
       dispatch(updateGuideActiveState('foreign_gamer_profile'));
       guidePanelAnimation.extendRevealContent('foreign_gamer_profile');
     };
   
-    const foreignExtendCommunityPage = () => {
+    const foreignExtendCommunityPage = (): void => {
       dispatch(updateNavigateContext('foreign_extension'));
       dispatch(updateGuideActiveState('foreign_community_profile'));
       guidePanelAnimation.extendRevealContent('foreign_community_profile');
     };
   
-    function slideBladesAway() {
+    function slideBladesAway(): void {
       dashboardAnimationState.slideBladesOut();
     }
   
-    function slideBladesBack() {
+    function slideBladesBack(): void {
       dashboardAnimationState.slideBladesBack();
     }
+
+    
   
-    function LoadPageContext() {
+    function LoadPageContext(): JSX.Element| null {
       switch (current_context_index) {
         case 0:
           return (
@@ -223,7 +216,6 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
               mockDbData={mockDbData}
               slideBladesAway={slideBladesAway}
               slideBladesBack={slideBladesBack}
-              guideAnimationRef={guidePanelAnimation}
             />
           );
         case 1:
@@ -241,10 +233,7 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
               foreignExtendGamerProfile={foreignExtendGamerProfile}
               gamesSubPageExit={dashboardAnimationState['gamesSubPageExit']}
               gamesSubPageAnimation={dashboardAnimationState['gamesSubPageAnimation']}
-              slideBladesAway={slideBladesAway}
-              slideBladesBack={slideBladesBack}
               current_context_index={current_context_index}
-              guideAnimationRef={guidePanelAnimation}
             />
           );
         case 3:
@@ -258,25 +247,21 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
             />
           );
         case 4:
-          return <SystemPage current_context_index={current_context_index} guideAnimationRef={guidePanelAnimation} />;
+          return <SystemPage current_context_index={current_context_index} />;
         default:
           return null;
       }
     }
 
 
-    
-
-
     return (
         <div className={styles.xboxComponent}>
 
                 
-                <div className={styles.arrowContextButtonContainer}  >
-                <div className={styles.xboxHomeLogo} onClick={()=>{showGuideSettings()}}><span className={styles.ellipseGlow}></span></div>
-                <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
-                <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
-                {/* onClick={()=>{foreignExtendGamerProfile()}} */}
+            <div className={styles.arrowContextButtonContainer}>
+              <div className={styles.xboxHomeLogo} onClick={()=>{showGuideSettings()}}><span className={styles.ellipseGlow}></span></div>
+              <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
+              <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
             </div>
 
             <GuideMenu mockDbData={mockDbData} guideAnimationRef={guidePanelAnimation} />
@@ -299,34 +284,34 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
 
                     <div id={backgroundAnimation[`${selectBackgroundAnimation()}`]} className={`${selectBackgroundDrop()}`} >
                         <div className={`${backgroundAnimation.pulseContainer}`}>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1} as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 1} as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 2}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 3}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 4}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 5}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 6}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}  as CustomCSSProperties}>
+                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}  as CustomRootVars}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
                         </div>
@@ -345,9 +330,7 @@ const Xbox: React.FC<XboxDataProps> = ({ mockDbData }) => {
                         </div>
                     </div>
                     </div>
-                        <section className={styles.gamesContainer}>
-
-                        </section>
+                      <section className={styles.gamesContainer}></section>
                         
                 </div>
 

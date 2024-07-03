@@ -18,7 +18,11 @@ import { updateSelectionHighlight,
     navigateCommunityCategory,
 } from '../../redux_slices/menuSlice';
 
-const XboxlivePage = (props) => {
+import { XboxlivePageProps, CustomRootVars } from '../../custom_types/utilityTypes';
+
+
+
+const XboxlivePage: React.FC<XboxlivePageProps> = (props) => {
 
     const dispatch = useDispatch();
 
@@ -34,7 +38,7 @@ const XboxlivePage = (props) => {
 
 
 
-    const listItemHighlight = (current_menu_index, target_index) => {
+    const listItemHighlight = (current_menu_index: number | null, target_index: number): string | null => {
         
         let highlight_state = false;
 
@@ -53,7 +57,7 @@ const XboxlivePage = (props) => {
     
   return (
      <>
-        <div id={xboxliveStyles["xboxliveContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 1 ? 1 : -1}`}}>
+        <div id={xboxliveStyles["xboxliveContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 1 ? 1 : -1}`} as CustomRootVars}>
 
         <div  className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 1 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
 
@@ -61,7 +65,7 @@ const XboxlivePage = (props) => {
 
         <div id={xboxliveStyles["xboxlive"]} className={`${pageGridStyles.mainGridContent} ${current_context_index !== 1 ? transitionStyles.removeDisplay : ""}`}>
             <div className={pageGridStyles.leftContent}>
-                <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile(); utilitySound.current.playButtonSound();}} >
+                <div className={profileCardStyles.profileContainer} onClick={()=>{foreignExtendGamerProfile(); utilitySound.current?.playButtonSound();}} >
                     <p>Epoxi117</p>
                     <div className={profileCardStyles.profileImgContainer} >
                         <div className={profileCardStyles.profileIcon}>
@@ -90,14 +94,14 @@ const XboxlivePage = (props) => {
                             <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(xboxliveMenuIndex, 1)}`}></div>
                             <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightTop} ${listItemHighlight(xboxliveMenuIndex, 2)}`}></div>
                         </div>
-                        <div className={isHighlightActive && itemSelectStyles.boxInsetHighlightMaskBottom}>
+                        <div className={isHighlightActive ? itemSelectStyles.boxInsetHighlightMaskBottom: ''}>
                             <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(xboxliveMenuIndex, 0)}`}></div>
                             <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(xboxliveMenuIndex, 1)}`}></div>
                             <div className={`${isHighlightActive && itemSelectStyles.boxInsetHighlightBottom} ${listItemHighlight(xboxliveMenuIndex, 2)}`}></div>
                         </div>
                     </div>
                     <div className={itemSelectStyles.innerListContainer} > 
-                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('messages')); utilitySound.current.playButtonSound()}}
+                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('messages')); utilitySound.current?.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.mail_shadow_icon}`}></span>
                             <p>
@@ -107,7 +111,7 @@ const XboxlivePage = (props) => {
                             <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
-                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('friends')); utilitySound.current.playButtonSound()}}
+                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('friends')); utilitySound.current?.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.friends_icon}`}></span>
                             <p>
@@ -117,7 +121,7 @@ const XboxlivePage = (props) => {
                             <span className={`${isHighlightActive && itemSelectStyles.listItemHighlight} ${xboxliveMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                             <div className={itemSelectStyles.listItemBorder}></div>
                         </div>
-                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('players')); utilitySound.current.playButtonSound()}}
+                        <div className={itemSelectStyles.listItem} onClick={()=>{foreignExtendCommunityPage(); dispatch(navigateCommunityCategory('players')); utilitySound.current?.playButtonSound()}}
                             onMouseEnter={()=>{dispatch(navigateXboxliveMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                             <span className={`${itemSelectStyles.listIcon} ${iconLibrary.chat_icon}`}></span>
                             <p>
@@ -132,25 +136,25 @@ const XboxlivePage = (props) => {
                 <div className={xboxliveStyles.insetContainer}>
                     <div className={xboxliveStyles.xboxliveAnimationContainer}>
                         <div className={xboxliveStyles.circleAnimation}>
-                            <div className={`${ringAnim.ring}`} style={{"--i": 0}}>
+                            <div className={`${ringAnim.ring}`} style={{"--i": 0} as CustomRootVars}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
-                            <div className={`${ringAnim.ring}`} style={{"--i": 1}}>
+                            <div className={`${ringAnim.ring}`} style={{"--i": 1} as CustomRootVars}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
-                            <div className={`${ringAnim.ring}`} style={{"--i": 2}}>
+                            <div className={`${ringAnim.ring}`} style={{"--i": 2} as CustomRootVars}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
-                            <div className={`${ringAnim.ring}`} style={{"--i": 3}}>
+                            <div className={`${ringAnim.ring}`} style={{"--i": 3} as CustomRootVars}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
-                            <div className={`${ringAnim.ring}`} style={{"--i": 4}}>
+                            <div className={`${ringAnim.ring}`} style={{"--i": 4} as CustomRootVars}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
-                            <div className={`${ringAnim.ring}`} style={{"--i": 5}}>
+                            <div className={`${ringAnim.ring}`} style={{"--i": 5} as CustomRootVars}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
-                            <div className={`${ringAnim.ring}`} style={{"--i": 6}}>
+                            <div className={`${ringAnim.ring}`} style={{"--i": 6} as CustomRootVars}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
                         </div>

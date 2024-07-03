@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { useTransitionBlade } from '../api_features/useTransitionBlade';
 
-import { XboxSliceTypes } from '../custom_types/xboxSliceTypes';
+import { XboxSliceTypes } from '../custom_types/reduxSliceTypes';
 
 
 const initialState: XboxSliceTypes = {

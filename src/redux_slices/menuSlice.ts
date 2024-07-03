@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { MenuSliceTypes } from '../custom_types/xboxSliceTypes';
+import { MenuSliceTypes } from '../custom_types/reduxSliceTypes';
 
 let initialState: MenuSliceTypes = {
     show_selection_highlight: false,
@@ -168,9 +168,7 @@ export const menuSlice = createSlice({
     }
 });
 
-export const { 
-               updateShowBlades,
-
+export const { updateShowBlades,
                updateSelectionHighlight,
                navigateSystemMenu, 
                navigateMediaMenu, 
@@ -182,34 +180,26 @@ export const {
                updateMarketplaceSpotlightCategory,
 
                navigateCommunityCategory,
-
-               
                navigateGuideMenuLinkStack,
                navigateGuideMenu,
                updateGuideActiveState,
                updateGuideMenuHighlight,
                updateLinkStackHighlight,
             
-
                updateGuideMusicPlayerHighlight,
                navigateGuideMusicPlayer,
-
 
                playMusic,
                navigateSongIndex,
                updateSelectedSong,
                updateMusicListSize,
 
-
                updateShowThemeSelect,
                updateSelectedTheme,
                navigateThemeSelectIndex,
                updateThemeSelectHighlight,
-
                updateExternalPanelNavigate,
-
                updateSubMenuNavigate,
-
                updateNavigateContext,
 
             } = menuSlice.actions;

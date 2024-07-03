@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { MutableRefObject, CSSProperties } from 'react';
 
 export type GsapTimeline = gsap.core.Timeline | null;
 export type RefElement = HTMLDivElement | null;
@@ -60,3 +60,81 @@ export interface DashboardBladeAnimation {
     mediaSubPageAnimation: () => void,
     mediaSubPageExit: () => void,
 }
+
+export interface DashboardDataItem {
+    source: string;
+    id: string | number;
+    title: string;
+    description: string;
+    category: string;
+    subtitle: string;
+}
+
+
+export interface OrganizedData {
+    [category: string]: DashboardDataItem[];
+    games: DashboardDataItem[];
+    demos: DashboardDataItem[];
+    videos: DashboardDataItem[];
+    themes: DashboardDataItem[];
+    featured: DashboardDataItem[];
+  }
+
+  export interface ApiDataReference {
+    mockDbData: OrganizedData;
+}
+
+export interface SpotlightKeyIdentifier {
+    games: DashboardDataItem[];
+    demos: DashboardDataItem[];
+    videos: DashboardDataItem[];
+    themes: DashboardDataItem[];
+    featured: DashboardDataItem[];
+}
+
+
+
+export type SpotlightCategories = keyof SpotlightKeyIdentifier;
+// export type SpotlightCategories = 'games' | 'demos' | 'videos' | 'themes' | 'featured';
+
+
+
+export interface MarketplacePageProps {
+    mockDbData: SpotlightKeyIdentifier;
+    slideBladesAway: () => void;
+    slideBladesBack: () => void;
+} 
+  
+export interface XboxlivePageProps {
+    foreignExtendGamerProfile: () => void;
+    foreignExtendCommunityPage: () => void;
+    current_context_index: number;
+    guideAnimationRef: GuidePanelAnimation;
+}
+
+export interface GamesPageProps {
+    foreignExtendGamerProfile: () => void;
+    gamesSubPageExit: () => void;
+    gamesSubPageAnimation: () => void;
+    current_context_index: number;
+}
+
+export interface MediaPageProps {
+    foreignExtendGamerProfile: () => void;
+    mediaSubPageExit: () => void;
+    mediaSubPageAnimation: () => void;
+    current_context_index: number;
+    guideAnimationRef: GuidePanelAnimation;
+}
+
+export interface SystemPageProps {
+    current_context_index: number|null;
+}
+
+
+
+export interface CustomRootVars extends CSSProperties {
+    '--z-depth'?: number | string;
+    '--ring-index'?: number | string;
+    '--i'?: number | string;
+    } 

@@ -19,13 +19,13 @@ export interface XboxSliceTypes {
 
 export interface MenuSliceTypes {
     show_selection_highlight: boolean;
-    system_menu_index: number;
+    system_menu_index: number | null;
     media_menu_index: number | null;
     games_menu_index: number | null;
     xboxlive_menu_index: number | null;
     marketplace_menu_index: number | null;
-    marketplace_spotlight_index: number;
-    marketplace_spotlight_category: 'games' | 'movies' | 'music';
+    marketplace_spotlight_index: number | null;
+    marketplace_spotlight_category: 'games' | 'demos' | 'videos' | 'themes' | 'featured';
 
     community_category: 'messages' | 'friends' | 'players'; 
 
@@ -52,6 +52,9 @@ export interface MenuSliceTypes {
     external_panel_navigate: boolean;
     sub_menu_navigate: boolean;
 
-    navigate_context: 'guide_panel_main' | 'foreign_extension' | 'main_menu_marketplace' | 'main_menu_xboxlive' | 'main_menu_games' | 'main_menu_media' | 'main_menu_system' | 'default';
+    navigate_context: 'guide_panel_main' | 'foreign_extension' | 'main_menu_marketplace' | 'main_menu_xboxlive' | 'main_menu_games' |
+                      'main_menu_media' | 'main_menu_system' | 'marketplace_spotlight' | 'games_trailers' | 'games_played_games' |
+                      'games_arcade' | 'games_demos' | 'media_videos' | 'media_pictures' | 'media_music_player' | 'main_menu_media' | 'media_videos' | 'default';
+
     guide_menu_active_state: 'closed' | 'open' | 'external_gamer_profile' | 'guide_setting_main' | 'theme_select' | 'extended_about_dashboard' | 'extended_gamer_profile' | 'foreign_gamer_profile' | 'foreign_community_profile' | 'default';
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import iconLibrary from "../../dashboard_styles/IconStyling.module.css";
@@ -10,12 +9,13 @@ import bladeStyles from "../../dashboard_styles/BladeStyling.module.css";
 import useUtilitySfx from "../../custom_hooks/useUtilitySfx";
 
 import { updateSelectionHighlight,
-    selectSystemMainMenuIndex,
-    navigateSystemMenu,
+         selectSystemMainMenuIndex,
+         navigateSystemMenu,
 } from '../../redux_slices/menuSlice';
 
+import { SystemPageProps, CustomRootVars } from '../../custom_types/utilityTypes';
 
-const XboxlivePage = (props) => {
+const XboxlivePage: React.FC<SystemPageProps>  = ({current_context_index}) => {
 
     const dispatch = useDispatch();
 
@@ -24,9 +24,8 @@ const XboxlivePage = (props) => {
     //Menu state variables
     const systemMenuIndex = useSelector(selectSystemMainMenuIndex);
 
-    const { systemBackgroundRef, current_context_index } = props;
 
-    const listItemHighlight = (current_menu_index, target_index) => {
+    const listItemHighlight = (current_menu_index: number|null, target_index:number): string|null => {
         
         let highlight_state = false;
 
@@ -42,7 +41,7 @@ const XboxlivePage = (props) => {
 
   return (
      <>
-        <div id={systemStyles["systemContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 4 ? 1 : -1}`}} >
+        <div id={systemStyles["systemContextContainer"]} className={pageGridStyles.outerContextContainer} style={{"--z-depth": `${current_context_index === 4 ? 1 : -1}`} as CustomRootVars} >
 
 
             <div className={` ${bladeStyles.dashboardWhiteUnderlay}   ${current_context_index === 4 ? (bladeStyles.dashboardUnderlayImage + ' ' + bladeStyles.dashboardUnderlayActive) : '' }`}></div> 
@@ -73,7 +72,7 @@ const XboxlivePage = (props) => {
                             </div>
                         </div>
                         <div className={itemSelectStyles.innerListContainer} >
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateSystemMenu(0));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.console_icon}`}></span>
                                 <p>
@@ -83,7 +82,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 0 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateSystemMenu(1));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.family_settings_icon}`}></span>
                                 <p>
@@ -93,7 +92,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 1 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateSystemMenu(2));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.mu_storage_icon}`}></span>
                                 <p>
@@ -103,7 +102,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 2 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateSystemMenu(3));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.adhoc_icon}`}></span>
                                 <p>
@@ -113,7 +112,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 3 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateSystemMenu(4));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.computer_icon}`}></span>
                                 <p>
@@ -123,7 +122,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 4 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateSystemMenu(5));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.xboxlive_vision}`}></span>
                                 <p>
@@ -133,7 +132,7 @@ const XboxlivePage = (props) => {
                                 <span className={`${itemSelectStyles.listItemHighlight} ${systemMenuIndex !== 5 ? transitionStyles.makeTransparent : ""}`}></span>
                                 <div className={itemSelectStyles.listItemBorder}></div>
                             </div>
-                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current.playButtonSound()}}
+                            <div className={itemSelectStyles.listItem} onClick={()=>{utilitySound.current?.playButtonSound()}}
                                 onMouseEnter={()=>{dispatch(navigateSystemMenu(6));dispatch(updateSelectionHighlight(true));}} onMouseLeave={()=>{dispatch(updateSelectionHighlight(false))}}>
                                 <span className={`${itemSelectStyles.listIcon} ${iconLibrary.console_controller_icon}`}></span>
                                 <p>

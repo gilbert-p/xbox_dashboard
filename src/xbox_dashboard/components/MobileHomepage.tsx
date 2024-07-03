@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import ReactPlayer from 'react-player';
 import mobileStyles from '../../dashboard_styles/mobilePage.module.css';
 
@@ -10,8 +10,9 @@ import fruitgerAeroXboxImg from '../../assets/images/frutiger_aero_xbox_360.png'
 import glowingXboxLogoDarkImg from '../../assets/images/glowing-xbox-logo-dark.png';
 import glowingXboxLogoLightImg from '../../assets/images/glowing-xbox-logo-light.png';
 
-const MobileViewPrompt = () => {
-  const dashboardIntroMediaRef = useRef(null);
+// Define a type for the useRef hook
+const MobileViewPrompt: React.FC = () => {
+  const dashboardIntroMediaRef = useRef<ReactPlayer>(null);
 
   return (
     <div className={mobileStyles.mobileViewContainer}>

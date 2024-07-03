@@ -115,9 +115,6 @@ const GuideMenu = (props) => {
       }, [mockDbData]); 
 
 
-
-
-
     const musicSprite = {
         overture:[0,15000],
         heavy_price_paid:[16000, 15000],
