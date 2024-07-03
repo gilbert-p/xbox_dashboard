@@ -348,7 +348,7 @@ const MarketplacePage : React.FC<MarketplacePageProps> = ({mockDbData, slideBlad
                       </h3>
                       <div className={pageGridStyles.descriptionContent}>
                         <p>
-                            {spotlightMenuIndex !==null && spotlightData?.[spotlightCategoryTitle]?.[spotlightMenuIndex]?.description}
+                        {spotlightMenuIndex !==null && spotlightData?.[spotlightCategoryTitle]?.[spotlightMenuIndex]?.description}
                         </p>
                       </div>
                     </div>

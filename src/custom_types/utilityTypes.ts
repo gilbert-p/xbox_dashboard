@@ -2,7 +2,8 @@ import { MutableRefObject, CSSProperties } from 'react';
 
 export type GsapTimeline = gsap.core.Timeline | null;
 export type RefElement = HTMLDivElement | null;
-export type ForeignExtendedState = 'foreign_gamer_profile' | 'foreign_community_profile' | 'extended_gamer_profile' | 'foreign_community_profile' | 'foreign_gamer_profile' | 'default'; 
+export type ForeignExtendedState = 'foreign_gamer_profile' | 'foreign_community_profile' | 'extended_gamer_profile' |
+                                   'foreign_community_profile' | 'foreign_gamer_profile' | 'default'; 
 export type ExtendedState = 'extended_about_dashboard' | 'extended_gamer_profile' | 'default';
 
 export interface GuidePanelAnimation {
@@ -92,10 +93,8 @@ export interface SpotlightKeyIdentifier {
     featured: DashboardDataItem[];
 }
 
-
-
 export type SpotlightCategories = keyof SpotlightKeyIdentifier;
-// export type SpotlightCategories = 'games' | 'demos' | 'videos' | 'themes' | 'featured';
+
 
 
 
@@ -129,6 +128,10 @@ export interface MediaPageProps {
 
 export interface SystemPageProps {
     current_context_index: number|null;
+}
+
+export interface NavBladesContainerProps {
+    dashboardAnimationState: DashboardBladeAnimation;
 }
 
 

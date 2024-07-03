@@ -4,9 +4,7 @@ import useDelayedFetchDatabase from './custom_hooks/useDelayedFetchDatabase';
 
 import DeviceSetup from './DeviceSetup';
 
-import { OrganizedData, DashboardDataItem, } from './ts_types/apiDataTypes';
-
-// import { ApiDataStructure } from './custom_types/utilityTypes'
+import { DashboardDataItem, OrganizedData } from './custom_types/utilityTypes';
 
 const AppDashboard: React.FC<any> = () => {
     
@@ -37,7 +35,7 @@ const AppDashboard: React.FC<any> = () => {
 
     return (
         <>
-        {mockDbData ?  <DeviceSetup mockDbData={mockDbData}/>: <></>}
+        {mockDbData ? <DeviceSetup mockDbData={mockDbData}/>: <></>}
         </>
     );
 }

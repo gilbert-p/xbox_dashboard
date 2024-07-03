@@ -56,9 +56,9 @@ import {
 const MediaPage: React.FC<MediaPageProps> = (props) => {
 
   const { current_context_index,
-    foreignExtendGamerProfile,
-    mediaSubPageAnimation,
-    mediaSubPageExit } = props;
+          foreignExtendGamerProfile,
+          mediaSubPageAnimation,
+          mediaSubPageExit } = props;
 
   const [displayImage, setDisplayImage] = useState(false);
   const [imageViewIndex, setImageViewIndex] = useState(0);
@@ -249,50 +249,53 @@ const MediaPage: React.FC<MediaPageProps> = (props) => {
         }
     };
 
-  const DisplayPicture = () => {
-    if(!displayImage) {
-      return <></>;
+    function DisplayPicture() {
+      if (!displayImage) {
+        return <></>;
+      }
+    
+      return (
+        <div className={mediaStyles.displayContainer}>
+          <div className={mediaStyles.growBox}>
+            <div className={mediaStyles.closeButtonContainer} onClick={() => { setDisplayImage(false) }}>
+              <div className={mediaStyles.closeButton}></div>
+            </div>
+            <img className={mediaStyles.mediaPictureImg} src={imageArray[imageViewIndex]} alt="Portrait astronaut" />
+          </div>
+        </div>
+      );
     }
 
-    return <div className={mediaStyles.displayContainer}>
-              <div className={mediaStyles.growBox}>
-                <div className={mediaStyles.closeButtonContainer} onClick={()=>{setDisplayImage(false)}}>
-                  <div className={mediaStyles.closeButton}></div>
-                </div>
-                <img className={mediaStyles.mediaPictureImg} src={imageArray[imageViewIndex]} alt="Portrait astronaut" />
-              </div>
-           </div>
-  }
-
-  const ReloadImage = () => {
-
+  function ReloadImage() {
+    const [imageViewIndex, setImageViewIndex] = useState(0);
+  
     useEffect(() => {
       const interval = setTimeout(() => {
         setImageViewIndex((imageViewIndex + 1) % imageArray.length);
       }, 3000);
   
       return () => clearInterval(interval);
-    }, []);
-
+    }, [imageViewIndex]);
+  
     return <img className={mediaStyles.mediaPictureImg} src={imageArray[imageViewIndex]} alt="Portrait astronaut" />;
   }
 
-    const PlaySlideShow = () => {
-      if (!displaySlideshow) {
-        return null;
-      }
-  
-      return (
-        <div className={mediaStyles.displaySlideshowContainer}>
-          <div className={mediaStyles.slideshowContent}>
-            <div className={mediaStyles.closeButtonContainer} onClick={() => { setDisplaySlideshow(false) }}>
-              <div className={mediaStyles.closeButton}></div>
-            </div>
-            <ReloadImage/>
-          </div>
-        </div>
-      );
+  function PlaySlideShow() {
+    if (!displaySlideshow) {
+      return null;
     }
+  
+    return (
+      <div className={mediaStyles.displaySlideshowContainer}>
+        <div className={mediaStyles.slideshowContent}>
+          <div className={mediaStyles.closeButtonContainer} onClick={() => { setDisplaySlideshow(false) }}>
+            <div className={mediaStyles.closeButton}></div>
+          </div>
+          <ReloadImage/>
+        </div>
+      </div>
+    );
+  }
   
   
 
@@ -414,24 +417,19 @@ const MediaPage: React.FC<MediaPageProps> = (props) => {
                             <button id={musicPlayerStyles["arrowSelectionButton"]} className={musicPlayerStyles.skewmorphButton} 
                                 onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(3));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
                                 <span className={musicPlayerStyles.arrowPoint}></span>
-                                {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 3 ? transitionStyles.removeDisplay : ""}`}></span> */}
                             </button>
                             <button id={musicPlayerStyles["soundAdjustButton"]} className={musicPlayerStyles.skewmorphButton} 
                             onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(4));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                                {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.skewmorphButtonHighlight} ${guideMusicPlayerIndex !== 4 ? transitionStyles.removeDisplay : ""}`}></span> */}
                             </button>
                         </div>
                         <div className={musicPlayerStyles.musicPlayerSongTitleContainer}
                             onMouseEnter={()=>{dispatch(navigateGuideMusicPlayer(5));}} onMouseLeave={()=>{dispatch(updateGuideMusicPlayerHighlight(false))}}>
-                            {/* <span className={`${isGuideMusicPlayerHighlightActive && styles.backgroundHighlightGlow} ${guideMusicPlayerIndex !== 5 ? transitionStyles.removeDisplay : ""}`}></span> */}
                             <p className={musicPlayerStyles.guideMusicPlayerTitle}>{`${isSongPlaying ? currentSongTitle : 'Select Music'}`}</p>
                         </div>
 
                         <div className={musicPlayerStyles.musicVisualContainer}>
                           <p className={musicPlayerStyles.artistTitle}>Album</p>
                           <p className={musicPlayerStyles.songTitle}>Artist</p>
-
-                          {/* <div className={musicPlayerStyles.musicVisualizer}></div> */}
 
                           <ReactPlayer
                             ref={playerRef}

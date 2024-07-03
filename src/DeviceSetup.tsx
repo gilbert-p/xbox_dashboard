@@ -6,7 +6,7 @@ import mobileStyles from './dashboard_styles/mobilePage.module.css';
 import transitionStyles from './dashboard_styles/TransitionStyles.module.css';
 import checkDeviceOrientation from './custom_hooks/useCheckDeviceOrientation';
 
-import { OrganizedData, DashboardDataItem } from './ts_types/apiDataTypes';
+import { OrganizedData } from './custom_types/utilityTypes';
 
 
 interface DeviceSetupProps {
