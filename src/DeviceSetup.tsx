@@ -9,6 +9,9 @@ import checkDeviceOrientation from './custom_hooks/useCheckDeviceOrientation';
 import { OrganizedData } from './custom_types/utilityTypes';
 
 
+import BackgroundBrowserAnimation from './xbox_dashboard/components/BackgroundBrowserAnimation';
+
+
 interface DeviceSetupProps {
   mockDbData: OrganizedData;
 }
@@ -30,6 +33,7 @@ const DeviceSetup: React.FC<DeviceSetupProps> = ({ mockDbData }) => {
         <MobileHomePage />
       ) : (
         <div ref={fullscreenRef} className={dashboard_style.safeBorder}>
+                      <BackgroundBrowserAnimation/>
           <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef}>
             <XboxDashboard mockDbData={mockDbData} />
             {!isFullscreen ? (

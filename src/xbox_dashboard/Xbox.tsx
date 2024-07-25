@@ -37,6 +37,8 @@ import { GuidePanelAnimation, DashboardBladeAnimation, ApiDataReference, CustomR
 
 
 
+
+
 const Xbox: React.FC<ApiDataReference> = ({ mockDbData }) => {
     const dispatch = useDispatch();
   
@@ -263,6 +265,8 @@ const Xbox: React.FC<ApiDataReference> = ({ mockDbData }) => {
               <div className={styles.leftArrow} onClick={()=>{shiftBladeLeft()}}></div>
               <div className={styles.rightArrow} onClick={()=>{shiftBladeRight()}}></div>
             </div>
+
+
 
             <GuideMenu mockDbData={mockDbData} guideAnimationRef={guidePanelAnimation} />
          
