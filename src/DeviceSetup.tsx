@@ -33,7 +33,7 @@ const DeviceSetup: React.FC<DeviceSetupProps> = ({ mockDbData }) => {
         <MobileHomePage />
       ) : (
         <div ref={fullscreenRef} className={dashboard_style.safeBorder}>
-                      <BackgroundBrowserAnimation/>
+                      {/* <BackgroundBrowserAnimation/> */}
           <div className={dashboard_style.appContainer} ref={xboxBladeContainerRef}>
             <XboxDashboard mockDbData={mockDbData} />
             {!isFullscreen ? (

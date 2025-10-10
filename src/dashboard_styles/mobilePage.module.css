@@ -60,7 +60,7 @@
 .mobileContent {
     position: absolute;
     width: inherit;
-    height: auto;
+    height: 100%;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
