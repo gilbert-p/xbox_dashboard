@@ -131,7 +131,7 @@ const XboxlivePage = (props) => {
                 </div>
                 <div className={xboxliveStyles.insetContainer}>
                     <div className={xboxliveStyles.xboxliveAnimationContainer}>
-                        <div className={xboxliveStyles.circleAnimation}>
+                        {/* <div className={xboxliveStyles.circleAnimation}>
                             <div className={`${ringAnim.ring}`} style={{"--i": 0}}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
@@ -153,7 +153,7 @@ const XboxlivePage = (props) => {
                             <div className={`${ringAnim.ring}`} style={{"--i": 6}}>
                                 <div className={ringAnim.ringInner}></div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className={xboxliveStyles.logoContainer}></div>
                     </div>
                 </div>

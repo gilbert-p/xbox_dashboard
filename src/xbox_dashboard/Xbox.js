@@ -246,7 +246,7 @@ const Xbox = (props) => {
                             <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 7}}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
-                            <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
+                            {/* <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 8}}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
                             </div>
                             <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 9}}>
@@ -254,7 +254,7 @@ const Xbox = (props) => {
                             </div>
                             <div className={backgroundAnimation.pulseRing} style={{"--ring-index": 10}}>
                                 <div className={backgroundAnimation.pulseRingInner}></div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
 

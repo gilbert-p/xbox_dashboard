@@ -15,7 +15,7 @@
     border-radius: 50%;
     filter: blur(18px);
     transform-origin: 50% 50%;
-    animation: pulse 13s ease-in-out calc((var(--ring-index, 0) * 1.6s));
+    animation: pulse 12s ease-in-out calc((var(--ring-index, 0) * 1.6s));
     animation-iteration-count: infinite;
     opacity: 0;
 }
